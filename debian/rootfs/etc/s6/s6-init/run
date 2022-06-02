@@ -1,0 +1,70 @@
+#!/bin/bash
+
+# shellcheck disable=SC1091
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+[ -n "${DEBUG:+1}" ] && set -x
+
+# Load libraries
+. /opt/easysoft/scripts/liblog.sh
+. /opt/easysoft/scripts/libmysql.sh
+. /opt/easysoft/scripts/libfs.sh
+
+# Load Apache/PHP/ZenTao environment variables
+. /etc/s6/s6-init/envs
+
+#==================================#
+# Prepare persistence directories. #
+#==================================#
+info "Prepare persistence directories."
+for pdir in $PHP_PERSISTENCE_LIST
+do
+    # Ensure a directory exists and,is owned by the given user
+    ensure_dir_exists "$pdir" "www-data"
+done
+
+# Process /apps/zentao/config directory
+# The config directory needs to be copied to the persistent directory for the first startup
+if [ ! -f /data/zentao/.init_cfg ];then
+    ensure_dir_exists "/data/zentao" "www-data"
+    mv /apps/zentao/config /data/zentao/ && touch /data/zentao/.init_cfg 
+fi
+
+for ldir in $PERSISTENCE_LINK_LIST
+do
+    ensure_dir_exists "$ldir" "www-data"
+    configure_permissions_ownership "$ldir" -d 777
+    make_soft_link "$ldir" "${ldir/data/apps}" "www-data"
+done
+
+# Check and delete install.php and upgrade.php
+/bin/bash /usr/bin/check_files.sh &
+
+#=====================#
+#   Prepare PHP       #
+#=====================#
+PHP_CLI_INI="/etc/php/7.4/cli/php.ini"
+PHP_APACHE_INI="/etc/php/7.4/apache2/php.ini"
+
+info "Render php.ini with environment variables."
+/usr/bin/render-template /etc/php/7.4/php.ini.tpl > ${PHP_CLI_INI}
+/usr/bin/render-template /etc/php/7.4/php.ini.tpl > ${PHP_APACHE_INI}
+
+#=====================#
+#   Prepare Apache    #
+#=====================#
+SITE_CFG="/etc/apache2/sites-enabled/site.conf"
+info "Render apache sites config with envionment variables."
+/usr/bin/render-template ${SITE_CFG}.tpl > $SITE_CFG
+
+#======================#
+# Check MySQL service  #
+#======================#
+# Check and waiting mysql to be ready
+wait_for_mysql || exit 1
+
+# Initialize database
+mysql_init_db "$MYSQL_DB"

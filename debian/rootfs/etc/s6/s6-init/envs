@@ -1,0 +1,41 @@
+#!/bin/bash
+
+#==========#
+#   php    #
+#==========#
+export PHP_SESSION_TYPE=${PHP_SESSION_TYPE:-files}
+export PHP_SESSION_PATH=${PHP_SESSION_PATH:-/data/php/session}
+export PHP_ERROR_LOG=${PHP_ERROR_LOG:-/data/php/log/error.log}
+
+#===========#
+#   MySQL   #
+#===========#
+export MYSQL_HOST=${MYSQL_HOST:-127.0.0.1}
+export MYSQL_PORT=${MYSQL_PORT:-3306}
+export MYSQL_DB=${MYSQL_DB:-zentao}
+export MYSQL_USER=${MYSQL_USER:-root}
+export MYSQL_PASSWORD=${MYSQL_PASSWORD:-pass4Zentao}
+
+#==========#
+# Apache   #
+#==========#
+export APP_DOMAIN=${APP_DOMAIN:-*}
+export DOCUMENT_ROOT=${DOCUMENT_ROOT:-/apps/zentao/www}
+
+# ======================#
+# Persistence directory #
+#=======================#
+export PHP_PERSISTENCE_LIST="
+/data/php/log
+/data/php/session"
+
+#==========================================#
+# Persistence directory and make soft link #
+#==========================================#
+export PERSISTENCE_LINK_LIST="
+/data/zentao/www/data
+/data/zentao/config
+/data/zentao/tmp/log
+/data/zentao/tmp/template
+/data/zentao/tmp/backup
+/data/zentao/module/extension/ext"

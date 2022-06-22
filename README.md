@@ -10,158 +10,79 @@
 
 官网：https://www.zentao.net/
 
-
 ## 二、支持的标签
-- 开源版：16.3
-- 企业版：6.3
-- 旗舰版：2.6 【目前只支持该标签】
+
+- 开源版：17.0
+- 企业版：biz7.0
+- 旗舰版：max2.8 max3.1
 
 ## 三、获取镜像
-推荐从 [Docker Hub Registry](https://hub.docker.com/r/easysoft/zentao) 拉取我们构建好的官方Docker镜像【目前提供国内加速镜像地址】
-```bash
-docker pull ccr.ccs.tencentyun.com/easysoft/zentao:max-2.6
-```
 
-如需使用指定的版本，可以拉取一个包含版本标签的镜像，在Docker Hub仓库中查看 [可用版本列表](https://hub.docker.com/r/easysoft/zentao/tags/) 【目前仅支持:max-2.6】
+推荐从 渠成镜像仓库 拉取我们构建好的官方Docker镜像
 
 ```bash
-docker pull ccr.ccs.tencentyun.com/easysoft/zentao:[TAG]
+docker pull hub.qucheng.com/app/zentao:[TAG]
 ```
 
 ## 四、持久化数据
-如果你删除容器，所有的数据都将被删除，下次运行镜像时会重新初始化数据。为了避免数据丢失，你应该为容器提供一个挂在卷，这样可以将数据进行持久化存储。
 
-为了数据持久化，你应该挂载2个目录：
+如果删除容器，所有的数据都将被删除，下次运行镜像时会重新初始化数据。为了避免数据丢失，应该为容器提供一个挂载卷，这样可以将数据进行持久化存储。
 
 - /data 禅道数据
-- /var/lib/mysql MySQL数据库 (如果设置 ENABLE_MYSQL=true 会启动MySQL服务 )
 如果挂载的目录为空，首次启动会自动初始化相关文件
 
 ```bash
 $ docker run -it \
-    -e ENABLE_MYSQL=true \
-    -v $PWD/mysql:/var/lib/mysql \
     -v $PWD/data:/data \
-    ccr.ccs.tencentyun.com/easysoft/zentao:max-2.6
+    hub.qucheng.com/app/zentao:max3.1
 ```
-或者修改docker-compose.yml 文件，添加持久化目录配置
 
-```bash
-services:
-  zentao:
-  ...
-    volumes:
-      - /path/to/zentao-persistence:/data
-      - /path/to/zentao-mysql:/var/lib/mysql
-  ...
-```
 ## 五、环境变量
 
 | 变量名           | 默认值        | 说明                             |
 | ---------------- | ------------- | -------------------------------- |
 | DEBUG            | false         | 是否打开调试信息，默认关闭       |
-| ENABLE_MYSQL     | false         | 是否启动MySQL服务，默认关闭      |
 | PHP_SESSION_TYPE | files         | php session 类型，files \| redis |
-| PHP_SESSION_PATH | /data/session | php session 存储路径             |
+| PHP_SESSION_PATH | /data/php/session | php session 存储路径             |
 | MYSQL_HOST       | 127.0.0.1     | MySQL 主机地址                   |
 | MYSQL_PORT       | 3306          | MySQL 端口                       |
-| MYSQL_DATABASE   | zentao        | zentao数据库名称                 |
+| MYSQL_DB         | zentao        | zentao数据库名称                 |
 | MYSQL_USER       | root          | MySQL用户名                      |
 | MYSQL_PASSWORD   | pass4zenTao   | MySQL密码                        |
 
+## 六、运行
 
+### 6.1 通过make命令运行
 
-
-## 六、运行 
-### 6.1 单机Docker命令运行
-
-```bash
-docker run -it -e DEBUG=true \
-               -e ENABLE_MYSQL=true \
-               -v $PWD/data:/data \
-               -v $PWD/mysql:/var/lib/mysql \
-               -p 8080:80 \
-           	   ccr.ccs.tencentyun.com/easysoft/zentao:max-2.6
-```
-
-> **说明：**
->
-> - 设置环境变量 `ENABLE_MYSQL=true` 会启动镜像中内置的MySQL服务
-> - 如果不指定MySQL密码，会使用默认值：`pass4zenTao`
-> - 首次启动成功后，打开浏览器访问 `http://<IP>:8080/` 会打开禅道安装向导页面
->   - ![数据库设置向导页](https://doc-pic-1308438674.cos.ap-shanghai.myqcloud.com/project/cloud-zentao/20220223/OByTww.png)
-
-### 6.2 单机Docker-compose方式运行
-
-通过Docker-compse运行禅道，默认会运行一个独立的MySQL服务，相关命令如下：
+[Makefile](./Makefile)中详细的定义了可以使用的参数。
 
 ```bash
-# 启动服务（zentao和mysql）
-docker-compose up -d
+# 运行禅道开源版
+make run
 
-# 查看服务状态
-docker-compose ps
+# 关闭禅道开源版
+make stop
 
-# 查看服务日志
-docker-compose logs -f zentao # 查看zentao日志
-docker-compose logs -f mysql # 查看mysql日志
+# 清理容器与持久化数据
+make clean
+
+# 构建镜像
+# 构建开源版镜像
+make build
+
+# 构建旗舰版镜像
+make build-max
+
 ```
 
+说明
 
-
-以下是docker-compose.yml文件详情
-
-```yml
-version: '2'
-services:
-
-# mysql service for zentao
-  mysql:
-    image: mysql:5.7
-    container_name: mysql
-    ports:
-      - '3306:3306'
-    volumes:
-      - 'db:/var/lib/mysql'
-    environment:
-      - MYSQL_ROOT_PASSWORD=pass4Zentao
-      - MYSQL_DATABASE=zentao
-
-# zentao service
-  zentao:
-    image: ccr.ccs.tencentyun.com/easysoft/zentao:max-2.6
-    container_name: zentao
-    ports:
-      - '8080:80'
-    volumes:
-      - 'zentao_data:/data'
-    depends_on:
-      - mysql
-    environment:
-      - MYSQL_HOST=mysql
-      - MYSQL_PORT=3306
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=pass4Zentao
-      - MYSQL_DB=zentao
-      - DEBUG=true
-
-# persistence for mysql and zentao
-volumes:
-  db:
-    driver: local
-  zentao_data:
-    driver: local
-```
-
-> **说明：**
->
-> - 通过docker-compose运行，会拉取mysql和redis镜像，并运行
-> - 启动成功后，打开浏览器输入 `http://<你的IP>:8080` 通过向导页面进行安装
-> - 数据库配置参考 [单机Docker命令运行](#6.1 单机Docker命令运行)
+- [VERSION](./VERSION) 文件中详细的定义了Makefile可以操作的版本
+- [docker-compose.yml](./docker-compose.yml)
 
 ### 6.3 在 Kubernetes 中运行
 
-我们通过 Helm封装了禅道应用，包含禅道Web服务，MySQL服务，Redis服务。
+我们通过 Helm封装了禅道应用，供[渠成平台](https://www.qucheng.com)使用，包含禅道Web服务，MySQL服务，您可以直接通过Helm命令添加渠成的Helm仓库。
 
 #### 6.3.1 前提条件
 
@@ -173,49 +94,26 @@ volumes:
 
 - 支持禅道web服务多副本运行（需要K8S持久化目录支持分布式存储）
 - MySQL服务独立运行（当前交付版本 只支持单节点）
-- Redis作为Session存储，并独立运行（当前交付版本 只支持单节点）
 
 #### 6.3.3 安装命令
 
 ```bash
 # 配置Helm仓库
-helm repo add zentao https://helm.external-prod.chandao.net
+helm repo add qucheng-market https://hub.qucheng.com/chartrepo/stable
 helm repo update
 
 # 为禅道服务创建独立namespace
-kubectl create ns zentao-app
+kubectl create ns easysoft
 
-# 启动禅道服务
-helm upgrade -i zentao zentao/zentao -n zentao-app --set ingress.hostname=zentao.local --set replicaCount=2 --set image.pullPolicy=Always
+# 启动禅道旗舰版
+helm upgrade -i zentao-max qucheng-market/zentao-max -n easysoft --set ingress.hostname=zentao.local --set replicaCount=2 --set image.pullPolicy=Always
 
 # 卸载服务
-helm delete zentao -n zentao-app # 删除服务
-kubectl delete pvc --all -n zentao-app # 清理持久化存储
+helm delete zentao-max -n easysoft # 删除服务
+kubectl delete pvc --all -n easysoft # 清理持久化存储
 ```
 
 > **说明：**
 >
 > 1. ingress.hostname=< 设置内部可用域名 > 需要设置域名
-> 2. 可以通过修改helm的配置来定制安装
->
-> ```bash
-> # 下载helm配置
-> cd /tmp
-> helm pull zentao/zentao --untar
-> 
-> # 切换到配置目录
-> cd /tmp/zentao
-> 
-> # 修改自定配置
-> vi /tmp/zentao/values.yaml
-> ```
->
-> 
-
-
-
-## 七、已知问题
-
-- K8S中运行时，MySQL和Redis均为单点，后续版本提供集群部署
-- 禅道Web端多副本运行时，某些需要管理员确认的操作，如创建 ok.txt 文件以便验证的功能，后续版本修复
-- 禅道Web端多副本运行时，计划任务不支持多节点运行，后续版本修复
+> 2. 通过helm安装的禅道是当前最新版本，详情可通过 `helm search repo zentao` 查看

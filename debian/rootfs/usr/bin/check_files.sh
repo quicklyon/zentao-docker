@@ -19,5 +19,5 @@ do
     if [ "$DB_INITED" != "0" ] && [ "$CFG_INITED" != "0" ];then
         rm -f /apps/zentao/www/{install.php,upgrade.php} && break 
     fi
-    sleep 3
+    sleep 1
 done

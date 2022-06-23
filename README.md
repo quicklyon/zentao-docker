@@ -10,11 +10,11 @@
 
 ## 二、支持的标签(Tag)
 
-- 开源版：[17.0](https://www.zentao.net/download/zentaopms17.0-80931.html) [17.1](https://www.zentao.net/download/zentaopms17.1-80973.html)
-- 企业版：[biz7.0](https://www.zentao.net/download/zentaopms.biz7.0-80932.html) [biz7.1](https://www.zentao.net/download/zentaopms.biz7.1-80974.html)
-- 旗舰版：[max2.8](https://www.zentao.net/dynamic/max2.8-80508.html) [max3.0](https://www.zentao.net/download/max3.0-80658.html) [max3.1](https://www.zentao.net/download/max3.1-80933.html) [max3.2](https://www.zentao.net/download/max3.2-80975.html)
-- 迅捷版：[lite1.1](https://www.zentao.net/dynamic/zentaolitev1.1-80683.html) [lite1.2](https://www.zentao.net/download/zentaolitev1.2-80982.html)
-- 迅捷企业版：[litebiz1.1](https://www.zentao.net/dynamic/zentaolitevipv1.1-80684.html) [litebiz1.2](https://www.zentao.net/download/zentaolitevipv1.2-80983.html)
+- 开源版：[`17.0`](https://www.zentao.net/download/zentaopms17.0-80931.html) [`17.1`](https://www.zentao.net/download/zentaopms17.1-80973.html)
+- 企业版：[`biz7.0`](https://www.zentao.net/download/zentaopms.biz7.0-80932.html) [`biz7.1`](https://www.zentao.net/download/zentaopms.biz7.1-80974.html)
+- 旗舰版：[`max2.8`](https://www.zentao.net/dynamic/max2.8-80508.html) [`max3.0`](https://www.zentao.net/download/max3.0-80658.html) [`max3.1`](https://www.zentao.net/download/max3.1-80933.html) [`max3.2`](https://www.zentao.net/download/max3.2-80975.html)
+- 迅捷版：[`lite1.1`](https://www.zentao.net/dynamic/zentaolitev1.1-80683.html) [`lite1.2`](https://www.zentao.net/download/zentaolitev1.2-80982.html)
+- 迅捷企业版：[`litevip1.1`](https://www.zentao.net/dynamic/zentaolitevipv1.1-80684.html) [`litevip1.2`](https://www.zentao.net/download/zentaolitevipv1.2-80983.html)
 
 ## 三、获取镜像
 

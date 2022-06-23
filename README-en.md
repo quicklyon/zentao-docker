@@ -10,14 +10,16 @@ ZenTao focuses on development project management!
 
 Official website: www.zentao.pm
 
-
 ## 2.Supported tags
-- 开源版：16.3
-- 企业版：6.3
-- 旗舰版：2.6
+
+- Open Source：16.3
+- Biz：6.3
+- Max：2.6
 
 ## 3.Get this image
+
 The recommended way to get the zentao official  Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/easysoft/zentao).
+
 ```bash
 docker pull easysoft/zentao:latest
 ```
@@ -29,9 +31,11 @@ docker pull easysoft/zentao:[TAG]
 ```
 
 ## 4.Persisting your database
+
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
 For data persistence, you should mount two directories:
+
 - /data ZenTao data
 - /var/lib/mysql MySQL database files ( If ENABLE_MYSQL=true is set, the MySQL service will be started)
 
@@ -42,6 +46,7 @@ $ docker run -it \
     -v $PWD/data:/data \
     easysoft/zentao:latest
 ```
+
 or by modifying the docker-compose.yml file add persistent directory configuration
 
 ```bash
@@ -52,6 +57,7 @@ services:
       - /path/to/zentao-mysql:/var/lib/mysql
   ...
 ```
+
 ## 5. Environment Variables
 
 | 变量名           | 默认值             | 说明                        |
@@ -66,10 +72,8 @@ services:
 | MYSQL_USER       | root               | MySQL用户名                 |
 | MYSQL_PASSWORD   | pass4zenTao        | MySQL密码                   |
 
+## 6.Run
 
-
-
-## 6.运行 
 ### 6.1 单机Docker命令运行
 
 ```bash
@@ -78,10 +82,8 @@ docker run -it -e DEBUG=true \
                -v $PWD/data:/data \
                -v $PWD/mysql:/var/lib/mysql \
                -p 8080:80 \
-           	   easysoft/zentao:max-2.6
+               easysoft/zentao:max-2.6
 ```
-
-
 
 ### 6.2 单机Docker-compose方式运行
 
@@ -98,8 +100,6 @@ docker-compose ps
 docker-compose logs -f zentao # 查看zentao日志
 docker-compose logs -f mysql # 查看mysql日志
 ```
-
-
 
 以下是docker-compose.yml文件详情
 
@@ -145,7 +145,3 @@ volumes:
   zentao_data:
     driver: local
 ```
-
-
-
-### 6.3 在 Kubernetes 中运行

@@ -45,16 +45,16 @@ run: ## 运行禅道开源版
 	docker-compose -f docker-compose.yml up -d
 
 run-biz: ## 运行禅道企业版
-	docker-compose -f docker-compose.yml up -d
+	export TAG=$(TAG_BIZ); docker-compose -f docker-compose.yml up -d
 
 run-max: ## 运行禅道旗舰版
-	docker-compose -f docker-compose.yml up -d
+	export TAG=$(TAG_MAX);docker-compose -f docker-compose.yml up -d
 
 run-lite: ## 运行禅道迅捷版
-	docker-compose -f docker-compose.yml up -d
+	export TAG=$(TAG_LITE);docker-compose -f docker-compose.yml up -d
 
 run-litebiz: ## 运行禅道迅捷企业版
-	docker-compose -f docker-compose.yml up -d
+	export TAG=$(TAG_LITEBIZ);docker-compose -f docker-compose.yml up -d
 
 ps: ## 运行状态
 	docker-compose -f docker-compose.yml ps

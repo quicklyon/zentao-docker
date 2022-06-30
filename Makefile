@@ -61,6 +61,7 @@ ps: ## 运行状态
 
 stop: ## 停服务
 	docker-compose -f docker-compose.yml stop
+	docker-compose -f docker-compose.yml rm -f
 
 restart: build clean ps ## 重构
 

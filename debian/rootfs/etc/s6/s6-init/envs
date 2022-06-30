@@ -27,14 +27,16 @@ export DOCUMENT_ROOT=${DOCUMENT_ROOT:-/apps/zentao/www}
 #=======================#
 export PHP_PERSISTENCE_LIST="
 /data/php/log
-/data/php/session"
+/data/php/session
+/data/zentao/
+/data/zentao/config
+"
 
 #==========================================#
 # Persistence directory and make soft link #
 #==========================================#
 export PERSISTENCE_LINK_LIST="
 /data/zentao/www/data
-/data/zentao/config
 /data/zentao/tmp/log
 /data/zentao/tmp/template
 /data/zentao/tmp/backup

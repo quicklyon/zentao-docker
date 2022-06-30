@@ -7,17 +7,29 @@
 while ((1))
 do
     CFG_INITED=$(wc -l /apps/zentao/config/my.php | awk '{print $1}')
+
+    # Installed successfully
     if [ "$CFG_INITED" != "0" ];then
         table_prefix=$(grep prefix /data/zentao/config/my.php  | cut -d '=' -f 2 | sed -E "s/( |'|;)//g")
-        DB_INITED=$(mysql -h"$MYSQL_HOST" \
+        CURRENT_VER=$(mysql -h"$MYSQL_HOST" \
                     -u"$MYSQL_USER" \
                     -p"$MYSQL_PASSWORD" \
                     -D"$MYSQL_DB" \
-                    -e "select * from \`${table_prefix}config\` where \`key\`='version';" 2>/dev/null | wc -l)
+                    -e "select value from \`${table_prefix}config\` where \`key\`='version';" 2>/dev/null | sed 1d)
     fi
 
-    if [ "$DB_INITED" != "0" ] && [ "$CFG_INITED" != "0" ];then
+    # If the initial installation is successful, delete install.php andupgrade.php files
+    if [ "$CURRENT_VER" == "$ZENTAO_VER" ] && [ "$CFG_INITED" != "0" ];then
         rm -f /apps/zentao/www/{install.php,upgrade.php} && break 
     fi
+
+    # ZenTao upgrade, remove only the install.php file 
+    if [ "$CURRENT_VER" != "" ] && [ "$CURRENT_VER" != "$ZENTAO_VER" ] && [ "$CFG_INITED" != "0" ];then
+        #[ -e /apps/zentao/www/data/ok.txt ] && rm /apps/zentao/www/data/ok.txt
+        #touch /apps/zentao/www/data/ok.txt
+        rm -f /apps/zentao/www/install.php && break
+    fi
+
     sleep 1
+
 done

@@ -13,7 +13,7 @@ set -o pipefail
 . /opt/easysoft/scripts/libmysql.sh
 . /opt/easysoft/scripts/libfs.sh
 
-# Load Apache/PHP/ZenTao environment variables
+# Load Global/Apache/PHP environment variables
 . /etc/s6/s6-init/envs
 
 #==================================#
@@ -26,12 +26,13 @@ do
     ensure_dir_exists "$pdir" "www-data"
 done
 
-# Process /apps/zentao/config directory
-# The config directory needs to be copied to the persistent directory for the first startup
+# The my.php needs to be move to the persistent directory for the first startup
 if [ ! -f /data/zentao/.init_cfg ];then
-    ensure_dir_exists "/data/zentao" "www-data"
-    mv /apps/zentao/config /data/zentao/ && touch /data/zentao/.init_cfg 
+    mv /apps/zentao/config/my.php /data/zentao/config/ && touch /data/zentao/.init_cfg
 fi
+
+# Make my.php link to /app/zentao/config/my.php
+make_soft_link "/data/zentao/config/my.php" "/apps/zentao/config/my.php"  "www-data"
 
 for ldir in $PERSISTENCE_LINK_LIST
 do

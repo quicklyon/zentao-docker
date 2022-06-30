@@ -23,7 +23,7 @@ make_soft_link() {
     local dest="${2:?path is missing}"
     local owner=${3:-}
 
-    [ -d "$dest" ] && rm -rf "$dest"
+    [ -e "$dest" ] && rm -rf "$dest"
     ln -s "$source" "$dest"
 
     if [[ -n $owner ]]; then

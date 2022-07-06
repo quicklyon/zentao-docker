@@ -2,6 +2,15 @@
 
 # shellcheck disable=SC1091
 
+case $ZENTAO_VER in
+"litevip1.2")
+    export ZENTAO_VER="biz7.1"
+    ;;
+"lite1.2")
+    export ZENTAO_VER="17.1"
+    ;;
+esac
+
 . /etc/s6/s6-init/envs
 
 while ((1))

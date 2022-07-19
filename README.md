@@ -50,9 +50,41 @@ $ docker run -it \
 | MYSQL_USER       | root          | MySQL用户名                      |
 | MYSQL_PASSWORD   | pass4zenTao   | MySQL密码                        |
 
-## 六、运行
+## 六、将Session存储在Redis
 
-### 6.1 通过make命令运行
+禅道默认是将Session存储在共享存储中，因此多节点部署也可以满足Session共享的需求，但如果你想通过Redis来存储Session也是可以的，只需要在启动容器是传入两个参数即可：
+
+- `PHP_SESSION_TYPE`
+- `PHP_SESSION_PATH`
+
+启动命令示例如下：
+
+```bash
+docker run -d --restart unless-stopped --name zentao \
+-e MYSQL_HOST=192.168.0.88 \
+-e MYSQL_PORT=3306 \
+-e MYSQL_USER=root \
+-e MYSQL_PASSWORD=UaTohph1aija \
+-e MYSQL_DB=zentao \
+-e PHP_SESSION_TYPE=redis \
+-e PHP_SESSION_PATH=tcp://192.168.0.99:6379?auth=Reids验证密码
+-v /data/zentao:/data \
+-p 8088:80 \
+hub.qucheng.com/app/zentao:17.2
+```
+
+指定上面两个环境变量，实际上就是修改了`php.ini`中关于Session的配置：
+
+```ini
+session.save_handler = redis
+session.save_path = "tcp://192.168.0.99:6379?auth=Reids验证密码"
+```
+
+**注意**：镜像内的脚本已经做了特殊处理，因此环境变量的值加不加引号，都不影响正常使用。
+
+## 七、运行
+
+### 7.1 通过make命令运行
 
 [Makefile](./Makefile)中详细的定义了可以使用的参数。
 
@@ -80,22 +112,22 @@ make build-max
 - [VERSION](./VERSION) 文件中详细的定义了Makefile可以操作的版本
 - [docker-compose.yml](./docker-compose.yml)
 
-### 6.3 在 Kubernetes 中运行
+### 7.2 在 Kubernetes 中运行
 
 我们通过 Helm封装了禅道应用，供[渠成平台](https://www.qucheng.com)使用，包含禅道Web服务，MySQL服务，您可以直接通过Helm命令添加渠成的Helm仓库。
 
-#### 6.3.1 前提条件
+#### 7.2.1 前提条件
 
 1. Kubernetes 1.19+ 最佳
 2. Helm 3.2.0+
 3. K8S集群需要提前配置默认的共享存储（分布式存储），通过`kubectl get sc` 查看
 
-#### 6.3.2 特性
+#### 7.2.2 特性
 
 - 支持禅道web服务多副本运行（需要K8S持久化目录支持分布式存储）
 - MySQL服务独立运行（当前交付版本 只支持单节点）
 
-#### 6.3.3 安装命令
+#### 7.2.3 安装命令
 
 ```bash
 # 配置Helm仓库

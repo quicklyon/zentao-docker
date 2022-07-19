@@ -64,10 +64,10 @@ docker run -d --restart unless-stopped --name zentao \
 -e MYSQL_HOST=192.168.0.88 \
 -e MYSQL_PORT=3306 \
 -e MYSQL_USER=root \
--e MYSQL_PASSWORD=UaTohph1aija \
+-e MYSQL_PASSWORD=MySQL密码 \
 -e MYSQL_DB=zentao \
 -e PHP_SESSION_TYPE=redis \
--e PHP_SESSION_PATH=tcp://192.168.0.99:6379?auth=Reids验证密码
+-e PHP_SESSION_PATH=tcp://192.168.0.99:6379?auth=Reids验证密码 \
 -v /data/zentao:/data \
 -p 8088:80 \
 hub.qucheng.com/app/zentao:17.2

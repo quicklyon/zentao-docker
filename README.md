@@ -24,7 +24,7 @@
 
 - 旗舰版
   - [`max3.4-20220722`](https://www.zentao.net/download/max3.4-81061.html)
-  - [`max3.3`](https://www.zentao.net/dynamic/max3.3-81023.html)
+  - [`max3.3-20220722`](https://www.zentao.net/dynamic/max3.3-81023.html)
   - [`max3.2`](https://www.zentao.net/download/max3.2-80975.html)
 
 - 迅捷版

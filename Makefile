@@ -1,8 +1,9 @@
-export TAG := $(shell grep open VERSION | cut -d '=' -f 2)
-export TAG_BIZ := $(shell grep ^biz VERSION | cut -d '=' -f 2)
-export TAG_MAX := $(shell grep max VERSION | cut -d '=' -f 2)
-export TAG_LITE := $(shell grep "lite=" VERSION | cut -d '=' -f 2)
-export TAG_LITEBIZ := $(shell grep litebiz VERSION | cut -d '=' -f 2)
+export OPEN_VER := $(shell grep open VERSION | cut -d '=' -f 2)
+export BIZ_VER := $(shell grep ^biz VERSION | cut -d '=' -f 2)
+export MAX_VER := $(shell grep max VERSION | cut -d '=' -f 2)
+export LITE_VER := $(shell grep "lite=" VERSION | cut -d '=' -f 2)
+export LITEBIZ_VER := $(shell grep litebiz VERSION | cut -d '=' -f 2)
+export BUILD_DATE := $(shell date +'%Y%m%d')
 
 help: ## this help
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {sub("\\\\n",sprintf("\n%22c"," "), $$2);printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -10,51 +11,51 @@ help: ## this help
 build-all: build build-biz build-max build-lite build-litebiz ## 构建禅道所有版本镜像
 
 build: ## 构建开源版镜像
-	docker build --build-arg VERSION=$(TAG) -t hub.qucheng.com/app/zentao:$(TAG) -f Dockerfile .
+	docker build --build-arg VERSION=$(OPEN_VER) -t hub.qucheng.com/app/zentao:$(OPEN_VER)-$(BUILD_DATE) -f Dockerfile .
 
 build-biz: ## 构建企业版镜像
-	docker build --build-arg VERSION=$(TAG_BIZ) -t hub.qucheng.com/app/zentao:$(TAG_BIZ) -f Dockerfile .
+	docker build --build-arg VERSION=$(BIZ_VER) -t hub.qucheng.com/app/zentao:$(BIZ_VER)-$(BUILD_DATE) -f Dockerfile .
 
 build-max: ## 构建旗舰版镜像
-	docker build --build-arg VERSION=$(TAG_MAX) -t hub.qucheng.com/app/zentao:$(TAG_MAX) -f Dockerfile .
+	docker build --build-arg VERSION=$(MAX_VER) -t hub.qucheng.com/app/zentao:$(MAX_VER)-$(BUILD_DATE) -f Dockerfile .
 
 build-lite: ## 构建迅捷版
-	docker build --build-arg VERSION=$(TAG_LITE) -t hub.qucheng.com/app/zentao:$(TAG_LITE) -f Dockerfile .
+	docker build --build-arg VERSION=$(LITE_VER) -t hub.qucheng.com/app/zentao:$(LITE_VER)-$(BUILD_DATE) -f Dockerfile .
 
 build-litebiz: ## 构建旗迅捷企业版
-	docker build --build-arg VERSION=$(TAG_LITEBIZ) -t hub.qucheng.com/app/zentao:$(TAG_LITEBIZ) -f Dockerfile .
+	docker build --build-arg VERSION=$(LITEBIZ_VER) -t hub.qucheng.com/app/zentao:$(LITEBIZ_VER)-$(BUILD_DATE) -f Dockerfile .
 
 push-all: push push-biz push-max push-lite push-litebiz ## 将所有镜像push到镜像仓库
 
 push: ## push 禅道开源版镜像
-	docker push hub.qucheng.com/app/zentao:$(TAG)
+	docker push hub.qucheng.com/app/zentao:$(OPEN_VER)-$(BUILD_DATE)
 
 push-biz: ## push 禅道企业版镜像
-	docker push hub.qucheng.com/app/zentao:$(TAG_BIZ)
+	docker push hub.qucheng.com/app/zentao:$(BIZ_VER)-$(BUILD_DATE)
 
 push-max: ## push 禅道旗舰版镜像
-	docker push hub.qucheng.com/app/zentao:$(TAG_MAX)
+	docker push hub.qucheng.com/app/zentao:$(MAX_VER)-$(BUILD_DATE) 
 
 push-lite: ## push 禅道迅捷版镜像
-	docker push hub.qucheng.com/app/zentao:$(TAG_LITE)
+	docker push hub.qucheng.com/app/zentao:$(LITE_VER)-$(BUILD_DATE)
 
 push-litebiz: ## push 禅道迅捷企业版镜像
-	docker push hub.qucheng.com/app/zentao:$(TAG_LITEBIZ)
+	docker push hub.qucheng.com/app/zentao:$(LITEBIZ_VER)-$(BUILD_DATE)
 
 run: ## 运行禅道开源版
-	docker-compose -f docker-compose.yml up -d
+	export TAG=$(OPEN_VER)-$(BUILD_DATE); docker-compose -f docker-compose.yml up -d
 
 run-biz: ## 运行禅道企业版
-	export TAG=$(TAG_BIZ); docker-compose -f docker-compose.yml up -d
+	export TAG=$(BIZ_VER)-$(BUILD_DATE); docker-compose -f docker-compose.yml up -d
 
 run-max: ## 运行禅道旗舰版
-	export TAG=$(TAG_MAX);docker-compose -f docker-compose.yml up -d
+	export TAG=$(MAX_VER)-$(BUILD_DATE); docker-compose -f docker-compose.yml up -d
 
 run-lite: ## 运行禅道迅捷版
-	export TAG=$(TAG_LITE);docker-compose -f docker-compose.yml up -d
+	export TAG=$(LITE_VER)-$(BUILD_DATE);docker-compose -f docker-compose.yml up -d
 
 run-litebiz: ## 运行禅道迅捷企业版
-	export TAG=$(TAG_LITEBIZ);docker-compose -f docker-compose.yml up -d
+	export TAG=$(LITEBIZ_VER)-$(BUILD_DATE);docker-compose -f docker-compose.yml up -d
 
 ps: ## 运行状态
 	docker-compose -f docker-compose.yml ps

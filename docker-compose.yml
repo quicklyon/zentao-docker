@@ -40,6 +40,7 @@ services:
       - MYSQL_USER=root
       - MYSQL_PASSWORD=pass4Zentao
       - MYSQL_DB=zentao
+      - DEBUG=1
       - IS_CONTAINER=true
     networks:
       - zentao-net

@@ -22,15 +22,18 @@ make_soft_link() {
     local source="${1:?path is missing}"
     local dest="${2:?path is missing}"
     local owner=${3:-}
+    local group=${4:-}
 
-    [ -e "$dest" ] && rm -rf "$dest"
-    ln -s "$source" "$dest"
 
-    if [[ -n $owner ]]; then
+    [ -d "$dest" ] && mv "$dest" "$dest".bak
+    [ ! -L "$dest" ] && ln -s "$source" "$dest"
+
+    if [[ -n $group ]]; then
+        chown -h "$owner":"$group" "$dest"
+    else
         chown -h "$owner":"$owner" "$dest"
     fi
 }
-
 
 ########################
 # Ensure a file/directory is owned (user and group) but the given user
@@ -63,11 +66,15 @@ owned_by() {
 ensure_dir_exists() {
     local dir="${1:?directory is missing}"
     local owner_user="${2:-}"
-    local owner_group="${3:-}"
+    local permission="${3:-}"
 
     [ ! -d "$dir" ] && mkdir -p "${dir}"
     if [[ -n $owner_user ]]; then
-        owned_by "$dir" "$owner_user" "$owner_group"
+        owned_by "$dir" "$owner_user" "$owner_user"
+    fi
+
+    if [[ -n "$permission" ]]; then
+        configure_permissions_ownership "$dir" -d "$permission"
     fi
 }
 

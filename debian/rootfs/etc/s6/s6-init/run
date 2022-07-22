@@ -20,26 +20,28 @@ set -o pipefail
 # Prepare persistence directories. #
 #==================================#
 info "Prepare persistence directories."
-for pdir in $PHP_PERSISTENCE_LIST
+for pdir in ${PHP_PERSISTENCE_LIST[*]}
 do
     # Ensure a directory exists and,is owned by the given user
     ensure_dir_exists "$pdir" "www-data"
 done
 
-# The my.php needs to be move to the persistent directory for the first startup
+# Make soft link for persistent directory
 if [ ! -f /data/zentao/.init_cfg ];then
-    mv /apps/zentao/config/my.php /data/zentao/config/ && touch /data/zentao/.init_cfg
+    for ldir in ${PERSISTENCE_LINK_LIST[*]}
+    do
+        ensure_dir_exists "$(dirname $ldir)" "www-data"
+        ensure_dir_exists "${ldir/data/apps}" "www-data" "777"
+        mv "${ldir/data/apps}" "$(dirname $ldir)"
+        make_soft_link "$ldir" "${ldir/data/apps}" "www-data"
+    done
+    touch /data/zentao/.init_cfg
+else
+    for ldir in ${PERSISTENCE_LINK_LIST[*]}
+    do
+        make_soft_link "$ldir" "${ldir/data/apps}" "www-data"
+    done
 fi
-
-# Make my.php link to /app/zentao/config/my.php
-make_soft_link "/data/zentao/config/my.php" "/apps/zentao/config/my.php"  "www-data"
-
-for ldir in $PERSISTENCE_LINK_LIST
-do
-    ensure_dir_exists "$ldir" "www-data"
-    configure_permissions_ownership "$ldir" -d 777
-    make_soft_link "$ldir" "${ldir/data/apps}" "www-data"
-done
 
 # Check and delete install.php and upgrade.php
 /bin/bash /usr/bin/check_files.sh &

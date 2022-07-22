@@ -105,7 +105,7 @@ session.save_path = "tcp://192.168.0.99:6379?auth=Reids验证密码"
 
 ### 7.1 通过make命令运行
 
-[Makefile](./Makefile)中详细的定义了可以使用的参数。
+[Makefile](https://github.com/quicklyon/zentao-docker/blob/master/Makefile)中详细的定义了可以使用的参数。
 
 ```bash
 # 运行禅道开源版
@@ -128,43 +128,5 @@ make build-max
 
 说明
 
-- [VERSION](./VERSION) 文件中详细的定义了Makefile可以操作的版本
-- [docker-compose.yml](./docker-compose.yml)
-
-### 7.2 在 Kubernetes 中运行
-
-我们通过 Helm封装了禅道应用，供[渠成平台](https://www.qucheng.com)使用，包含禅道Web服务，MySQL服务，您可以直接通过Helm命令添加渠成的Helm仓库。
-
-#### 7.2.1 前提条件
-
-1. Kubernetes 1.19+ 最佳
-2. Helm 3.2.0+
-3. K8S集群需要提前配置默认的共享存储（分布式存储），通过`kubectl get sc` 查看
-
-#### 7.2.2 特性
-
-- 支持禅道web服务多副本运行（需要K8S持久化目录支持分布式存储）
-- MySQL服务独立运行（当前交付版本 只支持单节点）
-
-#### 7.2.3 安装命令
-
-```bash
-# 配置Helm仓库
-helm repo add qucheng-market https://hub.qucheng.com/chartrepo/stable
-helm repo update
-
-# 为禅道服务创建独立namespace
-kubectl create ns easysoft
-
-# 启动禅道旗舰版
-helm upgrade -i zentao-max qucheng-market/zentao-max -n easysoft --set ingress.hostname=zentao.local --set replicaCount=2 --set image.pullPolicy=Always
-
-# 卸载服务
-helm delete zentao-max -n easysoft # 删除服务
-kubectl delete pvc --all -n easysoft # 清理持久化存储
-```
-
-> **说明：**
->
-> 1. ingress.hostname=< 设置内部可用域名 > 需要设置域名
-> 2. 通过helm安装的禅道是当前最新版本，详情可通过 `helm search repo zentao` 查看
+- [VERSION](https://github.com/quicklyon/zentao-docker/blob/master/VERSION) 文件中详细的定义了Makefile可以操作的版本
+- [docker-compose.yml](https://github.com/quicklyon/zentao-docker/blob/master/docker-compose.yml)

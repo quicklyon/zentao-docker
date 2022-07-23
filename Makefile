@@ -25,30 +25,42 @@ build-lite: ## 构建迅捷版
 build-litebiz: ## 构建旗迅捷企业版
 	docker build --build-arg VERSION=$(LITEBIZ_VER) -t hub.qucheng.com/app/zentao:$(LITEBIZ_VER)-$(BUILD_DATE) -f Dockerfile .
 
-push-all: push push-biz push-max push-lite push-litebiz ## 将所有镜像push到镜像仓库
+docker-push-all: docker-push docker-push-biz docker-push-max docker-push-lite docker-push-litebiz ## 将所有镜像push到 hub.docker.com 镜像仓库
 
-push: ## push 禅道开源版镜像
+push-all: push push-biz push-max push-lite push-litebiz ## 将所有镜像push到 hub.qucheng.com 镜像仓库
+
+push: ## push 禅道开源版 --> hub.qucheng.com
 	docker push hub.qucheng.com/app/zentao:$(OPEN_VER)-$(BUILD_DATE)
+
+push-biz: ## push 禅道企业版 --> hub.qucheng.com
+	docker push hub.qucheng.com/app/zentao:$(BIZ_VER)-$(BUILD_DATE)
+
+push-max: ## push 禅道旗舰版 --> hub.qucheng.com
+	docker push hub.qucheng.com/app/zentao:$(MAX_VER)-$(BUILD_DATE)
+
+push-lite: ## push 禅道迅捷版 --> hub.qucheng.com
+	docker push hub.qucheng.com/app/zentao:$(LITE_VER)-$(BUILD_DATE)
+
+push-litebiz: ## push 禅道迅捷企业版 --> hub.qucheng.com
+	docker push hub.qucheng.com/app/zentao:$(LITEBIZ_VER)-$(BUILD_DATE)
+
+docker-push: ## push 禅道开源版 --> hub.docker.com
 	docker tag hub.qucheng.com/app/zentao:$(OPEN_VER)-$(BUILD_DATE) easysoft/zentao:$(OPEN_VER)-$(BUILD_DATE)
 	docker push easysoft/zentao:$(OPEN_VER)-$(BUILD_DATE)
 
-push-biz: ## push 禅道企业版镜像
-	docker push hub.qucheng.com/app/zentao:$(BIZ_VER)-$(BUILD_DATE)
+docker-push-biz: ## push 禅道企业版 --> hub.docker.com
 	docker tag hub.qucheng.com/app/zentao:$(BIZ_VER)-$(BUILD_DATE) easysoft/zentao:$(BIZ_VER)-$(BUILD_DATE)
 	docker push easysoft/zentao:$(BIZ_VER)-$(BUILD_DATE)
 
-push-max: ## push 禅道旗舰版镜像
-	docker push hub.qucheng.com/app/zentao:$(MAX_VER)-$(BUILD_DATE)
+docker-push-max: ## push 禅道旗舰版 --> hub.docker.com
 	docker tag hub.qucheng.com/app/zentao:$(MAX_VER)-$(BUILD_DATE) easysoft/zentao:$(MAX_VER)-$(BUILD_DATE)
 	docker push  easysoft/zentao:$(MAX_VER)-$(BUILD_DATE)
 
-push-lite: ## push 禅道迅捷版镜像
-	docker push hub.qucheng.com/app/zentao:$(LITE_VER)-$(BUILD_DATE)
+docker-push-lite: ## push 禅道迅捷版 --> hub.docker.com
 	docker tag hub.qucheng.com/app/zentao:$(LITE_VER)-$(BUILD_DATE) easysoft/zentao:$(LITE_VER)-$(BUILD_DATE)
 	docker push easysoft/zentao:$(LITE_VER)-$(BUILD_DATE)
 
-push-litebiz: ## push 禅道迅捷企业版镜像
-	docker push hub.qucheng.com/app/zentao:$(LITEBIZ_VER)-$(BUILD_DATE)
+docker-push-litebiz: ## push 禅道迅捷企业版 --> hub.docker.com
 	docker tag hub.qucheng.com/app/zentao:$(LITEBIZ_VER)-$(BUILD_DATE) easysoft/zentao:$(LITEBIZ_VER)-$(BUILD_DATE)
 	docker push easysoft/zentao:$(LITEBIZ_VER)-$(BUILD_DATE)
 

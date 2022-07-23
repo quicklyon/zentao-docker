@@ -1,5 +1,12 @@
 # 禅道官方Docker镜像
 
+## 快速参考
+
+- 通过 [渠成软件百宝箱](https://www.qucheng.com/app-install/install-spug-125.html) 一键安装 **禅道**
+- [Dockerfile 源码](https://github.com/quicklyon/zentao-docker)
+- [禅道 源码](https://github.com/easysoft/zentaopms)
+- [禅道 官网](https://www.zentao.net/)
+
 ## 一、关于禅道
 
 禅道是一款开源的全生命周期项目管理软件，基于敏捷和CMMI管理理念进行设计，集产品管理、项目管理、质量管理、文档管理、组织管理和事务管理于一体，完整地覆盖了项目管理的核心流程。

@@ -46,7 +46,9 @@ push-litebiz: ## push 禅道迅捷企业版 --> hub.qucheng.com
 
 docker-push: ## push 禅道开源版 --> hub.docker.com
 	docker tag hub.qucheng.com/app/zentao:$(OPEN_VER)-$(BUILD_DATE) easysoft/zentao:$(OPEN_VER)-$(BUILD_DATE)
+	docker tag easysoft/zentao:$(OPEN_VER)-$(BUILD_DATE) easysoft/zentao:latest
 	docker push easysoft/zentao:$(OPEN_VER)-$(BUILD_DATE)
+	docker push easysoft/zentao:latest
 
 docker-push-biz: ## push 禅道企业版 --> hub.docker.com
 	docker tag hub.qucheng.com/app/zentao:$(BIZ_VER)-$(BUILD_DATE) easysoft/zentao:$(BIZ_VER)-$(BUILD_DATE)

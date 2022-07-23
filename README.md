@@ -2,7 +2,7 @@
 
 ## 快速参考
 
-- 通过 [渠成软件百宝箱](https://www.qucheng.com/app-install/install-spug-125.html) 一键安装 **禅道**
+- 通过 [渠成软件百宝箱](https://www.qucheng.com/app-install/install-zentao-126.html) 一键安装 **禅道**
 - [Dockerfile 源码](https://github.com/quicklyon/zentao-docker)
 - [禅道 源码](https://github.com/easysoft/zentaopms)
 - [禅道 官网](https://www.zentao.net/)

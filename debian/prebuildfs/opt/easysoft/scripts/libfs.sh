@@ -25,7 +25,7 @@ make_soft_link() {
     local group=${4:-}
 
 
-    [ -d "$dest" ] && mv "$dest" "$dest".bak
+    [ -e "$dest" ] && mv "$dest" "$dest".bak
     [ ! -L "$dest" ] && ln -s "$source" "$dest"
 
     if [[ -n $group ]]; then
@@ -68,7 +68,14 @@ ensure_dir_exists() {
     local owner_user="${2:-}"
     local permission="${3:-}"
 
-    [ ! -d "$dir" ] && mkdir -p "${dir}"
+    # $dir is file and not exists.
+    if [[ "$dir" =~ \. ]] ;then
+      [ ! -d "$(dirname "$dir")" ] && mkdir -p "$(dirname "$dir")"
+      touch "$dir"
+    elif [ ! -d "$dir" ];then
+      mkdir -p "${dir}"
+    fi
+
     if [[ -n $owner_user ]]; then
         owned_by "$dir" "$owner_user" "$owner_user"
     fi

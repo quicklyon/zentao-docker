@@ -20,7 +20,7 @@ set -o pipefail
 # Prepare persistence directories. #
 #==================================#
 info "Prepare persistence directories."
-for pdir in ${PHP_PERSISTENCE_LIST[*]}
+for pdir in "${PHP_PERSISTENCE_LIST[@]}"
 do
     # Ensure a directory exists and,is owned by the given user
     ensure_dir_exists "$pdir" "www-data"
@@ -28,7 +28,7 @@ done
 
 # Make soft link for persistent directory
 if [ ! -f /data/zentao/.init_cfg ];then
-    for ldir in ${PERSISTENCE_LINK_LIST[*]}
+    for ldir in "${PERSISTENCE_LINK_LIST[@]}"
     do
         ensure_dir_exists "$(dirname $ldir)" "www-data"
         ensure_dir_exists "${ldir/data/apps}" "www-data" "777"
@@ -37,7 +37,7 @@ if [ ! -f /data/zentao/.init_cfg ];then
     done
     touch /data/zentao/.init_cfg
 else
-    for ldir in ${PERSISTENCE_LINK_LIST[*]}
+    for ldir in "${PERSISTENCE_LINK_LIST[@]}"
     do
         make_soft_link "$ldir" "${ldir/data/apps}" "www-data"
     done

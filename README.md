@@ -20,26 +20,26 @@
 > 历史版本比较多，下面只列出最新的3个版本，详细版本请参考 [版本列表](https://hub.docker.com/r/easysoft/zentao/tags)
 
 - 开源版
-  - [`17.3-20220722`](https://www.zentao.net/download/zentaopms17.3-81058.html)
+  - [`17.3-20220725`](https://www.zentao.net/download/zentaopms17.3-81058.html)
   - [`17.2`](https://www.zentao.net/dynamic/zentaopms17.2-81021.html)
   - [`17.1`](https://www.zentao.net/download/zentaopms17.1-80973.html)
 
 - 企业版
-  - [`biz7.3-20220722`](https://www.zentao.net/download/zentaopms.biz7.3-81060.html)
+  - [`biz7.3-20220725`](https://www.zentao.net/download/zentaopms.biz7.3-81060.html)
   - [`biz7.2`](https://www.zentao.net/dynamic/zentaopms.biz7.2-81022.html)
   - [`biz7.1`](https://www.zentao.net/download/zentaopms.biz7.1-80974.html)
 
 - 旗舰版
-  - [`max3.4-20220722`](https://www.zentao.net/download/max3.4-81061.html)
+  - [`max3.4-20220725`](https://www.zentao.net/download/max3.4-81061.html)
   - [`max3.3-20220722`](https://www.zentao.net/dynamic/max3.3-81023.html)
   - [`max3.2`](https://www.zentao.net/download/max3.2-80975.html)
 
 - 迅捷版
-  - [`lite1.2-20220722`](https://www.zentao.net/download/zentaolitev1.2-80982.html)
+  - [`lite1.2-20220725`](https://www.zentao.net/download/zentaolitev1.2-80982.html)
   - [`lite1.1`](https://www.zentao.net/dynamic/zentaolitev1.1-80683.html)
 
 - 迅捷企业版
-  - [`litevip1.2-20220722`](https://www.zentao.net/download/zentaolitevipv1.2-80983.html)
+  - [`litevip1.2-20220725`](https://www.zentao.net/download/zentaolitevipv1.2-80983.html)
   - [`litevip1.1`](https://www.zentao.net/dynamic/zentaolitevipv1.1-80684.html)
 
 ## 三、获取镜像

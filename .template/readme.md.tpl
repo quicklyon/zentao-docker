@@ -50,7 +50,7 @@ docker pull easysoft/{{APP_DOCKER_IMAGE_NAME}}:[TAG]
 ```bash
 $ docker run -it \
     -v $PWD/data:/data \
-docker pull easysoft/{{APP_DOCKER_IMAGE_NAME}}:latest
+    easysoft/{{APP_DOCKER_IMAGE_NAME}}:latest
 ```
 
 或者修改 docker-compose.yml 文件，添加持久化目录配置

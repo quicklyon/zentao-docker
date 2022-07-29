@@ -72,7 +72,7 @@ docker pull easysoft/quickon-zentao:[TAG]
 ```bash
 $ docker run -it \
     -v $PWD/data:/data \
-docker pull easysoft/quickon-zentao:latest
+    easysoft/quickon-zentao:latest
 ```
 
 或者修改 docker-compose.yml 文件，添加持久化目录配置

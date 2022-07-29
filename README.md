@@ -1,70 +1,94 @@
-# 禅道官方Docker镜像
+<!-- 该文档是模板生成，手动修改的内容会被覆盖，详情参见：https://github.com/quicklyon/template-toolkit -->
+# QuickOn ZenTao 应用镜像
 
 ## 快速参考
 
-- 通过 [渠成软件百宝箱](https://www.qucheng.com/app-install/install-zentao-126.html) 一键安装 **禅道**
+- 通过 [渠成软件百宝箱](https://www.qucheng.com/app-install/install-zentao-126.html) 一键安装 **ZenTao**
 - [Dockerfile 源码](https://github.com/quicklyon/zentao-docker)
-- [禅道 源码](https://github.com/easysoft/zentaopms)
-- [禅道 官网](https://www.zentao.net/)
+- [ZenTao 源码](https://github.com/easysoft/zentaopms)
+- [ZenTao 官网](https://zentao.net/)
 
-## 一、关于禅道
+## 一、关于 ZenTao
+
+<!-- 这里写应用的【介绍信息】 -->
 
 禅道是一款开源的全生命周期项目管理软件，基于敏捷和CMMI管理理念进行设计，集产品管理、项目管理、质量管理、文档管理、组织管理和事务管理于一体，完整地覆盖了项目管理的核心流程。
 
 禅和道是中国文化中极具代表意义的两个字，是中国传统文化的结晶。我们之所以选用“禅道”作为我们软件的名字，是希望通过这两个字来传达我们对管理的理解和思考。我们希望通过禅道来进行的管理，可以摒弃繁文缛节，还原管理的本质！
 
-官网：[www.zentao.net](https://www.zentao.net/)
+![screenshots](.template/screenshots.png)
+
+ZenTao官网：[https://zentao.net/](https://zentao.net/)
+
+
+<!-- 这里写应用的【附加信息】 -->
 
 ## 二、支持的版本(Tag)
 
-> 历史版本比较多，下面只列出最新的3个版本，详细版本请参考 [版本列表](https://hub.docker.com/r/easysoft/zentao/tags)
+由于版本比较多,这里只列出最新的5个版本,更详细的版本列表请参考:[可用版本列表](https://hub.docker.com/r/easysoft/quickon-zentao/tags/)
+
+<!-- 这里是应用的【Tag】信息，通过命令维护，详情参考：https://github.com/quicklyon/doc-toolkit -->
 
 - 开源版
   - [`17.3-20220725`](https://www.zentao.net/download/zentaopms17.3-81058.html)
-  - [`17.2`](https://www.zentao.net/dynamic/zentaopms17.2-81021.html)
-  - [`17.1`](https://www.zentao.net/download/zentaopms17.1-80973.html)
 
 - 企业版
   - [`biz7.3-20220725`](https://www.zentao.net/download/zentaopms.biz7.3-81060.html)
-  - [`biz7.2`](https://www.zentao.net/dynamic/zentaopms.biz7.2-81022.html)
-  - [`biz7.1`](https://www.zentao.net/download/zentaopms.biz7.1-80974.html)
 
 - 旗舰版
   - [`max3.4-20220725`](https://www.zentao.net/download/max3.4-81061.html)
   - [`max3.3-20220722`](https://www.zentao.net/dynamic/max3.3-81023.html)
-  - [`max3.2`](https://www.zentao.net/download/max3.2-80975.html)
 
 - 迅捷版
   - [`lite1.2-20220725`](https://www.zentao.net/download/zentaolitev1.2-80982.html)
-  - [`lite1.1`](https://www.zentao.net/dynamic/zentaolitev1.1-80683.html)
 
 - 迅捷企业版
   - [`litevip1.2-20220725`](https://www.zentao.net/download/zentaolitevipv1.2-80983.html)
-  - [`litevip1.1`](https://www.zentao.net/dynamic/zentaolitevipv1.1-80684.html)
 
 ## 三、获取镜像
 
-推荐从 渠成镜像仓库 拉取我们构建好的官方Docker镜像
+推荐从 [Docker Hub Registry](https://hub.docker.com/r/easysoft/quickon-zentao) 拉取我们构建好的官方Docker镜像。
 
 ```bash
-docker pull hub.qucheng.com/app/zentao:[TAG]
+docker pull easysoft/quickon-zentao:latest
+```
+
+如需使用指定的版本，可以拉取一个包含版本标签的镜像，在Docker Hub仓库中查看 [可用版本列表](https://hub.docker.com/r/easysoft/quickon-zentao/tags/)
+
+```bash
+docker pull easysoft/quickon-zentao:[TAG]
 ```
 
 ## 四、持久化数据
 
-如果删除容器，所有的数据都将被删除，下次运行镜像时会重新初始化数据。为了避免数据丢失，应该为容器提供一个挂载卷，这样可以将数据进行持久化存储。
+如果你删除容器，所有的数据都将被删除，下次运行镜像时会重新初始化数据。为了避免数据丢失，你应该为容器提供一个挂在卷，这样可以将数据进行持久化存储。
 
-- /data 禅道数据
+为了数据持久化，你应该挂载持久化目录：
+
+- /data 持久化数据
+
 如果挂载的目录为空，首次启动会自动初始化相关文件
 
 ```bash
 $ docker run -it \
     -v $PWD/data:/data \
-    hub.qucheng.com/app/zentao:max3.1
+docker pull easysoft/quickon-zentao:latest
+```
+
+或者修改 docker-compose.yml 文件，添加持久化目录配置
+
+```bash
+services:
+  ZenTao:
+  ...
+    volumes:
+      - /path/to/gogs-persistence:/data
+  ...
 ```
 
 ## 五、环境变量
 
+<!-- 这里写应用的【环境变量信息】 -->
 | 变量名           | 默认值        | 说明                             |
 | ---------------- | ------------- | -------------------------------- |
 | DEBUG            | false         | 是否打开调试信息，默认关闭       |
@@ -96,7 +120,7 @@ docker run -d --restart unless-stopped --name zentao \
 -e PHP_SESSION_PATH=tcp://192.168.0.99:6379?auth=Reids验证密码 \
 -v /data/zentao:/data \
 -p 8088:80 \
-hub.qucheng.com/app/zentao:17.2
+easysoft/quickon-zentao:latest
 ```
 
 指定上面两个环境变量，实际上就是修改了`php.ini`中关于Session的配置：
@@ -110,30 +134,24 @@ session.save_path = "tcp://192.168.0.99:6379?auth=Reids验证密码"
 
 ## 七、运行
 
-### 7.1 通过make命令运行
-
-[Makefile](https://github.com/quicklyon/zentao-docker/blob/master/Makefile)中详细的定义了可以使用的参数。
+### 7.1 单机Docker-compose方式运行
 
 ```bash
-# 运行禅道开源版
+# 启动服务
 make run
 
-# 关闭禅道开源版
-make stop
+# 查看服务状态
+make ps
 
-# 清理容器与持久化数据
-make clean
-
-# 构建镜像
-# 构建开源版镜像
-make build
-
-# 构建旗舰版镜像
-make build-max
+# 查看服务日志
+docker-compose logs -f quickon-zentao
 
 ```
 
-说明
+<!-- 这里写应用的【make命令的备注信息】位于文档最后端 -->
+
+
+**说明:**
 
 - [VERSION](https://github.com/quicklyon/zentao-docker/blob/master/VERSION) 文件中详细的定义了Makefile可以操作的版本
 - [docker-compose.yml](https://github.com/quicklyon/zentao-docker/blob/master/docker-compose.yml)

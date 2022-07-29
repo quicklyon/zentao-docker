@@ -45,26 +45,26 @@ push-litebiz: ## push 禅道迅捷企业版 --> hub.qucheng.com
 	docker push hub.qucheng.com/app/zentao:$(LITEBIZ_VER)-$(BUILD_DATE)
 
 docker-push: ## push 禅道开源版 --> hub.docker.com
-	docker tag hub.qucheng.com/app/zentao:$(OPEN_VER)-$(BUILD_DATE) easysoft/zentao:$(OPEN_VER)-$(BUILD_DATE)
-	docker tag easysoft/zentao:$(OPEN_VER)-$(BUILD_DATE) easysoft/zentao:latest
-	docker push easysoft/zentao:$(OPEN_VER)-$(BUILD_DATE)
-	docker push easysoft/zentao:latest
+	docker tag hub.qucheng.com/app/zentao:$(OPEN_VER)-$(BUILD_DATE) easysoft/quickon-zentao:$(OPEN_VER)-$(BUILD_DATE)
+	docker tag easysoft/quickon-zentao:$(OPEN_VER)-$(BUILD_DATE) easysoft/quickon-zentao:latest
+	docker push easysoft/quickon-zentao:$(OPEN_VER)-$(BUILD_DATE)
+	docker push easysoft/quickon-zentao:latest
 
 docker-push-biz: ## push 禅道企业版 --> hub.docker.com
-	docker tag hub.qucheng.com/app/zentao:$(BIZ_VER)-$(BUILD_DATE) easysoft/zentao:$(BIZ_VER)-$(BUILD_DATE)
-	docker push easysoft/zentao:$(BIZ_VER)-$(BUILD_DATE)
+	docker tag hub.qucheng.com/app/zentao:$(BIZ_VER)-$(BUILD_DATE) easysoft/quickon-zentao:$(BIZ_VER)-$(BUILD_DATE)
+	docker push easysoft/quickon-zentao:$(BIZ_VER)-$(BUILD_DATE)
 
 docker-push-max: ## push 禅道旗舰版 --> hub.docker.com
-	docker tag hub.qucheng.com/app/zentao:$(MAX_VER)-$(BUILD_DATE) easysoft/zentao:$(MAX_VER)-$(BUILD_DATE)
-	docker push  easysoft/zentao:$(MAX_VER)-$(BUILD_DATE)
+	docker tag hub.qucheng.com/app/zentao:$(MAX_VER)-$(BUILD_DATE) easysoft/quickon-zentao:$(MAX_VER)-$(BUILD_DATE)
+	docker push  easysoft/quickon-zentao:$(MAX_VER)-$(BUILD_DATE)
 
 docker-push-lite: ## push 禅道迅捷版 --> hub.docker.com
-	docker tag hub.qucheng.com/app/zentao:$(LITE_VER)-$(BUILD_DATE) easysoft/zentao:$(LITE_VER)-$(BUILD_DATE)
-	docker push easysoft/zentao:$(LITE_VER)-$(BUILD_DATE)
+	docker tag hub.qucheng.com/app/zentao:$(LITE_VER)-$(BUILD_DATE) easysoft/quickon-zentao:$(LITE_VER)-$(BUILD_DATE)
+	docker push easysoft/quickon-zentao:$(LITE_VER)-$(BUILD_DATE)
 
 docker-push-litebiz: ## push 禅道迅捷企业版 --> hub.docker.com
-	docker tag hub.qucheng.com/app/zentao:$(LITEBIZ_VER)-$(BUILD_DATE) easysoft/zentao:$(LITEBIZ_VER)-$(BUILD_DATE)
-	docker push easysoft/zentao:$(LITEBIZ_VER)-$(BUILD_DATE)
+	docker tag hub.qucheng.com/app/zentao:$(LITEBIZ_VER)-$(BUILD_DATE) easysoft/quickon-zentao:$(LITEBIZ_VER)-$(BUILD_DATE)
+	docker push easysoft/quickon-zentao:$(LITEBIZ_VER)-$(BUILD_DATE)
 
 run: ## 运行禅道开源版
 	export TAG=$(OPEN_VER)-$(BUILD_DATE); docker-compose -f docker-compose.yml up -d

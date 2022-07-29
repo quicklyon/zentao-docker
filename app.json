@@ -1,0 +1,16 @@
+{
+    "Name": "ZenTao",
+    "Version": "17.3",
+    "Home": "https://zentao.net/",
+    "Maintainer": "zhouyq zhouyueqiu@easycorp.ltd",
+    "GitUrl": "https://github.com/easysoft/zentaopms",
+    "DockerfileUrl": "https://github.com/quicklyon/zentao-docker",
+    "InstallDocUrl": "https://www.qucheng.com/app-install/install-zentao-126.html",
+    "Docker": {
+        "Name": "quickon-zentao",
+        "OS": "debian-11",
+        "ImageOS": "debian:11.4-slim",
+        "Repo": "https://hub.docker.com/r/easysoft/quickon-zentao",
+        "TagUrl": "https://hub.docker.com/r/easysoft/quickon-zentao/tags/"
+    }
+}

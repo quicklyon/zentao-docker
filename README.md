@@ -21,7 +21,7 @@
 
 禅和道是中国文化中极具代表意义的两个字，是中国传统文化的结晶。我们之所以选用“禅道”作为我们软件的名字，是希望通过这两个字来传达我们对管理的理解和思考。我们希望通过禅道来进行的管理，可以摒弃繁文缛节，还原管理的本质！
 
-![screenshots](.template/screenshots.png)
+![screenshots](https://github.com/quicklyon/zentao-docker/blob/master/.template/screenshots.png)
 
 ZenTao官网：[https://zentao.net/](https://zentao.net/)
 

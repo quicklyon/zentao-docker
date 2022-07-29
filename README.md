@@ -1,6 +1,11 @@
 <!-- 该文档是模板生成，手动修改的内容会被覆盖，详情参见：https://github.com/quicklyon/template-toolkit -->
 # QuickOn ZenTao 应用镜像
 
+![GitHub Workflow Status (event)](https://img.shields.io/github/workflow/status/quicklyon/zentao-docker/build?style=flat-square)
+![Docker Pulls](https://img.shields.io/docker/pulls/easysoft/quickon-zentao?style=flat-square)
+![Docker Image Size](https://img.shields.io/docker/image-size/easysoft/quickon-zentao?style=flat-square)
+![GitHub tag](https://img.shields.io/github/v/tag/quicklyon/zentao-docker?style=flat-square)
+
 ## 快速参考
 
 - 通过 [渠成软件百宝箱](https://www.qucheng.com/app-install/install-zentao-126.html) 一键安装 **ZenTao**

@@ -20,16 +20,10 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
-    - name: Login TCR
-      uses: docker/login-action@v2
-      with:
-        registry: hub.qucheng.com
-        username: ${{ secrets.TCR_USER }}
-        password: ${{ secrets.TCR_PASS }}
     - name: Build and push
       run: |
         make build-all
-        make docker-push-all
+        make push-sync-tcr
     - name: Update repo description
       uses: peter-evans/dockerhub-description@v3
       with:

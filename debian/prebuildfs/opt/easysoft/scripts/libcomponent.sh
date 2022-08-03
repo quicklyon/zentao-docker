@@ -6,7 +6,7 @@
 
 # Constants
 CACHE_ROOT="/tmp/easysoft/pkg/cache"
-DOWNLOAD_URL="https://pkg.qucheng.com/files/stacksmith"
+DOWNLOAD_URL="https://pkg-hk.qucheng.com/files/stacksmith"
 ZENTAO_URL="https://www.zentao.net/dl/zentao"
 ZDOO_URL="https://www.zdoo.com/dl/zdoo"
 

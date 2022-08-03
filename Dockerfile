@@ -8,8 +8,7 @@ ENV OS_ARCH="amd64" \
 
 COPY debian/prebuildfs /
 
-ENV TZ=Asia/Shanghai \
-    DEBIAN_FRONTEND=noninteractive
+ENV TZ=Asia/Shanghai
 
 RUN install_packages curl wget zip unzip s6 pwgen cron
 

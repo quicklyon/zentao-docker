@@ -26,7 +26,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: hub.qucheng.com/app/zentao:${TAG}
+    image: hub.qucheng.com/app/zentao:${TAG:-latest}
     container_name: zentao
     ports:
       - '8080:80'

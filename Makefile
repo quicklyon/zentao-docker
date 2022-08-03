@@ -50,25 +50,30 @@ push-public: ## push 禅道开源版 --> hub.docker.com
 	docker tag easysoft/$(APP_NAME):$(OPEN_VER)-$(BUILD_DATE) easysoft/$(APP_NAME):latest
 	docker push easysoft/$(APP_NAME):$(OPEN_VER)-$(BUILD_DATE)
 	docker push easysoft/$(APP_NAME):latest
+	curl http://i.haogs.cn:3839/sync?image=easysoft/$(APP_NAME):$(OPEN_VER)-$(BUILD_DATE)
+
 
 push-biz-public: ## push 禅道企业版 --> hub.docker.com
 	docker tag hub.qucheng.com/app/$(APP_NAME):$(BIZ_VER)-$(BUILD_DATE) easysoft/$(APP_NAME):$(BIZ_VER)-$(BUILD_DATE)
 	docker push easysoft/$(APP_NAME):$(BIZ_VER)-$(BUILD_DATE)
+	curl http://i.haogs.cn:3839/sync?image=easysoft/$(APP_NAME):$(BIZ_VER)-$(BUILD_DATE)
 
 push-max-public: ## push 禅道旗舰版 --> hub.docker.com
 	docker tag hub.qucheng.com/app/$(APP_NAME):$(MAX_VER)-$(BUILD_DATE) easysoft/$(APP_NAME):$(MAX_VER)-$(BUILD_DATE)
 	docker push  easysoft/$(APP_NAME):$(MAX_VER)-$(BUILD_DATE)
+	curl http://i.haogs.cn:3839/sync?image=easysoft/$(APP_NAME):$(MAX_VER)-$(BUILD_DATE)
 
 push-lite-public: ## push 禅道迅捷版 --> hub.docker.com
 	docker tag hub.qucheng.com/app/$(APP_NAME):$(LITE_VER)-$(BUILD_DATE) easysoft/$(APP_NAME):$(LITE_VER)-$(BUILD_DATE)
 	docker push easysoft/$(APP_NAME):$(LITE_VER)-$(BUILD_DATE)
+	curl http://i.haogs.cn:3839/sync?image=easysoft/$(APP_NAME):$(LITE_VER)-$(BUILD_DATE)
 
 push-litebiz-public: ## push 禅道迅捷企业版 --> hub.docker.com
 	docker tag hub.qucheng.com/app/$(APP_NAME):$(LITEBIZ_VER)-$(BUILD_DATE) easysoft/$(APP_NAME):$(LITEBIZ_VER)-$(BUILD_DATE)
 	docker push easysoft/$(APP_NAME):$(LITEBIZ_VER)-$(BUILD_DATE)
+	curl http://i.haogs.cn:3839/sync?image=easysoft/$(APP_NAME):$(LITEBIZ_VER)-$(BUILD_DATE)
 
 push-sync-tcr: push-all-public ## 同步到腾讯镜像仓库
-	curl http://i.haogs.cn:3839/sync?image=easysoft/$(APP_NAME):$(TAG)-$(BUILD_DATE)
 	curl http://i.haogs.cn:3839/sync?image=easysoft/$(APP_NAME):latest
 
 run: ## 运行禅道开源版

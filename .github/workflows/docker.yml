@@ -20,6 +20,11 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
+    - name: install jq
+      run: |
+        echo "install jq"
+        sudo apt-get update -qq
+        sudo apt-get install -y jq
     - name: Build and push
       run: |
         make build-all

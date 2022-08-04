@@ -1,9 +1,9 @@
 export APP_NAME=quickon-zentao
-export OPEN_VER := $(shell grep open VERSION | cut -d '=' -f 2)
-export BIZ_VER := $(shell grep ^biz VERSION | cut -d '=' -f 2)
-export MAX_VER := $(shell grep max VERSION | cut -d '=' -f 2)
-export LITE_VER := $(shell grep "lite=" VERSION | cut -d '=' -f 2)
-export LITEBIZ_VER := $(shell grep litebiz VERSION | cut -d '=' -f 2)
+export OPEN_VER := $(shell jq -r .zentaopms.version < version.json)
+export BIZ_VER := biz$(shell jq -r .biz.version < version.json)
+export MAX_VER := max$(shell jq -r .max.version < version.json)
+export LITE_VER := lite$(shell jq -r .litev.version < version.json)
+export LITEBIZ_VER := litevip$(shell jq -r .litevipv.version < version.json)
 export BUILD_DATE := $(shell date +'%Y%m%d')
 
 help: ## this help

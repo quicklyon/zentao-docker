@@ -32,7 +32,26 @@ ZenTao官网：[https://zentao.net/](https://zentao.net/)
 
 由于版本比较多,这里只列出最新的5个版本,更详细的版本列表请参考:[可用版本列表](https://hub.docker.com/r/easysoft/quickon-zentao/tags/)
 
+<!-- 这里是应用的【Tag】信息，通过命令维护，详情参考：https://github.com/quicklyon/doc-toolkit -->
 
+- 开源版
+  - [`17.4-20220818`](https://www.zentao.net/download/zentaopms17.3-81058.html)
+  - [`17.3-20220729`](https://www.zentao.net/download/zentaopms17.3-81058.html)
+
+- 企业版
+  - [`biz7.4-20220818`](https://www.zentao.net/download/zentaopms.biz7.3-81060.html)
+  - [`biz7.3-20220729`](https://www.zentao.net/download/zentaopms.biz7.3-81060.html)
+
+- 旗舰版
+  - [`max3.5-20220818`](https://www.zentao.net/download/max3.4-81061.html)
+  - [`max3.4-20220729`](https://www.zentao.net/download/max3.4-81061.html)
+  - [`max3.3-20220729`](https://www.zentao.net/dynamic/max3.3-81023.html)
+
+- 迅捷版
+  - [`lite1.2-20220818`](https://www.zentao.net/download/zentaolitev1.2-80982.html)
+
+- 迅捷企业版
+  - [`litevip1.2-20220818`](https://www.zentao.net/download/zentaolitevipv1.2-80983.html)
 
 ## 三、获取镜像
 

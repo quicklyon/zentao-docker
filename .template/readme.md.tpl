@@ -26,7 +26,7 @@
 
 由于版本比较多,这里只列出最新的5个版本,更详细的版本列表请参考:[可用版本列表]({{APP_DOCKER_HUB_TAG_URL}})
 
-{{SUPPORT_TAGS}}
+{{APP_DOCKER_TAG}}
 
 ## 三、获取镜像
 

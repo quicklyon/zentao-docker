@@ -24,8 +24,13 @@ make_soft_link() {
     local owner=${3:-}
     local group=${4:-}
 
+    # 持久化目录没有文件，将代码中需要持久化的文件复制到持久化目录
+    [ ! -e "$source" ] && mv "$dest" "$(dirname "$source")"
 
+    # 代码中有需要持久化的目录，将代码中的目录改名
     [ -e "$dest" ] && mv "$dest" "$dest".bak
+    
+    # 如果没有持久化目录软连接，建立软连接
     [ ! -L "$dest" ] && ln -s "$source" "$dest"
 
     if [[ -n $group ]]; then

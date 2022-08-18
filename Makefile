@@ -122,6 +122,15 @@ run-lite: ## 运行禅道迅捷版
 run-litebiz: ## 运行禅道迅捷企业版
 	export TAG=$(LITEBIZ_VER)-$(BUILD_DATE);docker-compose -f docker-compose.yml up -d
 
+test-open: ## 测试禅道开源版
+	hack/make-rules/test-zentao.sh "zentao-open" "run"
+
+test-max: ## 测试禅道旗舰版
+	hack/make-rules/test-zentao.sh "zentao-max" "run-max"
+
+test-biz: ## 测试禅道企业版
+	hack/make-rules/test-zentao.sh "zentao-biz" "run-biz"
+
 ps: ## 运行状态
 	docker-compose -f docker-compose.yml ps
 

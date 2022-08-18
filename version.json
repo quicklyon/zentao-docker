@@ -1,15 +1,15 @@
 {
   "zentaopms": {
-    "version": "17.4",
-    "news": "https://www.zentao.net/dynamic/zentaopms17.4-81093.html"
+    "version": "17.5",
+    "news": "https://www.zentao.net/download/zentaopms17.5-81507.html"
   },
   "biz": {
-    "version": "7.4",
-    "news": "https://www.zentao.net/dynamic/zentaopms.biz7.4-81094.html"
+    "version": "7.5",
+    "news": "https://www.zentao.net/download/zentaopms.biz7.5-81508.html"
   },
   "max": {
-    "version": "3.5",
-    "news": "https://www.zentao.net/dynamic/max3.5-81095.html"
+    "version": "3.6",
+    "news": "https://www.zentao.net/download/max3.6-81509.html"
   },
   "max-k8s": {
     "version": "3.3",

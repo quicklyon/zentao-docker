@@ -21,7 +21,7 @@
 
 禅和道是中国文化中极具代表意义的两个字，是中国传统文化的结晶。我们之所以选用“禅道”作为我们软件的名字，是希望通过这两个字来传达我们对管理的理解和思考。我们希望通过禅道来进行的管理，可以摒弃繁文缛节，还原管理的本质！
 
-![screenshots](https://github.com/quicklyon/zentao-docker/blob/master/.template/screenshots.png)
+![screenshots](https://raw.githubusercontent.com/quicklyon/zentao-docker/master/.template/screenshots.png)
 
 ZenTao官网：[https://zentao.net/](https://zentao.net/)
 
@@ -35,15 +35,18 @@ ZenTao官网：[https://zentao.net/](https://zentao.net/)
 <!-- 这里是应用的【Tag】信息，通过命令维护，详情参考：https://github.com/quicklyon/doc-toolkit -->
 
 - 开源版
-  - [`17.4-20220818`](https://www.zentao.net/download/zentaopms17.3-81058.html)
+  - [`17.5-20220818`](https://www.zentao.net/download/zentaopms17.5-81507.html)
+  - [`17.4-20220818`](https://www.zentao.net/download/zentaopms17.4-81093.html)
   - [`17.3-20220729`](https://www.zentao.net/download/zentaopms17.3-81058.html)
 
 - 企业版
-  - [`biz7.4-20220818`](https://www.zentao.net/download/zentaopms.biz7.3-81060.html)
+  - [`biz7.5-20220818`](https://www.zentao.net/download/zentaopms.biz7.5-81508.html)
+  - [`biz7.4-20220818`](https://www.zentao.net/download/zentaopms.biz7.4-81094.html)
   - [`biz7.3-20220729`](https://www.zentao.net/download/zentaopms.biz7.3-81060.html)
 
 - 旗舰版
-  - [`max3.5-20220818`](https://www.zentao.net/download/max3.4-81061.html)
+  - [`max3.6-20220818`](https://www.zentao.net/download/max3.6-81509.html)
+  - [`max3.5-20220818`](https://www.zentao.net/download/max3.5-81095.html)
   - [`max3.4-20220729`](https://www.zentao.net/download/max3.4-81061.html)
   - [`max3.3-20220729`](https://www.zentao.net/dynamic/max3.3-81023.html)
 

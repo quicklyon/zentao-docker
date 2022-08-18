@@ -11,6 +11,10 @@
     "version": "3.5",
     "news": "https://www.zentao.net/dynamic/max3.5-81095.html"
   },
+  "max-k8s": {
+    "version": "3.3",
+    "news": "ZenTao Max kubernetes customized version"
+  },
   "litev": {
     "version": "1.2",
     "news": "https://www.zentao.net/download/zentaolitev1.2-80982.html"

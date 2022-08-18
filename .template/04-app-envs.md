@@ -9,6 +9,7 @@
 | MYSQL_DB         | zentao        | zentao数据库名称                 |
 | MYSQL_USER       | root          | MySQL用户名                      |
 | MYSQL_PASSWORD   | pass4zenTao   | MySQL密码                        |
+| IS_CONTAINER     | true          | 是否在容器内运行，zentao更新时使用|
 
 ## 六、将Session存储在Redis
 
@@ -20,14 +21,23 @@
 启动命令示例如下：
 
 ```bash
-docker run -d --restart unless-stopped --name zentao \
--e MYSQL_HOST=192.168.0.88 \
+# 运行redis
+docker run -d --rm --name redis redis:3.2.12-alpine3.8
+
+# 运行mysql
+docker run -d --rm --name mysql -e MYSQL_ROOT_PASSWORD=pass4you mysql:5.7.38-debian
+
+# 运行禅道
+docker run -d --rm --name zentao \
+--link mysql \
+--link redis \
+-e MYSQL_HOST=mysql \
 -e MYSQL_PORT=3306 \
 -e MYSQL_USER=root \
--e MYSQL_PASSWORD=MySQL密码 \
+-e MYSQL_PASSWORD=pass4you \
 -e MYSQL_DB=zentao \
 -e PHP_SESSION_TYPE=redis \
--e PHP_SESSION_PATH=tcp://192.168.0.99:6379?auth=Reids验证密码 \
+-e PHP_SESSION_PATH=tcp://redis:6379 \
 -v /data/zentao:/data \
 -p 8088:80 \
 easysoft/quickon-zentao:latest
@@ -37,7 +47,10 @@ easysoft/quickon-zentao:latest
 
 ```ini
 session.save_handler = redis
-session.save_path = "tcp://192.168.0.99:6379?auth=Reids验证密码"
+session.save_path = "tcp://redis:6379"
 ```
 
-**注意**：镜像内的脚本已经做了特殊处理，因此环境变量的值加不加引号，都不影响正常使用。
+**注意**：
+
+- 镜像内的脚本已经做了特殊处理，因此环境变量的值加不加引号，都不影响正常使用。
+- 示例使用了link的方式连接了mysql和redis，因此可以直接使用连接名称来连接mysql和redis。

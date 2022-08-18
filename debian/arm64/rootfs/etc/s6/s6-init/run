@@ -49,17 +49,15 @@ fi
 #=====================#
 #   Prepare PHP       #
 #=====================#
-PHP_CLI_INI="/etc/php/7.4/cli/php.ini"
-PHP_APACHE_INI="/etc/php/7.4/apache2/php.ini"
+PHP_INI="/usr/local/etc/php/php.ini"
 
 info "Render php.ini with environment variables."
-/usr/bin/render-template /etc/php/7.4/php.ini.tpl > ${PHP_CLI_INI}
-/usr/bin/render-template /etc/php/7.4/php.ini.tpl > ${PHP_APACHE_INI}
+/usr/bin/render-template ${PHP_INI}.tpl > ${PHP_INI}
 
 # enable redis extension
 if [ "$PHP_SESSION_TYPE" == "redis" ];then
     info "Enable redis extension for session."
-    phpenmod redis
+    docker-php-ext-enable redis
 fi
 
 #=====================#
@@ -74,6 +72,8 @@ info "Render apache sites config with envionment variables."
 #======================#
 # Check and waiting mysql to be ready
 wait_for_mysql || exit 1
+
+sleep ${PAUSE:-0}
 
 # Initialize database
 mysql_init_db "$MYSQL_DB"

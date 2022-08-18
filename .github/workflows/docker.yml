@@ -35,3 +35,4 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
         repository: easysoft/quickon-zentao
+        platforms: linux/amd64,linux/arm64

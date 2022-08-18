@@ -32,26 +32,7 @@ ZenTao官网：[https://zentao.net/](https://zentao.net/)
 
 由于版本比较多,这里只列出最新的5个版本,更详细的版本列表请参考:[可用版本列表](https://hub.docker.com/r/easysoft/quickon-zentao/tags/)
 
-<!-- 这里是应用的【Tag】信息，通过命令维护，详情参考：https://github.com/quicklyon/doc-toolkit -->
 
-- 开源版
-  - [`17.4-20220803`](https://www.zentao.net/download/zentaopms17.3-81058.html)
-  - [`17.3-20220729`](https://www.zentao.net/download/zentaopms17.3-81058.html)
-
-- 企业版
-  - [`biz7.4-20220803`](https://www.zentao.net/download/zentaopms.biz7.3-81060.html)
-  - [`biz7.3-20220729`](https://www.zentao.net/download/zentaopms.biz7.3-81060.html)
-
-- 旗舰版
-  - [`max3.5-20220803`](https://www.zentao.net/download/max3.4-81061.html)
-  - [`max3.4-20220729`](https://www.zentao.net/download/max3.4-81061.html)
-  - [`max3.3-20220729`](https://www.zentao.net/dynamic/max3.3-81023.html)
-
-- 迅捷版
-  - [`lite1.2-20220729`](https://www.zentao.net/download/zentaolitev1.2-80982.html)
-
-- 迅捷企业版
-  - [`litevip1.2-20220729`](https://www.zentao.net/download/zentaolitevipv1.2-80983.html)
 
 ## 三、获取镜像
 
@@ -107,6 +88,7 @@ services:
 | MYSQL_DB         | zentao        | zentao数据库名称                 |
 | MYSQL_USER       | root          | MySQL用户名                      |
 | MYSQL_PASSWORD   | pass4zenTao   | MySQL密码                        |
+| IS_CONTAINER     | true          | 是否在容器内运行，zentao更新时使用|
 
 ## 六、将Session存储在Redis
 
@@ -118,14 +100,23 @@ services:
 启动命令示例如下：
 
 ```bash
-docker run -d --restart unless-stopped --name zentao \
--e MYSQL_HOST=192.168.0.88 \
+# 运行redis
+docker run -d --rm --name redis redis:3.2.12-alpine3.8
+
+# 运行mysql
+docker run -d --rm --name mysql -e MYSQL_ROOT_PASSWORD=pass4you mysql:5.7.38-debian
+
+# 运行禅道
+docker run -d --rm --name zentao \
+--link mysql \
+--link redis \
+-e MYSQL_HOST=mysql \
 -e MYSQL_PORT=3306 \
 -e MYSQL_USER=root \
--e MYSQL_PASSWORD=MySQL密码 \
+-e MYSQL_PASSWORD=pass4you \
 -e MYSQL_DB=zentao \
 -e PHP_SESSION_TYPE=redis \
--e PHP_SESSION_PATH=tcp://192.168.0.99:6379?auth=Reids验证密码 \
+-e PHP_SESSION_PATH=tcp://redis:6379 \
 -v /data/zentao:/data \
 -p 8088:80 \
 easysoft/quickon-zentao:latest
@@ -135,10 +126,13 @@ easysoft/quickon-zentao:latest
 
 ```ini
 session.save_handler = redis
-session.save_path = "tcp://192.168.0.99:6379?auth=Reids验证密码"
+session.save_path = "tcp://redis:6379"
 ```
 
-**注意**：镜像内的脚本已经做了特殊处理，因此环境变量的值加不加引号，都不影响正常使用。
+**注意**：
+
+- 镜像内的脚本已经做了特殊处理，因此环境变量的值加不加引号，都不影响正常使用。
+- 示例使用了link的方式连接了mysql和redis，因此可以直接使用连接名称来连接mysql和redis。
 
 ## 七、运行
 
@@ -157,9 +151,35 @@ docker-compose logs -f quickon-zentao
 ```
 
 <!-- 这里写应用的【make命令的备注信息】位于文档最后端 -->
-
-
 **说明:**
 
 - [VERSION](https://github.com/quicklyon/zentao-docker/blob/master/VERSION) 文件中详细的定义了Makefile可以操作的版本
 - [docker-compose.yml](https://github.com/quicklyon/zentao-docker/blob/master/docker-compose.yml)
+
+## 八、版本升级
+
+<!-- 这里是应用的【应用升级】信息，通过命令维护，详情参考：https://github.com/quicklyon/doc-toolkit -->
+容器镜像已为版本升级做了特殊处理，当检测数据（数据库/持久化文件）版本与镜像内运行的程序版本不一致时，会进行数据库结构的检查，并自动进行数据库升级操作。
+
+因此，升级版本只需要更换镜像版本号即可：
+
+> 修改 docker-compose.yml 文件
+
+```diff
+...
+  zentao:
+-    image: easysoft/quickon-zentao:17.3-20220729
++    image: easysoft/quickon-zentao:17.4-20220817
+    container_name: zentao
+...
+```
+
+更新服务
+
+```bash
+# 是用新版本镜像更新服务
+docker-compose up -d
+
+# 查看服务状态和镜像版本
+docker-compose ps
+```

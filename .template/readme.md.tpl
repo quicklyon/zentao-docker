@@ -90,3 +90,7 @@ docker-compose logs -f {{APP_DOCKER_IMAGE_NAME}}
 ```
 
 {{MAKE_EXTRA_INFO}}
+
+## 八、版本升级
+
+{{APP_UPDATE}}

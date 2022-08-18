@@ -8,7 +8,7 @@ services:
 
 # mysql service for zentao
   zentao-mysql:
-    image: mysql:5.7
+    image: mysql:8.0.30
     container_name: zentao-mysql
     ports:
       - '3307:3306'

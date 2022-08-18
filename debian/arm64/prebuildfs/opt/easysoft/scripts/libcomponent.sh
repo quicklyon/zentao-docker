@@ -33,9 +33,9 @@ z_download() {
     echo "Downloading $name:$version package"
     case $name in 
     "zentao")
-        # 下载旗舰版 k8s定制版(amd64)
+        # 下载旗舰版 k8s定制版
         if [[ "$version" =~ "max-k8s" ]];then
-            component_unpack "zentao" "$version" -c 81beb31dd0e594ebe66805668dd97f5766a21206262a949e71b8b4e337018a14
+            component_unpack "zentao" "$version"
         else
             wget --no-check-certificate --quiet --output-document=/tmp/"${1}" "${ZENTAO_URL}/${version}/${zentao_base_name}"
             unzip -qq -d ${directory} /tmp/"${1}" && mv /apps/zentaopms /apps/zentao && rm -rf /apps/zentao/www/data
@@ -69,24 +69,8 @@ component_unpack() {
     local name="${1:?name is required}"
     local version="${2:?version is required}"
     local base_name="${name}-${version}-${OS_NAME}-${OS_ARCH}"
-    local package_sha256=""
     local directory="/"
-
-    # Validate arguments
-    shift 2
-    while [ "$#" -gt 0 ]; do
-        case "$1" in
-            -c|--checksum)
-                shift
-                package_sha256="${1:?missing package checksum}"
-                ;;
-            *)
-                echo "Invalid command line flag $1" >&2
-                return 1
-                ;;
-        esac
-        shift
-    done
+    package_sha256="$(curl -k -s -L $DOWNLOAD_URL/"${name}"-"${version}"-"${OS_NAME}"-"${OS_ARCH}".tar.gz.sha256 | awk '{print $1}')"
 
     echo "Downloading $base_name package"
 

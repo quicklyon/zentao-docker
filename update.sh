@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# shellcheck disable=SC1091
+
+. debian/prebuildfs/opt/easysoft/scripts/liblog.sh
+
 JSON=$(< version.json)
 VERSION_URL="https://www.zentao.net/download.html"
 
@@ -57,7 +61,9 @@ LAST_MD5=$(echo "$JSON"|md5sum | awk '{print $1}')
 CUR_MD5=$(md5sum version.json |awk '{print $1}')
 
 if [ "$LAST_MD5" != "$CUR_MD5" ];then
-    echo "New version of ZenTao detected!"
+    warn "New version of ZenTao detected!"
     diff --color=always -u1 <(echo "$JSON") <(cat version.json)
     jq <<< "$JSON" > version.json
+else
+    info "ZenTao all versions are the latest."
 fi

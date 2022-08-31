@@ -34,18 +34,18 @@ do
 
     # If the initial installation is successful, delete install.php andupgrade.php files
     if [ "$CURRENT_VER" == "$ZENTAO_VER" ] && [ "$CFG_INITED" != "0" ];then
-	if [ "$FIRST_RUN" == "" ];then
-	  sleep 30
-	fi
+        if [ "$FIRST_RUN" == "" ];then
+        sleep 30
+        fi
         rm -f /apps/zentao/www/{install.php,upgrade.php}
-	echo "$ZENTAO_VER installed" >> /data/zentao/.version
-	break 
+	    echo "$(date +'%F %H:%M:%S') $ZENTAO_VER installed" >> /data/zentao/.version
+	    break 
     fi
 
     # ZenTao upgrade, remove only the install.php file 
     if [ "$CURRENT_VER" != "" ] && [ "$CURRENT_VER" != "$ZENTAO_VER" ] && [ "$CFG_INITED" != "0" ];then
         rm -f /apps/zentao/www/install.php
-	echo "$CURRENT_VER update to $ZENTAO_VER" >> /data/zentao/.version
+	    echo "$(date +'%F %H:%M:%S') $CURRENT_VER update to $ZENTAO_VER" >> /data/zentao/.version
        	break
     fi
 

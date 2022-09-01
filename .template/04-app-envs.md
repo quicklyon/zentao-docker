@@ -4,12 +4,47 @@
 | DEBUG            | false         | 是否打开调试信息，默认关闭       |
 | PHP_SESSION_TYPE | files         | php session 类型，files \| redis |
 | PHP_SESSION_PATH | /data/php/session | php session 存储路径             |
+| PHP_MAX_EXECUTION_TIME | 120 | 最大执行时间，单位秒，有助于防止有问题程序占尽服务器资源。默认设置为 120             |
+| PHP_MEMORY_LIMIT | 256M | 单个php进程允许分配的最大内存             |
+| PHP_POST_MAX_SIZE | 128M | 允许最大Post数据大小             |
+| PHP_UPLOAD_MAX_FILESIZE | 128M | 单个文件上传的最大值             |
 | MYSQL_HOST       | 127.0.0.1     | MySQL 主机地址                   |
 | MYSQL_PORT       | 3306          | MySQL 端口                       |
 | MYSQL_DB         | zentao        | zentao数据库名称                 |
 | MYSQL_USER       | root          | MySQL用户名                      |
 | MYSQL_PASSWORD   | pass4zenTao   | MySQL密码                        |
 | IS_CONTAINER     | true          | 是否在容器内运行，zentao更新时使用|
+
+### 5.1 调整最大上传文件的限制
+
+通过设置 `PHP_POST_MAX_SIZE` 、`PHP_UPLOAD_MAX_FILESIZE` 这两个环境变量的值来调整最大上传文件的限制，另外，如果考虑到用户网速的因素，建议把`PHP_MAX_EXECUTION_TIME` 也加大一些，这样可以保证用户的文件可以上传完成。
+
+**示例：**
+
+```bash
+# 运行mysql
+docker run -d --rm --name mysql -e MYSQL_ROOT_PASSWORD=pass4you mysql:5.7.38-debian
+
+# 运行禅道
+docker run -d --rm --name zentao \
+--link mysql \
+--link redis \
+-e MYSQL_HOST=mysql \
+-e MYSQL_PORT=3306 \
+-e MYSQL_USER=root \
+-e MYSQL_PASSWORD=pass4you \
+-e MYSQL_DB=zentao \
+-e PHP_MAX_EXECUTION_TIME=300 \
+-e PHP_POST_MAX_SIZE=512M \
+-e PHP_UPLOAD_MAX_FILESIZE=512M \
+-v /data/zentao:/data \
+-p 8088:80 \
+easysoft/quickon-zentao:latest
+```
+
+> - PHP_MAX_EXECUTION_TIME 设置为300秒
+> - PHP_POST_MAX_SIZE 设置为512M
+> - PHP_UPLOAD_MAX_FILESIZE 设置为 512M
 
 ## 六、将Session存储在Redis
 

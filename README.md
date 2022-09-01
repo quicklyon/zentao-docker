@@ -33,19 +33,19 @@ ZenTao官网：[https://zentao.net/](https://zentao.net/)
 由于版本比较多,这里只列出最新的5个版本,更详细的版本列表请参考:[可用版本列表](https://hub.docker.com/r/easysoft/quickon-zentao/tags/)
 
 - 开源版
-  - [`17.6-20220831`](https://www.zentao.net/download/zentaopms17.6-81531.html)
+  - [`17.6-20220901`](https://www.zentao.net/download/zentaopms17.6-81531.html)
   - [`17.5-20220818`](https://www.zentao.net/download/zentaopms17.5-81507.html)
   - [`17.4-20220818`](https://www.zentao.net/download/zentaopms17.4-81093.html)
   - [`17.3-20220729`](https://www.zentao.net/download/zentaopms17.3-81058.html)
 
 - 企业版
-  - [`biz7.6-20220831`](https://www.zentao.net/download/zentaopms.biz7.6-81529.html)
+  - [`biz7.6-20220901`](https://www.zentao.net/download/zentaopms.biz7.6-81529.html)
   - [`biz7.5-20220818`](https://www.zentao.net/download/zentaopms.biz7.5-81508.html)
   - [`biz7.4-20220818`](https://www.zentao.net/download/zentaopms.biz7.4-81094.html)
   - [`biz7.3-20220729`](https://www.zentao.net/download/zentaopms.biz7.3-81060.html)
 
 - 旗舰版
-  - [`max3.6.1-20220831`](https://www.zentao.net/download/max3.6.1-81530.html)
+  - [`max3.6.1-20220901`](https://www.zentao.net/download/max3.6.1-81530.html)
   - [`max3.6-20220818`](https://www.zentao.net/download/max3.6-81509.html)
   - [`max3.5-20220818`](https://www.zentao.net/download/max3.5-81095.html)
   - [`max3.4-20220729`](https://www.zentao.net/download/max3.4-81061.html)
@@ -106,12 +106,47 @@ services:
 | DEBUG            | false         | 是否打开调试信息，默认关闭       |
 | PHP_SESSION_TYPE | files         | php session 类型，files \| redis |
 | PHP_SESSION_PATH | /data/php/session | php session 存储路径             |
+| PHP_MAX_EXECUTION_TIME | 120 | 最大执行时间，单位秒，有助于防止有问题程序占尽服务器资源。默认设置为 120             |
+| PHP_MEMORY_LIMIT | 256M | 单个php进程允许分配的最大内存             |
+| PHP_POST_MAX_SIZE | 128M | 允许最大Post数据大小             |
+| PHP_UPLOAD_MAX_FILESIZE | 128M | 单个文件上传的最大值             |
 | MYSQL_HOST       | 127.0.0.1     | MySQL 主机地址                   |
 | MYSQL_PORT       | 3306          | MySQL 端口                       |
 | MYSQL_DB         | zentao        | zentao数据库名称                 |
 | MYSQL_USER       | root          | MySQL用户名                      |
 | MYSQL_PASSWORD   | pass4zenTao   | MySQL密码                        |
 | IS_CONTAINER     | true          | 是否在容器内运行，zentao更新时使用|
+
+### 5.1 调整最大上传文件的限制
+
+通过设置 `PHP_POST_MAX_SIZE` 、`PHP_UPLOAD_MAX_FILESIZE` 这两个环境变量的值来调整最大上传文件的限制，另外，如果考虑到用户网速的因素，建议把`PHP_MAX_EXECUTION_TIME` 也加大一些，这样可以保证用户的文件可以上传完成。
+
+**示例：**
+
+```bash
+# 运行mysql
+docker run -d --rm --name mysql -e MYSQL_ROOT_PASSWORD=pass4you mysql:5.7.38-debian
+
+# 运行禅道
+docker run -d --rm --name zentao \
+--link mysql \
+--link redis \
+-e MYSQL_HOST=mysql \
+-e MYSQL_PORT=3306 \
+-e MYSQL_USER=root \
+-e MYSQL_PASSWORD=pass4you \
+-e MYSQL_DB=zentao \
+-e PHP_MAX_EXECUTION_TIME=300 \
+-e PHP_POST_MAX_SIZE=512M \
+-e PHP_UPLOAD_MAX_FILESIZE=512M \
+-v /data/zentao:/data \
+-p 8088:80 \
+easysoft/quickon-zentao:latest
+```
+
+> - PHP_MAX_EXECUTION_TIME 设置为300秒
+> - PHP_POST_MAX_SIZE 设置为512M
+> - PHP_UPLOAD_MAX_FILESIZE 设置为 512M
 
 ## 六、将Session存储在Redis
 

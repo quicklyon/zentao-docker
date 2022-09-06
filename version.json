@@ -12,7 +12,7 @@
     "news": "https://www.zentao.net/download/max3.6.1-81530.html"
   },
   "max-k8s": {
-    "version": "3.3",
+    "version": "3.6.1",
     "news": "ZenTao Max kubernetes customized version"
   },
   "litev": {

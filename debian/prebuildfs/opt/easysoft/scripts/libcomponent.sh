@@ -34,13 +34,13 @@ z_download() {
     case $name in 
     "zentao")
         # 下载旗舰版 k8s定制版(amd64)
-        if [[ "$version" =~ "max-k8s" ]];then
-            component_unpack "zentao" "$version" -c 81beb31dd0e594ebe66805668dd97f5766a21206262a949e71b8b4e337018a14
-        else
+        #if [[ "$version" =~ "max-k8s" ]];then
+        #    component_unpack "zentao" "$version" -c 4b140d9c9cb962345e8aefc84676e428bf842347798b2732e974d5b1172545b1
+        #else
             wget --no-check-certificate --quiet --output-document=/tmp/"${1}" "${ZENTAO_URL}/${version}/${zentao_base_name}"
             unzip -qq -d ${directory} /tmp/"${1}" && mv /apps/zentaopms /apps/zentao && rm -rf /apps/zentao/www/data
             rm /tmp/"${1}"
-        fi
+        #fi
         ;;
     "zdoo")
         wget --no-check-certificate --quiet --output-document=/tmp/"${1}" "${ZDOO_URL}/${version}/${zdoo_base_name}"

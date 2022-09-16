@@ -2,7 +2,8 @@ export APP_NAME=quickon-zentao
 export OPEN_VER := $(shell jq -r .zentaopms.version < version.json)
 export BIZ_VER := biz$(shell jq -r .biz.version < version.json)
 export MAX_VER := max$(shell jq -r .max.version < version.json)
-export MAX_K8S_VER := max-k8s$(shell jq -r '."max-k8s".version' < version.json)
+export MAX_K8S_VER := max$(shell jq -r '."max.k8s".version' < version.json).k8s
+export BIZ_K8S_VER := biz$(shell jq -r '."biz.k8s".version' < version.json).k8s
 export LITE_VER := lite$(shell jq -r .litev.version < version.json)
 export LITEBIZ_VER := litevip$(shell jq -r .litevipv.version < version.json)
 export BUILD_DATE := $(shell date +'%Y%m%d')
@@ -19,6 +20,9 @@ build: ## 构建开源版镜像
 
 build-biz: ## 构建企业版镜像
 	docker build --build-arg VERSION=$(BIZ_VER) -t hub.qucheng.com/app/$(APP_NAME):$(BIZ_VER)-$(BUILD_DATE) -f Dockerfile .
+
+build-biz-k8s: ## 构建企业版Kubernetes定制版镜像
+	docker build --build-arg VERSION=$(BIZ_K8S_VER) -t hub.qucheng.com/app/$(APP_NAME):$(BIZ_K8S_VER)-$(BUILD_DATE) -f Dockerfile .
 
 build-max: ## 构建旗舰版镜像
 	docker build --build-arg VERSION=$(MAX_VER) -t hub.qucheng.com/app/$(APP_NAME):$(MAX_VER)-$(BUILD_DATE) -f Dockerfile .
@@ -44,6 +48,9 @@ push: ## push 禅道开源版 --> hub.qucheng.com
 
 push-biz: ## push 禅道企业版 --> hub.qucheng.com
 	docker push hub.qucheng.com/app/$(APP_NAME):$(BIZ_VER)-$(BUILD_DATE)
+
+push-biz-k8s: ## push 企业版k8s --> hub.qucheng.com
+	docker push hub.qucheng.com/app/$(APP_NAME):$(BIZ_K8S_VER)-$(BUILD_DATE)
 
 push-max: ## push 禅道旗舰版 --> hub.qucheng.com
 	docker push hub.qucheng.com/app/$(APP_NAME):$(MAX_VER)-$(BUILD_DATE)
@@ -72,6 +79,12 @@ push-biz-public: ## push 禅道企业版 --> hub.docker.com
 	docker tag hub.qucheng.com/app/$(APP_NAME):$(BIZ_VER)-$(BUILD_DATE) easysoft/$(APP_NAME):$(BIZ_VER)-$(BUILD_DATE)
 	docker push easysoft/$(APP_NAME):$(BIZ_VER)-$(BUILD_DATE)
 	curl http://i.haogs.cn:3839/sync?image=easysoft/$(APP_NAME):$(BIZ_VER)-$(BUILD_DATE)
+
+push-biz-k8s-public: ## push 企业版k8s --> hub.docker.com
+	docker tag hub.qucheng.com/app/$(APP_NAME):$(BIZ_K8S_VER)-$(BUILD_DATE) easysoft/$(APP_NAME):$(BIZ_K8S_VER)-$(BUILD_DATE)
+	docker push  easysoft/$(APP_NAME):$(BIZ_K8S_VER)-$(BUILD_DATE)
+	curl http://i.haogs.cn:3839/sync?image=easysoft/$(APP_NAME):$(BIZ_K8S_VER)-$(BUILD_DATE)
+
 
 push-max-public: ## push 禅道旗舰版 --> hub.docker.com
 	docker tag hub.qucheng.com/app/$(APP_NAME):$(MAX_VER)-$(BUILD_DATE) easysoft/$(APP_NAME):$(MAX_VER)-$(BUILD_DATE)
@@ -106,6 +119,9 @@ run: ## 运行禅道开源版
 
 run-biz: ## 运行禅道企业版
 	export TAG=$(BIZ_VER)-$(BUILD_DATE); docker-compose -f docker-compose.yml up -d
+
+run-biz-k8s: ## 运行禅道旗舰版k8s
+	export TAG=$(BIZ_K8S_VER)-$(BUILD_DATE); docker-compose -f docker-compose.yml up -d
 
 run-max: ## 运行禅道旗舰版
 	export TAG=$(MAX_VER)-$(BUILD_DATE); docker-compose -f docker-compose.yml up -d

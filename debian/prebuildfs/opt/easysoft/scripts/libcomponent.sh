@@ -4,9 +4,11 @@
 
 [ -n "${DEBUG:+1}" ] && set -x
 
+set -e
+
 # Constants
 DOWNLOAD_URL="https://pkg-hk.qucheng.com/files/stacksmith"
-ZENTAO_URL="https://www.zentao.net/dl/zentao"
+ZENTAO_URL="https://dl.cnezsoft.com/zentao"
 ZDOO_URL="https://www.zdoo.com/dl/zdoo"
 
 
@@ -24,9 +26,10 @@ ZDOO_URL="https://www.zdoo.com/dl/zdoo"
 #   None
 #########################
 z_download() {
+    timestamp="$(date +%s)"
     local name="${1:?software name is required}"
     local version="${2:?version is required}"
-    local zentao_base_name="ZenTaoPMS.${version}.php7.2_7.4.zip"
+    local zentao_base_name="ZenTaoPMS.${version}.php7.2_7.4.zip?$timestamp"
     local zdoo_base_name="zdoo.${version}.php7.2.zip"
     local directory="/apps/"
 
@@ -37,7 +40,7 @@ z_download() {
         #if [[ "$version" =~ "max-k8s" ]];then
         #    component_unpack "zentao" "$version" -c 4b140d9c9cb962345e8aefc84676e428bf842347798b2732e974d5b1172545b1
         #else
-            wget --no-check-certificate --quiet --output-document=/tmp/"${1}" "${ZENTAO_URL}/${version}/${zentao_base_name}"
+            wget --no-check-certificate --quiet --output-document=/tmp/"${1}" "${ZENTAO_URL}/${version/.k8s}/${zentao_base_name}"
             unzip -qq -d ${directory} /tmp/"${1}" && mv /apps/zentaopms /apps/zentao && rm -rf /apps/zentao/www/data
             rm /tmp/"${1}"
         #fi

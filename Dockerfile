@@ -37,6 +37,7 @@ RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "mysql-client" "
 ARG VERSION
 ENV ZENTAO_VER=${VERSION}
 ENV EASYSOFT_APP_NAME="ZenTao $ZENTAO_VER"
+ENV DEBUG=true
 
 SHELL ["/bin/bash", "-c"] 
 RUN . /opt/easysoft/scripts/libcomponent.sh && z_download "zentao" "${ZENTAO_VER}"

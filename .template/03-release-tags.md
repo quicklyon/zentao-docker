@@ -7,13 +7,16 @@
 
 - 企业版
   - [`biz7.6.1-20220916`](https://www.zentao.net/download/zentaopms.biz7.6.1-81581.html)
+  - [`biz7.6.1.k8s-20220916`](https://hub.docker.com/r/easysoft/quickon-zentao/tags?page=1&name=biz7.6.1.k8s-20220916)
   - [`biz7.6-20220901`](https://www.zentao.net/download/zentaopms.biz7.6-81529.html)
+  - [`biz7.6.k8s-20220919`](https://hub.docker.com/r/easysoft/quickon-zentao/tags?page=1&name=biz7.6.k8s-20220919)
   - [`biz7.5-20220818`](https://www.zentao.net/download/zentaopms.biz7.5-81508.html)
   - [`biz7.4-20220818`](https://www.zentao.net/download/zentaopms.biz7.4-81094.html)
   - [`biz7.3-20220729`](https://www.zentao.net/download/zentaopms.biz7.3-81060.html)
 
 - 旗舰版
   - [`max3.6.2-20220916`](https://www.zentao.net/download/max3.6.1-81530.html)
+  - [`max3.6.2.k8s-20220916`](https://hub.docker.com/r/easysoft/quickon-zentao/tags?page=1&name=max3.6.2.k8s-20220916)
   - [`max3.6.1-20220901`](https://www.zentao.net/download/max3.6.1-81530.html)
   - [`max3.6-20220818`](https://www.zentao.net/download/max3.6-81509.html)
   - [`max3.5-20220818`](https://www.zentao.net/download/max3.5-81095.html)

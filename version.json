@@ -8,12 +8,12 @@
     "news": "https://www.zentao.net/download/zentaopms.biz7.6.1-81581.html"
   },
   "biz.k8s": {
-    "version": "7.6.1",
+    "version": "7.6",
     "news": "ZenTao Biz kubernetes customized version"
   },
   "max": {
     "version": "3.6.2",
-    "news": "https://www.zentao.net/download/max3.6.1-81530.html"
+    "news": "https://www.zentao.net/dynamic/max3.6.2-81582.html"
   },
   "max.k8s": {
     "version": "3.6.2",

@@ -9,8 +9,8 @@ case $ZENTAO_VER in
 "lite1.2")
     export ZENTAO_VER="17.1"
     ;;
-max-k8s*)
-    export ZENTAO_VER=${ZENTAO_VER/-k8s/}
+*k8s*)
+    export ZENTAO_VER=${ZENTAO_VER/.k8s/}
     ;;
 esac
 

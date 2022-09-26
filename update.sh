@@ -5,9 +5,17 @@
 . debian/prebuildfs/opt/easysoft/scripts/liblog.sh
 
 JSON=$(< version.json)
-VERSION_URL="https://www.zentao.net/download.html"
+NEWS_URL="https://www.zentao.net/download.html"
+VERSION_URL="https://dl.cnezsoft.com/tmp/zentao-latest.log?$(date +%s)"
 
-HTML_CONTENT=$(curl -sL ${VERSION_URL} | htmlq --attribute href a)
+URL_LIST=$(curl -sL ${NEWS_URL} | htmlq --attribute href a | sort -u)
+LATEST_VERSION=$(curl -sL "$VERSION_URL")
+
+OPEN_VER=$(echo "$LATEST_VERSION"| head -n 1)
+MAX_VER=$(echo "$LATEST_VERSION"| grep max | sed 's/max//' )
+BIZ_VER=$(echo "$LATEST_VERSION"| grep biz | sed 's/max//')
+LITE_VER=$(echo "$LATEST_VERSION"| grep -E 'lite[0-9]+' | sed 's/lite//')
+LITEBIZ_VER=$(echo "$LATEST_VERSION"| grep -E 'litevip[0-9]+' | sed 's/litevip//')
 
 REGULAR=(
     "zentaopms[[:digit:]]+(\.[[:digit:]]+)+"
@@ -20,12 +28,12 @@ REGULAR=(
 get_latest_ver(){
     local regular=${1:?regular is error!}
     local key=${2:?key is error}
-    grep -Eo "$regular" <<< "$HTML_CONTENT" | sed "s/${key}//g" | sort -nur | head -n 1 
+    grep -Eo "$regular" <<< "$URL_LIST" | sed "s/${key}//g" | sort -nur | head -n 1 
 }
 
 get_news_url(){
     local regular=${1:?regular is error!}
-    url=$(grep -E "$regular" <<< "$HTML_CONTENT" | sort -u | head -n 1 )
+    url=$(grep -E "$regular" <<< "$URL_LIST" | sort -u | head -n 1 )
     echo "https://www.zentao.net$url"
 }
 

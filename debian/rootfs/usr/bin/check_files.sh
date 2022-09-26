@@ -9,7 +9,7 @@ case $ZENTAO_VER in
 "lite1.2")
     export ZENTAO_VER="17.1"
     ;;
-*k8s*)
+*)
     export ZENTAO_VER=${ZENTAO_VER/.k8s/}
     ;;
 esac
@@ -34,11 +34,14 @@ do
 
     # If the initial installation is successful, delete install.php andupgrade.php files
     if [ "$CURRENT_VER" == "$ZENTAO_VER" ] && [ "$CFG_INITED" != "0" ];then
+
+        echo "$(date +'%F %H:%M:%S') $ZENTAO_VER installed" >> /data/zentao/.version
+
         if [ "$FIRST_RUN" == "" ];then
-        sleep 30
+            sleep 30
         fi
+        
         rm -f /apps/zentao/www/{install.php,upgrade.php}
-	    echo "$(date +'%F %H:%M:%S') $ZENTAO_VER installed" >> /data/zentao/.version
 	    break 
     fi
 

@@ -11,6 +11,7 @@ set -o pipefail
 # Load libraries
 . /opt/easysoft/scripts/liblog.sh
 . /opt/easysoft/scripts/libeasysoft.sh
+. /opt/easysoft/scripts/libfs.sh
 
 print_welcome_page
 

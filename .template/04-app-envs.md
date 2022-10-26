@@ -13,6 +13,14 @@
 | MYSQL_DB         | zentao        | zentao数据库名称                 |
 | MYSQL_USER       | root          | MySQL用户名                      |
 | MYSQL_PASSWORD   | pass4zenTao   | MySQL密码                        |
+| LDAP_ENABLED     | 0         | 是否启用LDAP                      |
+| LDAP_HOST        | 127.0.0.1     | LDAP服务主机地址   |
+| LDAP_PORT        | 389           | LDAP服务端口      |
+| LDAP_BASEDN      | dc=quickon,dc=org | LDAP BaseDN  |
+| LDAP_ADMINUSER   | cn=admin,dc=quickon,dc=org | LDAP 管理员  |
+| LDAP_BINDPASSWORD| pass4zenTao   | LDAP Bind 密码                |
+| LDAP_USERKEY     | uid           | LDAP 用户名称的字段名       |
+| LDAP_EMAILKEY    | mail          | LDAP 用户邮箱的字段名       |
 | IS_CONTAINER     | true          | 是否在容器内运行，zentao更新时使用|
 
 ### 5.1 调整最大上传文件的限制

@@ -1,4 +1,4 @@
-FROM debian:11.4-slim
+FROM debian:11.5-slim
 
 LABEL maintainer "zhouyueqiu <zhouyueqiu@easycorp.ltd>"
 
@@ -10,7 +10,7 @@ COPY debian/prebuildfs /
 
 ENV TZ=Asia/Shanghai
 
-RUN install_packages curl wget zip unzip s6 pwgen cron netcat
+RUN install_packages curl wget zip unzip s6 pwgen cron netcat ca-certificates
 
 # Install internal php
 RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "php" "7.4.28" -c 934dd0320ee217465f6a8496b0858d120c3fd45b413f1c9ff833731a848cefa7
@@ -37,7 +37,6 @@ RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "mysql-client" "
 ARG VERSION
 ENV ZENTAO_VER=${VERSION}
 ENV EASYSOFT_APP_NAME="ZenTao $ZENTAO_VER"
-ENV DEBUG=true
 
 SHELL ["/bin/bash", "-c"] 
 RUN . /opt/easysoft/scripts/libcomponent.sh && z_download "zentao" "${ZENTAO_VER}"

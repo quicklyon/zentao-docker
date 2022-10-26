@@ -29,18 +29,21 @@ do
                     -u"$MYSQL_USER" \
                     -p"$MYSQL_PASSWORD" \
                     -D"$MYSQL_DB" \
-                    -e "select value from \`${table_prefix}config\` where \`key\`='version';" 2>/dev/null | sed 1d )
+                    -e "select value from \`${table_prefix}config\` where  \`section\`='global' and \`key\`='version';" 2>/dev/null | sed 1d )
     fi
 
     # If the initial installation is successful, delete install.php andupgrade.php files
     if [ "$CURRENT_VER" == "$ZENTAO_VER" ] && [ "$CFG_INITED" != "0" ];then
 
-        echo "$(date +'%F %H:%M:%S') $ZENTAO_VER installed" >> /data/zentao/.version
-
         if [ "$FIRST_RUN" == "" ];then
+            echo "$(date +'%F %H:%M:%S') $ZENTAO_VER installed" >> /data/zentao/.version
             sleep 30
         fi
+
+        # Configure ldap
+        /bin/bash /usr/bin/ldap.sh
         
+        # remove install and update file
         rm -f /apps/zentao/www/{install.php,upgrade.php}
 	    break 
     fi
@@ -49,6 +52,10 @@ do
     if [ "$CURRENT_VER" != "" ] && [ "$CURRENT_VER" != "$ZENTAO_VER" ] && [ "$CFG_INITED" != "0" ];then
         rm -f /apps/zentao/www/install.php
 	    echo "$(date +'%F %H:%M:%S') $CURRENT_VER update to $ZENTAO_VER" >> /data/zentao/.version
+
+        # Configure ldap
+        /bin/bash /usr/bin/ldap.sh
+
        	break
     fi
 

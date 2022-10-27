@@ -40,9 +40,9 @@ services:
       - PHP_MEMORY_LIMIT=512M
       - PHP_POST_MAX_SIZE=128M
       - PHP_UPLOAD_MAX_FILESIZE=128M
-      - LDAP_ENABLED=0
-      - EASYSOFT_DEBUG=true
-      - DEBUG=1
+      - LDAP_ENABLED=true
+        #- EASYSOFT_DEBUG=true
+        #- DEBUG=1
       - IS_CONTAINER=true
     networks:
       - zentao-net

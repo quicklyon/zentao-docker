@@ -17,6 +17,7 @@ print_welcome_page
 
 # Enable apache
 make_soft_link "/etc/s6/s6-available/apache" "/etc/s6/s6-enable/01-apache" "root"
+make_soft_link "/etc/s6/s6-available/check_files" "/etc/s6/s6-enable/02-check_files" "root"
 
 if [ $# -gt 0 ]; then
     exec "$@"

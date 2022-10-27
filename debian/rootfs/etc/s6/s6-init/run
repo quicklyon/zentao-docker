@@ -44,7 +44,7 @@ else
 fi
 
 # Check and delete install.php and upgrade.php
-/usr/bin/nohup /bin/bash /usr/bin/check_files.sh &
+# /usr/bin/nohup /bin/bash /usr/bin/check_files.sh &
 
 #=====================#
 #   Prepare PHP       #

@@ -19,7 +19,7 @@ export PHP_UPLOAD_MAX_FILESIZE=${PHP_UPLOAD_MAX_FILESIZE:-128M}
 #==========#
 #   LDAP   #
 #==========#
-export LDAP_ENABLED=${LDAP_ENABLED:-0}
+export LDAP_ENABLED=${LDAP_ENABLED:-false}
 export LDAP_HOST=${LDAP_HOST:-127.0.0.1}
 export LDAP_PORT=${LDAP_PORT:-389}
 export LDAP_ADMINUSER=${LDAP_ADMINUSER:-cn=admin,dc=quickon,dc=org}

@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    name: build docker image
+    name: build zentao biz k8s image
     runs-on: ubuntu-latest
     steps:
     - name: CheckOut
@@ -27,8 +27,8 @@ jobs:
         sudo apt-get install -y jq
     - name: Build and push
       run: |
-        make build-all
-        make push-sync-tcr
+        make build-biz-k8s
+        make push-biz-k8s-public
     - name: Update repo description
       uses: peter-evans/dockerhub-description@v3
       with:

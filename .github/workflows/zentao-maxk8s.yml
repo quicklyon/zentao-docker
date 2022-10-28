@@ -1,0 +1,37 @@
+name: build
+on:
+  push:
+    tags:
+    - '*'
+
+jobs:
+  build:
+    name: build zentao max k8s image
+    runs-on: ubuntu-latest
+    steps:
+    - name: CheckOut
+      uses: actions/checkout@v3
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+    - name: Login Docker
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASS }}
+    - name: install jq
+      run: |
+        echo "install jq"
+        sudo apt-get update -qq
+        sudo apt-get install -y jq
+    - name: Build and push
+      run: |
+        make build-max-k8s
+        make push-max-k8s-public
+    - name: Update repo description
+      uses: peter-evans/dockerhub-description@v3
+      with:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASS }}
+        repository: easysoft/quickon-zentao

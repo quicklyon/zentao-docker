@@ -13,7 +13,7 @@
 | MYSQL_DB         | zentao        | zentao数据库名称                 |
 | MYSQL_USER       | root          | MySQL用户名                      |
 | MYSQL_PASSWORD   | pass4zenTao   | MySQL密码                        |
-| LDAP_ENABLED     | 0         | 是否启用LDAP                      |
+| LDAP_ENABLED     | false         | 是否启用LDAP                      |
 | LDAP_HOST        | 127.0.0.1     | LDAP服务主机地址   |
 | LDAP_PORT        | 389           | LDAP服务端口      |
 | LDAP_BASEDN      | dc=quickon,dc=org | LDAP BaseDN  |

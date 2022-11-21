@@ -47,6 +47,8 @@ export DOCUMENT_ROOT=${DOCUMENT_ROOT:-/apps/zentao/www}
 # Persistence directory #
 #=======================#
 export PHP_PERSISTENCE_LIST=(
+"/data"
+"/data/php"
 "/data/php/log"
 "/data/php/session"
 "/data/zentao")

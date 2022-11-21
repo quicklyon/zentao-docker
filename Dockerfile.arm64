@@ -1,4 +1,4 @@
-FROM --platform linux/arm64/v8 php:7.4.30-apache-bullseye
+FROM php:7.4.30-apache-bullseye
 
 LABEL maintainer "zhouyueqiu <zhouyueqiu@easycorp.ltd>"
 
@@ -6,7 +6,9 @@ ENV OS_ARCH="arm64" \
     OS_NAME="debian-11" \
     HOME_PAGE="www.zentao.net"
 
-COPY debian/arm64/prebuildfs /
+COPY debian/prebuildfs /
+
+ARG MIRROR
 
 ENV TZ=Asia/Shanghai
 
@@ -30,15 +32,20 @@ SHELL ["/bin/bash", "-c"]
 RUN . /opt/easysoft/scripts/libcomponent.sh && z_download "zentao" "${ZENTAO_VER}"
 
 # Clear apahce vhost config
-RUN rm -rf /etc/apache2/sites-available/* /etc/apache2/sites-enabled/*
+RUN rm -rf /etc/apache2
 
 # Copy apache php config files
-COPY debian/arm64/rootfs /
+COPY debian/arm64 /
+COPY debian/rootfs /
 
 # Copy zentao-pass source code
 WORKDIR /apps/zentao
-RUN chown www-data.www-data /apps/zentao -R \
-    && docker-php-ext-enable ioncube_loader
+RUN mkdir -pv /usr/local/etc/php \
+    && mv /etc/php/7.4/php.ini.tpl /usr/local/etc/php/php.ini.tpl \
+    && mv /etc/s6/s6-init/run.arm64 /etc/s6/s6-init/run \
+    && mv /etc/s6/s6-available/check_files/run.arm64 /etc/s6/s6-available/check_files/run \
+    && chown www-data.www-data /apps/zentao -R \
+    && docker-php-ext-enable ioncube_loader 
 
 EXPOSE 80
 

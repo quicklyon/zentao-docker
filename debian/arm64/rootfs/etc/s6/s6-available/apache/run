@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# shellcheck disable=SC1091
-
-[ -n "${DEBUG:+1}" ] && set -x
-
-exec /usr/sbin/apachectl -D FOREGROUND

@@ -7,7 +7,14 @@
 set -e
 
 # Constants
-DOWNLOAD_URL="https://pkg-hk.qucheng.com/files/stacksmith"
+MIRROR=${MIRROR:-false}
+
+if [ "${MIRROR}" = "true" ];then
+    DOWNLOAD_URL="https://pkg.qucheng.com/files/stacksmith"
+else
+    DOWNLOAD_URL="https://pkg-hk.qucheng.com/files/stacksmith"
+fi
+
 ZENTAO_URL="https://dl.cnezsoft.com/zentao"
 ZDOO_URL="https://www.zdoo.com/dl/zdoo"
 
@@ -36,14 +43,9 @@ z_download() {
     echo "Downloading $name:$version package"
     case $name in 
     "zentao")
-        # 下载旗舰版 k8s定制版(amd64)
-        #if [[ "$version" =~ "max-k8s" ]];then
-        #    component_unpack "zentao" "$version" -c 4b140d9c9cb962345e8aefc84676e428bf842347798b2732e974d5b1172545b1
-        #else
             wget --no-check-certificate --quiet --output-document=/tmp/"${1}" "${ZENTAO_URL}/${version/.k8s}/${zentao_base_name}"
             unzip -qq -d ${directory} /tmp/"${1}" && mv /apps/zentaopms /apps/zentao && rm -rf /apps/zentao/www/data
             rm /tmp/"${1}"
-        #fi
         ;;
     "zdoo")
         wget --no-check-certificate --quiet --output-document=/tmp/"${1}" "${ZDOO_URL}/${version}/${zdoo_base_name}"

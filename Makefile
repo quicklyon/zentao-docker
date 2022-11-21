@@ -31,7 +31,7 @@ build-max-k8s: ## 构建旗舰版Kubernetes定制版镜像
 	docker build --build-arg VERSION=$(MAX_K8S_VER) -t hub.qucheng.com/app/$(APP_NAME):$(MAX_K8S_VER)-$(BUILD_DATE) -f Dockerfile .
 
 build-max-k8s-arm64: ## 构建旗舰版Kubernetes定制版镜像(arm64)
-	docker build --platform arm64 --build-arg VERSION=$(MAX_K8S_VER) -t hub.qucheng.com/app/$(APP_NAME):$(MAX_K8S_VER)-$(BUILD_DATE) -f Dockerfile.arm64 .
+	docker build --platform arm64 --build-arg MIRROR=true --build-arg VERSION=$(MAX_K8S_VER) -t hub.qucheng.com/app/$(APP_NAME):$(MAX_K8S_VER)-$(BUILD_DATE) -f Dockerfile.arm64 .
 
 build-lite: ## 构建迅捷版
 	docker build --build-arg VERSION=$(LITE_VER) -t hub.qucheng.com/app/$(APP_NAME):$(LITE_VER)-$(BUILD_DATE) -f Dockerfile .
@@ -154,7 +154,17 @@ stop: ## 停服务
 	docker-compose -f docker-compose.yml stop
 	docker-compose -f docker-compose.yml rm -f
 
+stop-arm: ## 停arm服务
+	docker-compose -f docker-compose-arm64.yml stop
+	docker-compose -f docker-compose-arm64.yml rm -f
+
 restart: build clean ps ## 重构
+
+clean-arm64:  ## 停arm服务
+	docker-compose -f docker-compose-arm64.yml stop
+	docker-compose -f docker-compose-arm64.yml rm -f
+	docker-compose -f docker-compose-arm64.yml down
+	docker volume prune -f
 
 clean: stop ## 停服务
 	docker-compose -f docker-compose.yml down

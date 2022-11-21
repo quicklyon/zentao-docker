@@ -1,14 +1,31 @@
 #!/bin/sh
-set -e
 set -u
+set -e
+
+[ -n "${DEBUG:+1}" ] && set -x
+
+# change repo url
+MIRROR=${MIRROR:-false}
+
+if [ "$OS_NAME" = "alpine" ];then
+    if [ "$MIRROR" = "true" ];then
+        sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+    fi
+    alias install_cmd='apk add --no-cache'
+else
+    if [ "$MIRROR" = "true" ];then
+        sed -i -r 's/(deb|security).debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
+    fi
+    alias install_cmd='apt-get update -qq && apt-get install -y --no-install-recommends'
+fi
+
 export DEBIAN_FRONTEND=noninteractive
 n=0
 max=2
 until [ $n -gt $max ]; do
     set +e
     (
-      apt-get update -qq &&
-      apt-get install -y --no-install-recommends "$@"
+      install_cmd "$@"
     )
     CODE=$?
     set -e
@@ -21,4 +38,7 @@ until [ $n -gt $max ]; do
     echo "apt failed, retrying"
     n=$(($n + 1))
 done
-rm -r /var/lib/apt/lists /var/cache/apt/archives
+
+if [ "$OS_NAME" = "debian-11" ];then
+    rm -r /var/lib/apt/lists /var/cache/apt/archives
+fi

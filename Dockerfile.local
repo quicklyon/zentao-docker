@@ -30,8 +30,8 @@ RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "render-template
 # Install mysql-client
 RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "mysql-client" "10.5.15-20220817" -c c4f82cb5b66724dd608f0bafaac400fc0d15528599e8b42be5afe8cedfd16488
 
-# Install git for devops
-RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "git" "2.30.2" -c 02202e4bd530cbd090f1181b4cb8800a8547d4a9893bd3343542e541b28d1d7e
+# Install wait-for-port
+#RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "wait-for-port" "1.01" -c 2ad97310f0ecfbfac13480cabf3691238fdb3759289380262eb95f8660ebb8d1
 
 # Install zentao
 ARG VERSION
@@ -39,7 +39,7 @@ ENV ZENTAO_VER=${VERSION}
 ENV EASYSOFT_APP_NAME="ZenTao $ZENTAO_VER"
 
 SHELL ["/bin/bash", "-c"] 
-RUN . /opt/easysoft/scripts/libcomponent.sh && z_download "zentao" "${ZENTAO_VER}"
+ADD zentao.tar.gz /apps/
 
 # Clear apahce vhost config
 RUN rm -rf /etc/apache2/sites-available/* /etc/apache2/sites-enabled/*

@@ -4,6 +4,7 @@
 # Global   #
 #==========#
 export IS_CONTAINER="true"
+export PROTOCOL_TYPE=${PROTOCOL_TYPE:-https}
 
 #==========#
 #   php    #
@@ -19,7 +20,12 @@ export PHP_UPLOAD_MAX_FILESIZE=${PHP_UPLOAD_MAX_FILESIZE:-128M}
 #==========#
 #   LDAP   #
 #==========#
-export LDAP_ENABLED=${LDAP_ENABLED:-false}
+LDAP_ENABLED=${LDAP_ENABLED:-false}
+if [ "$LDAP_ENABLED" == "true" ];then
+	export LDAP_ENABLED=1
+else
+	export LDAP_ENABLED=0
+fi
 export LDAP_HOST=${LDAP_HOST:-127.0.0.1}
 export LDAP_PORT=${LDAP_PORT:-389}
 export LDAP_ADMINUSER=${LDAP_ADMINUSER:-cn=admin,dc=quickon,dc=org}
@@ -27,6 +33,21 @@ export LDAP_BINDPASSWORD=${LDAP_BINDPASSWORD:-pass4zenTao}
 export LDAP_BASEDN=${LDAP_BASEDN:-dc=quickon,dc=org}
 export LDAP_USERKEY=${LDAP_USERKEY:-uid}
 export LDAP_EMAILKEY=${LDAP_EMAILKEY:-mail}
+
+#==========#
+#   SMTP   #
+#==========#
+SMTP_ENABLED=${SMTP_ENABLED:-false}
+if [ "$SMTP_ENABLED" == "true" ];then
+	export SMTP_ENABLED=1
+else
+	export SMTP_ENABLED=0
+fi
+export SMTP_HOST=${SMTP_HOST:-127.0.0.1}
+export SMTP_PORT=${SMTP_PORT:-25}
+export SMTP_USER=${SMTP_USER:-zentao@easycorp.cn}
+export SMTP_PASS=${SMTP_PASS:-pass4zenTao}
+export SMTP_FROMNAME=${SMTP_FROMNAME:-ZenTao $ZENTAO_VER}
 
 #===========#
 #   MySQL   #

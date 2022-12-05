@@ -25,7 +25,7 @@ services:
     image: hub.qucheng.com/app/quickon-zentao:${TAG:-latest}
     container_name: zentao
     ports:
-      - '8080:80'
+      - '8181:80'
     volumes:
       - 'zentao_data:/data'
     depends_on:
@@ -41,8 +41,16 @@ services:
       - PHP_POST_MAX_SIZE=128M
       - PHP_UPLOAD_MAX_FILESIZE=128M
       - LDAP_ENABLED=false
-        #- EASYSOFT_DEBUG=true
-        #- DEBUG=1
+      - SMTP_ENABLED=true
+      - SMTP_FROMNAME=禅道旗舰版
+      - SMTP_HOST=192.168.50.182
+      - SMTP_PORT=25
+      - SMTP_USER=root@yunop.com
+      - SMTP_PASS=adslzyq
+      - APP_DOMAIN=mini:8181
+      - PROTOCOL_TYPE=http
+      - EASYSOFT_DEBUG=true
+      - DEBUG=1
       - IS_CONTAINER=true
     networks:
       - zentao-net

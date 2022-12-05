@@ -1,27 +1,33 @@
 <!-- 这里写应用的【环境变量信息】 -->
-| 变量名           | 默认值        | 说明                             |
-| ---------------- | ------------- | -------------------------------- |
-| DEBUG            | false         | 是否打开调试信息，默认关闭       |
-| PHP_SESSION_TYPE | files         | php session 类型，files \| redis |
-| PHP_SESSION_PATH | /data/php/session | php session 存储路径             |
-| PHP_MAX_EXECUTION_TIME | 120 | 最大执行时间，单位秒，有助于防止有问题程序占尽服务器资源。默认设置为 120             |
-| PHP_MEMORY_LIMIT | 256M | 单个php进程允许分配的最大内存             |
-| PHP_POST_MAX_SIZE | 128M | 允许最大Post数据大小             |
-| PHP_UPLOAD_MAX_FILESIZE | 128M | 单个文件上传的最大值             |
-| MYSQL_HOST       | 127.0.0.1     | MySQL 主机地址                   |
-| MYSQL_PORT       | 3306          | MySQL 端口                       |
-| MYSQL_DB         | zentao        | zentao数据库名称                 |
-| MYSQL_USER       | root          | MySQL用户名                      |
-| MYSQL_PASSWORD   | pass4zenTao   | MySQL密码                        |
-| LDAP_ENABLED     | false         | 是否启用LDAP                      |
-| LDAP_HOST        | 127.0.0.1     | LDAP服务主机地址   |
-| LDAP_PORT        | 389           | LDAP服务端口      |
-| LDAP_BASEDN      | dc=quickon,dc=org | LDAP BaseDN  |
-| LDAP_ADMINUSER   | cn=admin,dc=quickon,dc=org | LDAP 管理员  |
-| LDAP_BINDPASSWORD| pass4zenTao   | LDAP Bind 密码                |
-| LDAP_USERKEY     | uid           | LDAP 用户名称的字段名       |
-| LDAP_EMAILKEY    | mail          | LDAP 用户邮箱的字段名       |
-| IS_CONTAINER     | true          | 是否在容器内运行，zentao更新时使用|
+| 变量名           | 默认值                        | 说明                             |
+| ---------------- | ---------------------------- | -------------------------------- |
+| DEBUG            | false                        | 是否打开调试信息，默认关闭       |
+| PHP_SESSION_TYPE | files                        | php session 类型，files \| redis |
+| PHP_SESSION_PATH | /data/php/session            | php session 存储路径             |
+| PHP_MAX_EXECUTION_TIME | 120                    | 最大执行时间，单位秒，有助于防止有问题程序占尽服务器资源。默认120             |
+| PHP_MEMORY_LIMIT | 256M                         | 单个php进程允许分配的最大内存             |
+| PHP_POST_MAX_SIZE | 128M                        | 允许最大Post数据大小             |
+| PHP_UPLOAD_MAX_FILESIZE | 128M                  | 单个文件上传的最大值             |
+| MYSQL_HOST       | 127.0.0.1                    | MySQL 主机地址                   |
+| MYSQL_PORT       | 3306                         | MySQL 端口                       |
+| MYSQL_DB         | zentao                       | zentao数据库名称                 |
+| MYSQL_USER       | root                         | MySQL用户名                      |
+| MYSQL_PASSWORD   | pass4zenTao                  | MySQL密码                        |
+| LDAP_ENABLED     | false                        | 是否启用LDAP                      |
+| LDAP_HOST        | 127.0.0.1                    | LDAP服务主机地址   |
+| LDAP_PORT        | 389                          | LDAP服务端口      |
+| LDAP_BASEDN      | dc=quickon,dc=org            | LDAP BaseDN  |
+| LDAP_ADMINUSER   | cn=admin,dc=quickon,dc=org   | LDAP 管理员  |
+| LDAP_BINDPASSWORD| pass4zenTao                  | LDAP Bind 密码                |
+| LDAP_USERKEY     | uid                          | LDAP 用户名称的字段名       |
+| LDAP_EMAILKEY    | mail                         | LDAP 用户邮箱的字段名       |
+| SMTP_ENABLED     | false                        | 启用SMTP       |
+| SMTP_FROMNAME    | ZenTao $VERSION              | SMTP发件人显示名称       |
+| SMTP_HOST        | 127.0.0.1                    | SMTP 服务主机地址       |
+| SMTP_PORT        | 25                           | SMTP 服务端口号       |
+| SMTP_USER        | zentao@easycorp.cn           | SMTP发件人邮箱地址       |
+| SMTP_PASS        | pass4zenTao                  | SMTP发件人邮箱密码       |
+| IS_CONTAINER     | true                         | 是否在容器内运行，zentao更新时使用|
 
 ### 5.1 调整最大上传文件的限制
 

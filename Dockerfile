@@ -2,6 +2,7 @@ FROM debian:11.5-slim
 
 LABEL maintainer "zhouyueqiu <zhouyueqiu@easycorp.ltd>"
 
+ARG MIRROR
 ENV OS_ARCH="amd64" \
     OS_NAME="debian-11" \
     HOME_PAGE="www.zentao.net"

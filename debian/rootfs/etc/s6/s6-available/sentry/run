@@ -41,6 +41,7 @@ do
         export TABLE_PREFIX=${TABLE_PREFIX:-zt_}
 
         CURRENT_VER=$(Get_Running_Ver)
+        export CURRENT_VER
     fi
 
     # Check and config ldap/smtp

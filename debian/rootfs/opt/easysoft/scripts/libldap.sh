@@ -15,7 +15,7 @@ export LDAP_SQL="/apps/zentao/config/ldap.sql"
 function Config_LDAP()
 {
     # 如果开启LDAP，导入LDAP配置
-    if [ "$LDAP_ENABLED" == "1" ];then
+    if [ "$LDAP_ENABLED" == "1" ] && [ "$(Check_Version)" == "ok" ] ;then
         # 清理禅道ldap配置
         info "Check LDAP config ..."
         Del_LDAP_Config

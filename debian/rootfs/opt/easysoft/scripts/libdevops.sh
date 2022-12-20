@@ -185,11 +185,3 @@ Clean_Git_Config(){
     Del_Git_Config
 
 }
-
-Check_Version(){
-    if [ "$CURRENT_VER" == "biz4.1.3" ] || [ "$CURRENT_VER" == "12.5.3" ];then
-        echo "error"
-    else
-        echo "ok"
-    fi
-}

@@ -52,3 +52,12 @@ Del_SMTP_Config(){
 Del_LDAP_Config(){
     $MYSQL_BIN -e "DELETE from ${TABLE_PREFIX}config where owner='system' and module='ldap';"
 }
+
+Check_Version(){
+
+    if [ "$CURRENT_VER" == "biz4.1.3" ] || [ "$CURRENT_VER" == "12.5.3" ];then
+        echo "error"
+    else
+        echo "ok"
+    fi
+}

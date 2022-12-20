@@ -16,8 +16,8 @@ set -o pipefail
 print_welcome_page
 
 # Enable apache
-make_soft_link "/etc/s6/s6-available/apache" "/etc/s6/s6-enable/01-apache" "root"
-make_soft_link "/etc/s6/s6-available/check_files" "/etc/s6/s6-enable/02-check_files" "root"
+[ ! -L /etc/s6/s6-enable/01-apache ] && ln -s /etc/s6/s6-available/apache /etc/s6/s6-enable/01-apache
+[ ! -L /etc/s6/s6-enable/02-sentry ] && ln -s /etc/s6/s6-available/sentry /etc/s6/s6-enable/02-sentry
 
 if [ $# -gt 0 ]; then
     exec "$@"

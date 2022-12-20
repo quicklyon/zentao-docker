@@ -18,20 +18,24 @@
 # Returns:
 #   None
 #########################
-make_soft_link() {
+move_then_link() {
     local source="${1:?path is missing}"
     local dest="${2:?path is missing}"
     local owner=${3:-}
     local group=${4:-}
 
+    ensure_dir_exists "$dest" "www-data" "777"
+
     # 持久化目录没有文件，将代码中需要持久化的文件复制到持久化目录
-    [ ! -e "$source" ] && mv "$dest" "$(dirname "$source")"
+    if [ ! -e "$source" ];then
+        mv "$dest" "$(dirname "$source")"
+    fi
 
     # 代码中有需要持久化的目录，将代码中的目录改名
-    [ -e "$dest" ] && mv "$dest" "$dest".bak
-    
-    # 如果没有持久化目录软连接，建立软连接
-    [ ! -L "$dest" ] && ln -s "$source" "$dest"
+    if [ ! -L "$dest" ];then
+        mv "$dest" "$dest".bak
+        ln -s "$source" "$dest"
+    fi
 
     if [[ -n $group ]]; then
         chown -h "$owner":"$group" "$dest"

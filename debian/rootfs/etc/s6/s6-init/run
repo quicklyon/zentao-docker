@@ -11,7 +11,7 @@ set -o pipefail
 # Load libraries
 . /opt/easysoft/scripts/liblog.sh
 . /opt/easysoft/scripts/libmysql.sh
-. /opt/easysoft/scripts/libfs.sh
+. /opt/easysoft/scripts/libpersistence.sh
 
 # Load Global/Apache/PHP environment variables
 . /etc/s6/s6-init/envs
@@ -27,24 +27,11 @@ do
 done
 
 # Make soft link for persistent directory
-if [ ! -f /data/zentao/.init_cfg ];then
-    for ldir in "${PERSISTENCE_LINK_LIST[@]}"
-    do
-        ensure_dir_exists "$(dirname $ldir)" "www-data"
-        ensure_dir_exists "${ldir/data/apps}" "www-data" "777"
-        mv "${ldir/data/apps}" "$(dirname $ldir)"
-        make_soft_link "$ldir" "${ldir/data/apps}" "www-data"
-    done
-    touch /data/zentao/.init_cfg
-else
-    for ldir in "${PERSISTENCE_LINK_LIST[@]}"
-    do
-        make_soft_link "$ldir" "${ldir/data/apps}" "www-data"
-    done
-fi
-
-# Check and delete install.php and upgrade.php
-# /usr/bin/nohup /bin/bash /usr/bin/check_files.sh &
+for ldir in "${PERSISTENCE_LINK_LIST[@]}"
+do
+    ensure_dir_exists "$(dirname $ldir)" "www-data"
+    move_then_link "$ldir" "${ldir/data/apps}" "www-data"
+done
 
 #=====================#
 #   Prepare PHP       #

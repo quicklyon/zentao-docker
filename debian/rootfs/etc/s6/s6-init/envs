@@ -7,6 +7,19 @@ export IS_CONTAINER="true"
 export PROTOCOL_TYPE=${PROTOCOL_TYPE:-https}
 
 #==========#
+#  DevOps  #
+#==========#
+# Link Git
+export LINK_GIT=${LINK_GIT:-false}
+export GIT_TYPE=${GIT_TYPE:-gitea}
+export GIT_INSTANCE_NAME=${GIT_INSTANCE_NAME:-"QuickOn-Gitea"}
+export GIT_USERNAME=${GIT_USERNAME:-"root"}
+export GIT_PASSWORD=${GIT_PASSWORD:-"pass4QuickOn"}
+export GIT_PROTOCOL=${GIT_PROTOCOL:-"https"}
+export GIT_DOMAIN=${GIT_DOMAIN:-"git.haogs.cn"}
+export GIT_SQL_FILE="/apps/zentao/config/${GIT_TYPE,,}.sql"
+
+#==========#
 #   php    #
 #==========#
 export PHP_SESSION_TYPE=${PHP_SESSION_TYPE:-files}

@@ -53,6 +53,7 @@ services:
       - DEBUG=1
       - IS_CONTAINER=true
       - LINK_GIT=true
+      - GIT_TYPE=gitea
       - GIT_INSTANCE_NAME=my-gitea
       - GIT_USERNAME=demo
       - GIT_PASSWORD=password

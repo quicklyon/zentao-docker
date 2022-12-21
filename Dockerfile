@@ -11,7 +11,7 @@ COPY debian/prebuildfs /
 
 ENV TZ=Asia/Shanghai
 
-RUN install_packages curl wget zip unzip s6 pwgen cron netcat ca-certificates
+RUN install_packages jq curl wget zip unzip s6 pwgen cron netcat ca-certificates
 
 # Install internal php
 RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "php" "7.4.28" -c 934dd0320ee217465f6a8496b0858d120c3fd45b413f1c9ff833731a848cefa7
@@ -33,6 +33,9 @@ RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "mysql-client" "
 
 # Install git for devops
 RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "git" "2.30.2" -c 02202e4bd530cbd090f1181b4cb8800a8547d4a9893bd3343542e541b28d1d7e
+
+# Install create-gitlab-token
+RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "create-gitlab-token" "1.0" -c c39d0fabb971ab9b384d857265c44ab78f8db29fe0609139821ff84d52ce3494
 
 # Install zentao
 ARG VERSION

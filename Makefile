@@ -13,7 +13,7 @@ export BUILD_DATE := $(shell date +'%Y%m%d')
 help: ## this help
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n\nTargets:\n"} /^[a-zA-Z_\-0-9]+:.*?##/ { printf "  \033[36m%-30s\033[0m %s\n", $$1, $$2 }' $(MAKEFILE_LIST)
 
-build-all: build build-biz build-max build-max-k8s build-lite build-litebiz ## 构建禅道所有版本镜像
+build-all: build build-biz build-biz-k8s build-max build-max-k8s  ## 构建禅道所有版本镜像
 
 build: ## 构建开源版镜像
 	docker build --build-arg VERSION=$(OPEN_VER) -t hub.qucheng.com/app/$(APP_NAME):$(OPEN_VER)-$(BUILD_DATE) -f Dockerfile .
@@ -41,7 +41,7 @@ build-litebiz: ## 构建旗迅捷企业版
 
 push-all-public: push-public push-biz-public push-biz-k8s-public push-max-k8s-public push-max-public push-lite-public push-litebiz-public ## 将所有镜像push到 hub.docker.com 镜像仓库
 
-push-all: push push-biz push-max push-max-k8s push-lite push-litebiz ## 将所有镜像push到 hub.qucheng.com 镜像仓库
+push-all: push push-biz push-biz-k8s push-max push-max-k8s ## 将所有镜像push到 hub.qucheng.com 镜像仓库
 
 push: ## push 禅道开源版 --> hub.qucheng.com
 	docker push hub.qucheng.com/app/$(APP_NAME):$(OPEN_VER)-$(BUILD_DATE)

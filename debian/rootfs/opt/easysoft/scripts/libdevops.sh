@@ -9,9 +9,6 @@
 
 [ -n "${DEBUG:+1}" ] && set -x
 
-# Global Envs
-GIT_API_URL="${GIT_PROTOCOL}://${GIT_USERNAME}:${GIT_PASSWORD}@${GIT_DOMAIN}/api/v1/users/${GIT_USERNAME}/tokens"
-
 # Functions
 ########################
 # Link Git service
@@ -37,7 +34,7 @@ Config_Git(){
     Wait_For_Git
 
     # 没有创建过Token
-    if [ "$(/usr/bin/get_git_token)" != "quickon-zentao" ];then
+    if [ "$(/usr/bin/git_token list)" == "" ];then
 
         # 创建Token
         Create_Git_Token
@@ -89,22 +86,11 @@ Config_Git(){
 #########################
 Create_Git_Token(){
 
-    case "${GIT_TYPE,,}" in
-      "gitea"|"gogs")
-            GIT_TOKEN=$(curl -skL -X 'POST' "$GIT_API_URL" \
-                          -H 'accept: application/json' \
-                          -H 'Content-Type: application/json' \
-                          -d '{"name": "quickon-zentao"}' | jq -r .sha1)
-      ;;
-      "gitlab")
-            GIT_TOKEN=$(gitlab_token)
-      ;;
-    esac
-
+    GIT_TOKEN=$(/usr/bin/git_token create)
 
     # 创建Token失败
-    if [ "$GIT_TOKEN" == "null" ];then
-        error "Create gitea token error."
+    if [ "$GIT_TOKEN" == "null" ] ;then
+        error "Create ${GIT_TYPE} token error."
         exit 1
     fi
 
@@ -155,7 +141,7 @@ Wait_For_Git(){
     info "Check whether the $GIT_TYPE service is available."
 
     for ((i = 1; i <= retries; i += 1)); do
-        if curl -skL "$GIT_API_URL" > /dev/null 2>&1;
+        if curl -skL "${GIT_PROTOCOL:-http}://$GIT_DOMAIN" > /dev/null 2>&1;
         then
             info "$GIT_TYPE is ready."
             break
@@ -177,9 +163,8 @@ Clean_Git_Config(){
     # 版本较低，不支持配置
     [ "$(Check_Version)" == "error" ] && return 0
 
-    if [ "$(/usr/bin/get_git_token)" == "quickon-zentao" ];then
-        curl -skL -X "DELETE" "${GIT_API_URL}/quickon-zentao" -H 'accept: application/json'
-    fi
+    # 删除Git token
+    /usr/bin/git_token delete
 
     # 删除禅道数据库中的Git信息
     Del_Git_Config

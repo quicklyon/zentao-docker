@@ -1,0 +1,74 @@
+#!/bin/bash
+
+# shellcheck disable=SC1090,SC1091,SC2155
+
+# list   : 查看token
+# delete : 删除token
+# create : 创建token
+action=${1:-list}
+
+. /etc/s6/s6-init/envs
+
+GIT_API_URL="${GIT_PROTOCOL}://${GIT_USERNAME}:${GIT_PASSWORD}@${GIT_DOMAIN}/api/v1/users/${GIT_USERNAME}/tokens"
+
+# 查看token
+list_token(){
+
+    case "${GIT_TYPE,,}" in
+    "gitea"|"gogs")
+        curl -skL "$GIT_API_URL" | jq -r ".[] | select (.name == \"${ZENTAO_TOKEN_NAME}\").name"
+    ;;
+    "gitlab")
+        /usr/bin/gt list | jq -r ". | select (.name == \"${ZENTAO_TOKEN_NAME}\").name"
+    ;;
+    esac
+
+}
+
+# 创建 Token
+# return: token
+create_token(){
+    case "${GIT_TYPE,,}" in
+      "gitea"|"gogs")
+            curl -skL -X 'POST' "$GIT_API_URL" \
+                          -H 'accept: application/json' \
+                          -H 'Content-Type: application/json' \
+                          -d "{\"name\": \"$ZENTAO_TOKEN_NAME\"}" | jq -r .sha1
+      ;;
+      "gitlab")
+            /usr/bin/gt create | jq -r .sha1
+      ;;
+    esac
+}
+
+# 删除Token
+delete_token(){
+    if [ "$(list_token)" != "" ];then
+        case "${GIT_TYPE,,}" in
+          "gitea"|"gogs")
+                curl -skL -X "DELETE" "${GIT_API_URL}/${ZENTAO_TOKEN_NAME}" -H 'accept: application/json'
+           ;;
+          "gitlab")
+                /usr/bin/gt delete
+           ;;
+        esac
+    fi
+}
+
+# ========== Main ===========
+
+case $action in
+  "list")
+    list_token
+    ;;
+  "create")
+    create_token
+    ;;
+  "delete")
+    delete_token
+    ;;
+  *)
+    echo "Operation not supported."
+    exit 1
+    ;;
+esac

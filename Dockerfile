@@ -34,8 +34,8 @@ RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "mysql-client" "
 # Install git for devops
 RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "git" "2.30.2" -c 02202e4bd530cbd090f1181b4cb8800a8547d4a9893bd3343542e541b28d1d7e
 
-# Install create-gitlab-token
-RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "create-gitlab-token" "1.0" -c c39d0fabb971ab9b384d857265c44ab78f8db29fe0609139821ff84d52ce3494
+# Install gitlab token cli
+RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "gt" "1.2" -c 8b3c3816122a39aaf06c9c054ae79817b413713ea1012a06326d3e5811a7cd41
 
 # Install zentao
 ARG VERSION

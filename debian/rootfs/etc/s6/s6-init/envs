@@ -5,7 +5,7 @@
 #==========#
 export IS_CONTAINER="true"
 export PROTOCOL_TYPE=${PROTOCOL_TYPE:-https}
-
+export ZENTAO_TOKEN_NAME=${ZENTAO_TOKEN_NAME:-quickon-zentao}
 #==========#
 #  DevOps  #
 #==========#
@@ -17,7 +17,7 @@ export GIT_USERNAME=${GIT_USERNAME:-"root"}
 export GIT_PASSWORD=${GIT_PASSWORD:-"pass4QuickOn"}
 export GIT_PROTOCOL=${GIT_PROTOCOL:-"https"}
 export GIT_DOMAIN=${GIT_DOMAIN:-"git.haogs.cn"}
-export GIT_SQL_FILE="/apps/zentao/config/${GIT_TYPE,,}.sql"
+export GIT_SQL_FILE="/apps/zentao/config/git.sql"
 
 #==========#
 #   php    #

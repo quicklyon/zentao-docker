@@ -52,10 +52,10 @@ services:
       - EASYSOFT_DEBUG=true
       - DEBUG=1
       - IS_CONTAINER=true
-      - LINK_GIT=true
+      - LINK_GIT=false
       - GIT_TYPE=gitea
-      - GIT_INSTANCE_NAME=my-gitea
-      - GIT_USERNAME=demo
+      - GIT_INSTANCE_NAME=demo
+      - GIT_USERNAME=user
       - GIT_PASSWORD=password
       - GIT_PROTOCOL=https
       - GIT_DOMAIN=git.demo.com

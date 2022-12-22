@@ -38,7 +38,7 @@ RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "git" "2.30.2" -
 RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "gt" "1.2" -c 8b3c3816122a39aaf06c9c054ae79817b413713ea1012a06326d3e5811a7cd41
 
 # Install jenkins token cli
-RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "jt" "0.1" -c 23fc71c2347fc75f8a4bdb8bb9a76e4a55aa5148518a8eb245b7974bd151329a
+RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "jt" "0.2" -c 3bea97ce79c7ace3609bfe597b226154162e5818d445adee2ff84680d43f3061
 
 # Install zentao
 ARG VERSION

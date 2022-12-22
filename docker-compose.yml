@@ -59,6 +59,11 @@ services:
       - GIT_PASSWORD=password
       - GIT_PROTOCOL=https
       - GIT_DOMAIN=git.demo.com
+      - LINK_JENKINS=false
+      - JENKINS_PROTOCOL=https
+      - JENKINS_URL=jenkins.demo.com
+      - JENKINS_USERNAME=user
+      - JENKINS_PASSWORD=password
     networks:
       - zentao-net
 

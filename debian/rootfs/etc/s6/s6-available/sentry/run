@@ -9,7 +9,8 @@
 . /opt/easysoft/scripts/liblog.sh
 . /opt/easysoft/scripts/libldap.sh
 . /opt/easysoft/scripts/libsmtp.sh
-. /opt/easysoft/scripts/libdevops.sh
+. /opt/easysoft/scripts/libgit.sh
+. /opt/easysoft/scripts/libci.sh
 
 case $ZENTAO_VER in
 "litevip1.2")
@@ -55,6 +56,12 @@ do
             Config_Git
         else
             Clean_Git_Config
+        fi
+        # 是否配置Jenkins服务
+        if [ "$LINK_JENKINS" == "true" ];then
+            Config_Jenkins
+        else
+            Clean_Jenkins_Config
         fi
     fi
 

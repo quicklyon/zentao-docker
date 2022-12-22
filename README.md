@@ -137,13 +137,18 @@ services:
 | SMTP_PORT                | 25                           | SMTP 服务端口号       |
 | SMTP_USER                | zentao@easycorp.cn           | SMTP发件人邮箱地址       |
 | SMTP_PASS                | pass4zenTao                  | SMTP发件人邮箱密码       |
-| LINK_GIT                 | false                        | DevOps模块，是否链接Gitea服务|
+| LINK_GIT                 | false                        | DevOps模块，是否链接Git服务|
 | GIT_TYPE                 | gitea                        | 连接的git服务名称，目前支持 gitea/gogs/gitlab|
-| GIT_INSTANCE_NAME        | gitea                        | Gitea服务名称|
-| GIT_USERNAME             | root                         | Gitea 管理员账号名称，用于生成token|
-| GIT_PASSWORD             | pass4QuickOn                 | Gitea 管理员密码，用于生成token|
-| GIT_PROTOCOL             | https                        | Gitea 服务类型，http或https|
-| GIT_DOMAIN               | git.haogs.cn                 | Gitea 服务域名 |
+| GIT_INSTANCE_NAME        | gitea                        | Git 服务名称|
+| GIT_USERNAME             | root                         | Git 管理员账号名称，用于生成token|
+| GIT_PASSWORD             | pass4QuickOn                 | Git 管理员密码，用于生成token|
+| GIT_PROTOCOL             | https                        | Git 服务协议类型，http或https|
+| GIT_DOMAIN               | git.haogs.cn                 | Git 服务域名 |
+| LINK_JENKINS             | false                        | DevOps模块，是否链接Jenkins服务|
+| JENKINS_USERNAME         | root                         | Jenkins 管理员账号名称，用于生成token|
+| JENKINS_PASSWORD         | pass4QuickOn                 | Jenkins 管理员密码，用于生成token|
+| JENKINS_PROTOCOL         | https                        | Jenkins 协议类型，http或https|
+| JENKINS_URL              | jenkins.haogs.cn             | Jenkins 服务域名 |
 | IS_CONTAINER             | true                         | 是否在容器内运行，zentao更新时使用|
 
 ### 5.1 调整最大上传文件的限制

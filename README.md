@@ -34,7 +34,7 @@ ZenTao官网：[https://zentao.net/](https://zentao.net/)
 
 ## 镜像版本
 
-镜像地址: [easysoft/quickon-zentao](https://hub.docker.com/repository/docker/easysoft/quickon-zentao)
+镜像地址: [easysoft/quickon-zentao](https://hub.docker.com/r/easysoft/quickon-zentao)
 
 - 开源版
   - [`17.8-20221205`](https://www.zentao.net/dynamic/zentaopms17.8-81798.html)

@@ -37,11 +37,11 @@ ZenTao官网：[https://zentao.net/](https://zentao.net/)
 镜像地址: [easysoft/quickon-zentao](https://hub.docker.com/r/easysoft/quickon-zentao)
 
 - 开源版
+  - [`latest`](https://www.zentao.net/dynamic/zentaopms17.8-81798.html)
   - [`17.8-20221205`](https://www.zentao.net/dynamic/zentaopms17.8-81798.html)
   - [`17.7-20221028`](https://www.zentao.net/download/zentaopms17.7-81744.html)
   - [`17.6.2-20220929`](https://www.zentao.net/dynamic/zentaopms17.6.2-81636.html)
   - [`17.6.1-20220916`](https://www.zentao.net/download/zentaopms17.6.1-81580.html)
-  - [`17.6-20220901`](https://www.zentao.net/download/zentaopms17.6-81531.html)
 
 
 - 企业版
@@ -57,7 +57,6 @@ ZenTao官网：[https://zentao.net/](https://zentao.net/)
   - [`max3.7-20221028`](https://www.zentao.net/download/max3.7-81746.html)
   - [`max3.7.k8s-20221028`](https://www.zentao.net/download/max3.7-81746.html)
   - [`max3.6.3-20220929`](https://www.zentao.net/dynamic/max3.6.3-81638.html)
-
 
 - 迅捷版
   - [`lite1.2-20221205`](https://www.zentao.net/download/zentaolitev1.2-80982.html)

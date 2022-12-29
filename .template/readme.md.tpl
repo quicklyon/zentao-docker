@@ -44,11 +44,7 @@ docker pull easysoft/{{APP_DOCKER_IMAGE_NAME}}:[TAG]
 
 ## 四、持久化数据
 
-如果你删除容器，所有的数据都将被删除，下次运行镜像时会重新初始化数据。为了避免数据丢失，你应该为容器提供一个挂在卷，这样可以将数据进行持久化存储。
-
-为了数据持久化，你应该挂载持久化目录：
-
-- /data 持久化数据
+禅道容器镜像做了特殊处理，将所有需要持久化的数据都保存到了 `/data` 目录，因此，运行禅道容器镜像，您只需要将持久化目录挂载到容器的 `/data` 目录即可。
 
 如果挂载的目录为空，首次启动会自动初始化相关文件
 
@@ -65,7 +61,7 @@ services:
   {{APP_NAME}}:
   ...
     volumes:
-      - /path/to/gogs-persistence:/data
+      - /path/to/zentao-persistence:/data
   ...
 ```
 
@@ -78,7 +74,7 @@ services:
 ### 7.1 单机Docker-compose方式运行
 
 ```bash
-# 启动服务
+# 启动开源版及相关的服务
 make run
 
 # 查看服务状态

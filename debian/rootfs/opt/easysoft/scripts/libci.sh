@@ -11,42 +11,42 @@
 
 # Functions
 ########################
-# Link Jenkins service
+# Link CI service
 # Globals:
-#   JENKINS_USERNAME
-#   JENKINS_PASSWORD
-#   JENKINS_PROTOCOL
-#   JENKINS_URL
-#   JENKINS_SQL_FILE
+#   CI_USERNAME
+#   CI_PASSWORD
+#   CI_PROTOCOL
+#   CI_URL
+#   CI_SQL_FILE
 # Arguments:
 #   $1: Table prefix (default: zt_)
 # Returns:
 #   None
 #########################
-Config_Jenkins(){
+Config_CI(){
 
     # 版本较低，不支持配置
     [ "$(Check_Version)" == "error" ] && return 0
 
     # 检查禅道是否已经有配置
-    if [ "$(Get_Jenkins_Config)" == "1" ];then
-        log "Zentao Jenkins service is configured."
+    if [ "$(Get_CI_Config)" == "1" ];then
+        log "Zentao CI service is configured."
     else
-        # 等待Jenkins服务就绪
-        Wait_For_Jenkins
-        warn "Zentao Jenkins config not found,rebuild the configuration."
+        # 等待CI服务就绪
+        Wait_For_CI
+        warn "Zentao CI config not found,rebuild the configuration."
         # 清理残余配置
-        Clean_Jenkins_Config
+        Clean_CI_Config
         # 创建Token
-        Create_Jenkins_Token
+        Create_CI_Token
         # 导入配置
-        Import_Jenkins_Config
+        Import_CI_Config
     fi
 }
 
 
 ########################
-# Create_Jenkins_Token : 创建Jenkins服务Token
+# Create_CI_Token : 创建CI服务Token
 # Globals:
 #   None
 # Arguments:
@@ -54,8 +54,8 @@ Config_Jenkins(){
 # Returns:
 #   None
 #########################
-Create_Jenkins_Token(){
-
+Create_CI_Token(){
+    # TODO 支持其它CI
     JENKINS_TOKEN=$(/usr/bin/jt | grep token| awk '{print $NF}')
 
     # 创建Token失败
@@ -70,69 +70,69 @@ Create_Jenkins_Token(){
 
 
 ########################
-# Import_Jenkins_Config : 导入Jenkins配置
+# Import_CI_Config : 导入CI配置
 # Globals:
 #   MYSQL_DB
-#   JENKINS_SQL_FILE
+#   CI_SQL_FILE
 # Arguments:
 #   dbsql file
 # Returns:
 #   None
 #########################
-Import_Jenkins_Config(){
+Import_CI_Config(){
 
     # 生成sql语句
-    /usr/bin/render-template ${JENKINS_SQL_FILE}.tpl > ${JENKINS_SQL_FILE}
+    /usr/bin/render-template ${CI_SQL_FILE}.tpl > ${CI_SQL_FILE}
 
     # 导入SQL
-    info "Link and configure jenkins Service ..."
-    mysql_import_to_db "$MYSQL_DB" "$JENKINS_SQL_FILE" | tee $CHECK_LOG
+    info "Link and configure ci Service ..."
+    mysql_import_to_db "$MYSQL_DB" "$CI_SQL_FILE" | tee $CHECK_LOG
 }
 
 
 ########################
-# Wait_For_Jenkins : 等待Jenkins服务就绪
+# Wait_For_CI : 等待CI服务就绪
 # Globals:
-#   WAIT_JENKINS_TIME
-#   JENKINS_USERNAME
-#   JENKINS_PASSWORD
-#   JENKINS_PROTOCOL
-#   JENKINS_URL
-#   JENKINS_SQL_FILE
+#   WAIT_CI_TIME
+#   CI_USERNAME
+#   CI_PASSWORD
+#   CI_PROTOCOL
+#   CI_URL
+#   CI_SQL_FILE
 # Arguments:
 #   dbsql file
 # Returns:
 #   None
 #########################
-Wait_For_Jenkins(){
-    local retries=${WAIT_JENKINS_TIME:-600}
+Wait_For_CI(){
+    local retries=${WAIT_CI_TIME:-600}
 
-    info "Check whether the jenkins service is available."
+    info "Check whether the ci service is available."
 
     for ((i = 1; i <= retries; i += 1)); do
-        if curl -skL "${JENKINS_PROTOCOL:-http}://$JENKINS_URL" > /dev/null 2>&1;
+        if curl -skL "${CI_PROTOCOL:-http}://$CI_URL" > /dev/null 2>&1;
         then
-            info "jenkins is ready."
+            info "ci is ready."
             break
         fi
 
-        warn "Waiting jenkins $i seconds"
+        warn "Waiting ci $i seconds"
         sleep 1
 
         if [ "$i" == "$retries" ]; then
-            error "Unable to connect to jenkins: $JENKINS_PROTOCOL://$JENKINS_URL"
+            error "Unable to connect to ci: $CI_PROTOCOL://$CI_URL"
             return 1
         fi
     done
     return 0
 }
 
-Clean_Jenkins_Config(){
+Clean_CI_Config(){
 
     # 版本较低，不支持配置
     [ "$(Check_Version)" == "error" ] && return 0
 
-    # 删除禅道数据库中的Jenkins信息
-    Del_Jenkins_Config
+    # 删除禅道数据库中的CI信息
+    Del_CI_Config
 
 }

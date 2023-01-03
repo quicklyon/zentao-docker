@@ -139,11 +139,12 @@ services:
 | GIT_PASSWORD             | pass4QuickOn                 | Git 管理员密码，用于生成token|
 | GIT_PROTOCOL             | https                        | Git 服务协议类型，http或https|
 | GIT_DOMAIN               | git.haogs.cn                 | Git 服务域名 |
-| LINK_JENKINS             | false                        | DevOps模块，是否链接Jenkins服务|
-| JENKINS_USERNAME         | root                         | Jenkins 管理员账号名称，用于生成token|
-| JENKINS_PASSWORD         | pass4QuickOn                 | Jenkins 管理员密码，用于生成token|
-| JENKINS_PROTOCOL         | https                        | Jenkins 协议类型，http或https|
-| JENKINS_URL              | jenkins.haogs.cn             | Jenkins 服务域名 |
+| LINK_CI             | false                        | DevOps模块，是否链接CI服务|
+| CI_TYPE                 | jenkins                        | 连接的ci服务名称，目前支持 jenkins|
+| CI_USERNAME         | root                         | CI 管理员账号名称，用于生成token|
+| CI_PASSWORD         | pass4QuickOn                 | CI 管理员密码，用于生成token|
+| CI_PROTOCOL         | https                        | CI 协议类型，http或https|
+| CI_URL              | jenkins.haogs.cn             | CI 服务域名 |
 | IS_CONTAINER             | true                         | 是否在容器内运行，zentao更新时使用|
 
 ### 5.1 调整最大上传文件的限制

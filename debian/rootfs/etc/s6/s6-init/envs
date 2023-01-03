@@ -20,14 +20,15 @@ export GIT_DOMAIN=${GIT_DOMAIN:-"git.haogs.cn"}
 export GIT_SQL_FILE="/apps/zentao/config/git.sql"
 
 #==========#
-# jenkins  #
+# CI  #
 #==========#
-export LINK_JENKINS=${LINK_JENKINS:-false}
-export JENKINS_USERNAME=${JENKINS_USERNAME:-"root"}
-export JENKINS_PASSWORD=${JENKINS_PASSWORD:-"pass4QuickOn"}
-export JENKINS_PROTOCOL=${JENKINS_PROTOCOL:-"https"}
-export JENKINS_URL=${JENKINS_URL:-"jenkins.haogs.cn"}
-export JENKINS_SQL_FILE="/apps/zentao/config/jenkins.sql"
+export LINK_CI=${LINK_CI:-false}
+export CI_TYPE=${CI_TYPE:-"jenkins"}
+export CI_USERNAME=${CI_USERNAME:-"root"}
+export CI_PASSWORD=${CI_PASSWORD:-"pass4QuickOn"}
+export CI_PROTOCOL=${CI_PROTOCOL:-"https"}
+export CI_URL=${CI_URL:-"jenkins.haogs.cn"}
+export CI_SQL_FILE="/apps/zentao/config/ci.sql"
 
 #==========#
 #   php    #

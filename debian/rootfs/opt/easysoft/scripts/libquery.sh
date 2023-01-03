@@ -25,11 +25,11 @@ Get_Git_Config(){
     and \`deleted\`=0;" | sed 1d
 }
 
-# 获取禅道Jenkins配置
-Get_Jenkins_Config(){
+# 获取禅道CI配置
+Get_CI_Config(){
     $MYSQL_BIN -e "select count(1) from ${TABLE_PREFIX}pipeline \
-    where \`type\`=\"jenkins\" \
-    and \`name\`=\"quickon-jenkins\" \
+    where \`type\`=\"${CI_TYPE}\" \
+    and \`name\`=\"quickon-${CI_TYPE}\" \
     and \`deleted\`=0;" | sed 1d
 }
 
@@ -38,9 +38,9 @@ Del_Git_Config(){
     $MYSQL_BIN -e "delete from ${TABLE_PREFIX}pipeline where \`id\`=999;"
 }
 
-# 删除禅道数据库中的Jenkins信息
-Del_Jenkins_Config(){
-    $MYSQL_BIN -e "delete from ${TABLE_PREFIX}pipeline where \`name\`=\"quickon-jenkins\";"
+# 删除禅道数据库中的CI信息
+Del_CI_Config(){
+    $MYSQL_BIN -e "delete from ${TABLE_PREFIX}pipeline where \`name\`=\"quickon-${GIT_TYPE}\";"
 }
 
 # 获取SMTP发件人信息

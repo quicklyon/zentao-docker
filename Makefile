@@ -39,7 +39,7 @@ build-lite: ## 构建迅捷版
 build-litebiz: ## 构建旗迅捷企业版
 	docker build --build-arg VERSION=$(LITEBIZ_VER) -t hub.qucheng.com/app/$(APP_NAME):$(LITEBIZ_VER)-$(BUILD_DATE) -f Dockerfile .
 
-push-all-public: push-public push-biz-public push-biz-k8s-public push-max-k8s-public push-max-public push-lite-public push-litebiz-public ## 将所有镜像push到 hub.docker.com 镜像仓库
+push-all-public: push-public push-biz-public push-biz-k8s-public push-max-k8s-public push-max-public
 
 push-all: push push-biz push-biz-k8s push-max push-max-k8s ## 将所有镜像push到 hub.qucheng.com 镜像仓库
 

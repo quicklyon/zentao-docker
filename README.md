@@ -271,3 +271,13 @@ docker-compose up -d
 # 查看服务状态和镜像版本
 docker-compose ps
 ```
+
+## 九、其他
+
+### 9.1 容器内安装软件
+
+容器内临时安装软件，可以通过封装好的 `/usr/sbin/install_packages` 命令，该命令支持设置`MIRROR`参数，国内使用时，指定 `MIRROR=true` 会使用国内的加速源。实例如下：
+
+```bash
+export MIRROR=true;install_packages vim
+```

@@ -11,7 +11,7 @@ COPY debian/prebuildfs /
 
 ENV TZ=Asia/Shanghai
 
-RUN install_packages jq curl wget zip unzip s6 pwgen cron netcat ca-certificates
+RUN install_packages jq curl wget zip unzip s6 pwgen cron netcat ca-certificates vim-tiny
 
 # Install internal php
 RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "php" "7.4.28" -c 934dd0320ee217465f6a8496b0858d120c3fd45b413f1c9ff833731a848cefa7

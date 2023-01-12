@@ -64,3 +64,9 @@ wait_for_mysql || exit 1
 
 # Initialize database
 mysql_init_db "$MYSQL_DB"
+
+
+#=====Set Zentao Config=====
+# Disable checkClient fix QuickOn DevOps
+cfg_num=$(grep -n checkClient /apps/zentao/config/config.php | awk -F ':'  '{print $1}')
+sed -i "$cfg_num s/true/false/" /apps/zentao/config/config.php

@@ -104,6 +104,7 @@ export PHP_PERSISTENCE_LIST=(
 export PERSISTENCE_LINK_LIST=(
 "/data/zentao/config/my.php"
 "/data/zentao/config/license"
+"/data/zentao/config/ext"
 "/data/zentao/www/data"
 "/data/zentao/tmp/log"
 "/data/zentao/tmp/template"

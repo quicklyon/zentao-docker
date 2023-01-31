@@ -61,8 +61,10 @@ fi
 #=====================#
 #   Prepare Apache    #
 #=====================#
+PORTS_CFG="/etc/apache2/ports.conf"
 SITE_CFG="/etc/apache2/sites-enabled/site.conf"
 info "Render apache sites config with envionment variables."
+/usr/bin/render-template ${PORTS_CFG}.tpl > $PORTS_CFG
 /usr/bin/render-template ${SITE_CFG}.tpl > $SITE_CFG
 
 #======================#

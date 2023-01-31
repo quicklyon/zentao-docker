@@ -86,6 +86,7 @@ export MYSQL_PASSWORD=${MYSQL_PASSWORD:-pass4Zentao}
 # Apache   #
 #==========#
 export APP_DOMAIN=${APP_DOMAIN:-*}
+export APP_DEFAULT_PORT=${APP_DEFAULT_PORT:-80}
 export DOCUMENT_ROOT=${DOCUMENT_ROOT:-/apps/zentao/www}
 
 # ======================#

@@ -11,5 +11,5 @@ REPLACE INTO `{{TABLE_PREFIX}}config` (`vision`,`owner`,`module`,`section`,`key`
 REPLACE INTO `{{TABLE_PREFIX}}config` (`vision`,`owner`,`module`,`section`,`key`,`value`) VALUES ('','system','mail','','mta','smtp');
 REPLACE INTO `{{TABLE_PREFIX}}config` (`vision`,`owner`,`module`,`section`,`key`,`value`) VALUES ('','system','mail','','async','0');
 REPLACE INTO `{{TABLE_PREFIX}}config` (`vision`,`owner`,`module`,`section`,`key`,`value`) VALUES ('','system','mail','','fromAddress','{{SMTP_USER}}');
-REPLACE INTO `{{TABLE_PREFIX}}config` (`vision`,`owner`,`module`,`section`,`key`,`value`) VALUES ('','system','mail','','domain','{{PROTOCOL_TYPE}}://{{APP_DOMAIN}}');
+REPLACE INTO `{{TABLE_PREFIX}}config` (`vision`,`owner`,`module`,`section`,`key`,`value`) VALUES ('','system','mail','','domain','{{PROTOCOL_TYPE}}://{{APP_DOMAIN}}:{{APP_DEFAULT_PORT}}');
 UNLOCK TABLES;

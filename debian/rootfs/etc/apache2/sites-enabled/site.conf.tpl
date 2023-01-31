@@ -1,4 +1,4 @@
-<VirtualHost *:80>
+<VirtualHost *:{{APP_DEFAULT_PORT}}>
     ServerAlias {{APP_DOMAIN}}
     DocumentRoot {{DOCUMENT_ROOT}}
     AcceptPathInfo On

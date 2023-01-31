@@ -47,7 +47,8 @@ services:
       - SMTP_PORT=25
       - SMTP_USER=root@demo.com
       - SMTP_PASS=password
-      - APP_DOMAIN=mini:8080
+      - APP_DEFAULT_PORT=80
+      - APP_DOMAIN=zentao.demo.com
       - PROTOCOL_TYPE=http
       - EASYSOFT_DEBUG=true
       - DEBUG=1

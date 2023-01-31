@@ -19,7 +19,7 @@ build: ## 构建开源版镜像
 	docker build --build-arg VERSION=$(OPEN_VER) -t hub.qucheng.com/app/$(APP_NAME):$(OPEN_VER)-$(BUILD_DATE) -f Dockerfile .
 
 build-biz: ## 构建企业版镜像
-	docker build --build-arg VERSION=$(BIZ_VER) -t hub.qucheng.com/app/$(APP_NAME):$(BIZ_VER)-$(BUILD_DATE) -f Dockerfile .
+	docker build --build-arg VERSION=$(BIZ_VER) --build-arg MIRROR=true -t hub.qucheng.com/app/$(APP_NAME):$(BIZ_VER)-$(BUILD_DATE) -f Dockerfile .
 
 build-biz-k8s: ## 构建企业版Kubernetes定制版镜像
 	docker build --build-arg VERSION=$(BIZ_K8S_VER) -t hub.qucheng.com/app/$(APP_NAME):$(BIZ_K8S_VER)-$(BUILD_DATE) -f Dockerfile .

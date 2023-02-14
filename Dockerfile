@@ -1,4 +1,4 @@
-FROM debian:11.5-slim
+FROM debian:11.6-slim
 
 LABEL maintainer "zhouyueqiu <zhouyueqiu@easycorp.ltd>"
 
@@ -38,7 +38,7 @@ RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "git" "2.30.2" -
 RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "gt" "1.2" -c 8b3c3816122a39aaf06c9c054ae79817b413713ea1012a06326d3e5811a7cd41
 
 # Install jenkins token cli
-RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "jt" "0.2" -c 3bea97ce79c7ace3609bfe597b226154162e5818d445adee2ff84680d43f3061
+RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "jt" "0.3" -c e6afb1d57168f259d7e4f3d7f5d08a749a15f74887c2cc90ba4a098fef823d27
 
 # Install zentao
 ARG VERSION

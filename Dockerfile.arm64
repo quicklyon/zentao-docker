@@ -28,7 +28,8 @@ ARG VERSION
 ENV ZENTAO_VER=${VERSION}
 ENV EASYSOFT_APP_NAME="ZenTao $ZENTAO_VER"
 
-SHELL ["/bin/bash", "-c"] 
+SHELL ["/bin/bash", "-c"]
+
 RUN . /opt/easysoft/scripts/libcomponent.sh && z_download "zentao" "${ZENTAO_VER}"
 
 # Clear apahce vhost config
@@ -46,7 +47,7 @@ RUN mkdir -pv /usr/local/etc/php \
     && mv /etc/s6/s6-init/envs.arm64 /etc/s6/s6-init/envs \
     && mv /etc/s6/s6-available/check_files/run.arm64 /etc/s6/s6-available/check_files/run \
     && chown www-data.www-data /apps/zentao -R \
-    && docker-php-ext-enable ioncube_loader 
+    && docker-php-ext-enable ioncube_loader
 
 EXPOSE 80
 

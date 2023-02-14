@@ -56,16 +56,16 @@ Config_CI(){
 #########################
 Create_CI_Token(){
     # TODO 支持其它CI
-    JENKINS_TOKEN=$(/usr/bin/jt | grep token| awk '{print $NF}')
+    CI_TOKEN=$(/usr/bin/jt | grep token| awk '{print $NF}')
 
     # 创建Token失败
-    if [ "$JENKINS_TOKEN" == "" ] ;then
+    if [ "$CI_TOKEN" == "" ] ;then
         error "Create jenkins token error."
         exit 1
     fi
 
-    export JENKINS_TOKEN
-    echo "$JENKINS_TOKEN" > /data/zentao/.jenkins_token
+    export CI_TOKEN
+    echo "$CI_TOKEN" > /data/zentao/.jenkins_token
 }
 
 

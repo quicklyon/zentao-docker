@@ -1,22 +1,22 @@
 {
   "zentaopms": {
-    "version": "18.0",
-    "news": "https://www.zentao.net/download/zentaopms18.0-81998.html"
+    "version": "18.1",
+    "news": "https://www.zentao.net/download/zentaopms18.1-82069.html"
   },
   "biz": {
-    "version": "8.0",
-    "news": "https://www.zentao.net/download/zentaopms.biz8.0-81999.html"
+    "version": "8.1",
+    "news": "https://www.zentao.net/download/biz8.1-82070.html"
   },
   "biz.k8s": {
-    "version": "8.0",
+    "version": "8.1",
     "news": "ZenTao Biz kubernetes customized version"
   },
   "max": {
-    "version": "4.0",
-    "news": "https://www.zentao.net/download/max4.0-82000.html"
+    "version": "4.1",
+    "news": "https://www.zentao.net/download/max4.1-82071.html"
   },
   "max.k8s": {
-    "version": "4.0",
+    "version": "4.1",
     "news": "ZenTao Max kubernetes customized version"
   },
   "litev": {

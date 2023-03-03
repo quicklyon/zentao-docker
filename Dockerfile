@@ -45,13 +45,6 @@ ARG VERSION
 ENV ZENTAO_VER=${VERSION}
 ENV EASYSOFT_APP_NAME="ZenTao $ZENTAO_VER"
 
-# Pipeline stage env
-ARG STAGE
-
-RUN if [[ "$STAGE" == “PIPELINE” ]] then; \
-    . /opt/easysoft/scripts/libcomponent.sh && component_unpack "ztf" "1.0" -c 923b25526998796d677478da1dbafbe45ee9c28d4d15c89c5a4feba7bd516726 \ 
-    fi
-
 SHELL ["/bin/bash", "-c"] 
 RUN . /opt/easysoft/scripts/libcomponent.sh && z_download "zentao" "${ZENTAO_VER}"
 

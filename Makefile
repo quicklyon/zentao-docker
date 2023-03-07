@@ -19,19 +19,19 @@ build: ## 构建开源版镜像
 	docker build --build-arg VERSION=$(OPEN_VER) -t hub.qucheng.com/app/$(APP_NAME):$(OPEN_VER)-$(BUILD_DATE) -f Dockerfile .
 
 build-biz: ## 构建企业版镜像
-	docker build --build-arg VERSION=$(BIZ_VER) --build-arg MIRROR=true -t hub.qucheng.com/app/$(APP_NAME):$(BIZ_VER)-$(BUILD_DATE) -f Dockerfile .
+	docker build --build-arg VERSION=$(BIZ_VER) -t hub.qucheng.com/app/$(APP_NAME):$(BIZ_VER)-$(BUILD_DATE) -f Dockerfile .
 
 build-biz-k8s: ## 构建企业版Kubernetes定制版镜像
 	docker build --build-arg VERSION=$(BIZ_K8S_VER) -t hub.qucheng.com/app/$(APP_NAME):$(BIZ_K8S_VER)-$(BUILD_DATE) -f Dockerfile .
 
 build-max: ## 构建旗舰版镜像
-	docker build --build-arg VERSION=$(MAX_VER) --build-arg MIRROR=true -t hub.qucheng.com/app/$(APP_NAME):$(MAX_VER)-$(BUILD_DATE) -f Dockerfile .
+	docker build --build-arg VERSION=$(MAX_VER) -t hub.qucheng.com/app/$(APP_NAME):$(MAX_VER)-$(BUILD_DATE) -f Dockerfile .
 
 build-max-k8s: ## 构建旗舰版Kubernetes定制版镜像
 	docker build --build-arg VERSION=$(MAX_K8S_VER) -t hub.qucheng.com/app/$(APP_NAME):$(MAX_K8S_VER)-$(BUILD_DATE) -f Dockerfile .
 
 build-max-k8s-arm64: ## 构建旗舰版Kubernetes定制版镜像(arm64)
-	docker build --platform arm64 --build-arg MIRROR=true --build-arg VERSION=$(MAX_K8S_VER) -t hub.qucheng.com/app/$(APP_NAME):$(MAX_K8S_VER)-$(BUILD_DATE) -f Dockerfile.arm64 .
+	docker build --platform arm64 --build-arg VERSION=$(MAX_K8S_VER) -t hub.qucheng.com/app/$(APP_NAME):$(MAX_K8S_VER)-$(BUILD_DATE) -f Dockerfile.arm64 .
 
 build-lite: ## 构建迅捷版
 	docker build --build-arg VERSION=$(LITE_VER) -t hub.qucheng.com/app/$(APP_NAME):$(LITE_VER)-$(BUILD_DATE) -f Dockerfile .

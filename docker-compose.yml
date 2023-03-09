@@ -60,7 +60,7 @@ services:
       - GIT_PASSWORD=password
       - GIT_PROTOCOL=https
       - GIT_DOMAIN=git.demo.com
-      - GIT_TOKEN=token-example
+      # - GIT_TOKEN=token-example
       - LINK_CI=false
       - CI_TYPE=jenkins
       - CI_PROTOCOL=https

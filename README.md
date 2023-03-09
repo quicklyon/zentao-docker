@@ -38,7 +38,7 @@ ZenTao官网：[https://zentao.net/](https://zentao.net/)
 
 - 开源版
   - [`latest`](https://www.zentao.net/dynamic/zentaopms18.2-82151.html)
-  - [`18.2-20230309`](https://www.zentao.net/download/zentaopms18.1-82069.html)
+  - [`18.2-20230309`](https://www.zentao.net/dynamic/zentaopms18.2-82151.html)
   - [`18.1-20230216`](https://www.zentao.net/download/zentaopms18.1-82069.html)
   - [`18.0-20230112`](https://www.zentao.net/download/zentaopms18.0-81998.html)
   - [`17.8-20221205`](https://www.zentao.net/dynamic/zentaopms17.8-81798.html)

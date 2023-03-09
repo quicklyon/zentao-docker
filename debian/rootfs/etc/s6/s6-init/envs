@@ -31,6 +31,17 @@ export CI_URL=${CI_URL:-"jenkins.haogs.cn"}
 export CI_SQL_FILE="/apps/zentao/config/ci.sql"
 
 #==========#
+# SCAN  #
+#==========#
+export LINK_SCAN=${LINK_SCAN:-false}
+export SCAN_TYPE=${SCAN_TYPE:-"sonarqube"}
+export SCAN_USERNAME=${SCAN_USERNAME:-"sonar"}
+export SCAN_PASSWORD=${SCAN_PASSWORD:-"password"}
+export SCAN_PROTOCOL=${SCAN_PROTOCOL:-"https"}
+export SCAN_URL=${SCAN_URL:-"sonarqube.haogs.cn"}
+export SCAN_SQL_FILE="/apps/zentao/config/scan.sql"
+
+#==========#
 #   php    #
 #==========#
 export PHP_SESSION_TYPE=${PHP_SESSION_TYPE:-files}

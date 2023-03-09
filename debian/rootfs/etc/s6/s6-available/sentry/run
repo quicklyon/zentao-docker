@@ -11,6 +11,7 @@
 . /opt/easysoft/scripts/libsmtp.sh
 . /opt/easysoft/scripts/libgit.sh
 . /opt/easysoft/scripts/libci.sh
+. /opt/easysoft/scripts/libscan.sh
 
 case $ZENTAO_VER in
 "litevip1.2")
@@ -62,6 +63,12 @@ do
             Config_CI
         else
             Clean_CI_Config
+        fi
+        # 是否配置SCAN服务
+        if [ "$LINK_SCAN" == "true" ];then
+            Config_SCAN
+        else
+            Clean_SCAN_Config
         fi
     fi
 

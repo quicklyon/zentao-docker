@@ -60,12 +60,20 @@ services:
       - GIT_PASSWORD=password
       - GIT_PROTOCOL=https
       - GIT_DOMAIN=git.demo.com
+      - GIT_TOKEN=token-example
       - LINK_CI=false
       - CI_TYPE=jenkins
       - CI_PROTOCOL=https
       - CI_URL=jenkins.demo.com
       - CI_USERNAME=user
       - CI_PASSWORD=password
+      # - CI_TOKEN=token-example
+      - LINK_SCAN=false
+      - SCAN_TYPE=sonarqube
+      - SCAN_PROTOCOL=https
+      - SCAN_URL=sonarqube.demo.com
+      - SCAN_USERNAME=user
+      - SCAN_PASSWORD=password
     networks:
       - zentao-net
 

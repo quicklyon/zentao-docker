@@ -45,7 +45,7 @@ ZenTao官网：[https://zentao.net/](https://zentao.net/)
 
 - 企业版
   - [`biz8.2-20230309`](https://www.zentao.net/dynamic/biz8.2-82152.html)
-  - [`biz8.2.k8s-20230307`](https://www.zentao.net/dynamic/biz8.2-82152.html)
+  - [`biz8.2.k8s-20230309`](https://www.zentao.net/dynamic/biz8.2-82152.html)
   - [`biz8.1-20230216`](https://www.zentao.net/download/biz8.1-82070.html)
   - [`biz8.1.k8s-20230216`](https://www.zentao.net/download/biz8.1-82070.html)
   - [`biz8.0-20230112`](https://www.zentao.net/download/zentaopms.biz8.0-81999.html)
@@ -55,11 +55,12 @@ ZenTao官网：[https://zentao.net/](https://zentao.net/)
 
 - 旗舰版
   - [`max4.2-20230309`](https://www.zentao.net/dynamic/max4.2-82153.html)
-  - [`max4.2.k8s-20230307`](https://www.zentao.net/dynamic/max4.2-82153.html)
+  - [`max4.2.k8s-20230309`](https://www.zentao.net/dynamic/max4.2-82153.html)
   - [`max4.1-20230216`](https://www.zentao.net/download/max4.1-82071.html)
   - [`max4.1.k8s-20230216`](https://www.zentao.net/download/max4.1-82071.html)
   - [`max4.0-20230112`](https://www.zentao.net/download/max4.0-82000.html)
   - [`max4.0.k8s-20230112`](https://www.zentao.net/download/max4.0-82000.html)
+
 
 - 迅捷版
   - [`lite1.2-20221205`](https://www.zentao.net/download/zentaolitev1.2-80982.html)

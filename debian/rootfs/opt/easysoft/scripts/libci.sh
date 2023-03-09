@@ -37,7 +37,7 @@ Config_CI(){
         warn "Zentao CI config not found,rebuild the configuration."
         # 清理残余配置
         Clean_CI_Config
-        # 创建Token
+        # 检查Token
         Create_CI_Token
         # 导入配置
         Import_CI_Config
@@ -56,14 +56,14 @@ Config_CI(){
 #########################
 Create_CI_Token(){
     # TODO 支持其它CI
-    CI_TOKEN=$(/usr/bin/jt | grep token| awk '{print $NF}')
-
-    # 创建Token失败
     if [ "$CI_TOKEN" == "" ] ;then
-        error "Create jenkins token error."
-        exit 1
+        # 创建Token失败
+        CI_TOKEN=$(/usr/bin/jt | grep token| awk '{print $NF}')
+        if [ "$CI_TOKEN" == "" ] ;then
+            error "Create jenkins token error."
+            exit 1
+        fi
     fi
-
     export CI_TOKEN
     echo "$CI_TOKEN" > /data/zentao/.jenkins_token
 }

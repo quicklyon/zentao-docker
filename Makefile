@@ -73,7 +73,7 @@ push-public: ## push 禅道开源版 --> hub.docker.com
 	docker push easysoft/$(APP_NAME):$(OPEN_VER)-$(BUILD_DATE)
 	docker push easysoft/$(APP_NAME):latest
 	curl http://i.haogs.cn:3839/sync?image=easysoft/$(APP_NAME):$(OPEN_VER)-$(BUILD_DATE)
-
+	curl http://i.haogs.cn:3839/sync?image=easysoft/$(APP_NAME):latest
 
 push-biz-public: ## push 禅道企业版 --> hub.docker.com
 	docker tag hub.qucheng.com/app/$(APP_NAME):$(BIZ_VER)-$(BUILD_DATE) easysoft/$(APP_NAME):$(BIZ_VER)-$(BUILD_DATE)
@@ -163,12 +163,10 @@ restart: build clean ps ## 重构
 clean-arm64:  ## 停arm服务
 	docker-compose -f docker-compose-arm64.yml stop
 	docker-compose -f docker-compose-arm64.yml rm -f
-	docker-compose -f docker-compose-arm64.yml down
-	docker volume prune -f
+	docker-compose -f docker-compose-arm64.yml down -v
 
 clean: stop ## 停服务
-	docker-compose -f docker-compose.yml down
-	docker volume prune -f
+	docker-compose -f docker-compose.yml down -v
 
 logs: ## 查看运行日志
 	docker-compose -f docker-compose.yml logs

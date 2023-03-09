@@ -40,7 +40,12 @@ Del_Git_Config(){
 
 # 删除禅道数据库中的CI信息
 Del_CI_Config(){
-    $MYSQL_BIN -e "delete from ${TABLE_PREFIX}pipeline where \`name\`=\"quickon-${GIT_TYPE}\";"
+    $MYSQL_BIN -e "delete from ${TABLE_PREFIX}pipeline where \`name\`=\"quickon-${CI_TYPE}\";"
+}
+
+# 删除禅道数据库中的SCAN信息
+Del_SCAN_Config(){
+    $MYSQL_BIN -e "delete from ${TABLE_PREFIX}pipeline where \`name\`=\"quickon-${SCAN_TYPE}\";"
 }
 
 # 获取SMTP发件人信息

@@ -85,15 +85,14 @@ Config_Git(){
 #   None
 #########################
 Create_Git_Token(){
-
-    GIT_TOKEN=$(/usr/bin/git_token create)
-
-    # 创建Token失败
-    if [ "$GIT_TOKEN" == "null" ] ;then
-        error "Create ${GIT_TYPE} token error."
-        exit 1
+    if [ "$GIT_TOKEN" == "" ] ;then
+        GIT_TOKEN=$(/usr/bin/git_token create)
+        # 创建Token失败
+        if [ "$GIT_TOKEN" == "null" ] ;then
+            error "Create ${GIT_TYPE} token error."
+            exit 1
+        fi
     fi
-
     export GIT_TOKEN
     echo "$GIT_TOKEN" > /data/zentao/.git_token
 }

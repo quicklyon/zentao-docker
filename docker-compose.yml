@@ -40,8 +40,8 @@ services:
       - PHP_MEMORY_LIMIT=512M
       - PHP_POST_MAX_SIZE=128M
       - PHP_UPLOAD_MAX_FILESIZE=128M
-      - LDAP_ENABLED=true
-      - SMTP_ENABLED=true
+      - LDAP_ENABLED=false
+      - SMTP_ENABLED=false
       - SMTP_FROMNAME=禅道旗舰版
       - SMTP_HOST=192.168.50.182
       - SMTP_PORT=25

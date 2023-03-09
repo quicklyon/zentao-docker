@@ -90,6 +90,11 @@ do
 
     # ZenTao upgrade, remove only the install.php file
     if [ "$CURRENT_VER" != "" ] && [ "$CURRENT_VER" != "$ZENTAO_VER" ] && [ "$CFG_INITED" != "0" ];then
+
+        # ext目录做了持久化，因此企业版、旗舰版需要将镜像中的版本标识文件复制到持久化目录
+        # zhouyq 2023-03-09
+        cp -rp /apps/zentao/config/ext.*/zentao*.php /apps/zentao/config/ext/
+
         rm -f /apps/zentao/www/install.php
 	    echo "$(date +'%F %H:%M:%S') $CURRENT_VER update to $ZENTAO_VER" >> /data/zentao/.version
         info "Zentao upgrade is complete."

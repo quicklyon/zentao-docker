@@ -1,0 +1,51 @@
+version: '2'
+
+networks:
+  zentao-net:
+    driver: bridge
+
+services:
+# mysql service for zentao
+  zentao-mysql:
+    image: mysql:5.7
+    container_name: zentao-mysql
+    ports:
+      - '13306:3306'
+    volumes:
+      - /data/zentao/db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=pass4Zentao
+      - MYSQL_DATABASE=zentao
+    networks:
+      - zentao-net
+
+# zentao service
+  zentao:
+    image: hub.qucheng.com/app/quickon-zentao:${TAG:-latest}
+    container_name: zentao
+    ports:
+      - '18080:80'
+    volumes:
+      - /data/zentao/file:/data
+    depends_on:
+      - zentao-mysql
+    environment:
+      - MYSQL_HOST=zentao-mysql
+      - MYSQL_PORT=3306
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=pass4Zentao
+      - MYSQL_DB=zentao
+      - PHP_MAX_EXECUTION_TIME=120
+      - PHP_MEMORY_LIMIT=512M
+      - PHP_POST_MAX_SIZE=128M
+      - PHP_UPLOAD_MAX_FILESIZE=128M
+      - LDAP_ENABLED=false
+      - SMTP_ENABLED=false
+      - APP_DEFAULT_PORT=80
+      - APP_DOMAIN=zentao.demo.com
+      - PROTOCOL_TYPE=http
+      - IS_CONTAINER=true
+      - LINK_GIT=false
+      - LINK_CI=false
+    networks:
+      - zentao-net

@@ -79,6 +79,9 @@ do
         # 首次安装，延迟30秒删除安装文件
         if [ "$FIRST_RUN" == "" ];then
             echo "$(date +'%F %H:%M:%S') $ZENTAO_VER installed" >> /data/zentao/.version
+
+            # 等待初始化账号写入数据库，可能会有demo数据写入，此处是临时适配
+            sleep 5
         fi
         # remove install and update file
         rm -f /apps/zentao/www/{install.php,upgrade.php}

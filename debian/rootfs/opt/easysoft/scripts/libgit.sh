@@ -33,45 +33,59 @@ Config_Git(){
     # 等待Git服务就绪
     Wait_For_Git
 
-    # 没有创建过Token
-    if [ "$(/usr/bin/git_token list)" == "" ];then
-
-        # 创建Token
-        Create_Git_Token
-
-        # 导入Git配置
-        Import_Git_Config
-
+    # 检查Git是否已经配置
+    if [ "$(Get_Git_Config)" == "1" ];then
+        log "Zentao Git service is configured."
     else
-        # 禅道没有成功导入Token
         if [ -f /data/zentao/.git_token ];then
-
             # 读取之前生成的Token
             GIT_TOKEN=$(cat /data/zentao/.git_token)
             export GIT_TOKEN
-
-            # 导入Git配置
-            Import_Git_Config
-
         else
-            # 检查禅道是否已经有配置
-            if [ "$(Get_Git_Config)" == "1" ];then
-                log "Zentao Git service is configured."
-            else
-                warn "Zentao Git config was deleted,rebuild the configuration."
-
-                # 清理残余配置
-                Clean_Git_Config
-
-                # 创建Token
-                Create_Git_Token
-
-                # 导入Git配置
-                Import_Git_Config
-            fi
+            # 创建Git服务Token
+            Create_Git_Token
         fi
+        # 导入Git配置
+        Import_Git_Config
     fi
+    # 没有创建过Token
+#     if [ "$(/usr/bin/git_token list)" == "" ];then
 
+#         # 创建Token
+#         Create_Git_Token
+
+#         # 导入Git配置
+#         Import_Git_Config
+
+#     else
+#         # 禅道没有成功导入Token
+#         if [ -f /data/zentao/.git_token ];then
+
+#             # 读取之前生成的Token
+#             GIT_TOKEN=$(cat /data/zentao/.git_token)
+#             export GIT_TOKEN
+
+#             # 导入Git配置
+#             Import_Git_Config
+
+#         else
+#             # 检查禅道是否已经有配置
+#             if [ "$(Get_Git_Config)" == "1" ];then
+#                 log "Zentao Git service is configured."
+#             else
+#                 warn "Zentao Git config was deleted,rebuild the configuration."
+
+#                 # 清理残余配置
+#                 Clean_Git_Config
+
+#                 # 创建Token
+#                 Create_Git_Token
+
+#                 # 导入Git配置
+#                 Import_Git_Config
+#             fi
+#         fi
+#     fi
 }
 
 

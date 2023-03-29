@@ -18,6 +18,9 @@ build-all: build build-biz build-biz-k8s build-max build-max-k8s  ## 构建禅�
 build: ## 构建开源版镜像
 	docker build --build-arg VERSION=$(OPEN_VER) -t hub.qucheng.com/app/$(APP_NAME):$(OPEN_VER)-$(BUILD_DATE) -f Dockerfile .
 
+build-arm: ## 构建开源版镜像ARM
+	docker build --platform arm64 --build-arg VERSION=$(OPEN_VER) -t hub.qucheng.com/app/$(APP_NAME):$(OPEN_VER)-$(BUILD_DATE) -f Dockerfile.arm64 .
+
 build-biz: ## 构建企业版镜像
 	docker build --build-arg VERSION=$(BIZ_VER) -t hub.qucheng.com/app/$(APP_NAME):$(BIZ_VER)-$(BUILD_DATE) -f Dockerfile .
 

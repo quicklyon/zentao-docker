@@ -36,12 +36,18 @@ done
 #=====================#
 #   Prepare PHP       #
 #=====================#
-PHP_CLI_INI="/etc/php/7.4/cli/php.ini"
-PHP_APACHE_INI="/etc/php/7.4/apache2/php.ini"
-
 info "Render php.ini with environment variables."
-/usr/bin/render-template /etc/php/7.4/php.ini.tpl > ${PHP_CLI_INI}
-/usr/bin/render-template /etc/php/7.4/php.ini.tpl > ${PHP_APACHE_INI}
+if [ "$OS_ARCH" == "arm64" ];then
+    info "render template php.ini for arm64."
+    PHP_INI="/usr/local/etc/php/php.ini"
+    /usr/bin/render-template ${PHP_INI}.tpl > ${PHP_INI}
+else
+    info "render template php.ini for amd64"
+    PHP_CLI_INI="/etc/php/7.4/cli/php.ini"
+    PHP_APACHE_INI="/etc/php/7.4/apache2/php.ini"
+    /usr/bin/render-template /etc/php/7.4/php.ini.tpl > ${PHP_CLI_INI}
+    /usr/bin/render-template /etc/php/7.4/php.ini.tpl > ${PHP_APACHE_INI}
+fi
 
 # enable redis extension
 if [ "$PHP_SESSION_TYPE" == "redis" ];then

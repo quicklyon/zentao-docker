@@ -12,7 +12,7 @@ ARG MIRROR
 
 ENV TZ=Asia/Shanghai
 
-RUN install_packages curl wget zip unzip s6 pwgen cron netcat
+RUN install_packages curl wget zip unzip s6 pwgen cron netcat ca-certificates vim-tiny
 
 # Install php-ext
 RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "php-ext" "7.4.30"
@@ -43,9 +43,6 @@ COPY debian/rootfs /
 WORKDIR /apps/zentao
 RUN mkdir -pv /usr/local/etc/php \
     && mv /etc/php/7.4/php.ini.tpl /usr/local/etc/php/php.ini.tpl \
-    && mv /etc/s6/s6-init/run.arm64 /etc/s6/s6-init/run \
-    && mv /etc/s6/s6-init/envs.arm64 /etc/s6/s6-init/envs \
-    && mv /etc/s6/s6-available/check_files/run.arm64 /etc/s6/s6-available/check_files/run \
     && chown www-data.www-data /apps/zentao -R \
     && docker-php-ext-enable ioncube_loader
 

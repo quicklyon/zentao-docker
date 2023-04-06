@@ -78,7 +78,7 @@ Wait_For_SCAN(){
     info "Check whether the scan service is available."
 
     for ((i = 1; i <= retries; i += 1)); do
-        if curl -skL "${SCAN_PROTOCOL:-http}://$SCAN_URL" > /dev/null 2>&1;
+        if curl -skL "$SCAN_URL" > /dev/null 2>&1;
         then
             info "ci is ready."
             break
@@ -88,7 +88,7 @@ Wait_For_SCAN(){
         sleep 1
 
         if [ "$i" == "$retries" ]; then
-            error "Unable to connect to scan: $SCAN_PROTOCOL://$SCAN_URL"
+            error "Unable to connect to scan: $SCAN_URL"
             return 1
         fi
     done

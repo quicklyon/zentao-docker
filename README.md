@@ -140,22 +140,22 @@ services:
 | GIT_INSTANCE_NAME        | gitea                        | Git 服务名称|
 | GIT_USERNAME             | root                         | Git 管理员账号名称，用于生成token|
 | GIT_PASSWORD             | pass4QuickOn                 | Git 管理员密码，用于生成token|
-| GIT_PROTOCOL             | https                        | Git 服务协议类型，http或https|
-| GIT_DOMAIN               | git.haogs.cn                 | Git 服务域名 |
+| GIT_PROTOCOL             | https                        | Git 服务协议类型，http或https(废弃)|
+| GIT_DOMAIN               | https://git.haogs.cn       | Git 服务域名(完整域名包含协议头) |
 | GIT_TOKEN                | -                            | Git Token优先级高于用户名, 默认为空 |
 | LINK_CI                  | false                        | DevOps模块，是否链接CI服务|
 | CI_TYPE                  | jenkins                      | 连接的ci服务名称，目前支持 jenkins|
 | CI_USERNAME              | root                         | CI 管理员账号名称，用于生成token|
 | CI_PASSWORD              | pass4QuickOn                 | CI 管理员密码，用于生成token|
-| CI_PROTOCOL              | https                        | CI 协议类型，http或https|
-| CI_URL                   | jenkins.haogs.cn             | CI 服务域名 |
+| CI_PROTOCOL              | https                        | CI 协议类型，http或https(废弃)|
+| CI_URL                   | https://jenkins.haogs.cn     | CI 服务域名((完整域名包含协议头)) |
 | CI_TOKEN                 | -                            | CI Token优先级高于用户名, 默认为空 |
 | LINK_SCAN                | false                        | DevOps模块，是否链接扫描服务|
 | SCAN_TYPE                | sonarqube                    | 连接的扫描服务名称，目前支持 sonarqube|
 | SCAN_USERNAME            | admin                        | SCAN 管理员账号名称，用于生成token|
 | SCAN_PASSWORD            | pass4QuickOn                 | SCAN 管理员密码，用于生成token|
-| SCAN_PROTOCOL            | https                        | SCAN 协议类型，http或https|
-| SCAN_URL                 | sonarqube.haogs.cn           | SCAN 服务域名 |
+| SCAN_PROTOCOL            | https                        | SCAN 协议类型，http或https(废弃)|
+| SCAN_URL                 | https://sonarqube.haogs.cn | SCAN 服务域名(完整域名包含协议头) |
 | IS_CONTAINER             | true                         | 是否在容器内运行，zentao更新时使用|
 
 ### 5.1 调整最大上传文件的限制

@@ -8,8 +8,9 @@
 action=${1:-list}
 
 . /etc/s6/s6-init/envs
-
-GIT_API_URL="${GIT_PROTOCOL}://${GIT_USERNAME}:${GIT_PASSWORD}@${GIT_DOMAIN}/api/v1/users/${GIT_USERNAME}/tokens"
+GIT_TMP_DOMAIN=${GIT_DOMAIN##*://}
+GIT_TMP_PROTOCOL=${GIT_DOMAIN%://*}
+GIT_API_URL="${GIT_TMP_PROTOCOL}://${GIT_USERNAME}:${GIT_PASSWORD}@${GIT_TMP_DOMAIN}/api/v1/users/${GIT_USERNAME}/tokens"
 
 # 查看token
 list_token(){

@@ -154,7 +154,7 @@ Wait_For_Git(){
     info "Check whether the $GIT_TYPE service is available."
 
     for ((i = 1; i <= retries; i += 1)); do
-        if curl -skL "${GIT_PROTOCOL:-http}://$GIT_DOMAIN" > /dev/null 2>&1;
+        if curl -skL "$GIT_DOMAIN" > /dev/null 2>&1;
         then
             info "$GIT_TYPE is ready."
             break
@@ -164,7 +164,7 @@ Wait_For_Git(){
         sleep 1
 
         if [ "$i" == "$retries" ]; then
-            error "Unable to connect to $GIT_TYPE: $GIT_PROTOCOL://$GIT_DOMAIN"
+            error "Unable to connect to $GIT_TYPE: $GIT_DOMAIN"
             return 1
         fi
     done

@@ -110,7 +110,7 @@ Wait_For_CI(){
     info "Check whether the ci service is available."
 
     for ((i = 1; i <= retries; i += 1)); do
-        if curl -skL "${CI_PROTOCOL:-http}://$CI_URL" > /dev/null 2>&1;
+        if curl -skL "$CI_URL" > /dev/null 2>&1;
         then
             info "ci is ready."
             break
@@ -120,7 +120,7 @@ Wait_For_CI(){
         sleep 1
 
         if [ "$i" == "$retries" ]; then
-            error "Unable to connect to ci: $CI_PROTOCOL://$CI_URL"
+            error "Unable to connect to ci: $CI_URL"
             return 1
         fi
     done

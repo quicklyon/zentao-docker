@@ -15,7 +15,6 @@
 # Globals:
 #   CI_USERNAME
 #   CI_PASSWORD
-#   CI_PROTOCOL
 #   CI_URL
 #   CI_SQL_FILE
 # Arguments:
@@ -96,7 +95,6 @@ Import_CI_Config(){
 #   WAIT_CI_TIME
 #   CI_USERNAME
 #   CI_PASSWORD
-#   CI_PROTOCOL
 #   CI_URL
 #   CI_SQL_FILE
 # Arguments:

@@ -65,7 +65,6 @@ Import_SCAN_Config(){
 # Wait_For_SCAN : 等待SCAN服务就绪
 # Globals:
 #   WAIT_SCAN_TIME
-#   SCAN_PROTOCOL
 #   SCAN_URL
 # Arguments:
 #   dbsql file

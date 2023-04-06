@@ -17,7 +17,6 @@
 #   GIT_INSTANCE_NAME
 #   GIT_USERNAME
 #   GIT_PASSWORD
-#   GIT_PROTOCOL
 #   GIT_DOMAIN
 #   GIT_SQL_FILE
 # Arguments:
@@ -141,7 +140,6 @@ Import_Git_Config(){
 #   GIT_TYPE
 #   GIT_USERNAME
 #   GIT_PASSWORD
-#   GIT_PROTOCOL
 #   GIT_DOMAIN
 # Arguments:
 #   dbsql file

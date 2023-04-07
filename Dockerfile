@@ -35,10 +35,10 @@ RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "mysql-client" "
 RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "git" "2.30.2" -c 02202e4bd530cbd090f1181b4cb8800a8547d4a9893bd3343542e541b28d1d7e
 
 # Install gitlab token cli
-RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "gt" "1.2" -c 8b3c3816122a39aaf06c9c054ae79817b413713ea1012a06326d3e5811a7cd41
+RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "gt" "1.3" -c 0a76eb4fc59868184e6d140b3fa81d9bdd5adb4e8dbbcb8649269464d323299d
 
 # Install jenkins token cli
-RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "jt" "0.3" -c e6afb1d57168f259d7e4f3d7f5d08a749a15f74887c2cc90ba4a098fef823d27
+RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "jt" "0.4" -c 0a680ed8d79fd72892f09c8894d71abe35cd9726f49ba9b13a131eca00b35440
 
 # Install zentao
 ARG VERSION

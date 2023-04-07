@@ -18,7 +18,7 @@ export GIT_PASSWORD=${GIT_PASSWORD:-"pass4QuickOn"}
 export GIT_PROTOCOL=${GIT_PROTOCOL:-"https"}
 export GIT_DOMAIN=${GIT_DOMAIN:-"git.haogs.cn"}
 export GIT_SQL_FILE="/apps/zentao/config/git.sql"
-if [[ $GIT_DOMAIN == *"http://"* ]] || [ $GIT_DOMAIN == *"https://"* ];then
+if [[ $GIT_DOMAIN == *http* ]];then
 export GIT_DOMAIN=${GIT_DOMAIN:-"git.haogs.cn"}
 else
 export GIT_DOMAIN="$GIT_PROTOCOL://${GIT_DOMAIN}"
@@ -34,7 +34,7 @@ export CI_PASSWORD=${CI_PASSWORD:-"pass4QuickOn"}
 export CI_PROTOCOL=${CI_PROTOCOL:-"https"}
 export CI_URL=${CI_URL:-"jenkins.haogs.cn"}
 export CI_SQL_FILE="/apps/zentao/config/ci.sql"
-if [[ $CI_URL == *"http://"* ]] || [ $CI_URL == *"https://"* ];then
+if [[ $CI_URL == *http* ]];then
 export CI_URL=${CI_URL:-"jenkins.haogs.cn"}
 else
 export CI_URL="$CI_PROTOCOL://${CI_URL}"
@@ -49,7 +49,7 @@ export SCAN_PASSWORD=${SCAN_PASSWORD:-"password"}
 export SCAN_PROTOCOL=${SCAN_PROTOCOL:-"https"}
 export SCAN_URL=${SCAN_URL:-"sonarqube.haogs.cn"}
 export SCAN_SQL_FILE="/apps/zentao/config/scan.sql"
-if [[ $SCAN_URL == *"http://"* ]] || [ $SCAN_URL == *"https://"* ];then
+if [[ $SCAN_URL == *http* ]];then
 export SCAN_URL=${SCAN_URL:-"sonarqube.haogs.cn"}
 else
 export SCAN_URL="$SCAN_PROTOCOL://${SCAN_URL}"

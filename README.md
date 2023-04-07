@@ -255,7 +255,7 @@ docker-compose logs -f quickon-zentao
 - [VERSION](https://github.com/quicklyon/zentao-docker/blob/master/VERSION) 文件中详细的定义了Makefile可以操作的版本
 - [docker-compose.yml](https://github.com/quicklyon/zentao-docker/blob/master/docker-compose.yml)
 
-### 7.2 通过helm命令安装开源版示例
+### 7.2 Kubernetes通过helm命令安装开源版示例
 
 ```bash
 helm repo add zentao https://hub.qucheng.com/chartrepo/stable

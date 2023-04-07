@@ -11,7 +11,7 @@ COPY debian/prebuildfs /
 
 ENV TZ=Asia/Shanghai
 
-RUN install_packages jq curl wget zip unzip s6 pwgen cron netcat ca-certificates vim-tiny
+RUN install_packages jq curl wget zip unzip s6 pwgen cron netcat ca-certificates vim-tiny patch
 
 # Install internal php
 RUN . /opt/easysoft/scripts/libcomponent.sh && component_unpack "php" "7.4.28" -c 934dd0320ee217465f6a8496b0858d120c3fd45b413f1c9ff833731a848cefa7
@@ -53,6 +53,9 @@ RUN rm -rf /etc/apache2/sites-available/* /etc/apache2/sites-enabled/*
 
 # Copy apache,php and gogs config files
 COPY debian/rootfs /
+
+# Apply patch
+RUN bash -x /apps/zentao/patch/patch.sh
 
 # Copy zentao-pass source code
 WORKDIR /apps/zentao

@@ -87,6 +87,24 @@ docker-compose logs -f {{APP_DOCKER_IMAGE_NAME}}
 
 {{MAKE_EXTRA_INFO}}
 
+### 7.2 Kubernetes通过helm命令安装开源版示例
+
+```bash
+helm repo add zentao https://hub.qucheng.com/chartrepo/stable
+helm repo update
+helm search repo zentao/zentao
+helm upgrade -i zentao-open zentao/zentao --set ingress.enabled=true --set ingress.host=zentao.example.local
+```
+
+#### 高级自定义配置
+
+```bash
+# 下载zentao charts
+helm pull zentao/zentao --untar
+# 自定义配置 zentao/values.yaml, 示例
+helm upgrade -i zentao-open zentao/zentao -f custom.yaml
+```
+
 ## 八、版本升级
 
 {{APP_UPDATE}}

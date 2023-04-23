@@ -38,14 +38,14 @@ ZenTao官网：[https://zentao.net/](https://zentao.net/)
 
 - 开源版
   - [`latest`](https://www.zentao.net/download/zentaopms18.3-82231.html)
-  - [`18.3-20230323`](https://www.zentao.net/download/zentaopms18.3-82231.html)
+  - [`18.3-20230423`](https://www.zentao.net/download/zentaopms18.3-82231.html)
   - [`18.2-20230315`](https://www.zentao.net/dynamic/zentaopms18.2-82151.html)
   - [`18.1-20230216`](https://www.zentao.net/download/zentaopms18.1-82069.html)
   - [`18.0-20230112`](https://www.zentao.net/download/zentaopms18.0-81998.html)
 
 - 企业版
-  - [`biz8.3-20230323`](https://www.zentao.net/download/biz8.3-82232.html)
-  - [`biz8.3.k8s-20230323`](https://www.zentao.net/download/biz8.3-82232.html)
+  - [`biz8.3-20230423`](https://www.zentao.net/download/biz8.3-82232.html)
+  - [`biz8.3.k8s-20230423`](https://www.zentao.net/download/biz8.3-82232.html)
   - [`biz8.2-20230315`](https://www.zentao.net/dynamic/biz8.2-82152.html)
   - [`biz8.2.k8s-20230315`](https://www.zentao.net/dynamic/biz8.2-82152.html)
   - [`biz8.1-20230216`](https://www.zentao.net/download/biz8.1-82070.html)
@@ -54,8 +54,8 @@ ZenTao官网：[https://zentao.net/](https://zentao.net/)
   - [`biz8.0.k8s-20230112`](https://www.zentao.net/download/zentaopms.biz8.0-81999.html)
 
 - 旗舰版
-  - [`max4.3-20230323`](https://www.zentao.net/download/max4.3-82233.html)
-  - [`max4.3.k8s-20230323`](https://www.zentao.net/download/max4.3-82233.html)
+  - [`max4.3-20230423`](https://www.zentao.net/download/max4.3-82233.html)
+  - [`max4.3.k8s-20230423`](https://www.zentao.net/download/max4.3-82233.html)
   - [`max4.2-20230315`](https://www.zentao.net/dynamic/max4.2-82153.html)
   - [`max4.2.k8s-20230315`](https://www.zentao.net/dynamic/max4.2-82153.html)
   - [`max4.1-20230216`](https://www.zentao.net/download/max4.1-82071.html)
@@ -145,21 +145,21 @@ services:
 | GIT_USERNAME             | root                         | Git 管理员账号名称，用于生成token|
 | GIT_PASSWORD             | pass4QuickOn                 | Git 管理员密码，用于生成token|
 | GIT_PROTOCOL             | https                        | Git 服务协议类型，http或https(废弃)|
-| GIT_DOMAIN               | https://git.haogs.cn       | Git 服务域名(完整域名包含协议头) |
+| GIT_DOMAIN               | https://git.haogs.cn         | Git 服务域名(完整域名包含协议头) |
 | GIT_TOKEN                | -                            | Git Token优先级高于用户名, 默认为空 |
 | LINK_CI                  | false                        | DevOps模块，是否链接CI服务|
 | CI_TYPE                  | jenkins                      | 连接的ci服务名称，目前支持 jenkins|
 | CI_USERNAME              | root                         | CI 管理员账号名称，用于生成token|
 | CI_PASSWORD              | pass4QuickOn                 | CI 管理员密码，用于生成token|
 | CI_PROTOCOL              | https                        | CI 协议类型，http或https(废弃)|
-| CI_URL                   | https://jenkins.haogs.cn     | CI 服务域名((完整域名包含协议头)) |
+| CI_URL                   | https://jenkins.haogs.cn     | CI 服务域名(完整域名包含协议头) |
 | CI_TOKEN                 | -                            | CI Token优先级高于用户名, 默认为空 |
 | LINK_SCAN                | false                        | DevOps模块，是否链接扫描服务|
 | SCAN_TYPE                | sonarqube                    | 连接的扫描服务名称，目前支持 sonarqube|
 | SCAN_USERNAME            | admin                        | SCAN 管理员账号名称，用于生成token|
 | SCAN_PASSWORD            | pass4QuickOn                 | SCAN 管理员密码，用于生成token|
 | SCAN_PROTOCOL            | https                        | SCAN 协议类型，http或https(废弃)|
-| SCAN_URL                 | https://sonarqube.haogs.cn | SCAN 服务域名(完整域名包含协议头) |
+| SCAN_URL                 | https://sonarqube.haogs.cn   | SCAN 服务域名(完整域名包含协议头) |
 | IS_CONTAINER             | true                         | 是否在容器内运行，zentao更新时使用|
 
 ### 5.1 调整最大上传文件的限制

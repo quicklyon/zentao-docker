@@ -9,10 +9,10 @@ INSERT INTO `{{TABLE_PREFIX}}config` (`vision`, `owner`, `module`, `section`, `k
 ('',	'system',	'ldap',	'',	'baseDN',	'{{LDAP_BASEDN}}'),
 ('',	'system',	'ldap',	'',	'charset',	'utf-8'),
 ('',	'system',	'ldap',	'',	'account',	'{{LDAP_USERKEY}}'),
-('',	'system',	'ldap',	'',	'group',	'1'),
-('',	'system',	'ldap',	'',	'realname',	'name'),
+('',	'system',	'ldap',	'',	'group',	'{{LDAP_GROUP}}'),
+('',	'system',	'ldap',	'',	'realname',	'{{LDAP_REALNAME}}'),
 ('',	'system',	'ldap',	'',	'email',	'{{LDAP_EMAILKEY}}'),
 ('',	'system',	'ldap',	'',	'mobile',	'mobile'),
 ('',	'system',	'ldap',	'',	'phone',	'telephonenumber'),
-('',	'system',	'ldap',	'',	'repeatPolicy',	'number'),
-('',	'system',	'ldap',	'',	'autoCreate',	'1');
+('',	'system',	'ldap',	'',	'repeatPolicy',	'{{LDAP_REPEATPOLICY}}'),
+('',	'system',	'ldap',	'',	'autoCreate',	'{{LDAP_AUTOCREATE}}');

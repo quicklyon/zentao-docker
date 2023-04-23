@@ -21,6 +21,10 @@
 | LDAP_BINDPASSWORD        | pass4zenTao                  | LDAP Bind 密码                |
 | LDAP_USERKEY             | uid                          | LDAP 用户名称的字段名       |
 | LDAP_EMAILKEY            | mail                         | LDAP 用户邮箱的字段名       |
+| LDAP_GROUP| 1| 默认用户组(1: 管理员, 2: 研发, 3: 测试, 类比)       |
+| LDAP_REALNAME| name| LDAP 用户真实姓名的字段名       |
+| LDAP_REPEATPOLICY| number | LDAP 用户重名策略，number:数字后缀，dept:部门后缀|
+| LDAP_AUTOCREATE| 1| LDAP 用户自动创建，1:自动创建，0:不自动创建 |
 | SMTP_ENABLED             | false                        | 启用SMTP       |
 | SMTP_FROMNAME            | ZenTao $VERSION              | SMTP发件人显示名称       |
 | SMTP_HOST                | 127.0.0.1                    | SMTP 服务主机地址       |

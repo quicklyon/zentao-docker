@@ -82,6 +82,10 @@ export LDAP_BINDPASSWORD=${LDAP_BINDPASSWORD:-pass4zenTao}
 export LDAP_BASEDN=${LDAP_BASEDN:-dc=quickon,dc=org}
 export LDAP_USERKEY=${LDAP_USERKEY:-uid}
 export LDAP_EMAILKEY=${LDAP_EMAILKEY:-mail}
+export LDAP_GROUP=${LDAP_GROUP:-1}
+export LDAP_REALNAME=${LDAP_REALNAME:-name}
+export LDAP_REPEATPOLICY=${LDAP_REPEATPOLICY:-number}
+export LDAP_AUTOCREATE=${LDAP_AUTOCREATE:-1}
 
 #==========#
 #   SMTP   #

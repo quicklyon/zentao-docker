@@ -25,7 +25,7 @@ case $ZENTAO_VER in
     ;;
 esac
 
-FIRST_RUN=$( [ -e /data/zentao/.version ] && grep $ZENTAO_VER /data/zentao/.version )
+FIRST_RUN=$( [ -e /data/zentao/.version ] && grep "$ZENTAO_VER" /data/zentao/.version )
 export CHECK_LOG="/tmp/sentry.log"
 [ ! -e $CHECK_LOG ] && touch $CHECK_LOG
 
@@ -79,6 +79,8 @@ do
         # 首次安装，标记安装信息
         if [ "$FIRST_RUN" == "" ];then
             echo "$(date +'%F %H:%M:%S') $ZENTAO_VER installed" >> /data/zentao/.version
+        else
+            touch /data/.installed.tmp
         fi
 
         # remove install and update file
@@ -88,7 +90,7 @@ do
 	    break
     fi
 
-    # ZenTao upgrade, remove only the install.php file
+    # 安装完成，切换了版本
     if [ "$CURRENT_VER" != "" ] && [ "$CURRENT_VER" != "$ZENTAO_VER" ] && [ "$CFG_INITED" != "0" ];then
 
         # 获取重命名后的ext目录

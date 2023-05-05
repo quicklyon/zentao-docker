@@ -80,13 +80,13 @@ if(empty($config->notMd5Pwd))js::import($jsRoot . 'md5.js');
 
   <p style='margin-top:25px; color:#fff; text-align:center'>
     版本选择：
-    <a href='http://zentao12.demo.haogs.cn' style='color:yellow'>开源版</a>
+    <a href='https://zentao12.demo.haogs.cn' style='color:yellow'>开源版</a>
   </p>
     <div id="info" class="table-row">
       <div class="table-col text-middle text-center">
         <div id="poweredby">
           <?php if($config->checkVersion):?>
-          <?php $siteURL = $this->app->getClientLang() == 'en' ? 'http://api.zentao.pm' : 'http://api.zentao.net';?>
+          <?php $siteURL = $this->app->getClientLang() == 'en' ? 'https://api.zentao.pm' : 'https://api.zentao.net';?>
           <iframe id='updater' class='hidden' frameborder='0' width='100%' scrolling='no' allowtransparency='true' src="<?php echo $siteURL;?>/updater-isLatest-<?php echo $config->version;?>-<?php echo $s;?>.html?lang=<?php echo str_replace('-', '_', $this->app->getClientLang())?>"></iframe>
           <?php endif;?>
           <?php echo html::hidden('verifyRand', $rand);?>

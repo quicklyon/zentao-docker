@@ -1,0 +1,4 @@
+FROM hub.qucheng.com/app/quickon-zentao:12.5.3-20221220
+
+
+COPY patch/12 /

@@ -20,6 +20,13 @@ services:
     networks:
       - zentao-net
 
+# redis service for zentao
+#  zentao-redis:
+#    image: redis:3.2.12-alpine3.8
+#    container_name: zentao-redis
+#    networks:
+#      - zentao-net
+
 # zentao service
   zentao:
     image: hub.qucheng.com/app/quickon-zentao:${TAG:-latest}
@@ -36,6 +43,9 @@ services:
       - MYSQL_USER=root
       - MYSQL_PASSWORD=pass4Zentao
       - MYSQL_DB=zentao
+     # - PHP_SESSION_TYPE=redis
+     # - PHP_SESSION_PATH=tcp://zentao-redis:6379
+     # - PHP_REDIS_SENTINEL=1  
       - PHP_MAX_EXECUTION_TIME=120
       - PHP_MEMORY_LIMIT=512M
       - PHP_POST_MAX_SIZE=128M

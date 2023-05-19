@@ -52,6 +52,10 @@ fi
 # enable redis extension
 if [ "$PHP_SESSION_TYPE" == "redis" ];then
     info "Enable redis extension for session."
+    if [ "$PHP_REDIS_SENTINEL" == "1" ];then
+        echo "redis.sentinel = 1" >> /etc/php/7.4/mods-available/redis.ini
+    fi
+    
     phpenmod redis
 fi
 

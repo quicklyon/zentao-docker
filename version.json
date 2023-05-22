@@ -26,5 +26,9 @@
   "litevipv": {
     "version": "1.2",
     "news": "https://www.zentao.net/download/zentaolitevipv1.2-80983.html"
+  },
+  "ipd": {
+    "version": "1.0.beta1",
+    "news": "https://www.zentao.net/download/zentao-ipd-82471.html"
   }
 }

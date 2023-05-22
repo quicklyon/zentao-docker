@@ -34,3 +34,6 @@
 
 - 迅捷企业版
   - [`litevip1.2-20221205`](https://www.zentao.net/download/zentaolitevipv1.2-80983.html)
+
+- IPD版本
+  - [`ipd1.0.beta1-20230522`](https://www.zentao.net/download/zentao-ipd-82471.html)

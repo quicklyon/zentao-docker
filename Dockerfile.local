@@ -1,4 +1,4 @@
-FROM debian:11.5-slim
+FROM debian:11.7-slim
 
 LABEL maintainer "zhouyueqiu <zhouyueqiu@easycorp.ltd>"
 

@@ -4,11 +4,11 @@
     "news": "https://www.zentao.net/download/zentaopms18.3-82231.html"
   },
   "biz": {
-    "version": "4.1.3",
+    "version": "8.3",
     "news": "https://www.zentao.net/download/biz8.3-82232.html"
   },
   "biz.k8s": {
-    "version": "4.1.3",
+    "version": "8.3",
     "news": "ZenTao Biz kubernetes customized version"
   },
   "max": {

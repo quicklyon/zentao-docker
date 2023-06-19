@@ -1,0 +1,18 @@
+INSERT INTO `{{TABLE_PREFIX}}config` (`vision`, `owner`, `module`, `section`, `key`, `value`) VALUES
+('',	'system',	'ldap',	'',	'turnon',	'{{LDAP_ENABLED}}'),
+('',	'system',	'ldap',	'',	'type',	'ldap'),
+('',	'system',	'ldap',	'',	'host',	'{{LDAP_HOST}}'),
+('',	'system',	'ldap',	'',	'port',	'{{LDAP_PORT}}'),
+('',	'system',	'ldap',	'',	'version',	'3'),
+('',	'system',	'ldap',	'',	'admin',	'{{LDAP_ADMINUSER}}'),
+('',	'system',	'ldap',	'',	'password',	'{{LDAP_BINDPASSWORD}}'),
+('',	'system',	'ldap',	'',	'baseDN',	'{{LDAP_BASEDN}}'),
+('',	'system',	'ldap',	'',	'charset',	'utf-8'),
+('',	'system',	'ldap',	'',	'account',	'{{LDAP_USERKEY}}'),
+('',	'system',	'ldap',	'',	'group',	'{{LDAP_GROUP}}'),
+('',	'system',	'ldap',	'',	'realname',	'{{LDAP_REALNAME}}'),
+('',	'system',	'ldap',	'',	'email',	'{{LDAP_EMAILKEY}}'),
+('',	'system',	'ldap',	'',	'mobile',	'mobile'),
+('',	'system',	'ldap',	'',	'phone',	'telephonenumber'),
+('',	'system',	'ldap',	'',	'repeatPolicy',	'{{LDAP_REPEATPOLICY}}'),
+('',	'system',	'ldap',	'',	'autoCreate',	'{{LDAP_AUTOCREATE}}');

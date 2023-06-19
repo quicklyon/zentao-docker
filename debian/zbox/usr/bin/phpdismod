@@ -1,0 +1,12 @@
+#!/bin/bash
+
+ext_name=$1
+
+for ini in /opt/zbox/etc/php/conf.d/*-"$ext_name".ini
+do
+  if [ -e "$ini" ]
+  then
+    mv "$ini" "$ini".disabled
+    break
+  fi
+done

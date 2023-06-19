@@ -34,6 +34,9 @@ build-max: ## 构建旗舰版镜像
 build-max-k8s: ## 构建旗舰版Kubernetes定制版镜像
 	docker build --build-arg VERSION=$(MAX_K8S_VER) -t hub.qucheng.com/app/$(APP_NAME):$(MAX_K8S_VER)-$(BUILD_DATE) -f Dockerfile .
 
+build-max-k8s-php81: ## 构建旗舰版 PHP8.1 Kubernetes 镜像 
+	docker build --build-arg VERSION=$(MAX_K8S_VER) -t hub.qucheng.com/app/$(APP_NAME):$(MAX_K8S_VER)-php81-$(BUILD_DATE) -f Dockerfile.php81 .
+
 build-max-k8s-arm64: ## 构建旗舰版Kubernetes定制版镜像(arm64)
 	docker build --platform arm64 --build-arg VERSION=$(MAX_K8S_VER) -t hub.qucheng.com/app/$(APP_NAME):$(MAX_K8S_VER)-$(BUILD_DATE) -f Dockerfile.arm64 .
 
@@ -139,6 +142,9 @@ run-max: ## 运行禅道旗舰版
 
 run-max-k8s: ## 运行禅道旗舰版k8s
 	export TAG=$(MAX_K8S_VER)-$(BUILD_DATE); docker-compose -f docker-compose.yml up -d
+
+run-max-php81: ## 运行禅道旗舰版k8s
+	export TAG=$(MAX_K8S_VER)-$(BUILD_DATE); docker-compose -f docker-compose-php81.yml up -d
 
 run-max-k8s-arm64: ## 运行禅道旗舰版k8s(arm64)
 	export TAG=$(MAX_K8S_VER)-$(BUILD_DATE); docker-compose -f docker-compose-arm64.yml up -d

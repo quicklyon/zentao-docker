@@ -1,0 +1,82 @@
+#!/bin/bash
+
+# shellcheck disable=SC1091
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+[ -n "${DEBUG:+1}" ] && set -x
+
+# Load libraries
+. /opt/easysoft/scripts/liblog.sh
+. /opt/easysoft/scripts/libmysql.sh
+. /opt/easysoft/scripts/libpersistence.sh
+
+# Load Global/Apache/PHP environment variables
+. /etc/s6/s6-init/envs
+
+#==================================#
+# Prepare persistence directories. #
+#==================================#
+info "Prepare persistence directories."
+for pdir in "${PHP_PERSISTENCE_LIST[@]}"
+do
+    # Ensure a directory exists and,is owned by the given user
+    ensure_dir_exists "$pdir" "www-data"
+done
+
+# Make soft link for persistent directory
+for ldir in "${PERSISTENCE_LINK_LIST[@]}"
+do
+    ensure_dir_exists "$(dirname $ldir)" "www-data"
+    move_then_link "$ldir" "${ldir/data/apps}" "www-data"
+done
+
+#=====================#
+#   Prepare PHP       #
+#=====================#
+info "Render php.ini with environment variables."
+if [ "$OS_ARCH" == "arm64" ];then
+    info "render template php.ini for arm64."
+    PHP_INI="/usr/local/etc/php/php.ini"
+    /usr/bin/render-template ${PHP_INI}.tpl > ${PHP_INI}
+else
+    info "render template php.ini for amd64"
+    PHP_INI="/opt/zbox/etc/php/php.ini"
+    /usr/bin/render-template ${PHP_INI}.tpl > ${PHP_INI}
+fi
+
+# enable redis extension
+if [ "$PHP_SESSION_TYPE" == "redis" ];then
+    info "Enable redis extension for session."  
+    phpenmod redis
+
+    if [ "$PHP_REDIS_SENTINEL" == "1" ];then
+        ini_file=$(ls /opt/zbox/etc/php/conf.d/*-redis.ini)
+        echo "redis.sentinel = 1" >> "$ini_file"
+    fi
+fi
+
+#=====================#
+#   Prepare Apache    #
+#=====================#
+HTTPD_CONF="/opt/zbox/etc/apache/httpd.conf"
+
+info "Render apache sites config with envionment variables."
+/usr/bin/render-template ${HTTPD_CONF}.tpl > $HTTPD_CONF
+
+#======================#
+# Check MySQL service  #
+#======================#
+# Check and waiting mysql to be ready
+wait_for_mysql || exit 1
+
+# Initialize database
+mysql_init_db "$MYSQL_DB"
+
+
+#=====Set Zentao Config=====
+# Disable checkClient fix QuickOn DevOps
+cfg_num=$(grep -n checkClient /apps/zentao/config/config.php | awk -F ':'  '{print $1}')
+sed -i "$cfg_num s/true/false/" /apps/zentao/config/config.php

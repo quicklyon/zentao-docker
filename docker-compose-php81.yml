@@ -22,7 +22,7 @@ services:
 
 # zentao service
   zentao:
-    image: hub.qucheng.com/app/quickon-zentao:max4.3.k8s-php81-20230608
+    image: easysoft/quickon-zentao:max4.3.k8s-php81-20230608
     container_name: zentao
     ports:
       - '8080:80'

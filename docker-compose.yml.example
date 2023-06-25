@@ -21,7 +21,7 @@ services:
 
 # zentao service
   zentao:
-    image: hub.qucheng.com/app/quickon-zentao:${TAG:-latest}
+    image: easysoft/quickon-zentao:${TAG:-latest}
     container_name: zentao
     ports:
       - '18080:80'

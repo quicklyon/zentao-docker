@@ -1,4 +1,4 @@
-FROM hub.qucheng.com/app/quickon-zentao:biz4.1.3.k8s-20221220
+FROM easysoft/quickon-zentao:biz4.1.3.k8s-20221220
 
 
 COPY patch/12biz /

@@ -18,7 +18,7 @@ help: ## this help
 build-all: build build-biz build-biz-k8s build-max build-max-k8s build-ipd  ## 构建禅道所有版本镜像
 
 build: ## 构建开源版镜像
-	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(OPEN_VER) $(PHP_VER) $(MYSQL_VER) "amd64" "Dockerfile"
+	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(OPEN_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64" "Dockerfile"
 
 build-arm: ## 构建开源版镜像ARM
 	docker build --platform arm64 --build-arg VERSION=$(OPEN_VER) -t $(APP_NAME):$(OPEN_VER) -f Dockerfile.arm64 .
@@ -36,7 +36,7 @@ build-max-k8s: ## 构建旗舰版Kubernetes定制版镜像
 	docker build --build-arg VERSION=$(MAX_K8S_VER) -t $(APP_NAME):$(MAX_K8S_VER) -f Dockerfile .
 
 build-max-k8s-php74: ## 构建旗舰版 PHP8.1 Kubernetes 镜像
-	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(MAX_K8S_VER) $(PHP_VER) $(MYSQL_VER) "amd64" "Dockerfile.new"
+	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(MAX_K8S_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64" "Dockerfile.new"
 
 build-max-k8s-arm64: ## 构建旗舰版Kubernetes定制版镜像(arm64)
 	docker build --platform arm64 --build-arg VERSION=$(MAX_K8S_VER) -t $(APP_NAME):$(MAX_K8S_VER) -f Dockerfile.arm64 .

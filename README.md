@@ -32,7 +32,7 @@ ZenTao官网：[https://zentao.net/](https://zentao.net/)
 
 由于版本比较多,这里只列出最新的5个版本,更详细的版本列表请参考:[可用版本列表](https://hub.docker.com/r/easysoft/quickon-zentao/tags/)
 
-y## 镜像版本
+## 镜像版本
 
 镜像地址:
 
@@ -40,16 +40,13 @@ y## 镜像版本
 - `ccr.ccs.tencentyun.com/easysoft/quickon-zentao`(mirror镜像)
 
 - 开源版
-  - [`latest`, `18.5`, `18.5-20230713`](https://www.zentao.net/download/zentaopms18.5-82695.html)
-  - [`18.4`, `18.4-20230625`](https://www.zentao.net/download/zentaopms18.4-82629.html)
+  - [`latest`, `18.4`, `18.4-20230625`](https://www.zentao.net/download/zentaopms18.4-82629.html)
   - [`18.3-20230424`](https://www.zentao.net/download/zentaopms18.3-82231.html)
   - [`18.2-20230315`](https://www.zentao.net/dynamic/zentaopms18.2-82151.html)
   - [`18.1-20230216`](https://www.zentao.net/download/zentaopms18.1-82069.html)
   - [`18.0-20230112`](https://www.zentao.net/download/zentaopms18.0-81998.html)
 
 - 企业版
-  - [`biz8.5`, `biz8.5-20230713`](https://www.zentao.net/download/biz8.5-82696.html)
-  - [`biz8.5.k8s`, `biz8.5.k8s-20230713`](https://www.zentao.net/download/biz8.5-82696.html)
   - [`biz8.4`, `biz8.4-20230625`](https://www.zentao.net/download/biz8.4-82630.html)
   - [`biz8.4.k8s`, `biz8.4.k8s-20230625`](https://www.zentao.net/download/biz8.4-82630.html)
   - [`biz8.3-20230424`](https://www.zentao.net/download/biz8.3-82232.html)
@@ -62,8 +59,6 @@ y## 镜像版本
   - [`biz8.0.k8s-20230112`](https://www.zentao.net/download/zentaopms.biz8.0-81999.html)
 
 - 旗舰版
-  - [`max4.5`, `max4.5-20230713`](https://www.zentao.net/download/max4.5-82697.html)
-  - [`max4.5.k8s`, `max4.5.k8s-20230713`](https://www.zentao.net/download/max4.5-82697.html)
   - [`max4.4`, `max4.4-20230625`](https://www.zentao.net/download/max4.4-82631.html)
   - [`max4.4.k8s`, `max4.4.k8s-20230625`](https://www.zentao.net/download/max4.4-82631.html)
   - [`max4.3-20230424`](https://www.zentao.net/download/max4.3-82233.html)
@@ -98,27 +93,55 @@ docker pull easysoft/quickon-zentao:latest
 docker pull easysoft/quickon-zentao:[TAG]
 ```
 
-## 四、持久化数据
+## 四、运行镜像
 
 禅道容器镜像做了特殊处理，将所有需要持久化的数据都保存到了 `/data` 目录，因此，运行禅道容器镜像，您只需要将持久化目录挂载到容器的 `/data` 目录即可。
 
 如果挂载的目录为空，首次启动会自动初始化相关文件
 
 ```bash
-$ docker run -it \
+docker run -it \
     -v $PWD/data:/data \
+    -e MYSQL_INTERNAL=true \
     easysoft/quickon-zentao:latest
 ```
 
-或者修改 docker-compose.yml 文件，添加持久化目录配置
+> 执行上面的命令后，会启动禅道镜像，通过设置 `MYSQL_INTERNAL=true` 会启动内置的MySQL服务。
 
+### 4.1 使用外部的MySQL服务
+
+连接到外部MySQL服务：
 ```bash
-services:
-  ZenTao:
-  ...
+docker run -it \
+    -v $PWD/data:/data \
+    -e MYSQL_INTERNAL=false \
+    -e MYSQL_HOST=<你的MySQL服务地址> \
+    -e MYSQL_PORT=<你的MySQL服务端口> \
+    -e MYSQL_USER=<你的MySQL服务用户名> \
+    -e MYSQL_PASSWORD=<你的MySQL服务密码> \
+    easysoft/quickon-zentao:latest
+```
+
+> 通过设置 `MYSQL_INTERNAL=false` ，并且设置MySQL相关的环境变量，运行镜像后，可以连接到外部的MySQL
+
+如果用dockoer-compose运行，可以参考 [docker-compose.yml.example](./docker-compose.yml.example) 文件:
+
+```yaml
+...
+# mysql service for zentao
+  zentao-mysql:
+    image: mysql:5.7
+    container_name: zentao-mysql
+    ports:
+      - '13306:3306'
     volumes:
-      - /path/to/zentao-persistence:/data
-  ...
+      - /data/zentao/db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=pass4Zentao
+      - MYSQL_DATABASE=zentao
+    networks:
+      - zentao-net
+...
 ```
 
 ## 五、环境变量
@@ -133,6 +156,7 @@ services:
 | PHP_MEMORY_LIMIT         | 256M                         | 单个php进程允许分配的最大内存             |
 | PHP_POST_MAX_SIZE        | 128M                         | 允许最大Post数据大小             |
 | PHP_UPLOAD_MAX_FILESIZE  | 128M                         | 单个文件上传的最大值             |
+| MYSQL_INTERNAL           | false                        | 使用内部的MySQL，默认关闭          |
 | MYSQL_HOST               | 127.0.0.1                    | MySQL 主机地址                   |
 | MYSQL_PORT               | 3306                         | MySQL 端口                       |
 | MYSQL_DB                 | zentao                       | zentao数据库名称                 |

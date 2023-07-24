@@ -42,27 +42,55 @@ docker pull easysoft/{{APP_DOCKER_IMAGE_NAME}}:latest
 docker pull easysoft/{{APP_DOCKER_IMAGE_NAME}}:[TAG]
 ```
 
-## 四、持久化数据
+## 四、运行镜像
 
 禅道容器镜像做了特殊处理，将所有需要持久化的数据都保存到了 `/data` 目录，因此，运行禅道容器镜像，您只需要将持久化目录挂载到容器的 `/data` 目录即可。
 
 如果挂载的目录为空，首次启动会自动初始化相关文件
 
 ```bash
-$ docker run -it \
+docker run -it \
     -v $PWD/data:/data \
+    -e MYSQL_INTERNAL=true \
     easysoft/{{APP_DOCKER_IMAGE_NAME}}:latest
 ```
 
-或者修改 docker-compose.yml 文件，添加持久化目录配置
+> 执行上面的命令后，会启动禅道镜像，通过设置 `MYSQL_INTERNAL=true` 会启动内置的MySQL服务。
 
+### 4.1 使用外部的MySQL服务
+
+连接到外部MySQL服务：
 ```bash
-services:
-  {{APP_NAME}}:
-  ...
+docker run -it \
+    -v $PWD/data:/data \
+    -e MYSQL_INTERNAL=false \
+    -e MYSQL_HOST=<你的MySQL服务地址> \
+    -e MYSQL_PORT=<你的MySQL服务端口> \
+    -e MYSQL_USER=<你的MySQL服务用户名> \
+    -e MYSQL_PASSWORD=<你的MySQL服务密码> \
+    easysoft/{{APP_DOCKER_IMAGE_NAME}}:latest
+```
+
+> 通过设置 `MYSQL_INTERNAL=false` ，并且设置MySQL相关的环境变量，运行镜像后，可以连接到外部的MySQL
+
+如果用dockoer-compose运行，可以参考 [docker-compose.yml.example](./docker-compose.yml.example) 文件:
+
+```yaml
+...
+# mysql service for zentao
+  zentao-mysql:
+    image: mysql:5.7
+    container_name: zentao-mysql
+    ports:
+      - '13306:3306'
     volumes:
-      - /path/to/zentao-persistence:/data
-  ...
+      - /data/zentao/db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=pass4Zentao
+      - MYSQL_DATABASE=zentao
+    networks:
+      - zentao-net
+...
 ```
 
 ## 五、环境变量

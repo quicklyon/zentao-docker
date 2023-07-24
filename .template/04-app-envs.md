@@ -8,6 +8,7 @@
 | PHP_MEMORY_LIMIT         | 256M                         | 单个php进程允许分配的最大内存             |
 | PHP_POST_MAX_SIZE        | 128M                         | 允许最大Post数据大小             |
 | PHP_UPLOAD_MAX_FILESIZE  | 128M                         | 单个文件上传的最大值             |
+| MYSQL_INTERNAL           | false                        | 使用内部的MySQL，默认关闭          |
 | MYSQL_HOST               | 127.0.0.1                    | MySQL 主机地址                   |
 | MYSQL_PORT               | 3306                         | MySQL 端口                       |
 | MYSQL_DB                 | zentao                       | zentao数据库名称                 |

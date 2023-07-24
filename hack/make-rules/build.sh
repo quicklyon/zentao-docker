@@ -9,11 +9,8 @@ phpVer=${3:? "phpVer is required"}
 mysqlVer=${4:? "mysqlVer is required"}
 arch=${5:? "arch is required"}
 dockerfile=${6:? "dockerfile is required"}
+buildEnv=${7:? "buildEnv is required"}
 buildDate=$(date +%Y%m%d)
-
-if [ "$arch" == "all" ];then
-    arch="linux/amd64,linux/arm64"
-fi
 
 docker buildx build \
 	    --no-cache \
@@ -21,8 +18,9 @@ docker buildx build \
             --build-arg PHP_VER="$phpVer" \
             --build-arg MYSQL_VER="$mysqlVer" \
             --build-arg MIRROR="true" \
-            --build-arg OS_ARCH="$arch" \
-            --platform=linux/"$arch" \
+            --build-arg OS_ARCH="${arch/linux\/}" \
+            --build-arg BUILD_ENV="$buildEnv" \
+            --platform="$arch" \
             -t "$appName":"$appVer"-"$buildDate" \
             -t "$appName":"$appVer" \
             -f "$dockerfile" . --push

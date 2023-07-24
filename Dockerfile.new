@@ -2,17 +2,15 @@ FROM debian:11.7-slim
 
 LABEL maintainer "zhouyueqiu <zhouyueqiu@easycorp.ltd>"
 
-ARG MIRROR
+ARG BUILD_ENV
 ARG OS_ARCH
-ENV OS_ARCH=${OS_ARCH:-"amd64"} \
+ENV OS_ARCH=${OS_ARCH:-amd64} \
     OS_NAME="debian-11" \
     HOME_PAGE="www.zentao.net"
 
 COPY debian/prebuildfs /
 
 ENV TZ=Asia/Shanghai
-ARG DOWNLOAD_URL
-ENV DOWNLOAD_URL=${DOWNLOAD_URL:-"https://pkg.qucheng.com/files/stacksmith"}
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install_packages jq curl wget zip unzip s6 pwgen cron netcat ca-certificates vim-tiny patch

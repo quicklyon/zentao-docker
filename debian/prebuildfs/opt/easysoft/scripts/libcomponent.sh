@@ -2,17 +2,14 @@
 #
 # Library for managing Easysoft components
 
-[ -n "${DEBUG:+1}" ] && set -x
+set -x
 
 set -e
 
-# Constants
-MIRROR=${MIRROR:-false}
-
-if [ "${MIRROR}" = "true" ];then
-    DOWNLOAD_URL="https://pkg.qucheng.com/files/stacksmith"
+if [ "$BUILD_ENV" == "internal" ];then
+    DOWNLOAD_URL="https://nexus.qc.oop.cc/repository/easycorp-library/runtime"
 else
-    DOWNLOAD_URL="https://pkg-hk.qucheng.com/files/stacksmith"
+    DOWNLOAD_URL="https://pkg.qucheng.com/files/stacksmith"
 fi
 
 ZENTAO_URL="https://dl.cnezsoft.com/zentao"
@@ -113,12 +110,18 @@ unpack() {
     local package_sha256=""
     local directory=${3:-"/"}
 
+    if [ "$BUILD_ENV" == "internal" ];then
+        URL_PATH="${name}/${version}"
+    else
+        URL_PATH=""
+    fi
+
     echo "Downloading $base_name package"
 
-	curl -skL "${DOWNLOAD_URL}/${base_name}.tar.gz?$(date +%s)" -o "$base_name".tar.gz
+	curl -skL "${DOWNLOAD_URL}/${URL_PATH}/${base_name}.tar.gz" -o "$base_name".tar.gz
 
     echo "Verifying package integrity"
-    curl -k --show-error --fail "${DOWNLOAD_URL}/${base_name}.tar.gz.sha1?$(date +%s)" -o "$base_name".tar.gz.sha1
+    curl -skL "${DOWNLOAD_URL}/${URL_PATH}/${base_name}.tar.gz.sha1" -o "$base_name".tar.gz.sha1
     sha1sum -c "$base_name".tar.gz.sha1 || exit "$?"
 
     tar xzf "${base_name}.tar.gz" -C "$directory"

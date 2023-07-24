@@ -24,7 +24,7 @@ move_then_link() {
     local owner=${3:-}
     local group=${4:-}
 
-    ensure_dir_exists "$dest" "www-data" "777"
+    ensure_dir_exists "$dest" "$owner" "$group" "777"
 
     # 持久化目录没有文件，将代码中需要持久化的文件复制到持久化目录
     if [ ! -e "$source" ];then
@@ -75,7 +75,8 @@ owned_by() {
 ensure_dir_exists() {
     local dir="${1:?directory is missing}"
     local owner_user="${2:-}"
-    local permission="${3:-}"
+    local owner_group="${3:-}"
+    local permission="${4:-}"
 
     # $dir is file and not exists.
     if [[ "$dir" =~ \. ]] ;then
@@ -86,7 +87,7 @@ ensure_dir_exists() {
     fi
 
     if [[ -n $owner_user ]]; then
-        owned_by "$dir" "$owner_user" "$owner_user"
+        owned_by "$dir" "$owner_user" "$owner_group"
     fi
 
     if [[ -n "$permission" ]]; then

@@ -70,6 +70,16 @@ mysql_init_db() {
     debug_execute "$command" "${args[@]}" || return 1
 }
 
+mysql_reset_password(){
+    local -a args=("--host=$MYSQL_HOST" "--port=$MYSQL_PORT" "-p123456" "--user=root" "-S /data/mysql/tmp/mysql.sock")
+    local command="/usr/bin/mysql"
+
+    args+=("--execute=CREATE USER \'$MYSQL_USER\'@'%' IDENTIFIED BY \'$MYSQL_PASSWORD\';GRANT ALL ON *.* TO \'$MYSQL_USER\'@'%';flush privileges;")
+    
+    info "Check $EASYSOFT_APP_NAME database."
+    debug_execute "$command" "${args[@]}" || return 1 
+}
+
 ########################
 # Import to mysql from mysql dump file
 # Globals:

@@ -1,0 +1,3 @@
+[31mFATA[0m[2023-07-24 12:57:39] stat mysql-10.6.14-debian-11-amd64.tar.gz: no such file or directory 
+[31mFATA[0m[2023-07-24 12:57:39] stat mysql-10.6.14-debian-11-amd64.tar.gz: no such file or directory 
+[36mINFO[0m[2023-07-24 12:57:39] Upload /root/git-repo/app/published/zentao-docker/mysql-10.6.14-debian-11-amd64.tar.gz.sha1 => cos://mirror-pkg-1308438674/files/stacksmith/mysql-10.6.14-debian-11-amd64.tar.gz.sha1 

@@ -13,17 +13,7 @@
 . /opt/easysoft/scripts/libci.sh
 . /opt/easysoft/scripts/libscan.sh
 
-case $ZENTAO_VER in
-"litevip1.2")
-    export ZENTAO_VER="biz7.1"
-    ;;
-"lite1.2")
-    export ZENTAO_VER="17.1"
-    ;;
-*)
-    export ZENTAO_VER=${ZENTAO_VER/.k8s/}
-    ;;
-esac
+export ZENTAO_VER=${ZENTAO_VER/.k8s/}
 
 FIRST_RUN=$( [ -e /data/zentao/.version ] && grep "$ZENTAO_VER" /data/zentao/.version )
 export CHECK_LOG="/tmp/sentry.log"
@@ -85,9 +75,9 @@ do
 
         # remove install and update file
         [ -f /data/.installed.tmp ] && rm -f /apps/zentao/www/{install.php,upgrade.php}
-        info "Zentao installation complete."
+        info "Zentao is ready to use."
 
-	    break
+        break
     fi
 
     # 安装完成，切换了版本
@@ -105,9 +95,9 @@ do
         [ -e "$ext_dir"/edition.php ] && cp "$ext_dir"/edition.php /apps/zentao/config/ext/
 
         rm -f /apps/zentao/www/install.php
-	    echo "$(date +'%F %H:%M:%S') $CURRENT_VER update to $ZENTAO_VER" >> /data/zentao/.version
+        echo "$(date +'%F %H:%M:%S') $CURRENT_VER update to $ZENTAO_VER" >> /data/zentao/.version
         info "Zentao upgrade is complete."
-       	break
+        break
     fi
 
     warn "Please open the browser to complete the installation through the wizard."

@@ -7,6 +7,8 @@ export BIZ_K8S_VER := biz$(shell jq -r '."biz.k8s".version' < version.json).k8s
 export LITE_VER := lite$(shell jq -r .litev.version < version.json)
 export LITEBIZ_VER := litevip$(shell jq -r .litevipv.version < version.json)
 export IPD_VER := ipd$(shell jq -r .ipd.version < version.json)
+export PHP_VER="7.4.33"
+export MYSQL_VER="10.6.14"
 
 .DEFAULT_GOAL:=help
 
@@ -16,7 +18,7 @@ help: ## this help
 build-all: build build-biz build-biz-k8s build-max build-max-k8s build-ipd  ## 构建禅道所有版本镜像
 
 build: ## 构建开源版镜像
-	docker build --build-arg VERSION=$(OPEN_VER) -t $(APP_NAME):$(OPEN_VER) -f Dockerfile .
+	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(OPEN_VER) $(PHP_VER) $(MYSQL_VER) "amd64" "Dockerfile"
 
 build-arm: ## 构建开源版镜像ARM
 	docker build --platform arm64 --build-arg VERSION=$(OPEN_VER) -t $(APP_NAME):$(OPEN_VER) -f Dockerfile.arm64 .
@@ -33,8 +35,8 @@ build-max: ## 构建旗舰版镜像
 build-max-k8s: ## 构建旗舰版Kubernetes定制版镜像
 	docker build --build-arg VERSION=$(MAX_K8S_VER) -t $(APP_NAME):$(MAX_K8S_VER) -f Dockerfile .
 
-build-max-k8s-php81: ## 构建旗舰版 PHP8.1 Kubernetes 镜像
-	docker build --build-arg VERSION=$(MAX_K8S_VER) -t $(APP_NAME):$(MAX_K8S_VER)-php81 -f Dockerfile.php81 .
+build-max-k8s-php74: ## 构建旗舰版 PHP8.1 Kubernetes 镜像
+	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(MAX_K8S_VER) $(PHP_VER) $(MYSQL_VER) "amd64" "Dockerfile.new"
 
 build-max-k8s-arm64: ## 构建旗舰版Kubernetes定制版镜像(arm64)
 	docker build --platform arm64 --build-arg VERSION=$(MAX_K8S_VER) -t $(APP_NAME):$(MAX_K8S_VER) -f Dockerfile.arm64 .
@@ -124,8 +126,8 @@ run-max: ## 运行禅道旗舰版
 run-max-k8s: ## 运行禅道旗舰版k8s
 	export TAG=$(MAX_K8S_VER); docker-compose -f docker-compose.yml up -d
 
-run-max-php81: ## 运行禅道旗舰版k8s
-	export TAG=$(MAX_K8S_VER); docker-compose -f docker-compose-php81.yml up -d
+run-max-php74: ## 运行禅道旗舰版k8s
+	export TAG=$(MAX_K8S_VER); docker-compose -f docker-compose-php74.yml up -d
 
 run-max-k8s-arm64: ## 运行禅道旗舰版k8s(arm64)
 	export TAG=$(MAX_K8S_VER); docker-compose -f docker-compose-arm64.yml up -d

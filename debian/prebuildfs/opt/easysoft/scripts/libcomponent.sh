@@ -95,12 +95,32 @@ component_unpack() {
 
     echo "Downloading $base_name package"
 
-	curl -k --remote-name --silent --show-error --fail "${DOWNLOAD_URL}/${base_name}.tar.gz"
+	curl -k --remote-name --silent --show-error --fail "${DOWNLOAD_URL}/${base_name}.tar.gz" 
 
     if [ -n "$package_sha256" ]; then
         echo "Verifying package integrity"
         echo "$package_sha256  ${base_name}.tar.gz" | sha256sum -c - || exit "$?"
     fi
     tar xzf "${base_name}.tar.gz" --directory "${directory}"
+    rm "${base_name}.tar.gz"
+}
+
+# uppack 
+unpack() {
+    local name="${1:?name is required}"
+    local version="${2:?version is required}"
+    local base_name="${name}-${version}-${OS_NAME}-${OS_ARCH}"
+    local package_sha256=""
+    local directory=${3:-"/"}
+
+    echo "Downloading $base_name package"
+
+	curl -skL "${DOWNLOAD_URL}/${base_name}.tar.gz?$(date +%s)" -o "$base_name".tar.gz
+
+    echo "Verifying package integrity"
+    curl -k --show-error --fail "${DOWNLOAD_URL}/${base_name}.tar.gz.sha1?$(date +%s)" -o "$base_name".tar.gz.sha1
+    sha1sum -c "$base_name".tar.gz.sha1 || exit "$?"
+
+    tar xzf "${base_name}.tar.gz" -C "$directory"
     rm "${base_name}.tar.gz"
 }

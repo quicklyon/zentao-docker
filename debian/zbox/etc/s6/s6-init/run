@@ -10,7 +10,6 @@ set -o pipefail
 
 # Load libraries
 . /opt/easysoft/scripts/liblog.sh
-. /opt/easysoft/scripts/libmysql.sh
 . /opt/easysoft/scripts/libpersistence.sh
 
 # Load Global/Apache/PHP environment variables
@@ -23,14 +22,14 @@ info "Prepare persistence directories."
 for pdir in "${PHP_PERSISTENCE_LIST[@]}"
 do
     # Ensure a directory exists and,is owned by the given user
-    ensure_dir_exists "$pdir" "www-data"
+    ensure_dir_exists "$pdir" "nobody"  "nogroup"
 done
 
 # Make soft link for persistent directory
 for ldir in "${PERSISTENCE_LINK_LIST[@]}"
 do
-    ensure_dir_exists "$(dirname $ldir)" "www-data"
-    move_then_link "$ldir" "${ldir/data/apps}" "www-data"
+    ensure_dir_exists "$(dirname "$ldir")" "nobody"  "nogroup"
+    move_then_link "$ldir" "${ldir/data/apps}" "nobody"  "nogroup"
 done
 
 #=====================#
@@ -65,15 +64,6 @@ HTTPD_CONF="/opt/zbox/etc/apache/httpd.conf"
 
 info "Render apache sites config with envionment variables."
 /usr/bin/render-template ${HTTPD_CONF}.tpl > $HTTPD_CONF
-
-#======================#
-# Check MySQL service  #
-#======================#
-# Check and waiting mysql to be ready
-wait_for_mysql || exit 1
-
-# Initialize database
-mysql_init_db "$MYSQL_DB"
 
 
 #=====Set Zentao Config=====

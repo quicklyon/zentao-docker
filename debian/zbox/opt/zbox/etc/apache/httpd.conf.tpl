@@ -5,12 +5,12 @@ PidFile         /opt/zbox/tmp/apache/httpd.pid
 DocumentRoot    "{{DOCUMENT_ROOT}}"
 
 Listen          {{APP_DEFAULT_PORT}}
-User            www-data
-Group           www-data
+User            nobody
+Group           nogroup
 
 ServerAdmin     zentao@localhost.net
 
-ServerName      {{APP_DOMAIN}}
+ServerName      localhost
 
 EnableMMAP      off
 EnableSendfile  off
@@ -76,10 +76,10 @@ SSLSessionCache         "shmcb:/opt/zbox/logs/ssl_scache(512000)"
 SSLSessionCacheTimeout  300
 
 # php module.
-LoadModule php_module modules/libphp.so
+LoadModule php7_module modules/libphp.so
 
 
-<IfModule php_module>
+<IfModule php7_module>
     DirectoryIndex index.html default.php index.php
     AddHandler application/x-httpd-php .php
 </IfModule>

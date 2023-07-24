@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# shellcheck disable=SC1091
+. /opt/easysoft/scripts/liblog.sh
+
+[ -n "${DEBUG:+1}" ] && set -x
+
+# Make MySQL persistence directory
+for mdir in "${MYSQL_PERSISTENCE_LIST[@]}"
+do
+    ensure_dir_exists "$mdir" "nobody" "nogroup"
+done
+
+# If first run, copy mysql data to /data/mysql/data
+if [ ! -d "/data/mysql/data/mysql" ];then
+    info "Copy mysql data to /data/mysql/data"
+    cp -rp /opt/zbox/data/mysql/* /data/mysql/data/
+fi
+
+# Render mysql config with environment variables.
+MY_CONF="/data/mysql/etc/my.cnf"
+info "Render mysql config with envionment variables."
+/usr/bin/render-template /opt/zbox/etc/mysql/my.cnf.tpl > $MY_CONF
+
+exec /opt/zbox/run/mysql/mysqld_safe \
+     --defaults-file=$MY_CONF \
+     --datadir=/data/mysql/data \
+     --pid-file=/data/mysql/tmp/mysqld.pid

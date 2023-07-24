@@ -6,7 +6,7 @@
 export IS_CONTAINER="true"
 export PROTOCOL_TYPE=${PROTOCOL_TYPE:-https}
 export ZENTAO_TOKEN_NAME=${ZENTAO_TOKEN_NAME:-quickon-zentao}
-export MYSQL_INTERNAL=${MYSQL_INTERNAL:-true}
+export MYSQL_INTERNAL=${MYSQL_INTERNAL:-false}
 #==========#
 #  DevOps  #
 #==========#

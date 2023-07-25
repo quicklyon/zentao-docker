@@ -21,3 +21,7 @@ docker buildx build \
             -t $appName:$appVer-$buildDate \
             -t $appName:$appVer \
             -f "$dockerfile" . --push
+
+. hack/make-rules/gen_report.sh
+addInternalImage $appName:$appVer-$buildDate
+addInternalImage $appName:$appVer

@@ -128,3 +128,6 @@ clean: stop ## 停服务
 
 logs: ## 查看运行日志
 	docker-compose -f docker-compose.yml logs
+
+markdown-init:
+	hack/make-rules/gen_report.sh init

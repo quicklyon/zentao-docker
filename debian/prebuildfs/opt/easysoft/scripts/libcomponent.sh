@@ -12,7 +12,7 @@ else
     DOWNLOAD_URL="https://pkg.qucheng.com/files/stacksmith"
 fi
 
-ZENTAO_URL="https://dl.cnezsoft.com/zentao"
+ZENTAO_URL=${ZENTAO_URL:-https://dl.cnezsoft.com/zentao}
 ZDOO_URL="https://www.zdoo.com/dl/zdoo"
 
 

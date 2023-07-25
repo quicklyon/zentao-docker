@@ -7,7 +7,14 @@ mysqlVer=${4:? "mysqlVer is required"}
 arch=${5:? "arch is required"}
 dockerfile=${6:? "dockerfile is required"}
 buildEnv=${7:? "buildEnv is required"}
+pushToPublic=${8:-false}
 buildDate=$(date +%Y%m%d)
+internalRepo="hub.qc.oop.cc"
+
+buildTags="-t $internalRepo/$appName:$appVer-$buildDate -t $internalRepo/$appName":"$appVer"
+if [ $pushToPublic = "true" ];then
+  buildTags="$buildTags -t $appName:$appVer-$buildDate -t $appName:$appVer"
+fi
 
 docker buildx build \
             --build-arg ZENTAO_VER="$appVer" \
@@ -17,6 +24,5 @@ docker buildx build \
             --build-arg OS_ARCH="${arch/linux\/}" \
             --build-arg BUILD_ENV="$buildEnv" \
             --platform="$arch" \
-            -t "$appName":"$appVer"-"$buildDate" \
-            -t "$appName":"$appVer" \
-            -f "$dockerfile" .
+            $buildTags \
+            -f "$dockerfile" . --push

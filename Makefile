@@ -1,9 +1,9 @@
 export APP_NAME=hub.qc.oop.cc/app/zentao
 export OPEN_VER := $(or $(PMS_VERSION),$(shell jq -r .zentaopms.version < version.json))
 export BIZ_VER := $(or $(BIZ_VERSION),biz$(shell jq -r .biz.version < version.json))
-export MAX_VER := $(or $(BIZ_VERSION),max$(shell jq -r .max.version < version.json))
+export MAX_VER := $(or $(MAX_VERSION),max$(shell jq -r .max.version < version.json))
 export MAX_K8S_VER := $(or $(MAX_VERSION).k8s,max$(shell jq -r '."max.k8s".version' < version.json).k8s)
-export BIZ_K8S_VER := $(or $(MAX_VERSION).k8s,biz$(shell jq -r '."biz.k8s".version' < version.json).k8s)
+export BIZ_K8S_VER := $(or $(BIZ_VERSION).k8s,biz$(shell jq -r '."biz.k8s".version' < version.json).k8s)
 export LITE_VER := lite$(shell jq -r .litev.version < version.json)
 export LITEBIZ_VER := litevip$(shell jq -r .litevipv.version < version.json)
 export IPD_VER := ipd$(shell jq -r .ipd.version < version.json)

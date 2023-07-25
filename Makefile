@@ -130,4 +130,7 @@ logs: ## 查看运行日志
 	docker-compose -f docker-compose.yml logs
 
 markdown-init:
-	hack/make-rules/gen_report.sh init
+	@hack/make-rules/gen_report.sh init
+
+markdown-render:
+	@hack/make-rules/gen_report.sh render

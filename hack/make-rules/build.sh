@@ -9,6 +9,11 @@ dockerfile=${6:? "dockerfile is required"}
 buildEnv=${7:? "buildEnv is required"}
 buildDate=$(date +%Y%m%d)
 
+extraFlags=""
+if [ "$MIRROR" -eq "true" ];then
+  extraFlags="${extraFlags} --build-arg MIRROR=true"
+fi
+
 docker buildx build \
             --build-arg ZENTAO_VER="$appVer" \
             --build-arg ZENTAO_URL="$ZENTAO_URL" \
@@ -16,11 +21,14 @@ docker buildx build \
             --build-arg MYSQL_VER="$mysqlVer" \
             --build-arg OS_ARCH="${arch/linux\/}" \
             --build-arg BUILD_ENV="$buildEnv" \
+            $extraFlags \
             --platform="$arch" \
             -t $appName:$appVer-$buildDate \
             -t $appName:$appVer \
             -f "$dockerfile" . --push
 
 . hack/make-rules/gen_report.sh
-addInternalImage $appName:$appVer-$buildDate
-addInternalImage $appName:$appVer
+if [ "$arch" = "linux/amd64" ];then
+  addInternalImage $appName:$appVer-$buildDate
+  addInternalImage $appName:$appVer
+fi

@@ -89,11 +89,13 @@ outputMakdown() {
   jsonSourceFile=`genUniqueFile`
 
   if [ -n "$TAG_NAME" ];then
-    echo "Build by Tag: ${TAG_NAME}\t"
+    echo "Build by Tag: ${TAG_NAME}"
+    echo
   fi
 
   echo "### 生成镜像明细"
   echo "#### 内网镜像"
+  echo
 
   outputGroupedImages "开源版" ".images.internal.pms" $jsonSourceFile
   outputGroupedImages "企业版" ".images.internal.biz" $jsonSourceFile
@@ -102,6 +104,7 @@ outputMakdown() {
   publicCount=$(jq -r ".images.public | length " < $jsonSourceFile)
   if [ "$publicCount" -gt 0 ];then
     echo "#### 公网镜像"
+    echo
     outputGroupedImages "开源版" ".images.public.pms" $jsonSourceFile
     outputGroupedImages "企业版" ".images.public.biz" $jsonSourceFile
     outputGroupedImages "旗舰版" ".images.public.max" $jsonSourceFile

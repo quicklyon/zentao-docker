@@ -4,6 +4,7 @@ LABEL maintainer "zhouyueqiu <zhouyueqiu@easycorp.ltd>"
 
 ARG BUILD_ENV
 ARG ZENTAO_URL
+ARG MIRROR
 ARG OS_ARCH
 ENV OS_ARCH=${OS_ARCH:-amd64} \
     OS_NAME="debian-11" \
@@ -14,8 +15,6 @@ COPY debian/prebuildfs /
 ENV TZ=Asia/Shanghai
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-ENV DEBUG=1
-ENV MIRROR=true
 RUN install_packages jq curl wget zip unzip s6 pwgen cron netcat ca-certificates vim-tiny patch
 
 ARG PHP_VER

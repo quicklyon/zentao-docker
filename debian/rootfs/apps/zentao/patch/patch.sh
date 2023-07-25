@@ -2,7 +2,7 @@
 
 check_syntax(){
     local phpfile=$1
-    return "$(php -l "$phpfile" | grep -c 'No syntax')"
+    return "$(/opt/zbox/run/php/php -l "$phpfile" | grep -c 'No syntax')"
 }
 
 fix_install_step6(){

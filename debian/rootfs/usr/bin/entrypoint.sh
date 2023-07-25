@@ -15,6 +15,13 @@ set -o pipefail
 
 print_welcome_page
 
+# 默认启动内置MySQL
+MYSQL_INTERNAL=${MYSQL_INTERNAL:-false}
+
+if [ "$MYSQL_INTERNAL" == "true" ];then
+    [ ! -L /etc/s6/s6-enable/00-mysql ] && ln -s /etc/s6/s6-available/mysql /etc/s6/s6-enable/00-mysql    
+fi
+
 # Enable apache
 [ ! -L /etc/s6/s6-enable/01-apache ] && ln -s /etc/s6/s6-available/apache /etc/s6/s6-enable/01-apache
 [ ! -L /etc/s6/s6-enable/02-sentry ] && ln -s /etc/s6/s6-available/sentry /etc/s6/s6-enable/02-sentry

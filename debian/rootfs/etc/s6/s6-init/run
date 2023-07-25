@@ -10,7 +10,6 @@ set -o pipefail
 
 # Load libraries
 . /opt/easysoft/scripts/liblog.sh
-. /opt/easysoft/scripts/libmysql.sh
 . /opt/easysoft/scripts/libpersistence.sh
 
 # Load Global/Apache/PHP environment variables
@@ -23,14 +22,14 @@ info "Prepare persistence directories."
 for pdir in "${PHP_PERSISTENCE_LIST[@]}"
 do
     # Ensure a directory exists and,is owned by the given user
-    ensure_dir_exists "$pdir" "www-data"
+    ensure_dir_exists "$pdir" "nobody"  "nogroup"
 done
 
 # Make soft link for persistent directory
 for ldir in "${PERSISTENCE_LINK_LIST[@]}"
 do
-    ensure_dir_exists "$(dirname $ldir)" "www-data"
-    move_then_link "$ldir" "${ldir/data/apps}" "www-data"
+    ensure_dir_exists "$(dirname "$ldir")" "nobody"  "nogroup"
+    move_then_link "$ldir" "${ldir/data/apps}" "nobody"  "nogroup"
 done
 
 #=====================#
@@ -43,39 +42,28 @@ if [ "$OS_ARCH" == "arm64" ];then
     /usr/bin/render-template ${PHP_INI}.tpl > ${PHP_INI}
 else
     info "render template php.ini for amd64"
-    PHP_CLI_INI="/etc/php/7.4/cli/php.ini"
-    PHP_APACHE_INI="/etc/php/7.4/apache2/php.ini"
-    /usr/bin/render-template /etc/php/7.4/php.ini.tpl > ${PHP_CLI_INI}
-    /usr/bin/render-template /etc/php/7.4/php.ini.tpl > ${PHP_APACHE_INI}
+    PHP_INI="/opt/zbox/etc/php/php.ini"
+    /usr/bin/render-template ${PHP_INI}.tpl > ${PHP_INI}
 fi
 
 # enable redis extension
 if [ "$PHP_SESSION_TYPE" == "redis" ];then
-    info "Enable redis extension for session."
-    if [ "$PHP_REDIS_SENTINEL" == "1" ];then
-        echo "redis.sentinel = 1" >> /etc/php/7.4/mods-available/redis.ini
-    fi
-    
+    info "Enable redis extension for session."  
     phpenmod redis
+
+    if [ "$PHP_REDIS_SENTINEL" == "1" ];then
+        ini_file=$(ls /opt/zbox/etc/php/conf.d/*-redis.ini)
+        echo "redis.sentinel = 1" >> "$ini_file"
+    fi
 fi
 
 #=====================#
 #   Prepare Apache    #
 #=====================#
-PORTS_CFG="/etc/apache2/ports.conf"
-SITE_CFG="/etc/apache2/sites-enabled/site.conf"
+HTTPD_CONF="/opt/zbox/etc/apache/httpd.conf"
+
 info "Render apache sites config with envionment variables."
-/usr/bin/render-template ${PORTS_CFG}.tpl > $PORTS_CFG
-/usr/bin/render-template ${SITE_CFG}.tpl > $SITE_CFG
-
-#======================#
-# Check MySQL service  #
-#======================#
-# Check and waiting mysql to be ready
-wait_for_mysql || exit 1
-
-# Initialize database
-mysql_init_db "$MYSQL_DB"
+/usr/bin/render-template ${HTTPD_CONF}.tpl > $HTTPD_CONF
 
 
 #=====Set Zentao Config=====

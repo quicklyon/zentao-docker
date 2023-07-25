@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Build the project
-# This script is used to build the project
-
 appName=${1:? "appName is required"}
 appVer=${2:? "appVer is required"}
 phpVer=${3:? "phpVer is required"}
@@ -17,7 +14,6 @@ docker buildx build \
             --build-arg ZENTAO_VER="$appVer" \
             --build-arg PHP_VER="$phpVer" \
             --build-arg MYSQL_VER="$mysqlVer" \
-            --build-arg MIRROR="true" \
             --build-arg OS_ARCH="${arch/linux\/}" \
             --build-arg BUILD_ENV="$buildEnv" \
             --platform="$arch" \

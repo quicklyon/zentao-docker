@@ -6,6 +6,7 @@
 export IS_CONTAINER="true"
 export PROTOCOL_TYPE=${PROTOCOL_TYPE:-https}
 export ZENTAO_TOKEN_NAME=${ZENTAO_TOKEN_NAME:-quickon-zentao}
+export MYSQL_INTERNAL=${MYSQL_INTERNAL:-false}
 #==========#
 #  DevOps  #
 #==========#
@@ -109,7 +110,7 @@ export MYSQL_HOST=${MYSQL_HOST:-127.0.0.1}
 export MYSQL_PORT=${MYSQL_PORT:-3306}
 export MYSQL_DB=${MYSQL_DB:-zentao}
 export MYSQL_USER=${MYSQL_USER:-root}
-export MYSQL_PASSWORD=${MYSQL_PASSWORD:-pass4Zentao}
+export MYSQL_PASSWORD=${MYSQL_PASSWORD:-123456}
 
 #==========#
 # Apache   #
@@ -126,11 +127,23 @@ export PHP_PERSISTENCE_LIST=(
 "/data/php"
 "/data/php/log"
 "/data/php/session"
+"/data/mysql"
+"/data/mysql/data"
+"/data/mysql/etc"
+"/data/mysql/logs"
+"/data/mysql/tmp"
 "/data/zentao")
 
-#==========================================#
-# Persistence directory and make soft link #
-#==========================================#
+# MySQL persistence directory
+export MYSQL_PERSISTENCE_LIST=(
+"/data/mysql"
+"/data/mysql/data"
+"/data/mysql/etc"
+"/data/mysql/logs"
+"/data/mysql/tmp")
+
+
+# PHP Persistence directory and make soft link 
 export PERSISTENCE_LINK_LIST=(
 "/data/zentao/config/my.php"
 "/data/zentao/config/license"

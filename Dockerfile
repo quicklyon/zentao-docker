@@ -14,6 +14,8 @@ COPY debian/prebuildfs /
 ENV TZ=Asia/Shanghai
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+ENV DEBUG=1
+ENV MIRROR=true
 RUN install_packages jq curl wget zip unzip s6 pwgen cron netcat ca-certificates vim-tiny patch
 
 ARG PHP_VER

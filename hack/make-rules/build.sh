@@ -10,7 +10,6 @@ buildEnv=${7:? "buildEnv is required"}
 buildDate=$(date +%Y%m%d)
 
 docker buildx build \
-            --no-cache \
             --build-arg ZENTAO_VER="$appVer" \
             --build-arg ZENTAO_URL="$ZENTAO_URL" \
             --build-arg PHP_VER="$phpVer" \

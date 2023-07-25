@@ -37,6 +37,10 @@ z_download() {
     local zdoo_base_name="zdoo.${version}.php7.2.zip"
     local directory="/apps/"
 
+    if [[ ${ZENTAO_URL} == *"nexus"* ]];then
+        zentao_base_name="ZenTaoPMS-${version}-php7.2_7.4.zip?$timestamp"
+    fi
+
     echo "Downloading $name:$version package"
     case $name in 
     "zentao")

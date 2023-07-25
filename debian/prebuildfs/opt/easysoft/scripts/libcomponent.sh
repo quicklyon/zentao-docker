@@ -38,7 +38,7 @@ z_download() {
     local directory="/apps/"
 
     if [[ ${ZENTAO_URL} == *"nexus"* ]];then
-        zentao_base_name="ZenTaoPMS-`echo ${version} | tr '.k8s' '-k8s'`-php7.2_7.4.zip?$timestamp"
+        zentao_base_name="ZenTaoPMS-`echo ${version} | sed 's/\.k8s/-k8s/'`-php7.2_7.4.zip?$timestamp"
     fi
 
     echo "Downloading $name:$version package"

@@ -10,7 +10,7 @@ buildEnv=${7:? "buildEnv is required"}
 buildDate=$(date +%Y%m%d)
 
 extraFlags=""
-if [ "$MIRROR" -eq "true" ];then
+if [ "$MIRROR" = "true" ];then
   extraFlags="${extraFlags} --build-arg MIRROR=true"
 fi
 

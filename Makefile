@@ -77,8 +77,8 @@ push-litebiz: ## push 禅道迅捷企业版 --> hub.qucheng.com
 	docker push $(APP_NAME):$(LITEBIZ_VER)
 
 push-public: ## push 禅道开源版 --> hub.docker.com
-	curl http://i.haogs.cn:3839/sync?image=easysoft/$(APP_NAME):$(OPEN_VER)
-	curl http://i.haogs.cn:3839/sync?image=easysoft/$(APP_NAME):latest
+	curl http://i.haogs.cn:3839/sync?image=$(APP_NAME):$(OPEN_VER)
+	curl http://i.haogs.cn:3839/sync?image=$(APP_NAME):latest
 	hack/make-rules/docker.sh $(OPEN_VER)
 	hack/make-rules/docker.sh latest
 
@@ -107,7 +107,7 @@ push-ipd-public: ## push 禅道ipd版 --> hub.docker.com
 	hack/make-rules/docker.sh $(IPD_VER)
 
 push-sync-tcr: push-all-public ## 同步到腾讯镜像仓库
-	curl http://i.haogs.cn:3839/sync?image=easysoft/$(APP_NAME):latest
+	curl http://i.haogs.cn:3839/sync?image=$(APP_NAME):latest
 
 run: ## 运行禅道开源版
 	export TAG=$(OPEN_VER); docker-compose -f docker-compose.yml up -d
@@ -168,3 +168,4 @@ clean: stop ## 停服务
 
 logs: ## 查看运行日志
 	docker-compose -f docker-compose.yml logs
+

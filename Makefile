@@ -18,24 +18,19 @@ help: ## this help
 build-all: build build-biz build-biz-k8s build-max build-max-k8s build-ipd  ## 构建禅道所有版本镜像
 
 build: ## 构建开源版镜像
-	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(OPEN_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64" "Dockerfile" "internal"
-	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(OPEN_VER) $(PHP_VER) $(MYSQL_VER) "linux/arm64" "Dockerfile" "internal"
+	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(OPEN_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile" "internal"
 
 build-biz: ## 构建企业版镜像
-	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(BIZ_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64" "Dockerfile" "internal"
-	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(BIZ_VER) $(PHP_VER) $(MYSQL_VER) "linux/arm64" "Dockerfile" "internal"
+	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(BIZ_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile" "internal"
 
 build-biz-k8s: ## 构建企业版Kubernetes定制版镜像
-	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(BIZ_K8S_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64" "Dockerfile" "internal"
-	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(BIZ_K8S_VER) $(PHP_VER) $(MYSQL_VER) "linux/arm64" "Dockerfile" "internal"
+	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(BIZ_K8S_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile" "internal"
 
 build-max: ## 构建旗舰版镜像
-	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(MAX_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64" "Dockerfile" "internal"
-	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(MAX_VER) $(PHP_VER) $(MYSQL_VER) "linux/arm64" "Dockerfile" "internal"
+	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(MAX_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile" "internal"
 
 build-max-k8s: ## 构建旗舰版Kubernetes定制版镜像
-	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(MAX_K8S_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64" "Dockerfile" "internal"
-	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(MAX_K8S_VER) $(PHP_VER) $(MYSQL_VER) "linux/arm64" "Dockerfile" "internal"
+	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(MAX_K8S_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile" "internal"
 
 build-ipd: ## 构建ipd版本
 	docker build --build-arg VERSION=$(IPD_VER) -t $(APP_NAME):$(IPD_VER) -f Dockerfile .

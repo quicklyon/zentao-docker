@@ -1,0 +1,8 @@
+#!/bin/bash
+
+OS_ARCH=$(uname -m)
+if [ "$OS_ARCH" == "x86_64" ];then
+    export OS_ARCH="amd64"
+else
+    export OS_ARCH="arm64"
+fi

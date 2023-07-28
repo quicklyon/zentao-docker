@@ -4,10 +4,7 @@ LABEL maintainer "zhouyueqiu <zhouyueqiu@easycorp.ltd>"
 
 ARG BUILD_ENV
 ARG ZENTAO_URL
-ARG MIRROR
-ARG OS_ARCH
-ENV OS_ARCH=${OS_ARCH:-amd64} \
-    OS_NAME="debian-11" \
+ENV OS_NAME="debian-11" \
     HOME_PAGE="www.zentao.net"
 
 COPY debian/prebuildfs /

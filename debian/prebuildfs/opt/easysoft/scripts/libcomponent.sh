@@ -6,6 +6,8 @@ set -x
 
 set -e
 
+. /opt/easysoft/scripts/envs
+
 if [ "$BUILD_ENV" == "internal" ];then
     DOWNLOAD_URL="https://nexus.qc.oop.cc/repository/easycorp-library/runtime"
 else

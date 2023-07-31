@@ -114,13 +114,13 @@ renderCommitUrl() {
 outputMakdown() {
   jsonSourceFile=`genUniqueFile`
 
-  outputLine "完成时间 **$finishTime**"
+  echo "完成时间 **$finishTime**"
   echo
 
-  outputLine "#### Git 信息"
-  outputLine "* 触发 Tag: $(renderTagUrl)"
-  outputLine "* CommitId: $(renderCommitUrl)"
-  outputLine "* 触发人: ${GIT_TAGGER_NAME}"
+  echo "#### Git 信息"
+  echo "* 触发 Tag: $(renderTagUrl)"
+  echo "* CommitId: $(renderCommitUrl)"
+  echo "* 触发人: ${GIT_TAGGER_NAME}"
   echo
 
   echo "### 生成镜像明细"

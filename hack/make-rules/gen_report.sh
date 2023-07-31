@@ -85,13 +85,43 @@ outputGroupedImages() {
   fi
 }
 
+renderGitWebUrl() {
+  if [ -z "$GIT_URL" ];then
+    return
+  fi
+
+  echo $GIT_URL | sed -r -e 's/^.+@/https:\/\//' -e 's/\.git$//'
+}
+
+renderTagUrl() {
+  GIT_WEB_BASE=$(renderGitWebUrl)
+  if [ -n "$GIT_WEB_BASE" ];then
+    echo "[${TAG_NAME}](${GIT_WEB_BASE}/src/tag/${TAG_NAME})"
+  else
+    echo ${TAG_NAME}
+  fi
+}
+
+renderCommitUrl() {
+  GIT_WEB_BASE=$(renderGitWebUrl)
+  if [ -n "$GIT_WEB_BASE" ];then
+    echo "[${GIT_COMMIT:0:7}](${GIT_WEB_BASE}/commit/${GIT_COMMIT}) ([提交历史](${GIT_WEB_BASE}/commits/tag/${TAG_NAME}))"
+  else
+    echo ${GIT_COMMIT:0:7}
+  fi
+}
+
 outputMakdown() {
   jsonSourceFile=`genUniqueFile`
 
-  if [ -n "$TAG_NAME" ];then
-    echo "Build by Tag: ${TAG_NAME}"
-    echo
-  fi
+  outputLine "完成时间 **$finishTime**"
+  echo
+
+  outputLine "#### Git 信息"
+  outputLine "* 触发 Tag: $(renderTagUrl)"
+  outputLine "* CommitId: $(renderCommitUrl)"
+  outputLine "* 触发人: ${GIT_TAGGER_NAME}"
+  echo
 
   echo "### 生成镜像明细"
   echo "#### 内网镜像"

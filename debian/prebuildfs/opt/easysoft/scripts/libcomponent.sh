@@ -135,5 +135,5 @@ unpack() {
     sha1sum -c "$base_name".tar.gz.sha1 || exit "$?"
 
     tar xzf "${base_name}.tar.gz" -C "$directory"
-    rm "${base_name}.tar.gz"
+    rm "${base_name}.tar.gz" "${base_name}.tar.gz.sha1" -f
 }

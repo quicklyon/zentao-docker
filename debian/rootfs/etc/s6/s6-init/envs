@@ -61,6 +61,7 @@ fi
 #==========#
 export PHP_SESSION_TYPE=${PHP_SESSION_TYPE:-files}
 export PHP_SESSION_PATH=${PHP_SESSION_PATH:-/data/php/session}
+export PHP_REDIS_SENTINEL=${PHP_REDIS_SENTINEL:-false}
 export PHP_ERROR_LOG=${PHP_ERROR_LOG:-/data/php/log/error.log}
 export PHP_MAX_EXECUTION_TIME=${PHP_MAX_EXECUTION_TIME:-120}
 export PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-256M}

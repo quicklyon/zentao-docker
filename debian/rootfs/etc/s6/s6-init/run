@@ -52,7 +52,7 @@ if [ "$PHP_SESSION_TYPE" == "redis" ];then
     info "Enable redis extension for session."  
     phpenmod redis
 
-    if [ "$PHP_REDIS_SENTINEL" == "1" ];then
+    if [ "$PHP_REDIS_SENTINEL" == "true" ];then
         ini_file=$(ls /opt/zbox/etc/php/conf.d/*-redis.ini)
         echo "redis.sentinel = 1" >> "$ini_file"
     fi

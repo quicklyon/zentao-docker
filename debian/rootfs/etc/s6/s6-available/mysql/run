@@ -19,8 +19,12 @@ fi
 
 # Render mysql config with environment variables.
 MY_CONF="/data/mysql/etc/my.cnf"
-info "Render mysql config with envionment variables."
-/usr/bin/render-template /opt/zbox/etc/mysql/my.cnf.tpl > $MY_CONF
+if [ ! -f $MY_CONF ];then
+    info "Render mysql config with envionment variables."
+    /usr/bin/render-template /opt/zbox/etc/mysql/my.cnf.tpl > $MY_CONF
+else
+    info "MySQL config file exists, skip configure."
+fi
 
 exec /opt/zbox/run/mysql/mysqld_safe \
      --defaults-file=$MY_CONF \

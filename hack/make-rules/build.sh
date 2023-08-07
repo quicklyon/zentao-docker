@@ -9,6 +9,14 @@ dockerfile=${6:? "dockerfile is required"}
 buildEnv=${7:? "buildEnv is required"}
 buildDate=$(date +%Y%m%d)
 
+internalRepository="${INTERNAL_IMAGE_REPO}/$appName"
+publicRepository="${PUBLIC_IMAGE_REPO}/$appName"
+
+local extraTagFlags=""
+if [ "$BUILD_PUBLIC_IMAGE" = "true" ];then
+  extraTagFlags="-t ${publicRepository}/$appVer-$buildDate -t ${publicRepository}/$appVer"
+fi
+
 docker buildx build \
             --build-arg ZENTAO_VER="$appVer" \
             --build-arg ZENTAO_URL="$ZENTAO_URL" \
@@ -16,10 +24,16 @@ docker buildx build \
             --build-arg MYSQL_VER="$mysqlVer" \
             --build-arg BUILD_ENV="$buildEnv" \
             --platform="$arch" \
-            -t $appName:$appVer-$buildDate \
-            -t $appName:$appVer \
+            -t $internalRepository:$appVer-$buildDate \
+            -t $internalRepository:$appVer \
+            $extraTagFlags \
             -f "$dockerfile" . --push
 
 . hack/make-rules/gen_report.sh
-addInternalImage $appName:$appVer-$buildDate
-addInternalImage $appName:$appVer
+addInternalImage $internalRepository:$appVer-$buildDate
+addInternalImage $internalRepository:$appVer
+
+if [ "$BUILD_PUBLIC_IMAGE" = "true" ];then
+  addPublicImage ${publicRepository}/$appVer-$buildDate
+  addPublicImage ${publicRepository}/$appVer
+fi

@@ -1,7 +1,8 @@
-export BUILD_PUBLIC_IMAGE=$(build-public)
-export INTERNAL_IMAGE_REPO=hub.qc.oop.cc
-export PUBLIC_IMAGE_REPO=hub.zentao.net
-export APP_NAME=app/zentao
+export BUILD_PUBLIC_IMAGE=$(or ${CI_BUILD_PUBLIC_IMAGE},false)
+export INTERNAL_IMAGE_REPO=$(or $(CI_INTERNAL_IMAGE_REPO),hub.qc.oop.cc)
+export PUBLIC_IMAGE_REPO=$(or $(CI_PUBLIC_IMAGE_REPO),hub.zentao.net)
+export PUBLIC_IMAGE_NAMESPACE=$(or $(CI_PUBLIC_IMAGE_NAMESPACE),app)
+export APP_NAME=zentao
 export OPEN_VER := $(or $(PMS_VERSION),$(shell jq -r .zentaopms.version < version.json))
 export BIZ_VER := $(or $(BIZ_VERSION),biz$(shell jq -r .biz.version < version.json))
 export MAX_VER := $(or $(MAX_VERSION),max$(shell jq -r .max.version < version.json))

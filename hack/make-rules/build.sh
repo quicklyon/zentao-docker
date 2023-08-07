@@ -15,10 +15,10 @@ publicRepository="${PUBLIC_IMAGE_REPO}/${PUBLIC_IMAGE_NAMESPACE}/$appName"
 
 extraTagFlags=""
 if [ "$BUILD_PUBLIC_IMAGE" = "true" ];then
-  extraTagFlags="-t ${publicRepository}/$appVer-$buildDate -t ${publicRepository}/$appVer"
+  extraTagFlags="-t ${publicRepository}:$appVer-$buildDate -t ${publicRepository}:$appVer"
 fi
 
-echo docker buildx build \
+docker buildx build \
             --build-arg ZENTAO_VER="$appVer" \
             --build-arg ZENTAO_URL="$ZENTAO_URL" \
             --build-arg PHP_VER="$phpVer" \
@@ -35,6 +35,6 @@ addInternalImage $internalRepository:$appVer-$buildDate
 addInternalImage $internalRepository:$appVer
 
 if [ "$BUILD_PUBLIC_IMAGE" = "true" ];then
-  addPublicImage ${publicRepository}/$appVer-$buildDate
-  addPublicImage ${publicRepository}/$appVer
+  addPublicImage ${publicRepository}:$appVer-$buildDate
+  addPublicImage ${publicRepository}:$appVer
 fi

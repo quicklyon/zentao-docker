@@ -14,7 +14,8 @@ publicRepository="${PUBLIC_IMAGE_REPO}/$appName"
 
 local extraTagFlags=""
 if [ "$BUILD_PUBLIC_IMAGE" = "true" ];then
-  extraTagFlags="-t ${publicRepository}/$appVer-$buildDate -t ${publicRepository}/$appVer"
+  #extraTagFlags="-t ${publicRepository}/$appVer-$buildDate -t ${publicRepository}/$appVer"
+  extraTagFlags="-t ${publicRepository}/$appVer-$buildDate"
 fi
 
 docker buildx build \
@@ -35,5 +36,5 @@ addInternalImage $internalRepository:$appVer
 
 if [ "$BUILD_PUBLIC_IMAGE" = "true" ];then
   addPublicImage ${publicRepository}/$appVer-$buildDate
-  addPublicImage ${publicRepository}/$appVer
+  #addPublicImage ${publicRepository}/$appVer
 fi

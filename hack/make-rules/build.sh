@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 appName=${1:? "appName is required"}
 appVer=${2:? "appVer is required"}
@@ -12,7 +13,7 @@ buildDate=$(date +%Y%m%d)
 internalRepository="${INTERNAL_IMAGE_REPO}/$appName"
 publicRepository="${PUBLIC_IMAGE_REPO}/$appName"
 
-local extraTagFlags=""
+extraTagFlags=""
 if [ "$BUILD_PUBLIC_IMAGE" = "true" ];then
   #extraTagFlags="-t ${publicRepository}/$appVer-$buildDate -t ${publicRepository}/$appVer"
   extraTagFlags="-t ${publicRepository}/$appVer-$buildDate"

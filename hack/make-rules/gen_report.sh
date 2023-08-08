@@ -39,6 +39,9 @@ detectRelease() {
     max)
       echo max
     ;;
+    ipd)
+      echo ipd
+    ;;
     *)
       echo pms
     ;;
@@ -130,6 +133,7 @@ outputMakdown() {
   outputGroupedImages "开源版" ".images.internal.pms" $jsonSourceFile
   outputGroupedImages "企业版" ".images.internal.biz" $jsonSourceFile
   outputGroupedImages "旗舰版" ".images.internal.max" $jsonSourceFile
+  outputGroupedImages "IPD版" ".images.internal.ipd" $jsonSourceFile
 
   publicCount=$(jq -r ".images.public | length " < $jsonSourceFile)
   if [ "$publicCount" -gt 0 ];then
@@ -138,6 +142,7 @@ outputMakdown() {
     outputGroupedImages "开源版" ".images.public.pms" $jsonSourceFile
     outputGroupedImages "企业版" ".images.public.biz" $jsonSourceFile
     outputGroupedImages "旗舰版" ".images.public.max" $jsonSourceFile
+    outputGroupedImages "IPD版" ".images.public.ipd" $jsonSourceFile
   fi
 }
 

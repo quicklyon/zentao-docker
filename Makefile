@@ -10,7 +10,8 @@ export MAX_K8S_VER := $(or $(MAX_VERSION).k8s,max$(shell jq -r '."max.k8s".versi
 export BIZ_K8S_VER := $(or $(BIZ_VERSION).k8s,biz$(shell jq -r '."biz.k8s".version' < version.json).k8s)
 export LITE_VER := lite$(shell jq -r .litev.version < version.json)
 export LITEBIZ_VER := litevip$(shell jq -r .litevipv.version < version.json)
-export IPD_VER := ipd$(shell jq -r .ipd.version < version.json)
+export IPD_VER := $(or $(IPD_VERSION),ipd$(shell jq -r .ipd.version < version.json))
+export IPD_K8S_VER := $(or $(IPD_VERSION).k8s,ipd$(shell jq -r '."ipd.k8s".version' < version.json).k8s)
 export PHP_VER="7.4.33"
 export MYSQL_VER="10.6.14"
 
@@ -37,7 +38,12 @@ build-max-k8s: ## 构建旗舰版Kubernetes定制版镜像
 	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(MAX_K8S_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile" "internal"
 
 build-ipd: ## 构建ipd版本
-	docker build --build-arg VERSION=$(IPD_VER) -t $(APP_NAME):$(IPD_VER) -f Dockerfile .
+	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(IPD_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile" "internal"
+# 	docker build --build-arg VERSION=$(IPD_VER) -t $(APP_NAME):$(IPD_VER) -f Dockerfile .
+
+build-ipd-k8s: ## 构建ipd版本Kubernetes定制版镜像
+	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(IPD_K8S_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile" "internal"
+
 
 push-all-public: push-public push-biz-public push-biz-k8s-public push-max-k8s-public push-max-public push-ipd-public
 

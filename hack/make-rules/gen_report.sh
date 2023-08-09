@@ -115,7 +115,8 @@ renderCommitUrl() {
 }
 
 outputMakdown() {
-  jsonSourceFile=`genUniqueFile`
+  jsonSourceFile=$(genUniqueFile)
+  finishTime=$(date '+%Y-%m-%d %H:%M:%S')
 
   echo "完成时间 **$finishTime**"
   echo

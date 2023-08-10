@@ -20,7 +20,7 @@ skip-external-locking
 character-set-client-handshake = FALSE
 character-set-server = utf8mb4
 collation-server = utf8mb4_unicode_ci
-init_connect=’SET NAMES utf8mb4’
+init_connect='SET NAMES utf8mb4'
 
 bind-address            = 127.0.0.1
 key_buffer_size         = 16M

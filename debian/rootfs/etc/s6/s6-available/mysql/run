@@ -2,6 +2,7 @@
 
 # shellcheck disable=SC1091
 . /opt/easysoft/scripts/liblog.sh
+. /opt/easysoft/scripts/libfs.sh
 
 [ -n "${DEBUG:+1}" ] && set -x
 
@@ -14,7 +15,7 @@ done
 # If first run, copy mysql data to /data/mysql/data
 if [ ! -d "/data/mysql/data/mysql" ];then
     info "Copy mysql data to /data/mysql/data"
-    cp -rp /opt/zbox/data/mysql/* /data/mysql/data/
+    cp -rp /opt/zbox/data/mysql/* /data/mysql/data/ 
 fi
 
 # Render mysql config with environment variables.
@@ -25,6 +26,12 @@ if [ ! -f $MY_CONF ];then
 else
     info "MySQL config file exists, skip configure."
 fi
+
+# Make sure user and group is nobody:nogroup
+owned_by "nobody" "nogroup"  "/data/mysql"
+
+# Just for debug
+sleep "${PAUSE:-0}"
 
 exec /opt/zbox/run/mysql/mysqld_safe \
      --defaults-file=$MY_CONF \

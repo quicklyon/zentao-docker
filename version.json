@@ -4,7 +4,7 @@
     "news": "https://www.zentao.net/download/zentaopms18.5-82695.html"
   },
   "biz": {
-    "version": "8.5",
+    "version": "8.0",
     "news": "https://www.zentao.net/download/biz8.5-82696.html"
   },
   "biz.k8s": {

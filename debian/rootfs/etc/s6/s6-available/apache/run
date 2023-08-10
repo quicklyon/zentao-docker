@@ -8,6 +8,13 @@ set -e
 
 [ -n "${DEBUG:+1}" ] && set -x
 
+if [ "$MYSQL_INTERNAL" == "true" ];then
+    s6-svwait -u -t 30000 /etc/s6/s6-available/mysql
+fi
+
+# Just for debug
+sleep "${PAUSE:-0}"
+
 #======================#
 # Check MySQL service  #
 #======================#

@@ -13,6 +13,13 @@
 . /opt/easysoft/scripts/libci.sh
 . /opt/easysoft/scripts/libscan.sh
 
+# Wait for mysql and apache to be ready
+if [ "$MYSQL_INTERNAL" == "true" ];then
+    s6-svwait -u -t 30000 /etc/s6/s6-available/mysql /etc/s6/s6-available/apache
+else
+    s6-svwait -u -t 30000 /etc/s6/s6-available/apache
+fi
+
 export ZENTAO_VER=${ZENTAO_VER/.k8s/}
 
 FIRST_RUN=$( [ -e /data/zentao/.version ] && grep "$ZENTAO_VER" /data/zentao/.version )
@@ -31,7 +38,10 @@ do
     if [ "$CFG_INITED" != "0" ];then
         TABLE_PREFIX=$(grep prefix /data/zentao/config/my.php  | cut -d '=' -f 2 | sed -E "s/( |'|;)//g")
         export TABLE_PREFIX=${TABLE_PREFIX:-zt_}
-
+        
+        # Just for debug
+        sleep "${PAUSE:-0}"
+        
         CURRENT_VER=$(Get_Running_Ver)
         export CURRENT_VER
     fi
@@ -100,7 +110,10 @@ do
         break
     fi
 
-    warn "Please open the browser to complete the installation through the wizard."
+    # 当配置文件为空时，说明安装向导未完成
+    if [ "$CFG_INITED" == "0" ];then
+        info "Waiting for the installation wizard to complete."
+    fi
     sleep 1
 
 done

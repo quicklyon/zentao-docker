@@ -27,6 +27,7 @@ wait_for_mysql() {
     info "Check whether the MySQL is available."
 
     for ((i = 1; i <= retries; i += 1)); do
+        sleep 1
         if nc -z "${mysql_host}" "${mysql_port}";
         then
             info "MySQL is ready."
@@ -34,7 +35,6 @@ wait_for_mysql() {
         fi
 
         warn "Waiting MySQL $i seconds"
-        sleep 1
 
         if [ "$i" == "$retries" ]; then
             error "Unable to connect to MySQL: $mysql_host:$mysql_port"

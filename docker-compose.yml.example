@@ -14,8 +14,8 @@ services:
     volumes:
       - /data/zentao/db:/var/lib/mysql
     environment:
-      - ZT_MYSQL_ROOT_PASSWORD=pass4Zentao
-      - ZT_MYSQL_DATABASE=zentao
+      - MYSQL_ROOT_PASSWORD=pass4Zentao
+      - MYSQL_DATABASE=zentao
     networks:
       - zentao-net
 

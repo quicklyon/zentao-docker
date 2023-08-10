@@ -68,6 +68,7 @@ docker run -it \
     -e ZT_MYSQL_PORT=<你的MySQL服务端口> \
     -e ZT_MYSQL_USER=<你的MySQL服务用户名> \
     -e ZT_MYSQL_PASSWORD=<你的MySQL服务密码> \
+    -e ZT_MYSQL_DB=<禅道数据库名> \
     easysoft/{{APP_DOCKER_IMAGE_NAME}}:latest
 ```
 

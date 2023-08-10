@@ -28,7 +28,7 @@ else
 fi
 
 # Make sure user and group is nobody:nogroup
-owned_by "nobody" "nogroup"  "/data/mysql"
+configure_permissions_ownership "/data/mysql" -d "755" -u "nobody" -g "nogroup"
 
 # Just for debug
 sleep "${PAUSE:-0}"

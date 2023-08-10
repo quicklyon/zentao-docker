@@ -7,6 +7,7 @@
 # Load libraries
 . /etc/s6/s6-init/envs
 . /opt/easysoft/scripts/liblog.sh
+. /opt/easysoft/scripts/libmysql.sh
 . /opt/easysoft/scripts/libldap.sh
 . /opt/easysoft/scripts/libsmtp.sh
 . /opt/easysoft/scripts/libgit.sh
@@ -79,12 +80,10 @@ do
         # 首次安装，标记安装信息
         if [ "$FIRST_RUN" == "" ];then
             echo "$(date +'%F %H:%M:%S') $ZENTAO_VER installed" >> /data/zentao/.version
-        else
-            touch /data/.installed.tmp
         fi
-
+        
         # remove install and update file
-        [ -f /data/.installed.tmp ] && rm -f /apps/zentao/www/{install.php,upgrade.php}
+        rm -f /apps/zentao/www/{install.php,upgrade.php}
         info "Zentao is ready to use."
 
         break

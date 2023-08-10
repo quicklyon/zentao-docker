@@ -107,11 +107,12 @@ export SMTP_FROMNAME=${SMTP_FROMNAME:-ZenTao $ZENTAO_VER}
 #===========#
 #   MySQL   #
 #===========#
-export MYSQL_HOST=${MYSQL_HOST:-127.0.0.1}
-export MYSQL_PORT=${MYSQL_PORT:-3306}
-export MYSQL_DB=${MYSQL_DB:-zentao}
-export MYSQL_USER=${MYSQL_USER:-root}
-export MYSQL_PASSWORD=${MYSQL_PASSWORD:-123456}
+export ZT_MYSQL_HOST=${ZT_MYSQL_HOST:-${MYSQL_HOST:-127.0.0.1}}
+export ZT_MYSQL_PORT=${MYSQL_PORT:-${MYSQL_PORT:-3306}}
+export ZT_MYSQL_DB=${MYSQL_DB:-${MYSQL_DB:-zentao}}
+export ZT_MYSQL_USER=${MYSQL_USER:-${MYSQL_USER:-root}}
+export ZT_MYSQL_PASSWORD=${MYSQL_PASSWORD:-${MYSQL_PASSWORD:-123456}}
+
 
 #==========#
 # Apache   #

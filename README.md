@@ -115,10 +115,10 @@ docker run -it \
 docker run -it \
     -v $PWD/data:/data \
     -e MYSQL_INTERNAL=false \
-    -e MYSQL_HOST=<你的MySQL服务地址> \
-    -e MYSQL_PORT=<你的MySQL服务端口> \
-    -e MYSQL_USER=<你的MySQL服务用户名> \
-    -e MYSQL_PASSWORD=<你的MySQL服务密码> \
+    -e ZT_MYSQL_HOST=<你的MySQL服务地址> \
+    -e ZT_MYSQL_PORT=<你的MySQL服务端口> \
+    -e ZT_MYSQL_USER=<你的MySQL服务用户名> \
+    -e ZT_MYSQL_PASSWORD=<你的MySQL服务密码> \
     easysoft/quickon-zentao:latest
 ```
 
@@ -138,7 +138,7 @@ docker run -it \
       - /data/zentao/db:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=pass4Zentao
-      - MYSQL_DATABASE=zentao
+      - ZT_MYSQL_DB=zentao
     networks:
       - zentao-net
 ...
@@ -157,11 +157,11 @@ docker run -it \
 | PHP_POST_MAX_SIZE        | 128M                         | 允许最大Post数据大小             |
 | PHP_UPLOAD_MAX_FILESIZE  | 128M                         | 单个文件上传的最大值             |
 | MYSQL_INTERNAL           | false                        | 使用内部的MySQL，默认关闭          |
-| MYSQL_HOST               | 127.0.0.1                    | MySQL 主机地址                   |
-| MYSQL_PORT               | 3306                         | MySQL 端口                       |
-| MYSQL_DB                 | zentao                       | zentao数据库名称                 |
-| MYSQL_USER               | root                         | MySQL用户名                      |
-| MYSQL_PASSWORD           | pass4zenTao                  | MySQL密码                        |
+| ZT_MYSQL_HOST               | 127.0.0.1                    | MySQL 主机地址                   |
+| ZT_MYSQL_PORT               | 3306                         | MySQL 端口                       |
+| ZT_MYSQL_DB                 | zentao                       | zentao数据库名称                 |
+| ZT_MYSQL_USER               | root                         | MySQL用户名                      |
+| ZT_MYSQL_PASSWORD           | pass4zenTao                  | MySQL密码                        |
 | LDAP_ENABLED             | false                        | 是否启用LDAP                      |
 | LDAP_HOST                | 127.0.0.1                    | LDAP服务主机地址   |
 | LDAP_PORT                | 389                          | LDAP服务端口      |
@@ -217,11 +217,11 @@ docker run -d --rm --name mysql -e MYSQL_ROOT_PASSWORD=pass4you mysql:5.7.38-deb
 docker run -d --rm --name zentao \
 --link mysql \
 --link redis \
--e MYSQL_HOST=mysql \
--e MYSQL_PORT=3306 \
--e MYSQL_USER=root \
--e MYSQL_PASSWORD=pass4you \
--e MYSQL_DB=zentao \
+-e ZT_MYSQL_HOST=mysql \
+-e ZT_MYSQL_PORT=3306 \
+-e ZT_MYSQL_USER=root \
+-e ZT_MYSQL_PASSWORD=pass4you \
+-e ZT_MYSQL_DB=zentao \
 -e PHP_MAX_EXECUTION_TIME=300 \
 -e PHP_POST_MAX_SIZE=512M \
 -e PHP_UPLOAD_MAX_FILESIZE=512M \
@@ -254,11 +254,11 @@ docker run -d --rm --name mysql -e MYSQL_ROOT_PASSWORD=pass4you mysql:5.7.38-deb
 docker run -d --rm --name zentao \
 --link mysql \
 --link redis \
--e MYSQL_HOST=mysql \
--e MYSQL_PORT=3306 \
--e MYSQL_USER=root \
--e MYSQL_PASSWORD=pass4you \
--e MYSQL_DB=zentao \
+-e ZT_MYSQL_HOST=mysql \
+-e ZT_MYSQL_PORT=3306 \
+-e ZT_MYSQL_USER=root \
+-e ZT_MYSQL_PASSWORD=pass4you \
+-e ZT_MYSQL_DB=zentao \
 -e PHP_SESSION_TYPE=redis \
 -e PHP_SESSION_PATH=tcp://redis:6379 \
 -v /data/zentao:/data \

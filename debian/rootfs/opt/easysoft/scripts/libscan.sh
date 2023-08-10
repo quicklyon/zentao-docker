@@ -41,7 +41,7 @@ Config_SCAN(){
 ########################
 # Import_SCAN_Config : 导入扫描工具配置
 # Globals:
-#   MYSQL_DB
+#   ZT_MYSQL_DB
 #   SCAN_SQL_FILE
 # Arguments:
 #   dbsql file
@@ -57,7 +57,7 @@ Import_SCAN_Config(){
 
     # 导入SQL
     info "Link and configure scan Service ..."
-    mysql_import_to_db "$MYSQL_DB" "$SCAN_SQL_FILE" | tee $CHECK_LOG
+    mysql_import_to_db "$ZT_MYSQL_DB" "$SCAN_SQL_FILE" | tee $CHECK_LOG
 }
 
 

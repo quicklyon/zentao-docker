@@ -9,7 +9,7 @@
 
 [ -n "${DEBUG:+1}" ] && set -x
 
-MYSQL_BIN="/opt/zbox/bin/mysql -uroot -p$MYSQL_PASSWORD -D$MYSQL_DB"
+MYSQL_BIN="/opt/zbox/bin/mysql -uroot -p$ZT_MYSQL_PASSWORD -D$ZT_MYSQL_DB"
 export MYSQL_BIN
 
 # 获取当前运行的版本

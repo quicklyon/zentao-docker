@@ -15,8 +15,8 @@ services:
     volumes:
       - 'zentao_db:/var/lib/mysql'
     environment:
-      - MYSQL_ROOT_PASSWORD=pass4Zentao
-      - MYSQL_DATABASE=zentao
+      - ZT_MYSQL_ROOT_PASSWORD=pass4Zentao
+      - ZT_MYSQL_DATABASE=zentao
     networks:
       - zentao-net
 
@@ -38,11 +38,11 @@ services:
     depends_on:
       - zentao-mysql
     environment:
-      - MYSQL_HOST=zentao-mysql
-      - MYSQL_PORT=3306
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=pass4Zentao
-      - MYSQL_DB=zentao
+      - ZT_MYSQL_HOST=zentao-mysql
+      - ZT_MYSQL_PORT=3306
+      - ZT_MYSQL_USER=root
+      - ZT_MYSQL_PASSWORD=pass4Zentao
+      - ZT_MYSQL_DB=zentao
      # - PHP_SESSION_TYPE=redis
      # - PHP_SESSION_PATH=tcp://zentao-redis:6379
      # - PHP_REDIS_SENTINEL=1  

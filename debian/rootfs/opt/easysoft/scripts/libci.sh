@@ -71,7 +71,7 @@ Create_CI_Token(){
 ########################
 # Import_CI_Config : 导入CI配置
 # Globals:
-#   MYSQL_DB
+#   ZT_MYSQL_DB
 #   CI_SQL_FILE
 # Arguments:
 #   dbsql file
@@ -85,7 +85,7 @@ Import_CI_Config(){
 
     # 导入SQL
     info "Link and configure ci Service ..."
-    mysql_import_to_db "$MYSQL_DB" "$CI_SQL_FILE" | tee $CHECK_LOG
+    mysql_import_to_db "$ZT_MYSQL_DB" "$CI_SQL_FILE" | tee $CHECK_LOG
 }
 
 

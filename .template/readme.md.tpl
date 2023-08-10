@@ -64,10 +64,10 @@ docker run -it \
 docker run -it \
     -v $PWD/data:/data \
     -e MYSQL_INTERNAL=false \
-    -e MYSQL_HOST=<你的MySQL服务地址> \
-    -e MYSQL_PORT=<你的MySQL服务端口> \
-    -e MYSQL_USER=<你的MySQL服务用户名> \
-    -e MYSQL_PASSWORD=<你的MySQL服务密码> \
+    -e ZT_MYSQL_HOST=<你的MySQL服务地址> \
+    -e ZT_MYSQL_PORT=<你的MySQL服务端口> \
+    -e ZT_MYSQL_USER=<你的MySQL服务用户名> \
+    -e ZT_MYSQL_PASSWORD=<你的MySQL服务密码> \
     easysoft/{{APP_DOCKER_IMAGE_NAME}}:latest
 ```
 
@@ -87,7 +87,7 @@ docker run -it \
       - /data/zentao/db:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=pass4Zentao
-      - MYSQL_DATABASE=zentao
+      - ZT_MYSQL_DB=zentao
     networks:
       - zentao-net
 ...

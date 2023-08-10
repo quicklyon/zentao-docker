@@ -24,7 +24,7 @@ function Config_LDAP()
 
         info "Enable LDAP ..."
         /usr/bin/render-template ${LDAP_SQL}.tpl > $LDAP_SQL
-        mysql_import_to_db "$MYSQL_DB" "$LDAP_SQL" | tee $CHECK_LOG
+        mysql_import_to_db "$ZT_MYSQL_DB" "$LDAP_SQL" | tee $CHECK_LOG
     fi
 }
 

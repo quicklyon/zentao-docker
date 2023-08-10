@@ -114,7 +114,7 @@ Create_Git_Token(){
 ########################
 # Import_Git_Config : 导入Git配置
 # Globals:
-#   MYSQL_DB
+#   ZT_MYSQL_DB
 #   GIT_TYPE
 #   GIT_SQL_FILE
 # Arguments:
@@ -129,7 +129,7 @@ Import_Git_Config(){
 
     # 导入SQL
     info "Link and configure Git Service ..."
-    mysql_import_to_db "$MYSQL_DB" "$GIT_SQL_FILE" | tee $CHECK_LOG && rm -rf /data/zentao/.git_token
+    mysql_import_to_db "$ZT_MYSQL_DB" "$GIT_SQL_FILE" | tee $CHECK_LOG && rm -rf /data/zentao/.git_token
 }
 
 

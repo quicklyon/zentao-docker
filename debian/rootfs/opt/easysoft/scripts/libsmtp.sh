@@ -31,7 +31,7 @@ function Config_SMTP()
         Del_SMTP_Config
 
         info "Enable SMTP ..."
-        mysql_import_to_db "$MYSQL_DB" "$SMTP_SQL" | tee $CHECK_LOG
+        mysql_import_to_db "$ZT_MYSQL_DB" "$SMTP_SQL" | tee $CHECK_LOG
     fi
 
 }

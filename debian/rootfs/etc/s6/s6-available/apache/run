@@ -29,10 +29,10 @@ fi
 # First run add user and grant privileges
 if [ "$MYSQL_INTERNAL" == "true" ] && [ ! -f /data/zentao/.version ] ;then
     mysql -h127.0.0.1 -uroot -p123456 \
-          -e "CREATE USER $MYSQL_USER@'%' IDENTIFIED BY \"$MYSQL_PASSWORD\";GRANT ALL ON *.* TO $MYSQL_USER@'%';flush privileges;"
+          -e "CREATE USER $ZT_MYSQL_USER@'%' IDENTIFIED BY \"$ZT_MYSQL_PASSWORD\";GRANT ALL ON *.* TO $ZT_MYSQL_USER@'%';flush privileges;"
 fi
 
 # Initialize database
-mysql -uroot -p"$MYSQL_PASSWORD" -e "CREATE DATABASE IF NOT EXISTS $MYSQL_DB; "
+mysql -uroot -p"$ZT_MYSQL_PASSWORD" -e "CREATE DATABASE IF NOT EXISTS $ZT_MYSQL_DB; "
 
 exec /opt/zbox/bin/apachectl -D FOREGROUND

@@ -102,7 +102,7 @@ component_unpack() {
 
     echo "Downloading $base_name package"
 
-	curl -k --remote-name --silent --show-error --fail "${DOWNLOAD_URL}/${base_name}.tar.gz" 
+    curl -k --remote-name --silent --show-error --fail "${DOWNLOAD_URL}/${base_name}.tar.gz" 
 
     if [ -n "$package_sha256" ]; then
         echo "Verifying package integrity"
@@ -128,11 +128,11 @@ unpack() {
 
     echo "Downloading $base_name package"
 
-	curl -skL "${DOWNLOAD_URL}/${URL_PATH}/${base_name}.tar.gz" -o "$base_name".tar.gz
+    curl -skL "${DOWNLOAD_URL}/${URL_PATH}/${base_name}.tar.gz" -o "$base_name".tar.gz
 
     echo "Verifying package integrity"
     curl -skL "${DOWNLOAD_URL}/${URL_PATH}/${base_name}.tar.gz.sha1" -o "$base_name".tar.gz.sha1
-    sha1sum -c "$base_name".tar.gz.sha1 || exit "$?"
+    echo "$(awk '{print $1}' "$base_name".tar.gz.sha1)  ${base_name}.tar.gz" | sha1sum -c - || exit "$?"
 
     tar xzf "${base_name}.tar.gz" -C "$directory"
     rm "${base_name}.tar.gz" "${base_name}.tar.gz.sha1" -f

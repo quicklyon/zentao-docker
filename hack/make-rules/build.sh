@@ -12,6 +12,7 @@ buildDate=$(date +%Y%m%d)
 
 internalRepository="${INTERNAL_IMAGE_REPO}/app/$appName"
 publicRepository="${PUBLIC_IMAGE_REPO}/${PUBLIC_IMAGE_NAMESPACE}/$appName"
+baseImage="${PUBLIC_IMAGE_REPO}/ci/zentao-runtime:php${phpVer%.*}-mysql${mysqlVer%.*}"
 
 extraTagFlags=""
 if [ "$BUILD_PUBLIC_IMAGE" = "true" ];then
@@ -19,6 +20,7 @@ if [ "$BUILD_PUBLIC_IMAGE" = "true" ];then
 fi
 
 docker buildx build \
+            --build-arg BASE_IMAGE="$baseImage" \
             --build-arg ZENTAO_VER="$appVer" \
             --build-arg ZENTAO_URL="$ZENTAO_URL" \
             --build-arg PHP_VER="$phpVer" \
@@ -28,7 +30,7 @@ docker buildx build \
             -t $internalRepository:$appVer-$buildDate \
             -t $internalRepository:$appVer \
             $extraTagFlags \
-            -f "$dockerfile" . --push
+            -f "$dockerfile" . --pull --push
 
 . hack/make-rules/gen_report.sh
 addInternalImage $internalRepository:$appVer-$buildDate

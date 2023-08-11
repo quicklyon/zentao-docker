@@ -66,7 +66,6 @@ HTTPD_CONF="/opt/zbox/etc/apache/httpd.conf"
 info "Render apache sites config with envionment variables."
 /usr/bin/render-template ${HTTPD_CONF}.tpl > $HTTPD_CONF
 
-
 #=====Set Zentao Config=====
 # Disable checkClient fix QuickOn DevOps
 cfg_num=$(grep -n checkClient /apps/zentao/config/config.php | awk -F ':'  '{print $1}')

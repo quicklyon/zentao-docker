@@ -11,7 +11,7 @@ set -e
 if [ "$BUILD_ENV" == "internal" ];then
     DOWNLOAD_URL="https://nexus.qc.oop.cc/repository/easycorp-library/runtime"
 else
-    DOWNLOAD_URL="https://pkg.qucheng.com/files/stacksmith"
+    DOWNLOAD_URL="https://pkg.qucheng.com/files/runtime"
 fi
 
 ZENTAO_URL=${ZENTAO_URL:-https://dl.cnezsoft.com/zentao}

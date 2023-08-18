@@ -13,36 +13,60 @@ export LITEBIZ_VER := litevip$(shell jq -r .litevipv.version < version.json)
 export IPD_VER := $(or $(IPD_VERSION),ipd$(shell jq -r .ipd.version < version.json))
 export IPD_K8S_VER := $(or $(IPD_VERSION).k8s,ipd$(shell jq -r '."ipd.k8s".version' < version.json).k8s)
 export PHP_VER="7.4.33"
-export MYSQL_VER="10.6.14"
+export MYSQL_VER="10.6.15"
 
 .DEFAULT_GOAL:=help
 
 help: ## this help
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n\nTargets:\n"} /^[a-zA-Z_\-0-9]+:.*?##/ { printf "  \033[36m%-30s\033[0m %s\n", $$1, $$2 }' $(MAKEFILE_LIST)
 
-build-all: build build-biz build-biz-k8s build-max build-max-k8s build-ipd  ## 构建禅道所有版本镜像
+#============================ Public Build ============================#
+public-build-all: public-build public-build-biz public-build-biz-k8s public-build-max public-build-max-k8s public-build-ipd public-build-ipd-k8s ## 内网构建禅道所有版本镜像
+public-build: ## 公网构建开源版镜像
+	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(OPEN_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile"
 
-build: ## 构建开源版镜像
+public-build-biz: ## 公网构建企业版镜像
+	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(BIZ_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile"
+
+public-build-biz-k8s: ## 公网构建企业版Kubernetes定制版镜像
+	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(BIZ_K8S_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile"
+
+public-build-max: ## 公网构建旗舰版镜像
+	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(MAX_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile"
+
+public-build-max-k8s: ## 公网构建旗舰版Kubernetes定制版镜像
+	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(MAX_K8S_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile"
+
+public-build-ipd: ## 公网构建ipd版本
+	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(IPD_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile"
+
+public-build-ipd-k8s: ## 构建ipd版本Kubernetes定制版镜像
+	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(IPD_K8S_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile"
+#============================ End Public Build ============================#
+
+#============================ Internal Build ============================#
+build-all: build build-biz build-biz-k8s build-max build-max-k8s build-ipd  ## 内网构建禅道所有版本镜像
+build: ## 内网构建开源版镜像
 	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(OPEN_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile" "internal"
 
-build-biz: ## 构建企业版镜像
+build-biz: ## 内网构建企业版镜像
 	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(BIZ_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile" "internal"
 
-build-biz-k8s: ## 构建企业版Kubernetes定制版镜像
+build-biz-k8s: ## 内网构建企业版Kubernetes定制版镜像
 	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(BIZ_K8S_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile" "internal"
 
-build-max: ## 构建旗舰版镜像
+build-max: ## 内网构建旗舰版镜像
 	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(MAX_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile" "internal"
 
-build-max-k8s: ## 构建旗舰版Kubernetes定制版镜像
+build-max-k8s: ## 内网构建旗舰版Kubernetes定制版镜像
 	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(MAX_K8S_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile" "internal"
 
-build-ipd: ## 构建ipd版本
+build-ipd: ## 内网构建ipd版本
 	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(IPD_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile" "internal"
-# 	docker build --build-arg VERSION=$(IPD_VER) -t $(APP_NAME):$(IPD_VER) -f Dockerfile .
 
-build-ipd-k8s: ## 构建ipd版本Kubernetes定制版镜像
+build-ipd-k8s: ## 内网构建ipd版本Kubernetes定制版镜像
 	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(IPD_K8S_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile" "internal"
+#============================ End Internal Build ============================#
 
 
 push-all-public: push-public push-biz-public push-biz-k8s-public push-max-k8s-public push-max-public push-ipd-public

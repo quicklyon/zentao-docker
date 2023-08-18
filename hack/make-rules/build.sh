@@ -7,7 +7,7 @@ phpVer=${3:? "phpVer is required"}
 mysqlVer=${4:? "mysqlVer is required"}
 arch=${5:? "arch is required"} # like linux/amd64,linux/arm64
 dockerfile=${6:? "dockerfile is required"}
-buildEnv=${7:? "buildEnv is required"}
+buildEnv=${7:-public}
 buildDate=$(date +%Y%m%d)
 
 internalRepository="${INTERNAL_IMAGE_REPO}/app/$appName"

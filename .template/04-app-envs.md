@@ -79,7 +79,7 @@ docker run -d --rm --name zentao \
 -e PHP_UPLOAD_MAX_FILESIZE=512M \
 -v /data/zentao:/data \
 -p 8088:80 \
-easysoft/quickon-zentao:latest
+hub.zentao.net/app/zentao:latest
 ```
 
 > - PHP_MAX_EXECUTION_TIME 设置为300秒
@@ -115,7 +115,7 @@ docker run -d --rm --name zentao \
 -e PHP_SESSION_PATH=tcp://redis:6379 \
 -v /data/zentao:/data \
 -p 8088:80 \
-easysoft/quickon-zentao:latest
+hub.zentao.net/app/zentao:latest
 ```
 
 指定上面两个环境变量，实际上就是修改了`php.ini`中关于Session的配置：

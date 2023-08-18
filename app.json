@@ -7,7 +7,7 @@
     "DockerfileUrl": "https://github.com/quicklyon/zentao-docker",
     "InstallDocUrl": "https://www.qucheng.com/app-install/install-zentao-126.html",
     "Docker": {
-        "Name": "quickon-zentao",
+        "Name": "zentao",
         "OS": "debian-11",
         "ImageOS": "debian:11.4-slim",
         "Repo": "https://hub.docker.com/r/easysoft/quickon-zentao",

@@ -8,8 +8,8 @@
 ```diff
 ...
   zentao:
--    image: easysoft/quickon-zentao:17.3-20220729
-+    image: easysoft/quickon-zentao:17.4-20220817
+-    image: hub.zentao.net/app/zentao:18.5
++    image: hub.zentao.net/app/zentao:18.6
     container_name: zentao
 ...
 ```

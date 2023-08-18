@@ -33,13 +33,13 @@
 推荐从 [Docker Hub Registry]({{APP_DOCKER_HUB_URL}}) 拉取我们构建好的官方Docker镜像。
 
 ```bash
-docker pull easysoft/{{APP_DOCKER_IMAGE_NAME}}:latest
+docker pull hub.zentao.net/app/{{APP_DOCKER_IMAGE_NAME}}:latest
 ```
 
 如需使用指定的版本，可以拉取一个包含版本标签的镜像，在Docker Hub仓库中查看 [可用版本列表]({{APP_DOCKER_HUB_TAG_URL}})
 
 ```bash
-docker pull easysoft/{{APP_DOCKER_IMAGE_NAME}}:[TAG]
+docker pull hub.zentao.net/app/{{APP_DOCKER_IMAGE_NAME}}:[TAG]
 ```
 
 ## 四、运行镜像
@@ -52,7 +52,7 @@ docker pull easysoft/{{APP_DOCKER_IMAGE_NAME}}:[TAG]
 docker run -it \
     -v $PWD/data:/data \
     -e MYSQL_INTERNAL=true \
-    easysoft/{{APP_DOCKER_IMAGE_NAME}}:latest
+    hub.zentao.net/app/{{APP_DOCKER_IMAGE_NAME}}:latest
 ```
 
 > 执行上面的命令后，会启动禅道镜像，通过设置 `MYSQL_INTERNAL=true` 会启动内置的MySQL服务。
@@ -69,7 +69,7 @@ docker run -it \
     -e ZT_MYSQL_USER=<你的MySQL服务用户名> \
     -e ZT_MYSQL_PASSWORD=<你的MySQL服务密码> \
     -e ZT_MYSQL_DB=<禅道数据库名> \
-    easysoft/{{APP_DOCKER_IMAGE_NAME}}:latest
+    hub.zentao.net/app/{{APP_DOCKER_IMAGE_NAME}}:latest
 ```
 
 > 通过设置 `MYSQL_INTERNAL=false` ，并且设置MySQL相关的环境变量，运行镜像后，可以连接到外部的MySQL

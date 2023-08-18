@@ -2,8 +2,8 @@
 # QuickOn ZenTao 应用镜像
 
 ![GitHub Workflow Status (event)](https://img.shields.io/github/actions/workflow/status/quicklyon/zentao-docker/zentao.yml?style=flat-square)
-![Docker Pulls](https://img.shields.io/docker/pulls/easysoft/quickon-zentao?style=flat-square)
-![Docker Image Size](https://img.shields.io/docker/image-size/easysoft/quickon-zentao?style=flat-square)
+![Docker Pulls](https://img.shields.io/docker/pulls/easysoft/zentao?style=flat-square)
+![Docker Image Size](https://img.shields.io/docker/image-size/easysoft/zentao?style=flat-square)
 ![GitHub tag](https://img.shields.io/github/v/tag/quicklyon/zentao-docker?style=flat-square)
 
 ## 快速参考
@@ -36,17 +36,19 @@ ZenTao官网：[https://zentao.net/](https://zentao.net/)
 
 镜像地址:
 
+- `hub.zentao.net/app/zentao`(mirror镜像)
 - [easysoft/quickon-zentao](https://hub.docker.com/r/easysoft/quickon-zentao)
-- `ccr.ccs.tencentyun.com/easysoft/quickon-zentao`(mirror镜像)
 
 - 开源版
-  - [`latest`, `18.4`, `18.4-20230625`](https://www.zentao.net/download/zentaopms18.4-82629.html)
+  - [`latest`, `18.5`, `18.5-20230713`](https://www.zentao.net/download/zentaopms18.5-82695.html)
+  - [`18.4`, `18.4-20230625`](https://www.zentao.net/download/zentaopms18.4-82629.html)
   - [`18.3-20230424`](https://www.zentao.net/download/zentaopms18.3-82231.html)
   - [`18.2-20230315`](https://www.zentao.net/dynamic/zentaopms18.2-82151.html)
   - [`18.1-20230216`](https://www.zentao.net/download/zentaopms18.1-82069.html)
-  - [`18.0-20230112`](https://www.zentao.net/download/zentaopms18.0-81998.html)
 
 - 企业版
+  - [`biz8.5`, `biz8.5-20230713`](https://www.zentao.net/download/biz8.5-82696.html)
+  - [`biz8.5.k8s`, `biz8.5.k8s-20230713`](https://www.zentao.net/download/biz8.5-82696.html)
   - [`biz8.4`, `biz8.4-20230625`](https://www.zentao.net/download/biz8.4-82630.html)
   - [`biz8.4.k8s`, `biz8.4.k8s-20230625`](https://www.zentao.net/download/biz8.4-82630.html)
   - [`biz8.3-20230424`](https://www.zentao.net/download/biz8.3-82232.html)
@@ -55,10 +57,10 @@ ZenTao官网：[https://zentao.net/](https://zentao.net/)
   - [`biz8.2.k8s-20230315`](https://www.zentao.net/dynamic/biz8.2-82152.html)
   - [`biz8.1-20230216`](https://www.zentao.net/download/biz8.1-82070.html)
   - [`biz8.1.k8s-20230216`](https://www.zentao.net/download/biz8.1-82070.html)
-  - [`biz8.0-20230112`](https://www.zentao.net/download/zentaopms.biz8.0-81999.html)
-  - [`biz8.0.k8s-20230112`](https://www.zentao.net/download/zentaopms.biz8.0-81999.html)
 
 - 旗舰版
+  - [`max4.5`, `max4.5-20230713`](https://www.zentao.net/download/max4.5-82697.html)
+  - [`max4.5.k8s`, `max4.5.k8s-20230713`](https://www.zentao.net/download/max4.5-82697.html)
   - [`max4.4`, `max4.4-20230625`](https://www.zentao.net/download/max4.4-82631.html)
   - [`max4.4.k8s`, `max4.4.k8s-20230625`](https://www.zentao.net/download/max4.4-82631.html)
   - [`max4.3-20230424`](https://www.zentao.net/download/max4.3-82233.html)
@@ -67,8 +69,10 @@ ZenTao官网：[https://zentao.net/](https://zentao.net/)
   - [`max4.2.k8s-20230315`](https://www.zentao.net/dynamic/max4.2-82153.html)
   - [`max4.1-20230216`](https://www.zentao.net/download/max4.1-82071.html)
   - [`max4.1.k8s-20230216`](https://www.zentao.net/download/max4.1-82071.html)
-  - [`max4.0-20230112`](https://www.zentao.net/download/max4.0-82000.html)
-  - [`max4.0.k8s-20230112`](https://www.zentao.net/download/max4.0-82000.html)
+
+- IPD版本
+  - [`ipd1.0`, `ipd1.0-20230802`](https://www.zentao.net/download/ipd1.0-82750.html)
+  - [`ipd1.0.beta1-20230522`](https://www.zentao.net/download/zentao-ipd-82471.html)
 
 - 迅捷版
   - [`lite1.2-20221205`](https://www.zentao.net/download/zentaolitev1.2-80982.html)
@@ -76,21 +80,18 @@ ZenTao官网：[https://zentao.net/](https://zentao.net/)
 - 迅捷企业版
   - [`litevip1.2-20221205`](https://www.zentao.net/download/zentaolitevipv1.2-80983.html)
 
-- IPD版本
-  - [`ipd1.0.beta1-20230522`](https://www.zentao.net/download/zentao-ipd-82471.html)
-
 ## 三、获取镜像
 
 推荐从 [Docker Hub Registry](https://hub.docker.com/r/easysoft/quickon-zentao) 拉取我们构建好的官方Docker镜像。
 
 ```bash
-docker pull easysoft/quickon-zentao:latest
+docker pull hub.zentao.net/app/zentao:latest
 ```
 
 如需使用指定的版本，可以拉取一个包含版本标签的镜像，在Docker Hub仓库中查看 [可用版本列表](https://hub.docker.com/r/easysoft/quickon-zentao/tags/)
 
 ```bash
-docker pull easysoft/quickon-zentao:[TAG]
+docker pull hub.zentao.net/app/zentao:[TAG]
 ```
 
 ## 四、运行镜像
@@ -103,7 +104,7 @@ docker pull easysoft/quickon-zentao:[TAG]
 docker run -it \
     -v $PWD/data:/data \
     -e MYSQL_INTERNAL=true \
-    easysoft/quickon-zentao:latest
+    hub.zentao.net/app/zentao:latest
 ```
 
 > 执行上面的命令后，会启动禅道镜像，通过设置 `MYSQL_INTERNAL=true` 会启动内置的MySQL服务。
@@ -120,7 +121,7 @@ docker run -it \
     -e ZT_MYSQL_USER=<你的MySQL服务用户名> \
     -e ZT_MYSQL_PASSWORD=<你的MySQL服务密码> \
     -e ZT_MYSQL_DB=<禅道数据库名> \
-    easysoft/quickon-zentao:latest
+    hub.zentao.net/app/zentao:latest
 ```
 
 > 通过设置 `MYSQL_INTERNAL=false` ，并且设置MySQL相关的环境变量，运行镜像后，可以连接到外部的MySQL
@@ -228,7 +229,7 @@ docker run -d --rm --name zentao \
 -e PHP_UPLOAD_MAX_FILESIZE=512M \
 -v /data/zentao:/data \
 -p 8088:80 \
-easysoft/quickon-zentao:latest
+hub.zentao.net/app/zentao:latest
 ```
 
 > - PHP_MAX_EXECUTION_TIME 设置为300秒
@@ -264,7 +265,7 @@ docker run -d --rm --name zentao \
 -e PHP_SESSION_PATH=tcp://redis:6379 \
 -v /data/zentao:/data \
 -p 8088:80 \
-easysoft/quickon-zentao:latest
+hub.zentao.net/app/zentao:latest
 ```
 
 指定上面两个环境变量，实际上就是修改了`php.ini`中关于Session的配置：
@@ -291,7 +292,7 @@ make run
 make ps
 
 # 查看服务日志
-docker-compose logs -f quickon-zentao
+docker-compose logs -f zentao
 
 ```
 
@@ -331,8 +332,8 @@ helm upgrade -i zentao-open zentao/zentao -f custom.yaml
 ```diff
 ...
   zentao:
--    image: easysoft/quickon-zentao:17.3-20220729
-+    image: easysoft/quickon-zentao:17.4-20220817
+-    image: hub.zentao.net/app/zentao:18.5
++    image: hub.zentao.net/app/zentao:18.6
     container_name: zentao
 ...
 ```

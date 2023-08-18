@@ -10,7 +10,7 @@ dockerfile=${6:? "dockerfile is required"}
 buildEnv=${7:-public}
 buildDate=$(date +%Y%m%d)
 
-internalRepository="${INTERNAL_IMAGE_REPO}/app/$appName"
+internalRepository="${INTERNAL_IMAGE_REPO}/${INTERNAL_IMAGE_NAMESPACE}/$appName"
 publicRepository="${PUBLIC_IMAGE_REPO}/${PUBLIC_IMAGE_NAMESPACE}/$appName"
 baseImage="${PUBLIC_IMAGE_REPO}/ci/zentao-runtime:php${phpVer%.*}-mysql${mysqlVer%.*}"
 

@@ -157,6 +157,8 @@ export PERSISTENCE_LINK_LIST=(
 "/data/zentao/config/license"
 "/data/zentao/config/ext"
 "/data/zentao/www/data"
+"/data/zentao/www/.htaccess"
+"/data/zentao/www/.ztaccess"
 "/data/zentao/tmp/log"
 "/data/zentao/tmp/template"
 "/data/zentao/tmp/backup"

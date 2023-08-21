@@ -81,6 +81,7 @@ outputGroupedImages() {
   count=$(jq -r "${listKey} | length " < $jsonSourceFile)
   if [ "$count" -gt 0 ];then
     echo "##### $title"
+    echo
     for i in `jq -r "${listKey}[]" < $jsonSourceFile`
     do
       echo "* $i"

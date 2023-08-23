@@ -86,6 +86,7 @@ outputGroupedImages() {
     do
       echo "* $i"
     done
+    echo
   fi
 }
 

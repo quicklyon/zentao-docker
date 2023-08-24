@@ -22,7 +22,7 @@ RUN . /opt/easysoft/scripts/libcomponent.sh && z_download "zentao" "${ZENTAO_VER
 COPY debian/rootfs /
 
 # Apply patch
-RUN bash -x /apps/zentao/patch/patch.sh
+# RUN bash -x /apps/zentao/patch/patch.sh
 
 # Copy zentao-pass source code
 WORKDIR /apps/zentao

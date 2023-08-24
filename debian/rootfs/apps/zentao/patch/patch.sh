@@ -12,7 +12,7 @@ fix_install_step6(){
 	cp $file ${file}.fix
 	line=$(grep -n "step6()" $file | awk -F : '{print $1}')
 	line=$((line+1))
-	sed -i "$line a touch(\'/data/.installed.tmp\');" "$file".fix
+	sed -i "$line a touch(\'/data/zentao/tmp/.installed.tmp\');" "$file".fix
 	diff -uNr $file ${file}.fix > ${file}.patch
 	patch -p0 < ${file}.patch
 	if check_syntax "$dir/$file";then

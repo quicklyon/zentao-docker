@@ -35,7 +35,7 @@ z_download() {
     timestamp="$(date +%s)"
     local name="${1:?software name is required}"
     local version="${2:?version is required}"
-    local zentao_base_name="ZenTaoPMS.${version}.php7.2_7.4.zip?$timestamp"
+    local zentao_base_name="ZenTaoPMS-${version}-php7.2_7.4.zip?$timestamp"
     local zdoo_base_name="zdoo.${version}.php7.2.zip"
     local directory="/apps/"
 

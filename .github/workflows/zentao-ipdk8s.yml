@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    name: build zentao max image
+    name: build zentao-ipd image
     runs-on: ubuntu-latest
     steps:
     - name: CheckOut
@@ -27,7 +27,7 @@ jobs:
         sudo apt-get install -y jq
     - name: Build and push
       run: |
-        make public-build-max
+        make public-build-ipd-k8s
     - name: Update repo description
       uses: peter-evans/dockerhub-description@v3
       with:

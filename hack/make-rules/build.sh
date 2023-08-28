@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 set -e
 
 appName=${1:? "appName is required"}
@@ -36,7 +35,8 @@ do
   buildTagFlags="$buildTagFlags -t $i"
 done
 
-echo docker buildx build \
+set -x
+docker buildx build \
             --build-arg BASE_IMAGE="$baseImage" \
             --build-arg ZENTAO_VER="$appVer" \
             --build-arg ZENTAO_URL="$ZENTAO_URL" \
@@ -44,8 +44,9 @@ echo docker buildx build \
             --build-arg MYSQL_VER="$mysqlVer" \
             --build-arg BUILD_ENV="$buildEnv" \
             --platform="$arch" \
-            "$buildTagFlags" \
+            $buildTagFlags \
             -f "$dockerfile" . --pull --push
+set +x
 
 . hack/make-rules/gen_report.sh
 

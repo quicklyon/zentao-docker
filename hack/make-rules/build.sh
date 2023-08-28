@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 set -e
 
 appName=${1:? "appName is required"}
@@ -14,12 +15,28 @@ internalRepository="${INTERNAL_IMAGE_REPO}/${INTERNAL_IMAGE_NAMESPACE}/$appName"
 publicRepository="${PUBLIC_IMAGE_REPO}/${PUBLIC_IMAGE_NAMESPACE}/$appName"
 baseImage="${PUBLIC_IMAGE_REPO}/ci/zentao-runtime:php${phpVer%.*}-mysql${mysqlVer%.*}"
 
-extraTagFlags=""
+internalRepoList=()
+publicRepoList=()
+
+internalRepoList+=("$internalRepository:$appVer-$buildDate")
+internalRepoList+=("$internalRepository:$appVer")
+
 if [ "$BUILD_PUBLIC_IMAGE" = "true" ];then
-  extraTagFlags="-t ${publicRepository}:$appVer-$buildDate -t ${publicRepository}:$appVer"
+  publicRepoList+=("${publicRepository}:$appVer-$buildDate")
+  publicRepoList+=("${publicRepository}:$appVer")
+  
+  if [[ "$appVer" =~ ^[0-9]+ ]];then
+    publicRepoList+=("${publicRepository}:latest")
+  fi
 fi
 
-docker buildx build \
+buildTagFlags=""
+for i in "${internalRepoList[@]}" "${publicRepoList[@]}"
+do
+  buildTagFlags="$buildTagFlags -t $i"
+done
+
+echo docker buildx build \
             --build-arg BASE_IMAGE="$baseImage" \
             --build-arg ZENTAO_VER="$appVer" \
             --build-arg ZENTAO_URL="$ZENTAO_URL" \
@@ -27,16 +44,17 @@ docker buildx build \
             --build-arg MYSQL_VER="$mysqlVer" \
             --build-arg BUILD_ENV="$buildEnv" \
             --platform="$arch" \
-            -t $internalRepository:$appVer-$buildDate \
-            -t $internalRepository:$appVer \
-            $extraTagFlags \
+            "$buildTagFlags" \
             -f "$dockerfile" . --pull --push
 
 . hack/make-rules/gen_report.sh
-addInternalImage $internalRepository:$appVer-$buildDate
-addInternalImage $internalRepository:$appVer
 
-if [ "$BUILD_PUBLIC_IMAGE" = "true" ];then
-  addPublicImage ${publicRepository}:$appVer-$buildDate
-  addPublicImage ${publicRepository}:$appVer
-fi
+for i in "${internalRepoList[@]}"
+do
+  addInternalImage "$i"
+done
+
+for i in "${publicRepoList[@]}"
+do
+  addPublicImage "$i"
+done

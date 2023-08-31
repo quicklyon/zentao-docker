@@ -40,49 +40,95 @@ tasks:
       - task --list-all
 
   build:
-    desc: 内网构建 开源版 镜像
+    desc: 构建内网 开源版
     cmds:
       - /bin/bash ./hack/make-rules/build.sh "$APP_NAME" "$OPEN_VER" "$PHP_VER" "$MYSQL_VER" "linux/amd64,linux/arm64" "Dockerfile" "internal"
 
+  pub-build:
+    desc: 手动构建公网 开源版
+    aliases: [pb]
+    cmds:
+      - /bin/bash ./hack/make-rules/public-build.sh "$APP_NAME" "$OPEN_VER" "$PHP_VER" "$MYSQL_VER"
+
   build-biz:
-    desc: 内网构建 企业版 镜像
+    desc: 构建内网 企业版
     aliases: [biz]
     cmds:
       - /bin/bash ./hack/make-rules/build.sh "$APP_NAME" "$BIZ_VER" "$PHP_VER" "$MYSQL_VER" "linux/amd64,linux/arm64" "Dockerfile" "internal"
 
-  # 内网构建 企业K8s版 镜像
+  pub-build-biz:
+    desc: 手动构建公网 企业版
+    aliases: [pbiz]
+    cmds:
+      - /bin/bash ./hack/make-rules/public-build.sh "$APP_NAME" "$BIZ_VER" "$PHP_VER" "$MYSQL_VER"
+
   build-biz-k8s:
+    desc: 构建内网 企业K8s版
     aliases: [biz-k8s]
     cmds:
       - /bin/bash ./hack/make-rules/build.sh "$APP_NAME" "$BIZ_K8S_VER" "$PHP_VER" "$MYSQL_VER" "linux/amd64,linux/arm64" "Dockerfile" "internal"
 
+  pub-build-biz-k8s:
+    desc: 手动构建公网 企业K8s版
+    aliases: [pbiz-k8s]
+    cmds:
+      - /bin/bash ./hack/make-rules/public-build.sh "$APP_NAME" "$BIZ_K8S_VER" "$PHP_VER" "$MYSQL_VER"
 
-  # 内网构建 旗舰版 镜像
   build-max:
+    desc: 构建内网 旗舰版
     aliases: [max]
     cmds:
       - /bin/bash ./hack/make-rules/build.sh "$APP_NAME" "$MAX_VER" "$PHP_VER" "$MYSQL_VER" "linux/amd64,linux/arm64" "Dockerfile" "internal"
 
+  pub-build-max:
+    desc: 手动构建公网 旗舰版
+    aliases: [pmax]
+    cmds:
+      - /bin/bash ./hack/make-rules/public-build.sh "$APP_NAME" "$MAX_VER" "$PHP_VER" "$MYSQL_VER"
 
-  # 内网构建 旗舰K8S版 镜像
   build-max-k8s:
+    desc: 构建内网 旗舰K8S版
     aliases: [max-k8s]
     cmds:
       - /bin/bash ./hack/make-rules/build.sh "$APP_NAME" "$MAX_K8S_VER" "$PHP_VER" "$MYSQL_VER" "linux/amd64,linux/arm64" "Dockerfile" "internal"
 
-  # 内网构建 IPD版 镜像
+  pub-build-max-k8s:
+    desc: 手动构建公网 旗舰K8S版
+    aliases: [pmax-k8s]
+    cmds:
+      - /bin/bash ./hack/make-rules/public-build.sh "$APP_NAME" "$MAX_K8S_VER" "$PHP_VER" "$MYSQL_VER"
+
   build-ipd:
+    desc: 构建内网 IPD版
     aliases: [ipd]
     cmds:
       - /bin/bash ./hack/make-rules/build.sh "$APP_NAME" "$IPD_VER" "$PHP_VER" "$MYSQL_VER" "linux/amd64,linux/arm64" "Dockerfile" "internal"
+  
+  pub-build-ipd:
+    desc: 手动构建公网 IPD版
+    aliases: [pipd]
+    cmds:
+      - /bin/bash ./hack/make-rules/public-build.sh "$APP_NAME" "$IPD_VER" "$PHP_VER" "$MYSQL_VER"
 
-  # 内网构建开源版镜像
   build-ipd-k8s:
+    desc: 构建内网 IPD K8S版
     aliases: [ipd-k8s]
     cmds:
       - /bin/bash ./hack/make-rules/build.sh "$APP_NAME" "$IPD_K8S_VER" "$PHP_VER" "$MYSQL_VER" "linux/amd64,linux/arm64" "Dockerfile" "internal"
 
-  # 内网构建开源版镜像
+  pub-build-ipd-k8s:
+    desc: 手动构建公网 IPD K8S版
+    aliases: [pipd-k8s]
+    cmds:
+      - /bin/bash ./hack/make-rules/public-build.sh "$APP_NAME" "$IPD_K8S_VER" "$PHP_VER" "$MYSQL_VER"
+
+
   build-all:
+    desc: 构建内网 所有版本
     aliases: [all]
     deps: [build,biz,biz-k8s,max,max-k8s,ipd,ipd-k8s]
+
+  pub-build-all:
+    desc: 手动构建公网 所有版本
+    aliases: [pall]
+    deps: [pb,pbiz,pbiz-k8s,pmax,pmax-k8s,pipd,pipd-k8s]

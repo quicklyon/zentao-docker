@@ -3,7 +3,7 @@
 镜像地址:
 
 - `hub.zentao.net/app/zentao`(mirror镜像)
-- [easysoft/quickon-zentao](https://hub.docker.com/r/easysoft/quickon-zentao)
+- [easysoft/zentao](https://hub.docker.com/r/easysoft/zentao)
 
 - 开源版
   - [`latest`, `18.6`, `18.6-20230831`](https://www.zentao.net/dynamic/zentaopms18.6-82820.html)

@@ -39,19 +39,24 @@ z_download() {
     local zdoo_base_name="zdoo.${version}.php7.2.zip"
     local directory="/apps/"
 
-    if [[ ${ZENTAO_URL} == *"nexus"* ]];then
-        if [[ $version =~ ".k8s" ]];then
-            zentao_base_name="ZenTaoPMS-${version/.k8s}-k8s.php7.2_7.4.zip"
-        else
-            zentao_base_name="ZenTaoPMS-${version}-php7.2_7.4.zip"
-        fi
+    if [[ $version =~ ".k8s" ]];then
+        zentao_base_name="ZenTaoPMS-${version/.k8s}-k8s.php7.2_7.4.zip?$timestamp"
+    fi
+
+    # 兼容18.6之前的文件名
+    testPkg=$(curl -s -I -w %{http_code} -o /dev/null ${ZENTAO_URL}/${version/.k8s}/${zentao_base_name})
+    if [ "$testPkg" == "404" ];then
+        zentao_base_name=${zentao_base_name//-/.}
     fi
 
     echo "Downloading $name:$version package"
     case $name in 
     "zentao")
             wget --no-check-certificate --quiet --output-document=/tmp/"${1}" "${ZENTAO_URL}/${version/.k8s}/${zentao_base_name}"
-            unzip -qq -d ${directory} /tmp/"${1}" && mv /apps/zentaopms /apps/zentao && rm -rf /apps/zentao/www/data
+            unzip -qq -d ${directory} /tmp/"${1}" \
+            && mv /apps/zentaopms /apps/zentao \
+            && rm -rf /apps/zentao/www/data \
+            && chown nobody.nogroup /apps/zentao -R
             rm /tmp/"${1}"
         ;;
     "zdoo")

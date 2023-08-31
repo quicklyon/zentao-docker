@@ -7,7 +7,7 @@
     "version": "8.6",
     "news": "https://www.zentao.net/download/biz8.5-82696.html"
   },
-  "biz.k8s": {
+  "bizk8s": {
     "version": "8.6",
     "news": "ZenTao Biz kubernetes customized version"
   },
@@ -15,7 +15,7 @@
     "version": "4.6",
     "news": "https://www.zentao.net/download/max4.5-82697.html"
   },
-  "max.k8s": {
+  "maxk8s": {
     "version": "4.6",
     "news": "ZenTao Max kubernetes customized version"
   },
@@ -28,6 +28,10 @@
     "news": "https://www.zentao.net/download/zentaolitevipv1.2-80983.html"
   },
   "ipd": {
+    "version": "1.0.1",
+    "news": "https://www.zentao.net/download/zentao-ipd-82471.html"
+  },
+  "ipdk8s": {
     "version": "1.0.1",
     "news": "https://www.zentao.net/download/zentao-ipd-82471.html"
   }

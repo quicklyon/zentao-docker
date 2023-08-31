@@ -19,14 +19,14 @@ SHELL ["/bin/bash", "-c"]
 RUN . /opt/easysoft/scripts/libcomponent.sh && z_download "zentao" "${ZENTAO_VER}"
 
 # Copy apache,php and gogs config files
-COPY debian/rootfs /
+COPY --chown=nobody:nogroup debian/rootfs /
 
 # Apply patch
 RUN bash -x /apps/zentao/patch/patch.sh
 
 # Copy zentao-pass source code
 WORKDIR /apps/zentao
-RUN chown nobody.nogroup /apps/zentao /opt/zbox/tmp -R \
+RUN chown nobody.nogroup /opt/zbox/tmp -R \
    && ln -s /opt/zbox/run/mysql/mysql /usr/bin/
 
 EXPOSE 80

@@ -8,6 +8,8 @@
 . /opt/easysoft/scripts/liblog.sh
 . /opt/easysoft/scripts/libos.sh
 
+[ -n "${DEBUG:+1}" ] && set -x
+
 ########################
 # Check and waiting MySQL to be ready. 
 # Globals:
@@ -74,10 +76,22 @@ mysql_reset_password(){
     local -a args=("--host=$ZT_MYSQL_HOST" "--port=$ZT_MYSQL_PORT" "-p123456" "--user=root" "-S /data/mysql/tmp/mysql.sock")
     local command="/usr/bin/mysql"
 
-    args+=("--execute=CREATE USER \'$ZT_MYSQL_USER\'@'%' IDENTIFIED BY \'$ZT_MYSQL_PASSWORD\';GRANT ALL ON *.* TO \'$ZT_MYSQL_USER\'@'%';flush privileges;")
+    args+=("--execute=CREATE USER '$ZT_MYSQL_USER'@'%' IDENTIFIED BY '$ZT_MYSQL_PASSWORD';GRANT ALL ON *.* TO '$ZT_MYSQL_USER'@'%';flush privileges;")
+
+    if [ $(mysql_check_user) == "0" ];then
+        info "Check $EASYSOFT_APP_NAME database."
+        debug_execute "$command" "${args[@]}" || return 1 
+    fi
+}
+
+mysql_check_user(){
+    local -a args=("--host=$ZT_MYSQL_HOST" "--port=$ZT_MYSQL_PORT" "-p123456" "--user=root" "-S /data/mysql/tmp/mysql.sock" "-sN")
+    local command="/usr/bin/mysql"
+
+    args+=("--execute=select count(1) from mysql.user where User='$ZT_MYSQL_USER' and Host='%';")
     
-    info "Check $EASYSOFT_APP_NAME database."
-    debug_execute "$command" "${args[@]}" || return 1 
+    info "Check zentao mysql $ZT_MYSQL_HOST user."
+    "$command" "${args[@]}"
 }
 
 ########################

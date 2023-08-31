@@ -12,11 +12,9 @@ set -o pipefail
 . /opt/easysoft/scripts/liblog.sh
 . /opt/easysoft/scripts/libeasysoft.sh
 . /opt/easysoft/scripts/libfs.sh
+. /etc/s6/s6-init/envs
 
 print_welcome_page
-
-# 默认启动内置MySQL
-MYSQL_INTERNAL=${MYSQL_INTERNAL:-false}
 
 if [ "$MYSQL_INTERNAL" == "true" ];then
     [ ! -L /etc/s6/s6-enable/00-mysql ] && ln -s /etc/s6/s6-available/mysql /etc/s6/s6-enable/00-mysql    

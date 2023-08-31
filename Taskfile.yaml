@@ -1,0 +1,88 @@
+version: '3'
+
+env:
+  APP_NAME: zentao
+  PHP_VER: 7.4.33
+  MYSQL_VER: 10.6.15
+  BUILD_PUBLIC_IMAGE:
+    sh: echo ${CI_BUILD_PUBLIC_IMAGE:-false}
+  INTERNAL_IMAGE_REPO:
+    sh: echo ${CI_INTERNAL_IMAGE_REPO:-hub.qc.oop.cc}
+  INTERNAL_IMAGE_NAMESPACE:
+    sh: echo ${CI_INTERNAL_IMAGE_NAMESPACE:-app}
+  PUBLIC_IMAGE_REPO:
+    sh: echo ${CI_PUBLIC_IMAGE_REPO:-hub.zentao.net}
+  PUBLIC_IMAGE_NAMESPACE:
+    sh: echo ${CI_PUBLIC_IMAGE_NAMESPACE:-app}
+  OPEN_VER:
+    sh: echo ${PMS_VERSION:-$(jq -r .zentaopms.version < version.json)}
+  BIZ_VER:
+    sh: echo ${BIZ_VERSION:-biz$(jq -r .biz.version < version.json)}
+  BIZ_K8S_VER:
+    sh: echo ${BIZ_VER:-biz$(jq -r .bizk8s.version < version.json).k8s}
+  MAX_VER:
+    sh: echo ${MAX_VERSION:-max$(jq -r .max.version < version.json)}
+  MAX_K8S_VER:
+    sh: echo ${MAX_VERSION:-max$(jq -r .maxk8s.version < version.json).k8s}
+  LITE_VER:
+    sh: echo "lite$(jq -r .litev.version < version.json)"
+  LITEBIZ_VER:
+    sh: echo "lite$(jq -r .litevipv.version < version.json)"
+  IPD_VER:
+    sh: echo ${IPD_VERSION:-ipd$(jq -r .ipd.version < version.json)}
+  IPD_K8S_VER:
+    sh: echo ${IPD_VERSION:-ipd$(jq -r .ipdk8s.version < version.json).k8s}
+
+tasks:
+  default:
+    desc: 默认列出所有的任务
+    cmds:
+      - task --list-all
+
+  build:
+    desc: 内网构建 开源版 镜像
+    cmds:
+      - /bin/bash ./hack/make-rules/build.sh "$APP_NAME" "$OPEN_VER" "$PHP_VER" "$MYSQL_VER" "linux/amd64,linux/arm64" "Dockerfile" "internal"
+
+  build-biz:
+    desc: 内网构建 企业版 镜像
+    aliases: [biz]
+    cmds:
+      - /bin/bash ./hack/make-rules/build.sh "$APP_NAME" "$BIZ_VER" "$PHP_VER" "$MYSQL_VER" "linux/amd64,linux/arm64" "Dockerfile" "internal"
+
+  # 内网构建 企业K8s版 镜像
+  build-biz-k8s:
+    aliases: [biz-k8s]
+    cmds:
+      - /bin/bash ./hack/make-rules/build.sh "$APP_NAME" "$BIZ_K8S_VER" "$PHP_VER" "$MYSQL_VER" "linux/amd64,linux/arm64" "Dockerfile" "internal"
+
+
+  # 内网构建 旗舰版 镜像
+  build-max:
+    aliases: [max]
+    cmds:
+      - /bin/bash ./hack/make-rules/build.sh "$APP_NAME" "$MAX_VER" "$PHP_VER" "$MYSQL_VER" "linux/amd64,linux/arm64" "Dockerfile" "internal"
+
+
+  # 内网构建 旗舰K8S版 镜像
+  build-max-k8s:
+    aliases: [max-k8s]
+    cmds:
+      - /bin/bash ./hack/make-rules/build.sh "$APP_NAME" "$MAX_K8S_VER" "$PHP_VER" "$MYSQL_VER" "linux/amd64,linux/arm64" "Dockerfile" "internal"
+
+  # 内网构建 IPD版 镜像
+  build-ipd:
+    aliases: [ipd]
+    cmds:
+      - /bin/bash ./hack/make-rules/build.sh "$APP_NAME" "$IPD_VER" "$PHP_VER" "$MYSQL_VER" "linux/amd64,linux/arm64" "Dockerfile" "internal"
+
+  # 内网构建开源版镜像
+  build-ipd-k8s:
+    aliases: [ipd-k8s]
+    cmds:
+      - /bin/bash ./hack/make-rules/build.sh "$APP_NAME" "$IPD_K8S_VER" "$PHP_VER" "$MYSQL_VER" "linux/amd64,linux/arm64" "Dockerfile" "internal"
+
+  # 内网构建开源版镜像
+  build-all:
+    aliases: [all]
+    deps: [build,biz,biz-k8s,max,max-k8s,ipd,ipd-k8s]

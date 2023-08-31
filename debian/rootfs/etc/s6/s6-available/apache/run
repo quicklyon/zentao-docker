@@ -19,14 +19,13 @@ sleep "${PAUSE:-0}"
 wait_for_mysql || exit 1
 
 # link mysql.sock for mysql client
-if [ -e /data/mysql/tmp/mysql.sock ];then
+if [ -e /data/mysql/tmp/mysql.sock ] && [ ! -L /opt/zbox/tmp/mysql/mysql.sock ];then
     ln -s /data/mysql/tmp/mysql.sock /opt/zbox/tmp/mysql/mysql.sock
 fi
 
 # First run add user and grant privileges
 if [ "$MYSQL_INTERNAL" == "true" ] && [ ! -f /data/zentao/.version ] ;then
-    mysql -h127.0.0.1 -uroot -p123456 \
-          -e "CREATE USER $ZT_MYSQL_USER@'%' IDENTIFIED BY \"$ZT_MYSQL_PASSWORD\";GRANT ALL ON *.* TO $ZT_MYSQL_USER@'%';flush privileges;"
+    mysql_reset_password
 fi
 
 # Initialize database

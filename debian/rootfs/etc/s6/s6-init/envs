@@ -6,7 +6,9 @@
 export IS_CONTAINER="true"
 export PROTOCOL_TYPE=${PROTOCOL_TYPE:-https}
 export ZENTAO_TOKEN_NAME=${ZENTAO_TOKEN_NAME:-quickon-zentao}
-export MYSQL_INTERNAL=${MYSQL_INTERNAL:-false}
+MYSQL_INTERNAL=${MYSQL_INTERNAL:-false}
+# Confirm lower case
+export MYSQL_INTERNAL=${MYSQL_INTERNAL,,}
 #==========#
 #  DevOps  #
 #==========#
@@ -140,7 +142,13 @@ export PHP_PERSISTENCE_LIST=(
 "/data/mysql/etc"
 "/data/mysql/logs"
 "/data/mysql/tmp"
-"/data/zentao")
+"/data/zentao"
+"/data/zentao/config"
+"/data/zentao/www"
+"/data/zentao/tmp"
+"/data/zentao/module/"
+"/data/zentao/module/extension"
+"/data/zentao/extension")
 
 # MySQL persistence directory
 export MYSQL_PERSISTENCE_LIST=(

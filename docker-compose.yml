@@ -8,7 +8,7 @@ services:
 
 # mysql service for zentao
   zentao-mysql:
-    image: mysql:5.7
+    image: mariadb:10.6
     container_name: zentao-mysql
     ports:
       - '3307:3306'
@@ -29,7 +29,7 @@ services:
 
 # zentao service
   zentao:
-    image: easysoft/quickon-zentao:${TAG:-latest}
+    image: hub.zentao.net/app/zentao:${TAG:-latest}
     container_name: zentao
     ports:
       - '8080:80'

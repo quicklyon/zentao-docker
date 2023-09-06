@@ -127,10 +127,25 @@ CustomLog "/dev/stdout" combined
  ServerAdmin zentao@local.net
  DocumentRoot "{{DOCUMENT_ROOT}}"
  ServerName localhost
+ 
  <Directory />
    AllowOverride all
    Require all granted
  </Directory>
+
+# setting for admin
+ Alias /adminer "{{DOCUMENT_ROOT}}/adminer"
+ <Directory "{{DOCUMENT_ROOT}}/adminer">
+    <Files "index.php">
+        SetHandler application/x-httpd-php
+    </Files>
+ </Directory>
+ <DirectoryMatch "{{DOCUMENT_ROOT}}/adminer/.+/.*">
+    <FilesMatch ".+\.ph(p[3457]?|t|tml)$">
+        SetHandler text/plain
+    </FilesMatch>
+ </DirectoryMatch>
+ 
  ErrorLog "/dev/stderr"
  CustomLog "/dev/stdout" combined
 </VirtualHost>

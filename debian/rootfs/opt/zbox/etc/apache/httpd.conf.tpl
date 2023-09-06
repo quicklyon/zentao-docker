@@ -136,6 +136,7 @@ CustomLog "/dev/stdout" combined
 # setting for admin
  Alias /adminer "{{DOCUMENT_ROOT}}/adminer"
  <Directory "{{DOCUMENT_ROOT}}/adminer">
+    DirectoryIndex index.php
     <Files "index.php">
         SetHandler application/x-httpd-php
     </Files>

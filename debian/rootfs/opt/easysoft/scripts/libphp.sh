@@ -2,7 +2,7 @@
 
 function control_php_ext(){
     # 获取所有以PHP_EXT开头的环境变量
-    env_vars=$(env | grep '^PHP_EXT_')
+    env_vars=$(env | awk '/^PHP_EXT_/ {print}')
 
     # 循环处理环境变量
     for var in $env_vars; do
@@ -24,7 +24,7 @@ function control_php_ext(){
         else
             # 禁用扩展
             info "Disable php $ext_name extension."
-            phpenmod $ext_name
+            phpdismod $ext_name
         fi
     done
 }

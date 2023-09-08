@@ -6,7 +6,7 @@ for ini in /opt/zbox/etc/php/conf.d/*-"$ext_name".ini.disabled
 do
   if [ -e "$ini" ]
   then
-    mv "$ini" "${ini/.disabled/}"
+    cp -f "$ini" "${ini/.disabled/}"
     break
   fi
 done

@@ -3,6 +3,7 @@
 # shellcheck disable=SC1091
 . /etc/s6/s6-init/envs
 . /opt/easysoft/scripts/libmysql.sh
+. /opt/easysoft/scripts/libphp.sh
 
 set -e
 
@@ -30,5 +31,8 @@ fi
 
 # Initialize database
 mysql -h"$ZT_MYSQL_HOST" -P"$ZT_MYSQL_PORT" -u"$ZT_MYSQL_USER" -p"$ZT_MYSQL_PASSWORD" -e "CREATE DATABASE IF NOT EXISTS $ZT_MYSQL_DB; "
+
+# Enable or disable php extensions
+control_php_ext
 
 exec /opt/zbox/bin/apachectl -D FOREGROUND

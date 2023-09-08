@@ -98,7 +98,7 @@ do
 
         # ext目录做了持久化，因此企业版、旗舰版需要将镜像中的版本标识文件复制到持久化目录
         # zhouyq 2023-03-09
-        cp -rp "$ext_dir"/zentao*.php /apps/zentao/config/ext/
+        cp -rp "$ext_dir"/{zentao*,ipd}.php /apps/zentao/config/ext/
 
         # 开源切换到企业版或旗舰版，需要复制edition.php文件到持久化目录
         # zhouyq 2023-04-07

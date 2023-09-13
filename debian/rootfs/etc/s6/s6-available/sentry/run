@@ -82,9 +82,9 @@ do
             echo "$(date +'%F %H:%M:%S') $ZENTAO_VER installed" >> /data/zentao/.version
         fi
         # 兼容老版本升级, 后续移除
-        [ -f /data/.installed.tmp ] && [ ! -f /data/zentao/tmp/.installed.tmp ] && (
+        if [ -f /data/.installed.tmp ] && [ ! -f /data/zentao/tmp/.installed.tmp ];then
             mv /data/.installed.tmp /data/zentao/tmp/.installed.tmp
-        )
+        fi
         # remove install and update file
         # patch for create the .installed.tmp file
         [ -f /data/zentao/tmp/.installed.tmp ] && rm -f /apps/zentao/www/{install.php,upgrade.php}

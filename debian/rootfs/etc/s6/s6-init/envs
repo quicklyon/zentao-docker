@@ -145,6 +145,7 @@ export PHP_PERSISTENCE_LIST=(
 "/data/zentao"
 "/data/zentao/config"
 "/data/zentao/www"
+"/data/zentao/www/data"
 "/data/zentao/tmp"
 "/data/zentao/module/"
 "/data/zentao/module/extension"

@@ -24,16 +24,6 @@ for pdir in "${PHP_PERSISTENCE_LIST[@]}"
 do
     # Ensure a directory exists and,is owned by the given user
     ensure_dir_exists "$pdir" "nobody"  "nogroup"
-
-    # Recursively modify the permissions of the 'tmp' and 'data' directories.
-    if [ "$pdir" == "/data/zentao/tmp" ] || [ "$pdir" == "/data/zentao/www/data" ];then
-        chmod 777 -R "$pdir"
-    fi
-
-    # Modify the permissions of the 'config' and 'www' directories.
-    if [ "$pdir" == "/data/zentao/config" ] || [ "$pdir" == "/data/zentao/www" ];then
-        chmod 777 "$pdir"
-    fi
 done
 
 # Make soft link for persistent directory

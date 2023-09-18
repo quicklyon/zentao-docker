@@ -127,6 +127,7 @@ export MYSQL_PASSWORD=$ZT_MYSQL_PASSWORD
 #==========#
 export APP_DOMAIN=${APP_DOMAIN:-*}
 export APP_DEFAULT_PORT=${APP_DEFAULT_PORT:-80}
+export APP_WEB_ROOT=${APP_WEB_ROOT:-/zentao}
 export DOCUMENT_ROOT=${DOCUMENT_ROOT:-/apps/zentao/www}
 
 # ======================#

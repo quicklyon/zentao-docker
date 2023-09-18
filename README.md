@@ -154,6 +154,7 @@ docker run -it \
 | 变量名                    | 默认值                        | 说明                             |
 | ------------------------ | ---------------------------- | -------------------------------- |
 | DEBUG                    | false                        | 是否打开调试信息，默认关闭       |
+| APP_WEB_ROOT             | /zentao                      | 默认支持的路径前缀       |
 | PHP_SESSION_TYPE         | files                        | php session 类型，files \| redis |
 | PHP_SESSION_PATH         | /data/php/session            | php session 存储路径             |
 | PHP_MAX_EXECUTION_TIME   | 120                          | 最大执行时间，单位秒，有助于防止有问题程序占尽服务器资源。默认120             |

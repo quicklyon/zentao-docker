@@ -24,8 +24,8 @@ fi
 [ ! -L /etc/s6/s6-enable/01-apache ] && ln -s /etc/s6/s6-available/apache /etc/s6/s6-enable/01-apache
 [ ! -L /etc/s6/s6-enable/02-sentry ] && ln -s /etc/s6/s6-available/sentry /etc/s6/s6-enable/02-sentry
 
-if [ $# -gt 0 ]; then
-    exec "$@"
+if [ "$1"  == "bash" ]; then
+    exec /bin/bash
 else
     # Init service
     /etc/s6/s6-init/run || exit 1

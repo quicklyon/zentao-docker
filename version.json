@@ -1,22 +1,22 @@
 {
   "zentaopms": {
-    "version": "18.6",
-    "news": "https://www.zentao.net/download/zentaopms18.5-82695.html"
+    "version": "18.7",
+    "news": "https://www.zentao.net/download/zentaopms18.7-82913.html"
   },
   "biz": {
-    "version": "8.6",
-    "news": "https://www.zentao.net/download/biz8.5-82696.html"
+    "version": "8.7",
+    "news": "https://www.zentao.net/download/biz8.7-82914.html"
   },
   "bizk8s": {
-    "version": "8.6",
+    "version": "8.7",
     "news": "ZenTao Biz kubernetes customized version"
   },
   "max": {
-    "version": "4.6",
-    "news": "https://www.zentao.net/download/max4.5-82697.html"
+    "version": "4.7",
+    "news": "https://www.zentao.net/download/max4.7-82915.html"
   },
   "maxk8s": {
-    "version": "4.6",
+    "version": "4.7",
     "news": "ZenTao Max kubernetes customized version"
   },
   "litev": {
@@ -28,11 +28,11 @@
     "news": "https://www.zentao.net/download/zentaolitevipv1.2-80983.html"
   },
   "ipd": {
-    "version": "1.0.1",
-    "news": "https://www.zentao.net/download/zentao-ipd-82471.html"
+    "version": "1.0.2",
+    "news": "https://www.zentao.net/download/ipd1.0.2-82916.html"
   },
   "ipdk8s": {
-    "version": "1.0.1",
-    "news": "https://www.zentao.net/download/zentao-ipd-82471.html"
+    "version": "1.0.2",
+    "news": "https://www.zentao.net/download/ipd1.0.2-82916.html"
   }
 }

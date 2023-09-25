@@ -13,6 +13,7 @@
 . /opt/easysoft/scripts/libgit.sh
 . /opt/easysoft/scripts/libci.sh
 . /opt/easysoft/scripts/libscan.sh
+. /opt/easysoft/scripts/libdevops.sh
 
 # Wait for mysql and apache to be ready
 if [ "$MYSQL_INTERNAL" == "true" ];then
@@ -39,10 +40,10 @@ do
     if [ "$CFG_INITED" != "0" ];then
         TABLE_PREFIX=$(grep prefix /data/zentao/config/my.php  | cut -d '=' -f 2 | sed -E "s/( |'|;)//g")
         export TABLE_PREFIX=${TABLE_PREFIX:-zt_}
-        
+
         # Just for debug
         sleep "${PAUSE:-0}"
-        
+
         CURRENT_VER=$(Get_Running_Ver)
         export CURRENT_VER
     fi
@@ -116,6 +117,10 @@ do
     # 当配置文件为空时，说明安装向导未完成
     if [ "$CFG_INITED" == "0" ];then
         info "Waiting for the installation wizard to complete."
+        # 初始化DevOps平台数据库
+        if [[ $IN_QUICKON == "true" && $DEVOPS == "true" ]]; then
+            Init_Quickon_DevOps
+        fi
     fi
     sleep 1
 

@@ -129,6 +129,10 @@ export APP_DOMAIN=${APP_DOMAIN:-*}
 export APP_DEFAULT_PORT=${APP_DEFAULT_PORT:-80}
 export APP_WEB_ROOT=${APP_WEB_ROOT:-/zentao}
 export DOCUMENT_ROOT=${DOCUMENT_ROOT:-/apps/zentao/www}
+PHP_VER=$(php -v | head -1  | awk '{print $2}')
+if [[ "$PHP_VER" =~ ^8 ]];then
+	export PHP_VERSION_8=true
+fi
 
 # ======================#
 # Persistence directory #

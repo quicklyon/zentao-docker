@@ -13,8 +13,8 @@ export LITE_VER := lite$(shell jq -r .litev.version < version.json)
 export LITEBIZ_VER := litevip$(shell jq -r .litevipv.version < version.json)
 export IPD_VER := $(or $(IPD_VERSION),ipd$(shell jq -r .ipd.version < version.json))
 export IPD_K8S_VER := $(or $(IPD_VERSION).k8s,ipd$(shell jq -r .ipdk8s.version < version.json).k8s)
-export PHP_VER=$(or $(PHP_VER),7.4.33)
-export MYSQL_VER=$(or $(MYSQL_VER),10.6.15)
+export PHP_VER=$(or $(CI_PHP_VER),7.4.33)
+export MYSQL_VER=$(or $(CI_MYSQL_VER),10.6.15)
 
 .DEFAULT_GOAL:=help
 

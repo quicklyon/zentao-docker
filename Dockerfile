@@ -5,6 +5,7 @@ LABEL maintainer "zhouyueqiu <zhouyueqiu@easycorp.ltd>"
 
 ARG BUILD_ENV
 ARG ZENTAO_URL
+ARG PHP_VER
 ENV OS_NAME="debian-11" \
     HOME_PAGE="www.zentao.net"
 

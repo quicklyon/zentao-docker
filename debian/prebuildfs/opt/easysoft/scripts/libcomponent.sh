@@ -35,12 +35,12 @@ z_download() {
     timestamp="$(date +%s)"
     local name="${1:?software name is required}"
     local version="${2:?version is required}"
-    local zentao_base_name="ZenTaoPMS-${version}-php7.2_7.4.zip?$timestamp"
+    local zentao_base_name="ZenTaoPMS-${version}-${PHP_CLASSIFIER}.zip?$timestamp"
     local zdoo_base_name="zdoo.${version}.php7.2.zip"
     local directory="/apps/"
 
     if [[ $version =~ ".k8s" ]];then
-        zentao_base_name="ZenTaoPMS-${version/.k8s}-k8s.php7.2_7.4.zip?$timestamp"
+        zentao_base_name="ZenTaoPMS-${version/.k8s}-k8s.${PHP_CLASSIFIER}.zip?$timestamp"
     fi
 
     # 兼容18.6之前的文件名

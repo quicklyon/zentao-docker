@@ -67,7 +67,7 @@ mysql_init_db() {
     local command="/usr/bin/mysql"
 
     args+=("--execute=CREATE DATABASE IF NOT EXISTS $init_db;")
-    
+
     info "Check $EASYSOFT_APP_NAME database."
     debug_execute "$command" "${args[@]}" || return 1
 }
@@ -89,7 +89,7 @@ mysql_check_user(){
     local command="/usr/bin/mysql"
 
     args+=("--execute=select count(1) from mysql.user where User='$ZT_MYSQL_USER' and Host='%';")
-    
+
     info "Check zentao mysql $ZT_MYSQL_HOST user."
     "$command" "${args[@]}"
 }
@@ -104,7 +104,7 @@ mysql_check_user(){
 #   ZT_MYSQL_DB
 # Arguments:
 #   $1 - app database name
-#   $2 - mysql dump file(*.sql) 
+#   $2 - mysql dump file(*.sql)
 # Returns:
 #   0 if import succeed,1 otherwise
 #########################
@@ -120,6 +120,39 @@ mysql_import_to_db() {
     else
         error "The specified import file: $sql_file does not exist"
         return 1
-    fi 
-
+    fi
 }
+
+#########################
+# 校验用户权限是否为super/admin
+# Globals:
+#########################
+valid_mysql_user_admin_role() {
+    local retries=${MAXWAIT:-30}
+    local -a args=("--host=$ZT_MYSQL_HOST" "--port=$ZT_MYSQL_PORT" "-p$ZT_MYSQL_PASSWORD" "--user=$ZT_MYSQL_USER")
+    local command="/usr/bin/mysql"
+
+    args+=("--execute=SHOW GRANTS FOR CURRENT_USER;")
+
+    info "Valid MySQL User admin role"
+
+    for ((i = 1; i <= retries; i += 1)); do
+        sleep 1
+        "$command" "${args[@]}" | grep -E "(SUPER|SYSTEM_VARIABLES_ADMIN)"
+        if [ $? -eq 0 ];
+        then
+            info "MySQL User Admin Role is ready."
+            break
+        fi
+
+        warn "Waiting valid MySQL $i seconds"
+
+        if [ "$i" == "$retries" ]; then
+            error "Failed to valid MySQL user admin role: $ZT_MYSQL_USER"
+            return 1
+        fi
+    done
+    return 0
+}
+
+

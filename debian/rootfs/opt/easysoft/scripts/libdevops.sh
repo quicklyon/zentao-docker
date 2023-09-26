@@ -21,8 +21,13 @@ export InitDB_SQL="/apps/zentao/db/zentao.sql"
 #   None
 #########################
 function Init_Quickon_DevOps(){
-  info "Init Quickon DevOps config ..."
   if [ ! -f "/data/zentao/.devops" ]; then
-    mysql_import_to_db "$ZT_MYSQL_DB" "$InitDB_SQL" | tee $CHECK_LOG && touch /data/zentao/.devops
+    info "Init Quickon DevOps config ..."
+    # TODO 没有admin或者super权限
+    valid_mysql_user_admin_role
+    /opt/zbox/bin/php /usr/bin/initdevops.php && (
+      touch /data/zentao/.devops
+      info "Init Quickon DevOps Done"
+    ) || error "Init Quickon DevOps Failed"
   fi
 }

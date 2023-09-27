@@ -4,7 +4,7 @@ FROM ${BASE_IMAGE}
 LABEL maintainer "zhouyueqiu <zhouyueqiu@easycorp.ltd>"
 
 ARG BUILD_ENV
-ARG ZENTAO_URL
+ARG PKG_URL_FORMATTER
 ARG PHP_VER
 ARG BUILD_COMMIT_ID
 ENV OS_NAME="debian-11" \

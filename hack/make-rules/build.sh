@@ -40,7 +40,7 @@ set -x
 docker buildx build \
             --build-arg BASE_IMAGE="$baseImage" \
             --build-arg ZENTAO_VER="$appVer" \
-            --build-arg ZENTAO_URL="$ZENTAO_URL" \
+            --build-arg PKG_URL_FORMATTER="$PKG_URL_FORMATTER" \
             --build-arg PHP_VER="$phpVer" \
             --build-arg MYSQL_VER="$mysqlVer" \
             --build-arg BUILD_ENV="$buildEnv" \

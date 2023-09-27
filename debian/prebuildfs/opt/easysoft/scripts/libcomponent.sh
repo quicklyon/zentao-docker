@@ -15,10 +15,68 @@ else
 fi
 
 ZENTAO_URL=${ZENTAO_URL:-https://dl.cnezsoft.com/zentao}
+PKG_URL_FORMATTER=${PKG_URL_FORMATTER:-}
 ZDOO_URL="https://www.zdoo.com/dl/zdoo"
 
 
 # Functions
+######################################
+# Generate the zentaopms download url
+# Globals:
+#   PKG_URL_FORMATTER
+#   PHP_CLASSIFIER
+# Arguments:
+#   $1 - software's name
+#   $2 - software's version
+# Returns:
+#   string
+######################################
+gen_zentao_download_url() {
+    timestamp="$(date +%s)"
+    local name="${1:?software name is required}"
+    local version="${2:?version is required}"
+    local zentao_base_name="ZenTaoPMS-${version}-${PHP_CLASSIFIER}.zip?$timestamp"
+
+    if [[ $version =~ \.k8s ]];then
+        zentao_base_name="ZenTaoPMS-${version/.k8s}-k8s.${PHP_CLASSIFIER}.zip?$timestamp"
+    fi
+
+    local download_url=""
+    if [ -n "$PKG_URL_FORMATTER" ];then
+        # 内网下载地址
+        
+        # 根据版本号，得到下载子目录名称
+        local subdir
+        case $version in
+        biz*)
+            subdir=bizPack
+        ;;
+        max*)
+            subdir=maxPack
+        ;;
+        ipd*)
+            subdir=ipdPack
+            ;;
+        *)
+            subdir=pmsPack
+        ;;
+        esac
+
+        download_url=$(printf "$PKG_URL_FORMATTER" $subdir "ZenTaoPMS" "${version/.k8s}" "$zentao_base_name")
+    else
+        # 外网下载地址
+        # 兼容18.6之前的文件名
+        testPkg=$(curl -s -I -w %{http_code} -o /dev/null "${ZENTAO_URL}"/"${version/.k8s}"/"${zentao_base_name}")
+        if [ "$testPkg" == "404" ];then
+            zentao_base_name=${zentao_base_name//-/.}
+        fi
+
+        download_url=${ZENTAO_URL}/${version/.k8s}/${zentao_base_name}
+    fi
+    
+    echo "$download_url"
+}
+
 
 ########################
 # Download and unpack a Easysoft software
@@ -32,27 +90,17 @@ ZDOO_URL="https://www.zdoo.com/dl/zdoo"
 #   None
 #########################
 z_download() {
-    timestamp="$(date +%s)"
     local name="${1:?software name is required}"
     local version="${2:?version is required}"
-    local zentao_base_name="ZenTaoPMS-${version}-${PHP_CLASSIFIER}.zip?$timestamp"
     local zdoo_base_name="zdoo.${version}.php7.2.zip"
     local directory="/apps/"
 
-    if [[ $version =~ ".k8s" ]];then
-        zentao_base_name="ZenTaoPMS-${version/.k8s}-k8s.${PHP_CLASSIFIER}.zip?$timestamp"
-    fi
-
-    # 兼容18.6之前的文件名
-    testPkg=$(curl -s -I -w %{http_code} -o /dev/null ${ZENTAO_URL}/${version/.k8s}/${zentao_base_name})
-    if [ "$testPkg" == "404" ];then
-        zentao_base_name=${zentao_base_name//-/.}
-    fi
+    zentao_download_url=$(gen_zentao_download_url "$name" "$version")
 
     echo "Downloading $name:$version package"
     case $name in 
     "zentao")
-            wget --no-check-certificate --quiet --output-document=/tmp/"${1}" "${ZENTAO_URL}/${version/.k8s}/${zentao_base_name}"
+            wget --no-check-certificate --quiet --output-document=/tmp/"${1}" "$zentao_download_url"
             unzip -qq -d ${directory} /tmp/"${1}" \
             && mv /apps/zentaopms /apps/zentao \
             && rm -rf /apps/zentao/www/data \

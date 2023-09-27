@@ -6,8 +6,10 @@ LABEL maintainer "zhouyueqiu <zhouyueqiu@easycorp.ltd>"
 ARG BUILD_ENV
 ARG ZENTAO_URL
 ARG PHP_VER
+ARG BUILD_COMMIT_ID
 ENV OS_NAME="debian-11" \
-    HOME_PAGE="www.zentao.net"
+    HOME_PAGE="www.zentao.net" \
+    BUILD_COMMIT_ID="$BUILD_COMMIT_ID"
 
 COPY debian/prebuildfs /
 

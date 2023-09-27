@@ -9,6 +9,7 @@ arch=${5:? "arch is required"} # like linux/amd64,linux/arm64
 dockerfile=${6:? "dockerfile is required"}
 buildEnv=${7:-public}
 buildDate=$(date +%Y%m%d)
+buildCommitId=${GIT_COMMIT:-unknown}
 
 internalRepository="${INTERNAL_IMAGE_REPO}/${INTERNAL_IMAGE_NAMESPACE}/$appName"
 publicRepository="${PUBLIC_IMAGE_REPO}/${PUBLIC_IMAGE_NAMESPACE}/$appName"
@@ -43,7 +44,9 @@ docker buildx build \
             --build-arg PHP_VER="$phpVer" \
             --build-arg MYSQL_VER="$mysqlVer" \
             --build-arg BUILD_ENV="$buildEnv" \
+            --build-arg BUILD_COMMIT_ID="$buildCommitId" \
             --platform="$arch" \
+            --no-cache \
             $buildTagFlags \
             -f "$dockerfile" . --pull --push
 set +x

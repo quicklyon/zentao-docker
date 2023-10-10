@@ -21,6 +21,7 @@ disable_classes =
 expose_php = Off
 max_execution_time = {{PHP_MAX_EXECUTION_TIME}}
 max_input_time = 60
+max_input_vars = {{PHP_MAX_INPUT_VARS}}
 memory_limit = {{PHP_MEMORY_LIMIT}}
 error_reporting = E_ALL | E_STRICT
 display_errors = On

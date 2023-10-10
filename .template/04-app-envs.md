@@ -5,6 +5,7 @@
 | PHP_SESSION_TYPE         | files                        | php session 类型，files \| redis |
 | PHP_SESSION_PATH         | /data/php/session            | php session 存储路径             |
 | PHP_MAX_EXECUTION_TIME   | 120                          | 最大执行时间，单位秒，有助于防止有问题程序占尽服务器资源。默认120             |
+| PHP_MAX_INPUT_VARS       | 2000                         | 最大输入变量数，有助于防止有问题程序占尽服务器资源。默认2000         |
 | PHP_MEMORY_LIMIT         | 256M                         | 单个php进程允许分配的最大内存             |
 | PHP_POST_MAX_SIZE        | 128M                         | 允许最大Post数据大小             |
 | PHP_UPLOAD_MAX_FILESIZE  | 128M                         | 单个文件上传的最大值             |
@@ -75,6 +76,7 @@ docker run -d --rm --name zentao \
 -e ZT_MYSQL_PASSWORD=pass4you \
 -e ZT_MYSQL_DB=zentao \
 -e PHP_MAX_EXECUTION_TIME=300 \
+-e PHP_MAX_INPUT_VARS=2000 \
 -e PHP_POST_MAX_SIZE=512M \
 -e PHP_UPLOAD_MAX_FILESIZE=512M \
 -v /data/zentao:/data \
@@ -85,6 +87,7 @@ hub.zentao.net/app/zentao:latest
 > - PHP_MAX_EXECUTION_TIME 设置为300秒
 > - PHP_POST_MAX_SIZE 设置为512M
 > - PHP_UPLOAD_MAX_FILESIZE 设置为 512M
+> - PHP_MAX_INPUT_VARS 设置为2000
 
 ## 六、将Session存储在Redis
 

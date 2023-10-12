@@ -23,6 +23,6 @@ function initDB($basePath, $dbHost, $dbUser, $dbPWD, $dbFile, $dbName)
     $tableContent = preg_replace('/^CREATE\s+FUNCTION+/m', "DELIMITER ;;\nCREATE FUNCTION", $tableContent);
     $tableContent = preg_replace('/END;+/', "END;; \nDELIMITER ;", $tableContent);
 
-    file_put_contents($dbFile, "SET @@sql_mode='';" . $tableContent);
+    file_put_contents($dbFile, "SET @@sql_mode='';\nSET NAMES utf8;" . $tableContent);
     `mysql -u{$dbUser} -p{$dbPWD} -h{$dbHost} -D{$dbName} < $dbFile`;
 }

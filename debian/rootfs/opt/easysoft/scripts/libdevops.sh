@@ -21,13 +21,19 @@ export InitDB_SQL="/apps/zentao/db/zentao.sql"
 #   None
 #########################
 function Init_Quickon_DevOps(){
-  if [ ! -f "/data/zentao/.devops" ]; then
-    info "Init Quickon DevOps config ..."
-    # TODO 没有admin或者super权限
-    valid_mysql_user_admin_role
-    /opt/zbox/bin/php /usr/bin/initdevops.php && (
+  CURRENT_VER=$(Get_Running_Ver)
+  if [ "$CURRENT_VER" == "" ]; then
+    if [ ! -f "/data/zentao/.devops" ]; then
+      info "Init Quickon DevOps config ..."
+      # TODO 没有admin或者super权限
+      valid_mysql_user_admin_role
+      /opt/zbox/bin/php /usr/bin/initdevops.php && (
       touch /data/zentao/.devops
       info "Init Quickon DevOps Done"
-    ) || error "Init Quickon DevOps Failed"
+      ) || error "Init Quickon DevOps Failed"
+    fi
+  else
+    [ ! -f "/data/zentao/.devops" ] && touch /data/zentao/.devops
+    info "Quickon DevOps already initialized, Version: $CURRENT_VER"
   fi
 }

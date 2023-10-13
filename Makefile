@@ -69,7 +69,6 @@ build-ipd-k8s: ## 内网构建ipd版本Kubernetes定制版镜像
 	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(IPD_K8S_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile" "internal"
 #============================ End Internal Build ============================#
 
-
 push-all-public: push-public push-biz-public push-biz-k8s-public push-max-k8s-public push-max-public push-ipd-public
 
 push-all: push push-biz push-biz-k8s push-max push-max-k8s ## 将所有镜像push到 hub.qucheng.com 镜像仓库

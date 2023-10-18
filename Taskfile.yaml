@@ -103,7 +103,7 @@ tasks:
     aliases: [ipd]
     cmds:
       - /bin/bash ./hack/make-rules/build.sh "$APP_NAME" "$IPD_VER" "$PHP_VER" "$MYSQL_VER" "linux/amd64,linux/arm64" "Dockerfile" "internal"
-  
+
   pub-build-ipd:
     desc: 手动构建公网 IPD版
     aliases: [pipd]
@@ -121,7 +121,6 @@ tasks:
     aliases: [pipd-k8s]
     cmds:
       - /bin/bash ./hack/make-rules/public-build.sh "$APP_NAME" "$IPD_K8S_VER" "$PHP_VER" "$MYSQL_VER"
-
 
   build-all:
     desc: 构建内网 所有版本

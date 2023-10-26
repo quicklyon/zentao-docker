@@ -123,12 +123,6 @@ outputMakdown() {
   echo "完成时间 **$finishTime**"
   echo
 
-  echo "#### Git 信息"
-  echo "* 触发 Tag: $(renderTagUrl)"
-  echo "* CommitId: $(renderCommitUrl)"
-  echo "* 触发人: ${GIT_TAGGER_NAME}"
-  echo
-
   echo "### 生成镜像明细"
   echo "#### 内网镜像"
   echo

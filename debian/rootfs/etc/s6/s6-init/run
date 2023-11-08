@@ -68,13 +68,17 @@ sed -i "$cfg_num s/true/false/" /apps/zentao/config/config.php
 #   Prepare custom extensions    #
 #================================#
 info "Prepare custom extensions."
-for ext in $(ls -1 /apps/zentao/extension/pkg )
+#for ext in $(ls -1 /apps/zentao/extension/pkg )
+for ext in $(ls -1 /apps/zentao/module/extension/ext/ )
 do
-    if [ -f "/apps/zentao/extension/pkg/$ext/disabled" ];then
+    #if [ -f "/apps/zentao/extension/pkg/$ext/disabled" ];then
+    if [ -f "/apps/zentao/module/extension/ext/$ext/disabled" ];then
         info "Skip disabled extension $ext"
         continue
     else
         info "Install extension $ext"
-        cp -rp /apps/zentao/extension/pkg/$ext/* /apps/zentao/
+        #cp -rp /apps/zentao/extension/pkg/$ext/* /apps/zentao/
+        cd /apps/zentao/module/extension/ext/$ext \
+        && tar -cf - . | tar -xf  -  -C /apps/zentao/ --keep-directory-symlink
     fi
 done

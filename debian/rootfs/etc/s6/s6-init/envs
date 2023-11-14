@@ -151,8 +151,6 @@ export PHP_PERSISTENCE_LIST=(
 "/data/zentao/config"
 "/data/zentao/www"
 "/data/zentao/tmp"
-"/data/zentao/module/"
-"/data/zentao/module/extension"
 "/data/zentao/extension")
 
 # MySQL persistence directory
@@ -176,5 +174,5 @@ export PERSISTENCE_LINK_LIST=(
 "/data/zentao/tmp/template"
 "/data/zentao/tmp/backup"
 "/data/zentao/tmp/extension"
-"/data/zentao/module/extension/ext"
-"/data/zentao/extension/custom")
+"/data/zentao/extension/pkg"
+)

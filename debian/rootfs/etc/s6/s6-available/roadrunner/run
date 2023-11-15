@@ -24,6 +24,7 @@ do
     if [ -f /data/zentao/.version ];then
         break
     fi
+    sleep 1
 done
 
 exec /usr/bin/rr serve -c /apps/zentao/roadrunner/.rr.yaml

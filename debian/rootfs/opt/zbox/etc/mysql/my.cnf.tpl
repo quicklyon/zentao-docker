@@ -42,7 +42,7 @@ default-storage-engine=InnoDB
 default-tmp-storage-engine=InnoDB
 
 server-id  = 1
-
+sql_mode = ""
 [mysqldump]
 quick
 quote-names

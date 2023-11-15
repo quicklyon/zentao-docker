@@ -2,6 +2,7 @@
 
 # shellcheck disable=SC1091
 . /etc/s6/s6-init/envs
+. /opt/easysoft/scripts/libmysql.sh
 
 set -e
 
@@ -16,5 +17,13 @@ sleep "${PAUSE:-0}"
 
 # Check and waiting mysql to be ready
 wait_for_mysql || exit 1
+
+# wait for zentao installation finished
+while ((1))
+do
+    if [ -f /data/zentao/.version ];then
+        break
+    fi
+done
 
 exec /usr/bin/rr serve -c /apps/zentao/roadrunner/.rr.yaml

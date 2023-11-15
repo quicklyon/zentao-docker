@@ -1,0 +1,2 @@
+#!/bin/bash
+exec /etc/s6/s6-enable/03-roadrunner/run

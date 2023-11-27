@@ -15,9 +15,6 @@ fi
 # Just for debug
 sleep "${PAUSE:-0}"
 
-# Check and waiting mysql to be ready
-wait_for_mysql || exit 1
-
 # wait for zentao installation finished
 while ((1))
 do

@@ -1,10 +1,9 @@
 #!/bin/bash
 #
 # Library for managing Easysoft components
+# shellcheck disable=SC1091
 
-set -x
-
-set -e
+set -xe
 
 . /opt/easysoft/scripts/envs
 

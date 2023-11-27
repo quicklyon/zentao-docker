@@ -4,50 +4,10 @@
 
 # shellcheck disable=SC1090,SC1091
 
-# Load generic libraries
-. /opt/easysoft/scripts/liblog.sh
 . /opt/easysoft/scripts/libos.sh
 
 [ -n "${DEBUG:+1}" ] && set -x
 
-########################
-# Check and waiting MySQL to be ready. 
-# Globals:
-#   MAXWAIT
-#   ZT_MYSQL_HOST
-#   ZT_MYSQL_PORT
-# Arguments:
-#   $1 - mysql service host
-#   $2 - mysql service port
-# Returns:
-#   0 if the mysql server is can be connected, 1 otherwise
-#########################
-wait_for_mysql() {
-    local retries=${MAXWAIT:-5}
-    local mysql_host="${1:-$ZT_MYSQL_HOST}"
-    local mysql_port="${2:-$ZT_MYSQL_PORT}"
-    info "Check whether the MySQL is available."
-
-    for ((i = 0; i <= retries; i += 1)); do
-        # 重试5次，每次间隔2的i次方秒
-        secs=$((2 ** i))
-        sleep $secs
-        if nc -z "${mysql_host}" "${mysql_port}";
-        then
-            info "MySQL is ready."
-            break
-        fi
-
-        warn "Waiting MySQL $secs seconds"
-
-        if [ "$i" == "$retries" ]; then
-            error "Maximum number of retries reached!"
-            error "Unable to connect to MySQL: $mysql_host:$mysql_port"
-            return 1
-        fi
-    done
-    return 0
-}
 
 ########################
 # Initialize app database.
@@ -81,7 +41,7 @@ mysql_reset_password(){
 
     args+=("--execute=CREATE USER '$ZT_MYSQL_USER'@'%' IDENTIFIED BY '$ZT_MYSQL_PASSWORD';GRANT ALL ON *.* TO '$ZT_MYSQL_USER'@'%';flush privileges;")
 
-    if [ $(mysql_check_user) == "0" ];then
+    if [ "$(mysql_check_user)" == "0" ];then
         info "Check $EASYSOFT_APP_NAME database."
         debug_execute "$command" "${args[@]}" || return 1 
     fi

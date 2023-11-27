@@ -7,6 +7,7 @@
 # Load libraries
 . /etc/s6/s6-init/envs
 . /opt/easysoft/scripts/liblog.sh
+. /opt/easysoft/scripts/libcomm.sh
 . /opt/easysoft/scripts/libmysql.sh
 . /opt/easysoft/scripts/libldap.sh
 . /opt/easysoft/scripts/libsmtp.sh
@@ -14,12 +15,8 @@
 . /opt/easysoft/scripts/libci.sh
 . /opt/easysoft/scripts/libscan.sh
 
-# Wait for mysql and apache to be ready
-if [ "$MYSQL_INTERNAL" == "true" ];then
-    s6-svwait -u -t 30000 /etc/s6/s6-available/mysql /etc/s6/s6-available/apache
-else
-    s6-svwait -u -t 30000 /etc/s6/s6-available/apache
-fi
+# Wait apache to be ready
+wait_for_service "apache" "127.0.0.1" "80" "Sentry" || exit 1
 
 export ZENTAO_VER=${ZENTAO_VER/.k8s/}
 

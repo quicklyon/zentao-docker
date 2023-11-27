@@ -2,6 +2,8 @@
 
 # shellcheck disable=SC1091
 . /etc/s6/s6-init/envs
+. /opt/easysoft/scripts/liblog.sh
+. /opt/easysoft/scripts/libcomm.sh
 . /opt/easysoft/scripts/libmysql.sh
 . /opt/easysoft/scripts/libphp.sh
 . /opt/easysoft/scripts/libdevops.sh
@@ -14,11 +16,11 @@ if [ "$MYSQL_INTERNAL" == "true" ];then
     s6-svwait -u -t 30000 /etc/s6/s6-available/mysql
 fi
 
+wait_for_service "MySQL" "$ZT_MYSQL_HOST" "$ZT_MYSQL_PORT" "apache" || exit 1
+
 # Just for debug
 sleep "${PAUSE:-0}"
 
-# Check and waiting mysql to be ready
-wait_for_mysql || exit 1
 
 # link mysql.sock for mysql client
 if [ -e /data/mysql/tmp/mysql.sock ] && [ ! -L /opt/zbox/tmp/mysql/mysql.sock ];then

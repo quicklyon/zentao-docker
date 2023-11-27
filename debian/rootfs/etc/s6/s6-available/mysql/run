@@ -6,34 +6,44 @@
 
 [ -n "${DEBUG:+1}" ] && set -x
 
-# Make MySQL persistence directory
-for mdir in "${MYSQL_PERSISTENCE_LIST[@]}"
-do
-    ensure_dir_exists "$mdir" "nobody" "nogroup"
-done
-
-# If first run, copy mysql data to /data/mysql/data
-if [ ! -d "/data/mysql/data/mysql" ];then
-    info "Copy mysql data to /data/mysql/data"
-    cp -rp /opt/zbox/data/mysql/* /data/mysql/data/ 
-fi
-
-# Render mysql config with environment variables.
-MY_CONF="/data/mysql/etc/my.cnf"
-if [ ! -f $MY_CONF ];then
-    info "Render mysql config with envionment variables."
-    /usr/bin/render-template /opt/zbox/etc/mysql/my.cnf.tpl > $MY_CONF
+if    [ "$ZT_MYSQL_HOST" != "127.0.0.1" ] || [ "$ZT_MYSQL_PORT" != "3306" ]\
+   || [ "$ZT_MYSQL_USER" != "root" ]      || [ "$ZT_MYSQL_PASSWORD" != "123456" ];then
+    warn "You set both the MYSQL_INTERNAL=true and ZT_MYSQL_* environment variables."
+    warn "Skip the built-in MySQL and use external databases in preference."
+    warn "MySQL Host: $ZT_MYSQL_HOST Port: $ZT_MYSQL_PORT User: $ZT_MYSQL_USER"
+    touch /tmp/mysql-external.log
+    tail -f /tmp/mysql-external.log
 else
-    info "MySQL config file exists, skip configure."
+
+    # Make MySQL persistence directory
+    for mdir in "${MYSQL_PERSISTENCE_LIST[@]}"
+    do
+        ensure_dir_exists "$mdir" "nobody" "nogroup"
+    done
+
+    # If first run, copy mysql data to /data/mysql/data
+    if [ ! -d "/data/mysql/data/mysql" ];then
+        info "Copy mysql data to /data/mysql/data"
+        cp -rp /opt/zbox/data/mysql/* /data/mysql/data/ 
+    fi
+
+    # Render mysql config with environment variables.
+    MY_CONF="/data/mysql/etc/my.cnf"
+    if [ ! -f $MY_CONF ];then
+        info "Render mysql config with envionment variables."
+        /usr/bin/render-template /opt/zbox/etc/mysql/my.cnf.tpl > $MY_CONF
+    else
+        info "MySQL config file exists, skip configure."
+    fi
+
+    # Make sure user and group is nobody:nogroup
+    configure_permissions_ownership "/data/mysql" -d "755" -u "nobody" -g "nogroup"
+
+    # Just for debug
+    sleep "${PAUSE:-0}"
+
+    exec /opt/zbox/run/mysql/mysqld_safe \
+        --defaults-file=$MY_CONF \
+        --datadir=/data/mysql/data \
+        --pid-file=/data/mysql/tmp/mysqld.pid
 fi
-
-# Make sure user and group is nobody:nogroup
-configure_permissions_ownership "/data/mysql" -d "755" -u "nobody" -g "nogroup"
-
-# Just for debug
-sleep "${PAUSE:-0}"
-
-exec /opt/zbox/run/mysql/mysqld_safe \
-     --defaults-file=$MY_CONF \
-     --datadir=/data/mysql/data \
-     --pid-file=/data/mysql/tmp/mysqld.pid

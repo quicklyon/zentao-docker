@@ -23,22 +23,25 @@
 #   0 if the mysql server is can be connected, 1 otherwise
 #########################
 wait_for_mysql() {
-    local retries=${MAXWAIT:-30}
+    local retries=${MAXWAIT:-5}
     local mysql_host="${1:-$ZT_MYSQL_HOST}"
     local mysql_port="${2:-$ZT_MYSQL_PORT}"
     info "Check whether the MySQL is available."
 
-    for ((i = 1; i <= retries; i += 1)); do
-        sleep 1
+    for ((i = 0; i <= retries; i += 1)); do
+        # 重试5次，每次间隔2的i次方秒
+        secs=$((2 ** i))
+        sleep $secs
         if nc -z "${mysql_host}" "${mysql_port}";
         then
             info "MySQL is ready."
             break
         fi
 
-        warn "Waiting MySQL $i seconds"
+        warn "Waiting MySQL $secs seconds"
 
         if [ "$i" == "$retries" ]; then
+            error "Maximum number of retries reached!"
             error "Unable to connect to MySQL: $mysql_host:$mysql_port"
             return 1
         fi

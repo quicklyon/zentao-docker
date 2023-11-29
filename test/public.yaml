@@ -1,0 +1,40 @@
+command:
+  check_s6_service:
+    exec: ./scripts/check-internal-mysql.sh
+    exit-status: 0
+  check_php_enabled_exts:
+    exec: ./scripts/check-php-enabled-exts.sh
+    exit-status: 0
+  check_apache_domain_subdir:
+    exec: ./scripts/check-apache-domain-subdir.sh
+    exit-status: 0
+
+file:
+  /apps/zentao/www/data:
+    exists: true
+    filetype: symlink
+    linked-to: /data/zentao/www/data
+  /apps/zentao/config/license:
+    exists: true
+    filetype: symlink
+    linked-to: /data/zentao/config/license
+  /apps/zentao/config/my.php:
+    exists: true
+    filetype: symlink
+    linked-to: /data/zentao/config/my.php
+  /apps/zentao/tmp/backup:
+    exists: true
+    filetype: symlink
+    linked-to: /data/zentao/tmp/backup
+  /apps/zentao/tmp/extension:
+    exists: true
+    filetype: symlink
+    linked-to: /data/zentao/tmp/extension
+  /apps/zentao/tmp/log:
+    exists: true
+    filetype: symlink
+    linked-to: /data/zentao/tmp/log
+  /apps/zentao/tmp/template:
+    exists: true
+    filetype: symlink
+    linked-to: /data/zentao/tmp/template

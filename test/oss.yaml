@@ -1,0 +1,16 @@
+# Copyright ZenTao, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+gossfile:
+  # Goss tests exclusive to the oss container
+  public.yaml: {}
+  # Load scripts from templates
+  templates/check-app-version.yaml: {}
+  templates/check-binaries.yaml: {}
+  templates/check-linked-libraries.yaml: {}
+  templates/check-broken-symlinks.yaml: {}
+  templates/check-ca-certs.yaml: {}
+  templates/check-directories.yaml: {}
+  templates/check-files.yaml: {}
+  templates/check-apache-php.yaml: {}
+  templates/check-sed-in-place.yaml: {}

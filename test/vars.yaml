@@ -1,0 +1,100 @@
+version:
+  bin_name: echo
+  flag: $ZENTAO_VER
+
+root_dir: /opt/zbox
+
+binaries:
+  - mysql
+  - render-template
+  - git
+  - gt
+  - jt
+  - httpd
+  - php
+linked_libraries:
+  exclude_paths:
+    # Ignore binaries libs
+    - /opt/zbox/logs
+    - /opt/zbox/tmp
+    - /opt/zbox/etc
+    - /opt/zbox/data
+    - /opt/zbox/include
+
+directories:
+  - mode: "0775"
+    owner: nobody
+    group: nogroup
+    paths:
+      - /data/zentao
+      - /data/zentao/tmp
+      - /data/zentao/www
+      - /data/zentao/config
+      - /data/zentao/extension
+      - /data/php
+      - /data/php/log
+      - /data/php/session
+  - mode: "0777"
+    owner: nobody
+    group: nogroup
+    paths:
+      - /data/zentao/config/license
+      - /data/zentao/config/ext
+      - /data/zentao/extension/pkg
+      - /data/zentao/tmp/backup
+      - /data/zentao/tmp/extension
+      - /data/zentao/tmp/log
+      - /data/zentao/tmp/template
+
+files:
+  - paths:
+      - /opt/zbox/etc/php/php.ini
+modules:
+  enabled:
+    - bcmath
+    - bz2
+    - calendar
+    - Core
+    - ctype
+    - curl
+    - date
+    - dom
+    - exif
+    - fileinfo
+    - filter
+    - ftp
+    - gd
+    - gettext
+    - hash
+    - iconv
+    - imap
+    - intl
+    - ionCube Loader
+    - json
+    - ldap
+    - libxml
+    - mbstring
+    - mysqli
+    - mysqlnd
+    - openssl
+    - pcntl
+    - pcre
+    - PDO
+    - pdo_mysql
+    - pdo_pgsql
+    - Phar
+    - posix
+    - readline
+    - Reflection
+    - session
+    - SimpleXML
+    - SPL
+    - standard
+    - tokenizer
+    - xlswriter
+    - xml
+    - xmlreader
+    - xmlwriter
+    - Zend OPcache
+    - zip
+    - zlib

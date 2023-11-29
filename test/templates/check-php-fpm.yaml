@@ -1,0 +1,46 @@
+# Copyright ZenTao, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+########################
+# Test coverage for the php-fpm package
+# Needed vars:
+# - None
+########################
+file:
+  /opt/zbox/etc/php/php.ini:
+    exists: true
+    contents:
+      - /^opcache.interned_strings_buffer = 16/
+      - /^opcache.memory_consumption = 192/
+      - /^opcache.file_cache = \/opt\/zbox\/php\/var\/run\/opcache_file/
+      - /^upload_tmp_dir = \/opt\/zbox\/php\/tmp/
+      - /^session.save_path = \/opt\/zbox\/php\/var\/run\/session/
+      - /^error_log = \/dev\/stderr/
+  /opt/zbox/etc/php/php-fpm.d/www.conf:
+    exists: true
+    contents:
+      - /^listen = \/opt\/zbox\/php\/var\/run\/www.sock/
+  /opt/zbox/logs/php-fpm.log:
+    exists: true
+    filetype: symlink
+    linked-to: /dev/stdout
+  /opt/zbox/etc/php/common.conf.disabled:
+    exists: true
+    filetype: file
+  /opt/zbox/etc/php:
+    exists: true
+    filetype: directory
+    mode: "0775"
+  /opt/zbox/tmp/tmp:
+    exists: true
+    filetype: directory
+    mode: "0775"
+  /opt/zbox/run/php:
+    exists: true
+    filetype: directory
+    mode: "0775"
+  /data/php/session:
+    exists: true
+    filetype: directory
+    mode: "0775"
+

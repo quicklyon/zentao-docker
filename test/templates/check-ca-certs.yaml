@@ -1,0 +1,11 @@
+# Copyright ZenTao, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+########################
+# Checks the ca-certificates package is installed accessing an HTTPS URL
+# Needed vars:
+# - None
+########################
+http:
+  https://www.zentao.net/:
+    status: 200

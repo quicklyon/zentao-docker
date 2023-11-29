@@ -1,0 +1,24 @@
+# Copyright ZenTao, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+########################
+# Check components executables have no missing linked libraries
+# Needed vars:
+#   - .Vars.root_dir
+# Optional vars:
+#   - .Vars.linked_libraries.exclude_paths (Array)
+#   - .Vars.linked_libraries.timeout (String)
+########################
+command:
+  check-linked-libraries:
+    {{ $exclude_paths := "" }}
+    {{ if and (index .Vars "linked_libraries") (index .Vars.linked_libraries "exclude_paths")}}
+        {{ $exclude_paths = (.Vars.linked_libraries.exclude_paths | join "|") }}
+    {{ end }}
+    exec: export ZBOX_ROOT_DIR={{ .Vars.root_dir }} && export EXCLUDE_PATHS='{{ $exclude_paths }}' && ./scripts/check-linked-libraries.sh
+    {{ if and (index .Vars "linked_libraries") (index .Vars.linked_libraries "timeout")}}
+    timeout: {{ .Vars.linked_libraries.timeout }}
+    {{ else }}
+    timeout: 20000
+    {{ end }}
+    exit-status: 0

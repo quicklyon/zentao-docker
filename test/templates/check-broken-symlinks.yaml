@@ -1,0 +1,12 @@
+# Copyright ZenTao, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+########################
+# Checks there are no broken symlinks in the components folders
+# Needed vars:
+#   - .Vars.root_dir (String)
+########################
+command:
+  check-broken-symlinks-for-tmp:
+    exec: if [ $(find /apps/zentao/{tmp,config,www,extension} -maxdepth 1 -xtype l | wc -l) -gt 0 ]; then exit 1; fi
+    exit-status: 0

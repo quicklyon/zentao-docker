@@ -13,4 +13,3 @@ gossfile:
   templates/check-directories.yaml: {}
   templates/check-files.yaml: {}
   templates/check-apache-php.yaml: {}
-  templates/check-sed-in-place.yaml: {}

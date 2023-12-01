@@ -22,7 +22,7 @@ linked_libraries:
     - /opt/zbox/include
 
 directories:
-  - mode: "0775"
+  - mode: "0755"
     owner: nobody
     group: nogroup
     paths:
@@ -39,7 +39,6 @@ directories:
     group: nogroup
     paths:
       - /data/zentao/config/license
-      - /data/zentao/config/ext
       - /data/zentao/extension/pkg
       - /data/zentao/tmp/backup
       - /data/zentao/tmp/extension

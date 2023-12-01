@@ -21,9 +21,18 @@ command:
     exec: php -l /opt/zbox/etc/php/php.ini
     exit-status: 0
   check-enabled-modules:
-    exec: php -i
+    exec: php -m
     exit-status: 0
     stdout:
     {{ range $module := .Vars.modules.enabled }}
-      - /{{ $module }}.*enabled/
+      - /{{ $module }}.*/
     {{ end }}
+
+http:
+  http://localhost:
+    allow-insecure: true
+    no-follow-redirects: false
+    status: 200
+    timeout: 30000
+    body:
+      - /.*Thanks for choosing ZenTao!.*/

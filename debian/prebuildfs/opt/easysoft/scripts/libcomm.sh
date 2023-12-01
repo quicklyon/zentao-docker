@@ -25,7 +25,7 @@ wait_for_service() {
         # 重试5次，每次间隔2的i次方秒
         secs=$((2 ** i))
         sleep $secs
-        if nc -z "${svc_host}" "${svc_port}";
+        if nc -z "${svc_host}" "${svc_port}" > /dev/null 2>&1;
         then
             info "$prefix_info: $service_name is ready."
             break

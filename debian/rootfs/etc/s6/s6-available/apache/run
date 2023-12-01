@@ -43,4 +43,4 @@ fi
 # Enable or disable php extensions
 control_php_ext
 
-exec /opt/zbox/bin/apachectl -D FOREGROUND
+exec /opt/zbox/bin/apachectl -D FOREGROUND > /dev/null 2>&1

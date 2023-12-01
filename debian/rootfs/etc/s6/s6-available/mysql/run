@@ -45,5 +45,5 @@ else
     exec /opt/zbox/run/mysql/mysqld_safe \
         --defaults-file=$MY_CONF \
         --datadir=/data/mysql/data \
-        --pid-file=/data/mysql/tmp/mysqld.pid
+        --pid-file=/data/mysql/tmp/mysqld.pid > /dev/null 2>&1
 fi

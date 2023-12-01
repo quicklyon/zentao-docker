@@ -103,7 +103,7 @@ do
     if [ "$CFG_INITED" == "0" ];then
         info "Waiting for the installation wizard to complete."
     fi
-    sleep 1
+    sleep $((RANDOM % 5 + 1))
 
 done
 

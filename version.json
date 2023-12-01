@@ -20,11 +20,11 @@
     "news": "ZenTao Max kubernetes customized version"
   },
   "ipd": {
-    "version": "1.2",
+    "version": "1.1.1",
     "news": "https://www.zentao.net/download/ipd1.0.2-82916.html"
   },
   "ipdk8s": {
-    "version": "1.2",
+    "version": "1.1.1",
     "news": "https://www.zentao.net/download/ipd1.0.2-82916.html"
   }
 }

@@ -128,7 +128,10 @@ CustomLog "/dev/stdout" combined
   AllowOverride All
   Require all granted
 </Directory>
-Alias {{APP_WEB_ROOT}} "/apps/zentao/www"
+
+{{#if APP_WEB_ROOT}}
+  Alias {{APP_WEB_ROOT}} "/apps/zentao/www"
+ {{/if}}
 
 <VirtualHost *:{{APP_DEFAULT_PORT}}>
  ServerAdmin zentao@local.net
@@ -142,7 +145,9 @@ Alias {{APP_WEB_ROOT}} "/apps/zentao/www"
 
 # setting for admin
  Alias /adminer "{{DOCUMENT_ROOT}}/adminer"
- Alias {{APP_WEB_ROOT}}/adminer "{{DOCUMENT_ROOT}}/adminer"
+ {{#if APP_WEB_ROOT}}
+  Alias {{APP_WEB_ROOT}}/adminer "{{DOCUMENT_ROOT}}/adminer"
+ {{/if}}
  <Directory "{{DOCUMENT_ROOT}}/adminer">
     DirectoryIndex index.php
     <Files "index.php">

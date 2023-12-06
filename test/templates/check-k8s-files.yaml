@@ -13,20 +13,21 @@
 #   - .Vars.files.group (String)
 ########################
 file:
-  {{ range $files := .Vars.files }}
+  {{if .Env.ZENTAO_VER | regexMatch "k8s" }}
+  {{ range $k8files := .Vars.filek8s }}
   {{ range $path := .paths }}
   {{ $path }}:
     exists: true
     filetype: file
-    {{ if and (index $files "mode") }}
-    mode: "{{ printf "%s" $files.mode }}"
+    {{ if and (index $k8files "mode") }}
+    mode: "{{ printf "%s" $k8files.mode }}"
     {{ end }}
-    {{ if and (index $files "owner") }}
-    owner: {{ printf "%s" $files.owner }}
+    {{ if and (index $k8files "owner") }}
+    owner: {{ printf "%s" $k8files.owner }}
     {{ end }}
-    {{ if and (index $files "group") }}
-    group: {{ printf "%s" $files.group }}
+    {{ if and (index $k8files "group") }}
+    group: {{ printf "%s" $k8files.group }}
     {{ end }}
   {{ end }}
   {{ end }}
-
+  {{end}}

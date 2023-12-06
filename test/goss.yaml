@@ -12,4 +12,5 @@ gossfile:
   templates/check-ca-certs.yaml: {}
   templates/check-directories.yaml: {}
   templates/check-files.yaml: {}
+  templates/check-k8s-files.yaml: {}
   templates/check-apache-php.yaml: {}

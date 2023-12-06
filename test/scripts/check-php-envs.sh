@@ -43,6 +43,9 @@ for var in $php_envs; do
         "session_path")
             php_setting=$(php -r "echo ini_get(\"session.save_path\");")
             ;;
+        "max_execution_time")
+            php_setting=$(grep max_execution_time  /opt/zbox/etc/php/php.ini | awk '{print $3}')
+            ;;
         *)
             php_setting=$(php -r "echo ini_get(\"$var_name\");")
             ;;
@@ -56,6 +59,6 @@ for var in $php_envs; do
 done
 
 # 判断PHP SESSION类型是否为redis，需要判断是否启用了redis扩展
-if [ "$PHP_SESSION_TYPE" = "redis" ];then
+if [ "${PHP_SESSION_TYPE:-}" = "redis" ];then
     php -m | grep redis || exit 1
 fi

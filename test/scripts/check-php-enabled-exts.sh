@@ -36,6 +36,6 @@ for var in $env_vars; do
 done
 
 # 判断PHP SESSION类型是否为redis，需要判断是否启用了redis扩展
-if [ "$PHP_SESSION_TYPE" = "redis" ];then
+if [ "${PHP_SESSION_TYPE:-}" = "redis" ];then
     php -m | grep redis || exit 1
 fi

@@ -20,11 +20,11 @@ function control_php_ext(){
         if [ "${value,,}" == "true" ]; then       
             # 启用扩展
             info "Enable php $ext_name extension."
-            phpenmod $ext_name
+            phpenmod "$ext_name"
         else
             # 禁用扩展
             info "Disable php $ext_name extension."
-            phpdismod $ext_name
+            phpdismod "$ext_name"
         fi
     done
 }

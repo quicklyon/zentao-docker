@@ -11,22 +11,24 @@ command:
       - "mpm_prefork_module"
       - "!mpm_event_module"
 
-  check-used-config:
+  check-php-config-include:
     exec: php --ini
     exit-status: 0
     stdout:
       - "/opt/zbox/etc/php/php.ini"
       - "/opt/zbox/etc/php/conf.d"
-  check-config-syntax:
-    exec: php -l /opt/zbox/etc/php/php.ini
-    exit-status: 0
-  check-enabled-modules:
+  
+  check-php-internal-exts:
     exec: php -m
     exit-status: 0
     stdout:
     {{ range $module := .Vars.modules.enabled }}
       - /{{ $module }}.*/
     {{ end }}
+
+  check-php-custom-enabled-exts:
+    exec: ./scripts/check-php-enabled-exts.sh
+    exit-status: 0
 
 http:
   http://localhost:
@@ -35,4 +37,4 @@ http:
     status: 200
     timeout: 30000
     body:
-      - /.*Thanks for choosing ZenTao!.*/
+      - /.*Thanks for choosing ZenTao.*!/

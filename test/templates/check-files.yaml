@@ -29,3 +29,23 @@ file:
     {{ end }}
   {{ end }}
   {{ end }}
+
+file:
+  {{if .Env.ZENTAO_VER | regexMatch "k8s" }}
+  {{ range $files := .Vars.filek8s }}
+  {{ range $path := .paths }}
+  {{ $path }}:
+    exists: true
+    filetype: file
+    {{ if and (index $files "mode") }}
+    mode: "{{ printf "%s" $files.mode }}"
+    {{ end }}
+    {{ if and (index $files "owner") }}
+    owner: {{ printf "%s" $files.owner }}
+    {{ end }}
+    {{ if and (index $files "group") }}
+    group: {{ printf "%s" $files.group }}
+    {{ end }}
+  {{ end }}
+  {{ end }}
+  {{end}}

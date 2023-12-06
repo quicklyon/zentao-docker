@@ -2,11 +2,13 @@ command:
   check_s6_service:
     exec: ./scripts/check-internal-mysql.sh
     exit-status: 0
-  check_php_enabled_exts:
-    exec: ./scripts/check-php-enabled-exts.sh
-    exit-status: 0
+
   check_apache_domain_subdir:
     exec: ./scripts/check-apache-domain-subdir.sh
+    exit-status: 0
+
+  check-php-envs.sh:
+    exec: ./scripts/check-php-envs.sh
     exit-status: 0
 
 file:

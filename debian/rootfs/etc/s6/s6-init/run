@@ -12,6 +12,7 @@ set -o pipefail
 . /opt/easysoft/scripts/envs
 . /opt/easysoft/scripts/liblog.sh
 . /opt/easysoft/scripts/libpersistence.sh
+. /opt/easysoft/scripts/libcomm.sh
 
 # Load Global/Apache/PHP environment variables
 . /etc/s6/s6-init/envs
@@ -40,14 +41,21 @@ info "Render php.ini with environment variables."
 PHP_INI="/opt/zbox/etc/php/php.ini"
 /usr/bin/render-template ${PHP_INI}.tpl > ${PHP_INI}
 
-# enable redis extension
+# ===================#
+# Prepare Session    #
+# ===================#
 if [ "$PHP_SESSION_TYPE" == "redis" ];then
-    info "Enable redis extension for session."  
-    phpenmod redis
+    if [[ "$PHP_SESSION_PATH"  =~ ^tcp:// ]]
+    then
+        redis_host=$(echo "${PHP_SESSION_PATH#tcp://}" | cut -d: -f1)
+        redis_port=$(echo "${PHP_SESSION_PATH#tcp://}" | cut -d: -f2 | sed 's/\?.*//')
 
-    if [ "$PHP_REDIS_SENTINEL" == "true" ];then
-        ini_file=$(ls /opt/zbox/etc/php/conf.d/*-redis.ini)
-        echo "redis.sentinel = 1" >> "$ini_file"
+        wait_for_service "redis" "$redis_host" "$redis_port" "Init"
+        info "Enable redis extension for session."  
+        phpenmod redis
+    else
+        error "PHP_SESSION_TYPE is redis, but PHP_SESSION_PATH is not tcp://.*"
+        exit 1
     fi
 fi
 

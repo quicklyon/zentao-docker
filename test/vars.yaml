@@ -48,6 +48,21 @@ directories:
 files:
   - paths:
       - /opt/zbox/etc/php/php.ini
+
+filek8s:
+  - paths:
+      - /apps/zentao/extension/max/misc/ext/view/k8s.html.php
+      - /apps/zentao/extension/max/misc/ext/control/k8s.php
+      - /apps/zentao/extension/max/misc/ext/lang/en/k8s.php
+      - /apps/zentao/extension/max/misc/ext/lang/zh-cn/k8s.php
+      - /apps/zentao/extension/ipd/misc/ext/view/k8s.html.php
+      - /apps/zentao/extension/ipd/misc/ext/control/k8s.php
+      - /apps/zentao/extension/ipd/misc/ext/lang/en/k8s.php
+      - /apps/zentao/extension/ipd/misc/ext/lang/zh-cn/k8s.php
+      - /apps/zentao/extension/biz/misc/ext/view/k8s.html.php
+      - /apps/zentao/extension/biz/misc/ext/control/k8s.php
+      - /apps/zentao/extension/biz/misc/ext/lang/en/k8s.php
+      - /apps/zentao/extension/biz/misc/ext/lang/zh-cn/k8s.php
 modules:
   enabled:
     - bcmath

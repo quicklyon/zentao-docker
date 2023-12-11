@@ -25,7 +25,7 @@ export CHECK_LOG="/tmp/sentry.log"
 [ ! -e $CHECK_LOG ] && touch $CHECK_LOG
 
 
-# 持续运行，监控安装向导进度
+# Run continuously to monitor the progress of the installation wizard
 while ((1))
 do
 
@@ -99,9 +99,11 @@ do
         break
     fi
 
+    # When the configuration file is empty, the installation wizard is not complete
     # 当配置文件为空时，说明安装向导未完成
     if [ "$CFG_INITED" == "0" ];then
-        info "Waiting for the installation wizard to complete."
+        info "Go to http://<host IP>[:port] to complete the installation wizard"
+        info "访问http://<宿主机IP>[:端口] 完成安装向导"
     fi
     sleep $((RANDOM % 5 + 1))
 

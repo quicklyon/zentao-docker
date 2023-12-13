@@ -71,6 +71,10 @@ LoadModule setenvif_module modules/mod_setenvif.so
 LoadModule unixd_module modules/mod_unixd.so
 LoadModule ssl_module modules/mod_ssl.so
 LoadModule socache_shmcb_module modules/mod_socache_shmcb.so
+LoadModule dav_module modules/mod_dav.so
+LoadModule dav_fs_module modules/mod_dav_fs.so
+LoadModule dav_svn_module modules/mod_dav_svn.so
+LoadModule authz_svn_module modules/mod_authz_svn.so
 
 SSLSessionCache         "shmcb:/opt/zbox/logs/ssl_scache(512000)"
 SSLSessionCacheTimeout  300

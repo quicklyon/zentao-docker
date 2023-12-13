@@ -69,6 +69,30 @@ build-ipd-k8s: ## 内网构建ipd版本Kubernetes定制版镜像
 	/bin/bash ./hack/make-rules/build.sh $(APP_NAME) $(IPD_K8S_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile" "internal"
 #============================ End Internal Build ============================#
 
+#============================ Image Unit Test ===============================#
+test-open:
+	/bin/bash ./hack/make-rules/test.sh $(APP_NAME) $(OPEN_VER)
+
+test-biz:
+	/bin/bash ./hack/make-rules/test.sh $(APP_NAME) $(BIZ_VER)
+
+test-biz-k8s:
+	/bin/bash ./hack/make-rules/test.sh $(APP_NAME) $(BIZ_K8S_VER)
+
+test-max:
+	/bin/bash ./hack/make-rules/test.sh $(APP_NAME) $(MAX_VER)
+
+test-max-k8s:
+	/bin/bash ./hack/make-rules/test.sh $(APP_NAME) $(MAX_K8S_VER)
+
+test-ipd:
+	/bin/bash ./hack/make-rules/test.sh $(APP_NAME) $(IPD_VER)
+
+test-ipd-k8s:
+	/bin/bash ./hack/make-rules/test.sh $(APP_NAME) $(IPD_K8S_VER)
+
+#============================ End Image Unit Test ===========================#
+
 push-all-public: push-public push-biz-public push-biz-k8s-public push-max-k8s-public push-max-public push-ipd-public
 
 push-all: push push-biz push-biz-k8s push-max push-max-k8s ## 将所有镜像push到 hub.qucheng.com 镜像仓库
@@ -130,14 +154,14 @@ run-max-k8s: ## 运行禅道旗舰版k8s
 run-max-php74: ## 运行禅道旗舰版k8s
 	export TAG=$(MAX_K8S_VER); docker-compose -f docker-compose-php74.yml up -d
 
-test-open: ## 测试禅道开源版
-	hack/make-rules/smoke-test.sh "zentao-open" "run"
+# test-open: ## 测试禅道开源版
+# 	hack/make-rules/smoke-test.sh "zentao-open" "run"
 
-test-max: ## 测试禅道旗舰版
-	hack/make-rules/smoke-test.sh "zentao-max" "run-max"
+# test-max: ## 测试禅道旗舰版
+# 	hack/make-rules/smoke-test.sh "zentao-max" "run-max"
 
-test-biz: ## 测试禅道企业版
-	hack/make-rules/smoke-test.sh "zentao-biz" "run-biz"
+# test-biz: ## 测试禅道企业版
+# 	hack/make-rules/smoke-test.sh "zentao-biz" "run-biz"
 
 ps: ## 运行状态
 	docker-compose -f docker-compose.yml ps

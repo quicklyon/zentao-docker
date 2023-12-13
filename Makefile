@@ -24,7 +24,7 @@ help: ## this help
 #============================ Public Build ============================#
 public-build-all: public-build public-build-biz public-build-biz-k8s public-build-max public-build-max-k8s public-build-ipd public-build-ipd-k8s ## 内网构建禅道所有版本镜像
 public-build: ## 公网构建开源版镜像
-	/bin/bash ./hack/make-rules/public-build.sh $(APP_NAME) $(OPEN_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile"
+	/bin/bash -x ./hack/make-rules/public-build.sh $(APP_NAME) $(OPEN_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile"
 
 public-build-biz: ## 公网构建企业版镜像
 	/bin/bash ./hack/make-rules/public-build.sh $(APP_NAME) $(BIZ_VER) $(PHP_VER) $(MYSQL_VER) "linux/amd64,linux/arm64" "Dockerfile"

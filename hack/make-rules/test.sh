@@ -39,7 +39,7 @@ setupDependService() {
 
 testInternalMysql() {
     setupDependService
-    dgoss run --link redis \
+    bash -x dgoss run --link redis \
           -e MYSQL_INTERNAL=true \
           -e APP_WEB_ROOT=/pms \
           -e PHP_MAX_EXECUTION_TIME=60 \
@@ -59,7 +59,7 @@ testInternalMysql() {
 
 testExternalMysql() {
     setupDependService
-    bash dgoss run --link redis --link mysql \
+    bash -x dgoss run --link redis --link mysql \
           -e APP_WEB_ROOT=/pms \
           -e ZT_MYSQL_HOST=mysql \
           -e ZT_MYSQL_PORT=3306 \

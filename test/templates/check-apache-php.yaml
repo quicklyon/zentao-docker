@@ -9,6 +9,10 @@ command:
     stdout:
       - "php7_module"
       - "mpm_prefork_module"
+      - "dav_module"
+      - "dav_fs_module"
+      - "dav_svn_module"
+      - "authz_svn_module"
       - "!mpm_event_module"
 
   check-php-config-include:

@@ -12,6 +12,7 @@ binaries:
   - jt
   - httpd
   - php
+  - rr
 linked_libraries:
   exclude_paths:
     # Ignore binaries libs

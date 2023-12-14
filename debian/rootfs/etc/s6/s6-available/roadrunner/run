@@ -24,4 +24,4 @@ do
     sleep 1
 done
 
-exec /usr/bin/rr serve -c /apps/zentao/roadrunner/.rr.yaml
+exec /opt/zbox/bin/rr serve -c /apps/zentao/roadrunner/.rr.yaml

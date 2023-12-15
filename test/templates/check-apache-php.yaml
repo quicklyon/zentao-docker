@@ -7,7 +7,11 @@ command:
     exec: apachectl -M
     exit-status: 0
     stdout:
+{{ if hasPrefix "8." .Env.PHP_VER }}
+      - "php_module"
+{{ else }}
       - "php7_module"
+{{ end }}
       - "mpm_prefork_module"
       - "dav_module"
       - "dav_fs_module"

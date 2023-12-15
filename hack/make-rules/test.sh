@@ -3,6 +3,7 @@ set -e
 
 appName=${1:? "appName is required"}
 appVer=${2:? "appVer is required"}
+rebuild=${3:-true}
 
 targetImg="local/$appName:${appVer}"
 
@@ -82,7 +83,7 @@ testExternalMysql() {
           "$targetImg"
 }
 
-buildTestImage
+[ "$rebuild" = "true" ] && buildTestImage
 
 setupEnv
 

@@ -71,25 +71,27 @@ build-ipd-k8s: ## 内网构建ipd版本Kubernetes定制版镜像
 
 #============================ Image Unit Test ===============================#
 test-open:
-	/bin/bash ./hack/make-rules/test.sh $(APP_NAME) $(OPEN_VER)
+	# usage last local image
+	# make test-open rebuild=false
+	/bin/bash ./hack/make-rules/test.sh $(APP_NAME) $(OPEN_VER) $(rebuild)
 
 test-biz:
-	/bin/bash ./hack/make-rules/test.sh $(APP_NAME) $(BIZ_VER)
+	/bin/bash ./hack/make-rules/test.sh $(APP_NAME) $(BIZ_VER) $(rebuild)
 
 test-biz-k8s:
-	/bin/bash ./hack/make-rules/test.sh $(APP_NAME) $(BIZ_K8S_VER)
+	/bin/bash ./hack/make-rules/test.sh $(APP_NAME) $(BIZ_K8S_VER) $(rebuild)
 
 test-max:
-	/bin/bash ./hack/make-rules/test.sh $(APP_NAME) $(MAX_VER)
+	/bin/bash ./hack/make-rules/test.sh $(APP_NAME) $(MAX_VER) $(rebuild)
 
 test-max-k8s:
-	/bin/bash ./hack/make-rules/test.sh $(APP_NAME) $(MAX_K8S_VER)
+	/bin/bash ./hack/make-rules/test.sh $(APP_NAME) $(MAX_K8S_VER) $(rebuild)
 
 test-ipd:
-	/bin/bash ./hack/make-rules/test.sh $(APP_NAME) $(IPD_VER)
+	/bin/bash ./hack/make-rules/test.sh $(APP_NAME) $(IPD_VER) $(rebuild)
 
 test-ipd-k8s:
-	/bin/bash ./hack/make-rules/test.sh $(APP_NAME) $(IPD_K8S_VER)
+	/bin/bash ./hack/make-rules/test.sh $(APP_NAME) $(IPD_K8S_VER) $(rebuild)
 
 #============================ End Image Unit Test ===========================#
 

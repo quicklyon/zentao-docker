@@ -9,6 +9,7 @@ targetImg="local/$appName:${appVer}"
 setupEnv() {
     export GOSS_FILES_PATH=./test
     export GOSS_SLEEP=0
+    export GOSS_WAIT_OPTS="-r 30s -s 1s > /dev/null"
     export GOSS_VARS=vars.yaml
     export GOSS_OTHER_YAML=public.yaml
 }

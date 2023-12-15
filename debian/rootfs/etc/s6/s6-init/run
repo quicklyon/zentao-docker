@@ -59,6 +59,12 @@ if [ "$PHP_SESSION_TYPE" == "redis" ];then
     fi
 fi
 
+#=========================#
+# Check zentao data owner #
+#=========================#
+info "Check zentao data owner..."
+find /data/zentao -not -user nobody -not -group nogroup -exec chown nobody:nogroup {} +
+
 #=====================#
 #   Prepare Apache    #
 #=====================#

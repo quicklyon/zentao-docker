@@ -11,6 +11,10 @@ command:
     exec: ./scripts/check-php-envs.sh
     exit-status: 0
 
+  check_svn_https:
+    exec: ldd /opt/zbox/run/svn/bin/svn | grep serf
+    exit-status: 0
+
 file:
   /apps/zentao/www/data:
     exists: true

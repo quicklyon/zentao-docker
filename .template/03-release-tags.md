@@ -6,16 +6,15 @@
 - [easysoft/zentao](https://hub.docker.com/r/easysoft/zentao)
 
 - 开源版
-  - [`latest`, `18.6`, `18.6-20230831`](https://www.zentao.net/dynamic/zentaopms18.6-82820.html)
-  - [`18.5`, `18.5-20230713`](https://www.zentao.net/download/zentaopms18.5-82695.html)
-  - [`18.4`, `18.4-20230625`](https://www.zentao.net/download/zentaopms18.4-82629.html)
-  - [`18.3-20230424`](https://www.zentao.net/download/zentaopms18.3-82231.html)
-  - [`18.2-20230315`](https://www.zentao.net/dynamic/zentaopms18.2-82151.html)
-  - [`18.1-20230216`](https://www.zentao.net/download/zentaopms18.1-82069.html)
+  - [`latest`, `18.9`, `18.9-20231204`](https://www.zentao.net/dynamic/zentaopms18.6-82820.html)
+  - [`18.8`, `18.5-20230713`](https://www.zentao.net/download/zentaopms18.5-82695.html)
+  - [`18.7`, `18.4-20230625`](https://www.zentao.net/download/zentaopms18.4-82629.html)
+  - [`18.6-20230424`](https://www.zentao.net/download/zentaopms18.3-82231.html)
+  - [`18.5-20230315`](https://www.zentao.net/dynamic/zentaopms18.2-82151.html)
 
 - 企业版
-  - [`biz8.6`, `biz8.6-20230831`](https://www.zentao.net/download/biz8.6-82821.html)
-  - [`biz8.6.k8s`, `biz8.6.k8s-20230831`](https://www.zentao.net/download/biz8.6-82821.html)
+  - [`biz8.9`, `biz8.6-20230831`](https://www.zentao.net/download/biz8.6-82821.html)
+  - [`biz8.6.k8s`, `biz8.9.k8s-20231204`](https://www.zentao.net/download/biz8.6-82821.html)
   - [`biz8.5`, `biz8.5-20230713`](https://www.zentao.net/download/biz8.5-82696.html)
   - [`biz8.5.k8s`, `biz8.5.k8s-20230713`](https://www.zentao.net/download/biz8.5-82696.html)
   - [`biz8.4`, `biz8.4-20230625`](https://www.zentao.net/download/biz8.4-82630.html)
@@ -26,7 +25,7 @@
   - [`biz8.2.k8s-20230315`](https://www.zentao.net/dynamic/biz8.2-82152.html)
 
 - 旗舰版
-  - [`max4.6`, `max4.6-20230831`](https://www.zentao.net/download/max4.6-82822.html)
+  - [`max4.9`, `max4.9-20231204`](https://www.zentao.net/download/max4.6-82822.html)
   - [`max4.6.k8s`, `max4.6.k8s-20230831`](https://www.zentao.net/download/max4.6-82822.html)
   - [`max4.5`, `max4.5-20230713`](https://www.zentao.net/download/max4.5-82697.html)
   - [`max4.5.k8s`, `max4.5.k8s-20230713`](https://www.zentao.net/download/max4.5-82697.html)

@@ -4,17 +4,17 @@ set -e
 appName=${1:? "appName is required"}
 appVer=${2:? "appVer is required"}
 
-targetImg="${INTERNAL_IMAGE_REPO}/${INTERNAL_IMAGE_NAMESPACE}/$appName:${appVer}"
-
-if [ "$BUILD_PUBLIC_IMAGE" = "true" ];then
-    targetImg="${PUBLIC_IMAGE_REPO}/${PUBLIC_IMAGE_NAMESPACE}/$appName:$appVer"
-fi
+targetImg="local/$appName:${appVer}"
 
 setupEnv() {
     export GOSS_FILES_PATH=./test
     export GOSS_SLEEP=${GOSS_SLEEP:-5}
     export GOSS_VARS=vars.yaml
     export GOSS_OTHER_YAML=public.yaml
+}
+
+buildTestImage() {
+    "$(dirname "$0")/build.sh" "$appName" "$appVer" "$PHP_VER" "$MYSQL_VER" "linux/amd64" "Dockerfile" "internal" "local" 
 }
 
 cleanContainer() {
@@ -39,7 +39,7 @@ setupDependService() {
 
 testInternalMysql() {
     setupDependService
-    bash -x dgoss run --link redis \
+    dgoss run --link redis \
           -e MYSQL_INTERNAL=true \
           -e APP_WEB_ROOT=/pms \
           -e PHP_MAX_EXECUTION_TIME=60 \
@@ -59,7 +59,7 @@ testInternalMysql() {
 
 testExternalMysql() {
     setupDependService
-    bash -x dgoss run --link redis --link mysql \
+    dgoss run --link redis --link mysql \
           -e APP_WEB_ROOT=/pms \
           -e ZT_MYSQL_HOST=mysql \
           -e ZT_MYSQL_PORT=3306 \
@@ -80,6 +80,8 @@ testExternalMysql() {
           -e PHP_EXT_YAML=true \
           "$targetImg"
 }
+
+buildTestImage
 
 setupEnv
 

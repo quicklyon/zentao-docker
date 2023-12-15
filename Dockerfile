@@ -1,5 +1,6 @@
 ARG BASE_IMAGE
 
+# hadolint ignore=DL3006
 FROM ${BASE_IMAGE}
 LABEL maintainer "zhouyueqiu <zhouyueqiu@easycorp.ltd>"
 

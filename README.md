@@ -40,47 +40,23 @@ ZenTao官网：[https://zentao.net/](https://zentao.net/)
 - [easysoft/zentao](https://hub.docker.com/r/easysoft/zentao)
 
 - 开源版
-  - [`latest`, `18.6`, `18.6-20230831`](https://www.zentao.net/dynamic/zentaopms18.6-82820.html)
-  - [`18.5`, `18.5-20230713`](https://www.zentao.net/download/zentaopms18.5-82695.html)
-  - [`18.4`, `18.4-20230625`](https://www.zentao.net/download/zentaopms18.4-82629.html)
-  - [`18.3-20230424`](https://www.zentao.net/download/zentaopms18.3-82231.html)
-  - [`18.2-20230315`](https://www.zentao.net/dynamic/zentaopms18.2-82151.html)
-  - [`18.1-20230216`](https://www.zentao.net/download/zentaopms18.1-82069.html)
+  - [`latest`, `18.9`, `18.9-20231215`]https://www.zentao.net/dynamic/zentaopms18.9-83122.html)
+  - [`18.8`, `18.8-20231023`](https://www.zentao.net/dynamic/zentaopms18.8-83014.html)
+
 
 - 企业版
-  - [`biz8.6`, `biz8.6-20230831`](https://www.zentao.net/download/biz8.6-82821.html)
-  - [`biz8.6.k8s`, `biz8.6.k8s-20230831`](https://www.zentao.net/download/biz8.6-82821.html)
-  - [`biz8.5`, `biz8.5-20230713`](https://www.zentao.net/download/biz8.5-82696.html)
-  - [`biz8.5.k8s`, `biz8.5.k8s-20230713`](https://www.zentao.net/download/biz8.5-82696.html)
-  - [`biz8.4`, `biz8.4-20230625`](https://www.zentao.net/download/biz8.4-82630.html)
-  - [`biz8.4.k8s`, `biz8.4.k8s-20230625`](https://www.zentao.net/download/biz8.4-82630.html)
-  - [`biz8.3-20230424`](https://www.zentao.net/download/biz8.3-82232.html)
-  - [`biz8.3.k8s-20230424`](https://www.zentao.net/download/biz8.3-82232.html)
-  - [`biz8.2-20230315`](https://www.zentao.net/dynamic/biz8.2-82152.html)
-  - [`biz8.2.k8s-20230315`](https://www.zentao.net/dynamic/biz8.2-82152.html)
+  - [`biz8.9`, `biz8.9-20231215`](https://www.zentao.net/dynamic/biz8.9-83123.html)
+  - [`biz8.9.k8s`, `biz8.9.k8s-20231215`](https://www.zentao.net/dynamic/biz8.9-83123.html)
+
 
 - 旗舰版
-  - [`max4.6`, `max4.6-20230831`](https://www.zentao.net/download/max4.6-82822.html)
-  - [`max4.6.k8s`, `max4.6.k8s-20230831`](https://www.zentao.net/download/max4.6-82822.html)
-  - [`max4.5`, `max4.5-20230713`](https://www.zentao.net/download/max4.5-82697.html)
-  - [`max4.5.k8s`, `max4.5.k8s-20230713`](https://www.zentao.net/download/max4.5-82697.html)
-  - [`max4.4`, `max4.4-20230625`](https://www.zentao.net/download/max4.4-82631.html)
-  - [`max4.4.k8s`, `max4.4.k8s-20230625`](https://www.zentao.net/download/max4.4-82631.html)
-  - [`max4.3-20230424`](https://www.zentao.net/download/max4.3-82233.html)
-  - [`max4.3.k8s-20230424`](https://www.zentao.net/download/max4.3-82233.html)
-  - [`max4.2-20230315`](https://www.zentao.net/dynamic/max4.2-82153.html)
-  - [`max4.2.k8s-20230315`](https://www.zentao.net/dynamic/max4.2-82153.html)
+  - [`max4.9`, `max4.9-20231215`](https://www.zentao.net/dynamic/max4.9-83124.html)
+  - [`max4.6.k8s`, `max4.6.k8s-20230831`](https://www.zentao.net/dynamic/max4.9-83124.html)
+
 
 - IPD版本
-  - [`ipd1.1`, `ipd1.0.1-20230831`](https://www.zentao.net/dynamic/ipd1.0.1-82823.html)
-  - [`ipd1.0`, `ipd1.0-20230802`](https://www.zentao.net/download/ipd1.0-82750.html)
-  - [`ipd1.0.beta1-20230522`](https://www.zentao.net/download/zentao-ipd-82471.html)
-
-- 迅捷版
-  - [`lite1.2-20221205`](https://www.zentao.net/download/zentaolitev1.2-80982.html)
-
-- 迅捷企业版
-  - [`litevip1.2-20221205`](https://www.zentao.net/download/zentaolitevipv1.2-80983.html)
+  - [`ipd1.1`, `ipd1.1.1-20231215`](https://www.zentao.net/dynamic/ipd1.1.1-83125.html)
+  - [`ipd1.1.1.k8s`, `ipd1.1.1.k8s-20231215`](https://www.zentao.net/dynamic/ipd1.1.1-83125.html)
 
 ## 三、获取镜像
 
@@ -154,10 +130,9 @@ docker run -it \
 | 变量名                    | 默认值                        | 说明                             |
 | ------------------------ | ---------------------------- | -------------------------------- |
 | DEBUG                    | false                        | 是否打开调试信息，默认关闭       |
-| APP_WEB_ROOT             | /zentao                      | 默认支持的路径前缀       |
 | PHP_SESSION_TYPE         | files                        | php session 类型，files \| redis |
 | PHP_SESSION_PATH         | /data/php/session            | php session 存储路径             |
-| PHP_MAX_EXECUTION_TIME   | 120                          | 最大执行时间，单位秒，有助于防止有问题程序占尽服务器资源。默认120         |
+| PHP_MAX_EXECUTION_TIME   | 120                          | 最大执行时间，单位秒，有助于防止有问题程序占尽服务器资源。默认120             |
 | PHP_MAX_INPUT_VARS       | 2000                         | 最大输入变量数，有助于防止有问题程序占尽服务器资源。默认2000         |
 | PHP_MEMORY_LIMIT         | 256M                         | 单个php进程允许分配的最大内存             |
 | PHP_POST_MAX_SIZE        | 128M                         | 允许最大Post数据大小             |

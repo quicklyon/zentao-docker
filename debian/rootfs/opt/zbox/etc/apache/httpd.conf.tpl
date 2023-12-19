@@ -148,17 +148,17 @@ CustomLog "/dev/stdout" combined
  </Directory>
 
 # setting for admin
- Alias /adminer "{{DOCUMENT_ROOT}}/adminer"
+ Alias /adminer "{{DOCUMENT_ROOT}}/dbview"
  {{#if APP_WEB_ROOT}}
-  Alias {{APP_WEB_ROOT}}/adminer "{{DOCUMENT_ROOT}}/adminer"
+  Alias {{APP_WEB_ROOT}}/adminer "{{DOCUMENT_ROOT}}/dbview"
  {{/if}}
- <Directory "{{DOCUMENT_ROOT}}/adminer">
+ <Directory "{{DOCUMENT_ROOT}}/dbview">
     DirectoryIndex index.php
     <Files "index.php">
         SetHandler application/x-httpd-php
     </Files>
  </Directory>
- <DirectoryMatch "{{DOCUMENT_ROOT}}/adminer/.+/.*">
+ <DirectoryMatch "{{DOCUMENT_ROOT}}/dbview/.+/.*">
     <FilesMatch ".+\.ph(p[3457]?|t|tml)$">
         SetHandler text/plain
     </FilesMatch>

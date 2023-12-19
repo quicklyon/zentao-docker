@@ -21,6 +21,7 @@ ENV EASYSOFT_APP_NAME="ZenTao $ZENTAO_VER"
 
 SHELL ["/bin/bash", "-c"]
 RUN . /opt/easysoft/scripts/libcomponent.sh && z_download "zentao" "${ZENTAO_VER}"
+RUN . /opt/easysoft/scripts/libcomponent.sh && unpack "dbview" "4.8.1"
 
 # Copy apache,php and gogs config files
 COPY --chown=nobody:nogroup debian/rootfs /

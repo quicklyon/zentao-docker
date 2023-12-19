@@ -3,7 +3,15 @@
 #==========#
 # Global   #
 #==========#
+# 18.10 will remove this environment variable
 export IS_CONTAINER=${IS_CONTAINER:-"true"}
+
+# Verify if you need to create a txt file to verify identity
+export ZT_CHECK_SAFE_FILE=${ZT_CHECK_SAFE_FILE:-"false"}
+
+# Confirming whether to perform automatic upgrades
+export ZT_AUTO_UPGRADE=${ZT_AUTO_UPGRADE:-"true"}
+
 export PROTOCOL_TYPE=${PROTOCOL_TYPE:-https}
 export ZENTAO_TOKEN_NAME=${ZENTAO_TOKEN_NAME:-quickon-zentao}
 MYSQL_INTERNAL=${MYSQL_INTERNAL:-false}

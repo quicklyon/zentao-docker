@@ -10,7 +10,7 @@ export IS_CONTAINER=${IS_CONTAINER:-"true"}
 export ZT_CHECK_SAFE_FILE=${ZT_CHECK_SAFE_FILE:-"false"}
 
 # Confirming whether to perform automatic upgrades
-export ZT_AUTO_UPGRADE=${ZT_AUTO_UPGRADE:-"true"}
+export ZT_AUTO_UPGRADE=${ZT_AUTO_UPGRADE:-"false"}
 
 export PROTOCOL_TYPE=${PROTOCOL_TYPE:-https}
 export ZENTAO_TOKEN_NAME=${ZENTAO_TOKEN_NAME:-quickon-zentao}

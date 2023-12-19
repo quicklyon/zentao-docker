@@ -6,7 +6,7 @@
 - [easysoft/zentao](https://hub.docker.com/r/easysoft/zentao)
 
 - 开源版
-  - [`latest`, `18.9`, `18.9-20231215`]https://www.zentao.net/dynamic/zentaopms18.9-83122.html)
+  - [`latest`, `18.9`, `18.9-20231215`](https://www.zentao.net/dynamic/zentaopms18.9-83122.html)
   - [`18.8`, `18.8-20231023`](https://www.zentao.net/dynamic/zentaopms18.8-83014.html)
 
 

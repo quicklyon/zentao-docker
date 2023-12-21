@@ -7,5 +7,5 @@
 # - None
 ########################
 http:
-  https://www.zentao.net/:
+  https://www.baidu.com/:
     status: 200

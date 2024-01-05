@@ -133,8 +133,8 @@ CustomLog "/dev/stdout" combined
   Require all granted
 </Directory>
 
-{{#if APP_WEB_ROOT}}
-  Alias {{APP_WEB_ROOT}} "/apps/zentao/www"
+{{#if ZT_WEB_ROOT}}
+  Alias {{ZT_WEB_ROOT}} "/apps/zentao/www"
  {{/if}}
 
 <VirtualHost *:{{APP_DEFAULT_PORT}}>
@@ -149,8 +149,8 @@ CustomLog "/dev/stdout" combined
 
 # setting for admin
  Alias /adminer "{{DOCUMENT_ROOT}}/dbview"
- {{#if APP_WEB_ROOT}}
-  Alias {{APP_WEB_ROOT}}/adminer "{{DOCUMENT_ROOT}}/dbview"
+ {{#if ZT_WEB_ROOT}}
+  Alias {{ZT_WEB_ROOT}}/adminer "{{DOCUMENT_ROOT}}/dbview"
  {{/if}}
  <Directory "{{DOCUMENT_ROOT}}/dbview">
     DirectoryIndex index.php

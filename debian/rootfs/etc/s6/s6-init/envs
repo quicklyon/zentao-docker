@@ -6,9 +6,6 @@
 # 18.10 will remove this environment variable
 export IS_CONTAINER=${IS_CONTAINER:-"true"}
 
-# 
-export ZT_DEBUG=${ZT_DEBUG:-"false"}
-
 # Verify if you need to create a txt file to verify identity
 export ZT_CHECK_SAFE_FILE=${ZT_CHECK_SAFE_FILE:-"false"}
 
@@ -121,11 +118,22 @@ export SMTP_FROMNAME=${SMTP_FROMNAME:-ZenTao $ZENTAO_VER}
 #===========#
 #   MySQL   #
 #===========#
+export ZT_DB_DRIVER=${ZT_DB_DRIVER:-"mysql"}
 export ZT_MYSQL_HOST=${ZT_MYSQL_HOST:-${MYSQL_HOST:-127.0.0.1}}
 export ZT_MYSQL_PORT=${ZT_MYSQL_PORT:-${MYSQL_PORT:-3306}}
 export ZT_MYSQL_DB=${ZT_MYSQL_DB:-${MYSQL_DB:-zentao}}
 export ZT_MYSQL_USER=${ZT_MYSQL_USER:-${MYSQL_USER:-root}}
 export ZT_MYSQL_PASSWORD=${ZT_MYSQL_PASSWORD:-${MYSQL_PASSWORD:-123456}}
+
+# 20 新变量
+export ZT_DB_DRIVER=${ZT_DB_DRIVER:-"mysql"}
+export ZT_DB_HOST=${ZT_DB_HOST:-${ZT_MYSQL_HOST}}
+export ZT_DB_PORT=${ZT_DB_PORT:-${ZT_MYSQL_PORT}}
+export ZT_DB_NAME=${ZT_DB_NAME:-${ZT_MYSQL_DB}}
+export ZT_DB_USER=${ZT_DB_USER:-${ZT_MYSQL_USER}}
+export ZT_DB_PASSWORD=${ZT_DB_PASSWORD:-${ZT_MYSQL_PASSWORD}}
+export ZT_DB_ENCODING=${ZT_DB_ENCODING:-"UTF8"}
+export ZT_DB_PREFIX=${ZT_DB_PREFIX:="zt_"};
 
 # 兼容旧版本
 export MYSQL_HOST=$ZT_MYSQL_HOST
@@ -146,11 +154,12 @@ if [[ "$PHP_VER" =~ ^8 ]];then
 fi
 
 #=============#
-# ZenTao 
+# ZenTao      #
 #=============#
+export ZT_DEBUG=${ZT_DEBUG:-"0"}
+export ZT_INSTALLED=${ZT_INSTALLED:-"false"}
 export ZT_REQUEST_TYPE=${ZT_REQUEST_TYPE:-"PATH_INFO"}
-export ZT_DB_ENCODING=${ZT_DB_ENCODING:-"UTF8"}
-export ZT_DB_PREFIX=${ZT_DB_PREFIX:="zt_"};
+export ZT_TIMEZONE=${TZ}
 export ZT_WEB_ROOT=${ZT_WEB_ROOT:-${APP_WEB_ROOT}}
 export ZT_DEFAULT_LANG=${ZT_DEFAULT_LANG:-"zh-cn"};
 

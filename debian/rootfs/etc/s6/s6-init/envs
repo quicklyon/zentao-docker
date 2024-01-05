@@ -6,6 +6,9 @@
 # 18.10 will remove this environment variable
 export IS_CONTAINER=${IS_CONTAINER:-"true"}
 
+# 
+export ZT_DEBUG=${ZT_DEBUG:-"false"}
+
 # Verify if you need to create a txt file to verify identity
 export ZT_CHECK_SAFE_FILE=${ZT_CHECK_SAFE_FILE:-"false"}
 
@@ -141,6 +144,15 @@ export DOCUMENT_ROOT=${DOCUMENT_ROOT:-/apps/zentao/www}
 if [[ "$PHP_VER" =~ ^8 ]];then
 	export PHP_VERSION_8=true
 fi
+
+#=============#
+# ZenTao 
+#=============#
+export ZT_REQUEST_TYPE=${ZT_REQUEST_TYPE:-"PATH_INFO"}
+export ZT_DB_ENCODING=${ZT_DB_ENCODING:-"UTF8"}
+export ZT_DB_PREFIX=${ZT_DB_PREFIX:="zt_"};
+export ZT_WEB_ROOT=${ZT_WEB_ROOT:-${APP_WEB_ROOT}}
+export ZT_DEFAULT_LANG=${ZT_DEFAULT_LANG:-"zh-cn"};
 
 # ======================#
 # Persistence directory #

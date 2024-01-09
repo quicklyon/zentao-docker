@@ -23,7 +23,7 @@ sleep "${PAUSE:-0}"
 
 
 # link mysql.sock for mysql client
-if [ -e /data/mysql/tmp/mysql.sock ] && [ ! -L /opt/zbox/tmp/mysql/mysql.sock ];then
+if [ -e /data/mysql/tmp/mysql.sock ] && [ ! -e /opt/zbox/tmp/mysql/mysql.sock ];then
     ln -s /data/mysql/tmp/mysql.sock /opt/zbox/tmp/mysql/mysql.sock
 fi
 
